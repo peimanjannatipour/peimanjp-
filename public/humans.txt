@@ -1,0 +1,13 @@
+/* TEAM */
+Name: Peiman Jannatipour
+Alias: Peiman JP
+Role: Computational Neuroscience Researcher, Inventor, Neurotechnology Systems Developer
+Contact: peiman.jannatipour@gmail.com
+ORCID: 0009-0009-3205-2423
+GitHub: peimanjannatipour
+
+/* SITE */
+Stack: Next.js, TypeScript, Tailwind CSS
+Hosting: Vercel
+Purpose: Research-author portfolio with conservative claim labels and verification signals.
+Claim boundaries: Patent pending is not issued patent status. Research-use prototypes are not clinical products.

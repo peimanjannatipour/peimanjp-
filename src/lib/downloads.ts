@@ -9,4 +9,3 @@ export function getAvailableDownloads() {
     existsSync(path.join(docsDir, item.fileName)),
   );
 }
-

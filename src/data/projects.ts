@@ -1,0 +1,137 @@
+export type Project = {
+  title: string;
+  status: string;
+  summary: string;
+  href?: string;
+  tags: string[];
+  category: string;
+  image?: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
+};
+
+export const projectCategories = [
+  "Computational Neuroscience Articles",
+  "Developmental Neuroimaging Research",
+  "Research Software",
+  "Privacy-Preserving Neurotechnology",
+  "Biomedical and Evidence Systems",
+  "Exploratory Theoretical Modelling",
+] as const;
+
+export const projects: Project[] = [
+  {
+    title: "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias",
+    status: "Published research article with DOI",
+    href: "/research/eeg-temporal-reproduction-bias",
+    summary:
+      "Flagship computational neuroscience article testing whether sensor-level EEG features explain residual temporal reproduction bias beyond behavioural structure.",
+    tags: ["EEG", "Temporal cognition", "Residual prediction", "DOI"],
+    category: "Computational Neuroscience Articles",
+    image: {
+      src: "https://images.pexels.com/photos/4031694/pexels-photo-4031694.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      alt: "Illustrative laboratory team reviewing research data.",
+      caption: "Stock research context for EEG and temporal cognition work.",
+    },
+  },
+  {
+    title: "A Bayesian Log-Time State-Space Clock for Human Time Reproduction",
+    status: "SSRN preprint with DOI",
+    href: "/research/bayesian-log-time-state-space-clock",
+    summary:
+      "Computational neuroscience preprint modelling human time reproduction with Bayesian log-time state-space inference.",
+    tags: ["Bayesian timing", "State-space model", "Time perception", "DOI"],
+    category: "Computational Neuroscience Articles",
+    image: {
+      src: "https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800",
+      alt: "Illustrative data-analysis workspace used as context for computational modelling.",
+      caption: "Stock computational-modelling context for Bayesian timing research.",
+    },
+  },
+  {
+    title: "ABCD Autism-ADHD Developmental Neuroimaging Research Line",
+    status: "Research line",
+    summary:
+      "Multi-investigator international developmental neuroimaging research line focused on adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-elevation.",
+    tags: ["ABCD", "Developmental neuroimaging", "Resting-state fMRI"],
+    category: "Developmental Neuroimaging Research",
+    image: {
+      src: "https://images.pexels.com/photos/9574543/pexels-photo-9574543.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      alt: "Illustrative research team reviewing results at a workstation.",
+      caption: "Stock research-review context for developmental neuroimaging.",
+    },
+  },
+  {
+    title: "NeuroLab OS",
+    status: "Pre-production",
+    href: "/neurolab-os",
+    summary:
+      "Research-use workflow layer for neural and biomedical time-series ingestion, validation, QC, fitting, simulation, and reporting.",
+    tags: ["Next.js", "FastAPI", "Time-series", "Reproducibility"],
+    category: "Research Software",
+    image: {
+      src: "https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800",
+      alt: "Illustrative laptop-based data-analysis workflow.",
+      caption: "Stock data-analysis context for the neural time-series workflow.",
+    },
+  },
+  {
+    title: "Masking Index Prototype",
+    status: "Patent pending",
+    href: "/patent",
+    summary:
+      "On-device multimodal masking-estimation prototype concept tied to the PCT application and privacy-preserving neurotechnology positioning.",
+    tags: ["Privacy", "Multimodal AI", "PCT application filed"],
+    category: "Privacy-Preserving Neurotechnology",
+  },
+  {
+    title: "Robotic Hand Workbench",
+    status: "Prototype",
+    summary:
+      "Robotics hand work associated with the Near East University Robotics Lab context and embedded-systems prototyping.",
+    tags: ["Robotics", "Robotic hand", "Embedded systems", "Prototype"],
+    category: "Biomedical and Evidence Systems",
+    image: {
+      src: "https://images.pexels.com/photos/4031694/pexels-photo-4031694.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      alt: "Illustrative laboratory team reviewing research data.",
+      caption: "Stock laboratory context for biomedical prototyping.",
+    },
+  },
+  {
+    title: "SMIS-ODS",
+    status: "Concept",
+    href: "/projects/smis-ods",
+    summary:
+      "Supplement claim evidence and misinformation review system for structured claim verification, source reliability checks, study-type separation, and risk-of-bias review.",
+    tags: ["Evidence systems", "Scientific claim verification", "Risk of bias"],
+    category: "Biomedical and Evidence Systems",
+    image: {
+      src: "https://images.pexels.com/photos/9574543/pexels-photo-9574543.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      alt: "Illustrative research team reviewing results at a workstation.",
+      caption: "Stock research-review context for scientific claim verification.",
+    },
+  },
+  {
+    title: "Graph-Spacetime Manuscript",
+    status: "Under review",
+    summary:
+      "Exploratory theoretical modelling manuscript grounded in the SSRN graph-spacetime preprint.",
+    tags: ["Exploratory theory", "Graph modelling", "Under review"],
+    category: "Exploratory Theoretical Modelling",
+    image: {
+      src: "https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800",
+      alt: "Illustrative data-analysis workspace used as context for computational modelling.",
+      caption: "Stock computational-modelling context for exploratory graph-theoretic work.",
+    },
+  },
+  {
+    title: "Duality-of-Time Manuscript",
+    status: "Under review",
+    summary:
+      "Theoretical manuscript direction around time perception and physical-time framing.",
+    tags: ["Time perception", "Under review", "Manuscript"],
+    category: "Exploratory Theoretical Modelling",
+  },
+];
