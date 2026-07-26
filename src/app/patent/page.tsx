@@ -18,6 +18,7 @@ export default function PatentPage() {
       <Section
         description={patent.subtitle}
         eyebrow="Patent / invention"
+        headingLevel={1}
         title={patent.title}
       >
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">

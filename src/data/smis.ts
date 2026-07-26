@@ -5,14 +5,14 @@ export const smisOds = {
   status: ["Concept", "Research-use only"],
   route: "/projects/smis-ods",
   image: {
-    src: "https://images.pexels.com/photos/9574543/pexels-photo-9574543.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    alt: "Illustrative research team reviewing results at a workstation.",
-    caption: "Stock research-review context for scientific claim verification.",
+    src: "/images/stock-data-dashboard.jpg",
+    alt: "Researcher reviewing a structured data analysis.",
+    caption: "Illustrative research-review context.",
   },
   summary:
     "SMIS-ODS is an evidence-review system for organizing and evaluating supplement-related health claims. It separates claim text, evidence sources, study type, source reliability, risk of bias, supporting versus non-supporting evidence, and outcome relevance. The goal is to reduce misinformation by making the evidence structure behind supplement claims easier to inspect.",
   positioning:
-    "SMIS-ODS is a structured evidence-review and claim-verification system for supplement and health-related claims. It is designed to evaluate claim status, source reliability, study type, outcome relevance, risk of bias, and misinformation risk.",
+    "SMIS-ODS is a structured evidence-review system for supplement and health-related claims. It maps claims to sources, study type, outcome relevance, risk of bias, and support direction.",
   limitations:
     "SMIS-ODS does not diagnose conditions, prescribe supplements, replace clinicians, or act as a supplement recommendation engine. It is a structured evidence-review and misinformation-screening system intended for research, review, and decision-support contexts.",
   evaluates: [
@@ -28,7 +28,7 @@ export const smisOds = {
     {
       question: "What is SMIS-ODS?",
       answer:
-        "SMIS-ODS is a structured evidence-review and claim-verification system for supplement and health-related claims.",
+        "SMIS-ODS is a structured evidence-review system for supplement and health-related claims.",
     },
     {
       question: "Does SMIS-ODS recommend supplements?",

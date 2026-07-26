@@ -10,7 +10,7 @@ const aboutFaq = [
   {
     question: "Who is Peiman Jannatipour?",
     answer:
-      "Peiman Jannatipour is a computational neuroscience researcher, inventor, and neurotechnology systems developer whose portfolio is anchored by EEG, temporal cognition, Bayesian timing, ABCD developmental neuroimaging, privacy-preserving neurotechnology, biomedical modelling, robotics prototype context, and research software.",
+      "Peiman Jannatipour is a computational neuroscience researcher and research-software builder working on human time perception, EEG, Bayesian modelling, and reproducible neural time-series analysis.",
   },
   {
     question: "What is Peiman Jannatipour's research focus?",
@@ -35,19 +35,17 @@ const aboutFaq = [
   {
     question: "How should editors and collaborators evaluate the claims?",
     answer:
-      "Claims should be read through their explicit evidence labels: research article, preprint, manuscript, prototype, patent pending, research-use only, or exploratory theoretical modelling.",
+      "Each output is identified as a preprint, manuscript in preparation, research line, prototype, PCT application, or exploratory model.",
   },
 ];
 
 const mainAboutParagraphs = [
-  "Peiman Jannatipour is a computational neuroscience researcher, inventor, and neurotechnology systems developer working across EEG analysis, temporal cognition, Bayesian timing models, ABCD developmental neuroimaging, biomedical systems, privacy-preserving neurotechnology, robotics prototypes, and research software. His current research identity is anchored by neuroscience work on human time reproduction and neurodevelopment: how the brain and behaviour construct, bias, and update estimates of duration under uncertainty, and how adolescent neurodevelopment can be studied with conservative dimensional neuroimaging methods.",
-  "The strongest public research axis of this portfolio is temporal cognition. In Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias, Jannatipour tests whether sensor-level EEG features explain residual timing error beyond behavioural structure. The study reconstructs verified target-reproduction trials, models signed logarithmic reproduction error using task and history covariates, and then asks whether multiband EEG features add incremental predictive value under cross-validation, regularization, control analyses, ablation analyses, and subject-level inference. The interpretation is deliberately conservative: the work does not claim a subject-independent EEG biomarker or a direct neural clock. Instead, it supports a narrower systems-neuroscience claim that human temporal reproduction is dominated by behavioural context and history, while being weakly modulated by individualized, calibration-dependent cortical state.",
-  "A second major neuroscience article, A Bayesian Log-Time State-Space Clock for Human Time Reproduction, provides the behavioural and computational modelling backbone for the EEG work. This article models human time reproduction as Bayesian state-space inference in log-time, combining Kalman-like prior integration with lognormal observation noise. Its value is not only fit quality, but falsification: the study identifies a mean-variance dissociation where empirical variability and posterior-predictive variability do not follow the same pattern. That gap turns the model from a fitting exercise into a benchmark for next-generation heteroscedastic or multi-source timing models.",
-  "The unifying theme across Jannatipour's portfolio is interpretable modelling of hidden states. In the neuroscience articles, hidden states appear as timing bias, cortical state, trial history, Bayesian priors, residual dynamics, and uncertainty-weighted integration. In NeuroLab OS, the same theme becomes a software-infrastructure problem: how neural and biomedical time-series data can move through ingestion, preprocessing, quality control, feature extraction, model fitting, simulation, and reproducible reporting without becoming a black box. NeuroLab OS is therefore best understood as research-use infrastructure for neural and biomedical modelling, not as an automated clinical classification system.",
-  "NDMS extends the hidden-state modelling theme into privacy-preserving neurotechnology. It is a patent-pending, consent-aware system direction focused on neurodivergent social masking, internal load, and mismatch between outward presentation and possible support needs. Its correct framing is research-use and support-oriented: a human-in-the-loop framework for making complex masking-related patterns easier to inspect under ethical boundaries of consent, uncertainty, and participant agency.",
-  "Jannatipour's broader technical work also includes an ABCD-focused autism-ADHD developmental neuroimaging line, mitochondrial and biomedical modelling, evidence-system design such as SMIS-ODS, robotics prototype context, and exploratory theoretical modelling. The ABCD line is framed around adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-elevation. Graph-theoretic spacetime remains part of the portfolio, but it is secondary to the neuroscience axis and should be read as exploratory theoretical work rather than the main identity of the site.",
-  "The portfolio is intentionally artifact-first. It separates research articles, SSRN preprints, manuscripts, patent-pending invention work, pre-production prototypes, software systems, and exploratory models. This distinction matters because computational neuroscience, neurotechnology, and biomedical modelling are easy to overstate when complex signals are reduced to simple claims. The site therefore prioritizes evidence before claims, interpretability before automation, consent before measurement, reproducibility before presentation, and careful status labels before promotional language.",
-  "Research and institutional contexts include Near East University, Near East University Robotics Lab, Near East University Faculty of Engineering / Medical Research, and Universita Campus Bio-Medico di Roma (UCBM), with formal wording, role titles, and dates kept aligned to available records. The intended audience for this portfolio is editors, reviewers, professors, technical collaborators, mentors, and research evaluators who need a clear view of what has been published, what is under development, what is prototype-stage, and what remains exploratory.",
+  "Peiman Jannatipour is a computational neuroscience researcher and research-software builder. His main work examines human time perception with EEG, behavioural modelling, and Bayesian methods; related work includes developmental neuroimaging and privacy-aware neurotechnology.",
+  "The EEG preprint analyzes 19,419 target–reproduction trials from 27 participants. Behavioural context and trial history explain most timing error. Within-subject EEG calibration adds a small but statistically reliable predictive increment, without establishing a subject-independent biomarker or direct neural clock.",
+  "The Bayesian timing preprint models 15,264 cleaned trials in log-time. It captures the central-tendency pattern (R² = 0.7099) but misses the observed duration-dependent variance, identifying a concrete limitation of stationary-noise models.",
+  "Across both studies, the recurring question is how latent state, recent history, and uncertainty shape behaviour. NeuroLab OS extends that concern into reproducible workflows for neural and biomedical time-series data.",
+  "The PCT-filed masking-system work explores on-device multimodal estimation with data minimization and human review. It is not presented as a validated diagnostic tool.",
+  "Additional work includes an ABCD-focused developmental-neuroimaging research line, mitochondrial modelling, the SMIS-ODS evidence-review concept, and exploratory graph-theoretic modelling.",
 ];
 
 export const metadata: Metadata = createPageMetadata({
@@ -64,16 +62,17 @@ export default function AboutPage() {
       <Section
         description="Computational neuroscience, EEG, temporal cognition, Bayesian timing models, ABCD developmental neuroimaging, privacy-preserving neurotechnology, and research software."
         eyebrow="About"
+        headingLevel={1}
         title="Peiman Jannatipour"
       >
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50 shadow-sm">
             <Image
-              alt="Illustrative data-analysis workspace on a laptop."
+              alt="Researcher working with a data-analysis notebook."
               className="aspect-[4/3] w-full object-cover"
               height={900}
               priority
-              src="https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+              src="/images/stock-data-dashboard.jpg"
               width={1200}
             />
             <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
@@ -132,7 +131,7 @@ export default function AboutPage() {
         className="border-t border-slate-200 bg-slate-50"
         description="Institutional names are shown as research and institutional contexts without adding unverified role titles, dates, appointment types, or employment status."
         eyebrow="Research contexts"
-        title="Verified affiliations and research contexts"
+        title="Affiliation and education contexts"
       >
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <figure className="overflow-hidden rounded-lg border border-slate-200 bg-white">
@@ -140,7 +139,7 @@ export default function AboutPage() {
               alt="Illustrative laboratory team reviewing research data."
               className="aspect-[4/3] w-full object-cover"
               height={720}
-              src="https://images.pexels.com/photos/4031694/pexels-photo-4031694.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              src="/images/stock-neuroscience-research.jpg"
               width={960}
             />
             <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
@@ -151,12 +150,9 @@ export default function AboutPage() {
           <div className="space-y-5">
             <div className="rounded-lg border border-slate-200 bg-white p-6">
               <p className="text-sm leading-7 text-slate-600">
-                Peiman Jannatipour lists research and institutional contexts
-                including Near East University, Near East University Robotics
-                Lab, Near East University Faculty of Engineering / Medical
-                Research, and Universita Campus Bio-Medico di Roma (UCBM),
-                Rome, Italy. Role titles, project dates, appointment wording,
-                and formal status should follow available records exactly.
+                Near East University appears as the author affiliation on the
+                public Bayesian timing preprint. Biomedical Engineering at
+                UCBM is listed in the author-supplied CV.
               </p>
             </div>
 

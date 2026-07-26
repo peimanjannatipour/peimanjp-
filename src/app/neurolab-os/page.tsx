@@ -19,6 +19,7 @@ export default function NeuroLabPage() {
       <Section
         description={neurolab.subtitle}
         eyebrow="NeuroLab OS"
+        headingLevel={1}
         title={neurolab.title}
       >
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -39,14 +40,14 @@ export default function NeuroLabPage() {
           <div className="grid gap-5">
             <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
               <Image
-                alt="Illustrative data-analysis workspace on a laptop."
+                alt="Researcher working with a data-analysis notebook."
                 className="aspect-[4/3] w-full object-cover"
                 height={900}
-                src="https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+                src="/images/stock-data-dashboard.jpg"
                 width={1200}
               />
               <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
-                Stock data-analysis context for neural and biomedical time-series workflows.
+                Illustrative data-analysis interface; not a NeuroLab OS product screenshot.
               </figcaption>
             </figure>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">

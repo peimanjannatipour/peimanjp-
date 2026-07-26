@@ -20,7 +20,7 @@ export const siteConfig = {
   name: "Peiman Jannatipour",
   shortName: "Peiman JP",
   role:
-    "Computational Neuroscience Researcher | Inventor | Neurotechnology Systems Developer",
+    "Computational Neuroscience Researcher · EEG, Human Timing & Neural Time-Series",
   baseUrl: "https://peiman-jannatipour-portfolio.vercel.app",
   email: "peiman.jannatipour@gmail.com",
   defaultTitle:
@@ -55,7 +55,7 @@ export const externalLinks = {
     visible: true,
   },
   eegArticle: {
-    label: "Research Article DOI",
+    label: "EEG Preprint DOI",
     value: "10.21203/rs.3.rs-9852649/v1",
     href: "https://doi.org/10.21203/rs.3.rs-9852649/v1",
     visible: true,
@@ -109,10 +109,7 @@ export const navItems: NavItem[] = [
 
 export const primaryCtas: NavItem[] = [
   { label: "View Research", href: "/research" },
-  { label: "View Patent", href: "/patent" },
-  { label: "View NeuroLab OS", href: "/neurolab-os" },
-  { label: "View CV", href: "/cv" },
-  { label: "Contact", href: "/contact" },
+  { label: "Publications", href: "/publications" },
 ];
 
 export const downloadItems: DownloadItem[] = [

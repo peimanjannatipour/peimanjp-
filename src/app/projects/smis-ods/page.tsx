@@ -12,7 +12,7 @@ import { faqJsonLd } from "@/lib/structured-data";
 export const metadata: Metadata = createPageMetadata({
   title: "SMIS-ODS - Supplement Claim Evidence Review",
   description:
-    "SMIS-ODS is a research-use evidence-review and claim-verification system for supplement and health-related claims.",
+    "SMIS-ODS is a research-use system for structured review of supplement and health-related evidence.",
   path: smisOds.route,
 });
 
@@ -23,6 +23,7 @@ export default function SmisOdsPage() {
       <Section
         description={smisOds.positioning}
         eyebrow={smisOds.category}
+        headingLevel={1}
         title={smisOds.name}
       >
         <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">

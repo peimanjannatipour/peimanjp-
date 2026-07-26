@@ -48,18 +48,19 @@ export default function BayesianLogTimeStateSpaceClockPage() {
         })}
       />
       <Section
-        description="SSRN preprint with DOI آ· Near East University"
+        description="SSRN preprint with DOI · Near East University"
         eyebrow="Second neuroscience anchor"
+        headingLevel={1}
         title={bayesianLogTimeClock.title}
       >
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
             <Image
-              alt="Illustrative data-analysis workspace used as context for computational modelling."
+              alt="Researcher working with a data-analysis notebook."
               className="aspect-[4/3] w-full object-cover"
               height={900}
               priority
-              src="https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+              src="/images/stock-data-dashboard.jpg"
               width={1200}
             />
             <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">

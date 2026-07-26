@@ -9,7 +9,7 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-950/5">
+    <article className="group flex h-full flex-col rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:border-cyan-200 hover:shadow-md hover:shadow-cyan-950/5">
       {project.image ? (
         <figure className="mb-5 overflow-hidden rounded-md border border-slate-200 bg-slate-50">
           <Image
@@ -32,7 +32,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {project.summary}
       </p>
       <div className="mt-5 flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
+        {project.tags.slice(0, 3).map((tag) => (
           <span
             className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600"
             key={tag}

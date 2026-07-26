@@ -7,6 +7,7 @@ type SectionProps = {
   children: ReactNode;
   tone?: "light" | "dark";
   className?: string;
+  headingLevel?: 1 | 2;
 };
 
 export function Section({
@@ -16,8 +17,10 @@ export function Section({
   children,
   tone = "light",
   className = "",
+  headingLevel = 2,
 }: SectionProps) {
   const isDark = tone === "dark";
+  const Heading = headingLevel === 1 ? "h1" : "h2";
 
   return (
     <section
@@ -36,9 +39,9 @@ export function Section({
               {eyebrow}
             </p>
           ) : null}
-          <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+          <Heading className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
             {title}
-          </h2>
+          </Heading>
           {description ? (
             <p
               className={`mt-4 max-w-2xl text-base leading-7 ${

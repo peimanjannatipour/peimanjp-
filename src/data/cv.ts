@@ -7,9 +7,9 @@ export const cv = {
       items: [
         {
           title: "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias",
-          meta: "Published research article with DOI, posted June 1st, 2026",
+          meta: "Research Square preprint with DOI, 2026",
           description:
-            "Flagship computational neuroscience article on sensor-level EEG, residual temporal reproduction bias, behavioural structure, and conservative model checking.",
+            "EEG study of residual temporal reproduction error across 19,419 trials from 27 participants, with a small calibrated-EEG predictive increment and an explicit non-biomarker boundary.",
         },
         {
           title: "A Bayesian Log-Time State-Space Clock for Human Time Reproduction",
@@ -19,21 +19,21 @@ export const cv = {
         },
         {
           title: "ABCD Autism-ADHD Developmental Neuroimaging Research Line",
-          meta: "Lead research line / multi-investigator international project",
+          meta: "ABCD developmental neuroimaging research line",
           description:
             "Developmental neuroimaging research line focused on adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-elevation using conservative, validation-first framing.",
         },
         {
           title: "Cortical State Temporal Inference Manuscript",
-          meta: "Systems neuroscience / status-labelled research direction",
+          meta: "Manuscript in preparation / systems neuroscience",
           description:
-            "Status-labelled research direction around cortical-state dynamics, EEG/fMRI-informed workflows, and temporal inference.",
+            "Ongoing work on cortical-state dynamics, EEG/fMRI-informed workflows, and temporal inference.",
         },
         {
           title: "SMIS-ODS",
           meta: "Evidence Systems & Scientific Decision Support / concept",
           description:
-            "Structured evidence-review and claim-verification system for supplement-related health claims, source reliability, study type, outcome relevance, risk of bias, and misinformation risk. Research-use only; not a recommendation engine.",
+            "Structured evidence-review system for mapping supplement claims to sources, study design, outcome relevance, and risk of bias. Research-use only; not a recommendation engine.",
         },
         {
           title: "Robotic Hand Workbench",
@@ -44,19 +44,19 @@ export const cv = {
       ],
     },
     {
-      title: "Research and institutional contexts",
+      title: "Affiliation and education contexts",
       items: [
         {
-          title: "Near East University - Faculty of Engineering / Medical Research",
-          meta: "CV-listed research context, 2023-present",
+          title: "Near East University",
+          meta: "Author affiliation on the Bayesian timing preprint",
           description:
-            "Medical research and biomedical engineering interface across computational neuroscience, biomedical time-series modelling, neurodevelopmental traits, and translational engineering.",
+            "Affiliation shown on the public SSRN record for the Bayesian timing preprint.",
         },
         {
           title: "Universita Campus Bio-Medico di Roma (UCBM), Rome, Italy",
           meta: "Biomedical Engineering context",
           description:
-            "Biomedical engineering and research context listed in the CV; formal role wording should follow available records exactly.",
+            "Biomedical Engineering context listed in the author-supplied CV.",
         },
       ],
     },
@@ -71,10 +71,10 @@ export const cv = {
             "Secondary exploratory theoretical modelling artifact with DOI-linked SSRN preprint status.",
         },
         {
-          title: "Status-labelled manuscript portfolio",
+          title: "Ongoing manuscripts",
           meta: "Manuscripts and research directions",
           description:
-            "Additional work is listed by cautious public title, evidence category, and status label.",
+            "Additional work is listed by title, evidence category, and current status.",
         },
       ],
     },

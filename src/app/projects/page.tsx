@@ -13,9 +13,10 @@ export default function ProjectsPage() {
   return (
     <main id="main">
       <Section
-        description="Projects are grouped by evidence type, with computational neuroscience articles first and exploratory theoretical modelling lower on the page."
+        description="Projects are grouped by evidence type, with computational neuroscience preprints first and exploratory theoretical modelling lower on the page."
         eyebrow="Projects"
-        title="Computational neuroscience articles and research systems"
+        headingLevel={1}
+        title="Computational neuroscience preprints and research systems"
       >
         <div className="grid gap-10">
           {projectCategories.map((category) => {

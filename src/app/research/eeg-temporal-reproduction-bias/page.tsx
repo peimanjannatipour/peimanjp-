@@ -22,7 +22,7 @@ const eegFaq = [
   {
     question: "What is the status?",
     answer:
-      "Published research article with DOI. It should not be described as a peer-reviewed journal article unless final journal acceptance is verified.",
+      "It is a Research Square preprint with a DOI. No peer-reviewed journal version is claimed here.",
   },
 ];
 
@@ -50,22 +50,23 @@ export default function EegTemporalReproductionBiasPage() {
         })}
       />
       <Section
-        description="Research Article آ· Posted June 1st, 2026 آ· Universita Campus Bio-Medico di Roma (UCBM), Rome, Italy"
-        eyebrow="Flagship neuroscience article"
+        description="Research Square preprint · 2026 · DOI 10.21203/rs.3.rs-9852649/v1"
+        eyebrow="EEG and temporal cognition"
+        headingLevel={1}
         title={eegTemporalReproductionBias.title}
       >
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
             <Image
-              alt="Illustrative laboratory team reviewing research data."
+              alt="Researchers working in a biomedical laboratory."
               className="aspect-[4/3] w-full object-cover"
               height={900}
               priority
-              src="https://images.pexels.com/photos/4031694/pexels-photo-4031694.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              src="/images/stock-neuroscience-research.jpg"
               width={1200}
             />
             <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
-              Stock research context for EEG and temporal cognition work.
+              Illustrative research context; not an image from the reported experiment.
             </figcaption>
           </figure>
 
@@ -88,10 +89,9 @@ export default function EegTemporalReproductionBiasPage() {
                 <dd>{eegTemporalReproductionBias.doi}</dd>
               </div>
               <div>
-                <dt className="font-semibold text-slate-950">Claim boundary</dt>
+                <dt className="font-semibold text-slate-950">Publication status</dt>
                 <dd>
-                  Do not describe as a peer-reviewed journal article unless final
-                  journal acceptance is verified.
+                  Research Square preprint; peer review is not claimed.
                 </dd>
               </div>
             </dl>
@@ -109,24 +109,35 @@ export default function EegTemporalReproductionBiasPage() {
 
       <Section
         className="border-t border-slate-200 bg-slate-50"
-        description="The article is framed as a conservative residual-prediction study, not a broad biomarker claim."
+        description="Behavioural structure explains most timing error; calibrated EEG adds a small incremental signal."
         eyebrow="Research summary"
-        title="Conservative residual-prediction framework"
+        title="What the EEG added — and what it did not"
       >
-        <p className="max-w-4xl text-base leading-8 text-slate-700">
-          This article tests whether sensor-level EEG features explain residual
-          temporal reproduction bias beyond behavioural structure. It
-          reconstructs 19,419 verified target-reproduction trials from 27
-          participants and uses a conservative residual-prediction framework
-          with leave-one-subject-out cross-validation, nested ridge
-          regularization, shadow EEG controls, ablation analyses,
-          artifact-sensitivity analyses, and subject-level inference. The result
-          is intentionally cautious: it does not support a subject-independent
-          EEG biomarker or direct neural-clock interpretation, but it supports
-          the narrower conclusion that temporal reproduction is dominated by
-          behavioural context and history while being weakly modulated by
-          individualized, calibration-dependent cortical state.
-        </p>
+        <div className="max-w-4xl space-y-5 text-base leading-8 text-slate-700">
+          <p>
+            The study analyzes 19,419 target–reproduction trials from 27
+            participants. It first models timing error from target duration,
+            task context, range, trial order, and previous-trial history, then
+            tests whether sensor-level theta, alpha, beta, and low-gamma
+            features improve held-out prediction under leave-one-subject-out
+            cross-validation, nested ridge regularization, shadow controls,
+            ablations, artifact-sensitivity analyses, and subject-level
+            inference.
+          </p>
+          <p>
+            Strict train-only EEG standardization did not improve held-out
+            prediction. Unsupervised within-subject calibration produced a
+            small but reliable gain over the behavioural model: RMSE fell from
+            0.211012 to 0.210683 (0.156%; permutation p = 0.010), and the
+            improvement exceeded the within-subject shadow control.
+          </p>
+          <p>
+            The result does not establish a subject-independent EEG biomarker
+            or a direct neural clock. It supports individualized,
+            calibration-dependent prediction in which behavioural context and
+            history remain the dominant sources of temporal reproduction error.
+          </p>
+        </div>
       </Section>
     </main>
   );

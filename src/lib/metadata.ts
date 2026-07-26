@@ -16,10 +16,7 @@ export function createPageMetadata({
   const imageUrl = new URL("/images/inventor-photo.jpg", siteConfig.baseUrl);
 
   return {
-    title: {
-      default: title,
-      template: "%s | Peiman Jannatipour",
-    },
+    title,
     description,
     metadataBase: new URL(siteConfig.baseUrl),
     applicationName: "Peiman Jannatipour Portfolio",

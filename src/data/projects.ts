@@ -13,7 +13,7 @@ export type Project = {
 };
 
 export const projectCategories = [
-  "Computational Neuroscience Articles",
+  "Computational Neuroscience Preprints",
   "Developmental Neuroimaging Research",
   "Research Software",
   "Privacy-Preserving Neurotechnology",
@@ -24,16 +24,16 @@ export const projectCategories = [
 export const projects: Project[] = [
   {
     title: "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias",
-    status: "Published research article with DOI",
+    status: "Research Square preprint with DOI",
     href: "/research/eeg-temporal-reproduction-bias",
     summary:
-      "Flagship computational neuroscience article testing whether sensor-level EEG features explain residual temporal reproduction bias beyond behavioural structure.",
+      "Across 19,419 trials from 27 participants, behavioural context explained most timing error; within-subject EEG calibration added a small, reliable predictive improvement.",
     tags: ["EEG", "Temporal cognition", "Residual prediction", "DOI"],
-    category: "Computational Neuroscience Articles",
+    category: "Computational Neuroscience Preprints",
     image: {
-      src: "https://images.pexels.com/photos/4031694/pexels-photo-4031694.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      alt: "Illustrative laboratory team reviewing research data.",
-      caption: "Stock research context for EEG and temporal cognition work.",
+      src: "/images/stock-neuroscience-research.jpg",
+      alt: "Researchers working in a biomedical laboratory.",
+      caption: "Stock laboratory context for the EEG and temporal cognition research.",
     },
   },
   {
@@ -43,10 +43,10 @@ export const projects: Project[] = [
     summary:
       "Computational neuroscience preprint modelling human time reproduction with Bayesian log-time state-space inference.",
     tags: ["Bayesian timing", "State-space model", "Time perception", "DOI"],
-    category: "Computational Neuroscience Articles",
+    category: "Computational Neuroscience Preprints",
     image: {
-      src: "https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800",
-      alt: "Illustrative data-analysis workspace used as context for computational modelling.",
+      src: "/images/stock-data-dashboard.jpg",
+      alt: "Researcher working with a data-analysis notebook.",
       caption: "Stock computational-modelling context for Bayesian timing research.",
     },
   },
@@ -54,12 +54,12 @@ export const projects: Project[] = [
     title: "ABCD Autism-ADHD Developmental Neuroimaging Research Line",
     status: "Research line",
     summary:
-      "Multi-investigator international developmental neuroimaging research line focused on adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-elevation.",
+      "ABCD-focused developmental neuroimaging work on adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-elevation.",
     tags: ["ABCD", "Developmental neuroimaging", "Resting-state fMRI"],
     category: "Developmental Neuroimaging Research",
     image: {
-      src: "https://images.pexels.com/photos/9574543/pexels-photo-9574543.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      alt: "Illustrative research team reviewing results at a workstation.",
+      src: "/images/stock-lab-data-analysis.jpg",
+      alt: "Researchers reviewing laboratory data.",
       caption: "Stock research-review context for developmental neuroimaging.",
     },
   },
@@ -72,8 +72,8 @@ export const projects: Project[] = [
     tags: ["Next.js", "FastAPI", "Time-series", "Reproducibility"],
     category: "Research Software",
     image: {
-      src: "https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800",
-      alt: "Illustrative laptop-based data-analysis workflow.",
+      src: "/images/stock-data-dashboard.jpg",
+      alt: "Researcher working with a data-analysis notebook.",
       caption: "Stock data-analysis context for the neural time-series workflow.",
     },
   },
@@ -94,8 +94,8 @@ export const projects: Project[] = [
     tags: ["Robotics", "Robotic hand", "Embedded systems", "Prototype"],
     category: "Biomedical and Evidence Systems",
     image: {
-      src: "https://images.pexels.com/photos/4031694/pexels-photo-4031694.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      alt: "Illustrative laboratory team reviewing research data.",
+      src: "/images/stock-neuroscience-research.jpg",
+      alt: "Researchers working in a biomedical laboratory.",
       caption: "Stock laboratory context for biomedical prototyping.",
     },
   },
@@ -104,34 +104,34 @@ export const projects: Project[] = [
     status: "Concept",
     href: "/projects/smis-ods",
     summary:
-      "Supplement claim evidence and misinformation review system for structured claim verification, source reliability checks, study-type separation, and risk-of-bias review.",
-    tags: ["Evidence systems", "Scientific claim verification", "Risk of bias"],
+      "Structured evidence-review system that maps supplement claims to sources, study designs, outcome relevance, and risk of bias.",
+    tags: ["Evidence systems", "Structured evidence review", "Risk of bias"],
     category: "Biomedical and Evidence Systems",
     image: {
-      src: "https://images.pexels.com/photos/9574543/pexels-photo-9574543.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      alt: "Illustrative research team reviewing results at a workstation.",
-      caption: "Stock research-review context for scientific claim verification.",
+      src: "/images/stock-data-dashboard.jpg",
+      alt: "Researcher reviewing a structured data analysis.",
+      caption: "Stock data-review context for structured evidence assessment.",
     },
   },
   {
     title: "Graph-Spacetime Manuscript",
-    status: "Under review",
+    status: "Manuscript in preparation",
     summary:
       "Exploratory theoretical modelling manuscript grounded in the SSRN graph-spacetime preprint.",
     tags: ["Exploratory theory", "Graph modelling", "Under review"],
     category: "Exploratory Theoretical Modelling",
     image: {
-      src: "https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800",
+      src: "/images/stock-data-dashboard.jpg",
       alt: "Illustrative data-analysis workspace used as context for computational modelling.",
       caption: "Stock computational-modelling context for exploratory graph-theoretic work.",
     },
   },
   {
     title: "Duality-of-Time Manuscript",
-    status: "Under review",
+    status: "Manuscript in preparation",
     summary:
       "Theoretical manuscript direction around time perception and physical-time framing.",
-    tags: ["Time perception", "Under review", "Manuscript"],
+    tags: ["Time perception", "Manuscript in preparation"],
     category: "Exploratory Theoretical Modelling",
   },
 ];

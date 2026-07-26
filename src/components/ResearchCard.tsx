@@ -11,15 +11,15 @@ export function ResearchCard({ item }: ResearchCardProps) {
   const isDetailed = item.visibility === "detailed";
   const limitedText =
     item.status === "Preprint"
-      ? "Preprint item listed with status-limited public detail."
+      ? "Preprint; details are available from the linked public record."
       : item.status === "Under review" ||
           item.status === "Manuscript in preparation" ||
           item.status === "Manuscript in progress"
-        ? "Status-limited manuscript or research direction."
-        : "Public detail intentionally limited until release.";
+        ? "Manuscript in preparation; details will be added with a public manuscript."
+        : "Current scope is described by the status shown above.";
 
   return (
-    <article className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg hover:shadow-cyan-950/5">
+    <article className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:border-cyan-200 hover:shadow-md hover:shadow-cyan-950/5">
       {item.cover ? <ScientificCover variant={item.cover} /> : null}
       <div className="flex flex-wrap items-center gap-3">
         <StatusBadge status={item.status} />
@@ -41,7 +41,7 @@ export function ResearchCard({ item }: ResearchCardProps) {
       )}
       {isDetailed && item.keywords ? (
         <div className="mt-5 flex flex-wrap gap-2">
-          {item.keywords.map((keyword) => (
+          {item.keywords.slice(0, 3).map((keyword) => (
             <span
               className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600"
               key={keyword}

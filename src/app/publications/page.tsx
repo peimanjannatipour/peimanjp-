@@ -11,12 +11,12 @@ const publicationsFaq = [
   {
     question: "What leads the publication record?",
     answer:
-      "The publication record starts with computational neuroscience articles on EEG residual prediction and Bayesian log-time state-space timing.",
+      "The publication record starts with two computational neuroscience preprints on EEG residual prediction and Bayesian log-time state-space timing.",
   },
   {
     question: "Is the Research Square article a peer-reviewed journal article?",
     answer:
-      "It is listed as a published research article with DOI. It should not be described as a peer-reviewed journal article unless final journal acceptance is verified.",
+      "It is a Research Square preprint with a DOI. No peer-reviewed journal version is claimed here.",
   },
   {
     question: "How are other outputs classified?",
@@ -28,7 +28,7 @@ const publicationsFaq = [
 export const metadata: Metadata = createPageMetadata({
   title: "Publications | Peiman Jannatipour | Computational Neuroscience Articles",
   description:
-    "Computational neuroscience articles, SSRN preprints, manuscripts, patent-pending invention work, research software, and exploratory modelling by Peiman Jannatipour.",
+    "Computational neuroscience preprints, manuscripts, PCT-filed invention work, research software, and exploratory modelling by Peiman Jannatipour.",
   path: "/publications",
 });
 
@@ -38,14 +38,15 @@ export default function PublicationsPage() {
       <JsonLd data={preprintJsonLd} />
       <JsonLd data={faqJsonLd(publicationsFaq)} />
       <Section
-        description="Research articles, preprints, manuscripts, technical artifacts, and patent-related work are separated so review status is not implied."
+        description="Public preprints, ongoing manuscripts, software, and patent work are listed separately with their current status."
         eyebrow="Publications"
+        headingLevel={1}
         title="Publications and manuscripts"
       >
         <div className="grid gap-8">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
-              Computational neuroscience articles
+              Computational neuroscience preprints
             </h2>
             <div className="mt-5 grid gap-5">
               {publications.neuroscienceArticles.map((item) => (
@@ -56,7 +57,7 @@ export default function PublicationsPage() {
 
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
-              Manuscripts and status-labelled research directions
+              Ongoing manuscripts and research
             </h2>
             <div className="mt-5 grid gap-3 md:grid-cols-2">
               <div className="rounded-lg border border-slate-200 bg-white p-5">
@@ -78,8 +79,8 @@ export default function PublicationsPage() {
                     {item.title}
                   </p>
                   <p className="mt-3 text-sm leading-7 text-slate-600">
-                    Status-labelled research direction. Public detail remains
-                    aligned with available artifacts.
+                    {item.summary ??
+                      "This work is in preparation; methods and results will be added with a public manuscript."}
                   </p>
                   {item.href ? (
                     <a

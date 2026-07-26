@@ -20,6 +20,7 @@ export default function CVPage() {
       <Section
         description={cv.summary}
         eyebrow="CV"
+        headingLevel={1}
         title="Professional CV"
       >
         <div className="grid gap-8 lg:grid-cols-[1fr_0.38fr]">

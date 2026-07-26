@@ -26,24 +26,18 @@ export const verificationItems = [
     status: "PCT application filed",
   },
   {
-    label: "Near East University Robotics Lab",
+    label: "Near East University",
     value:
-      "Verified research and institutional context. Role titles, project dates, and formal appointment wording should match available records exactly.",
-    status: "Verified link",
-  },
-  {
-    label: "Near East University Faculty of Engineering / Medical Research",
-    value:
-      "CV-listed medical research and biomedical engineering context. Formal role wording should match available records exactly.",
-    href: "https://neu.edu.tr/?lang=en",
-    status: "Verified link",
+      "Author affiliation shown on the public Bayesian timing preprint.",
+    href: externalLinks.bayesianTiming.href,
+    status: "Preprint link",
   },
   {
     label: "Universita Campus Bio-Medico di Roma (UCBM)",
     value:
-      "Biomedical engineering context listed in the CV. Formal role wording should match available records exactly.",
+      "Biomedical Engineering context listed in the author-supplied CV.",
     href: "https://www.unicampus.it/en/",
-    status: "Verified link",
+    status: "Affiliation to verify",
   },
 ];
 

@@ -2,7 +2,7 @@ import { externalLinks } from "./links";
 
 export type ClaimStatus =
   | "Published"
-  | "Published research article with DOI"
+  | "Research Square preprint with DOI"
   | "SSRN preprint"
   | "SSRN preprint with DOI"
   | "Preprint"
@@ -33,14 +33,13 @@ export type ResearchItem = {
 
 export const eegTemporalReproductionBias: ResearchItem = {
   title: "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias",
-  status: "Published research article with DOI",
+  status: "Research Square preprint with DOI",
   href: "/research/eeg-temporal-reproduction-bias",
   linkLabel: "Open article page",
   doi: "https://doi.org/10.21203/rs.3.rs-9852649/v1",
-  date: "June 1st, 2026",
-  affiliation: "Universita Campus Bio-Medico di Roma (UCBM), Rome, Italy",
+  date: "2026",
   summary:
-    "This article tests whether sensor-level EEG features explain residual temporal reproduction bias beyond behavioural structure. It uses a conservative residual-prediction framework and supports the narrower conclusion that temporal reproduction is dominated by behavioural context and history while being weakly modulated by individualized, calibration-dependent cortical state.",
+    "Across 19,419 trials from 27 participants, behavioural context and trial history explained most temporal reproduction error. Within-subject EEG calibration added a small but reliable improvement in held-out prediction (0.156%; permutation p = 0.010), without supporting a subject-independent biomarker or direct neural-clock claim.",
   keywords: [
     "temporal reproduction",
     "time perception",
@@ -50,7 +49,7 @@ export const eegTemporalReproductionBias: ResearchItem = {
     "Bayesian timing",
     "sensor-level neural state",
   ],
-  role: "Research article / DOI",
+  role: "Research Square preprint / DOI",
   cover: "minimal",
   visibility: "detailed",
 };
@@ -63,7 +62,7 @@ export const bayesianLogTimeClock: ResearchItem = {
   doi: "https://doi.org/10.2139/ssrn.6383218",
   affiliation: "Near East University",
   summary:
-    "This article models human time reproduction using a Bayesian log-time state-space clock with Kalman-like prior integration and lognormal observation noise. It reproduces central-tendency behaviour and identifies a mean-variance dissociation that motivates next-generation heteroscedastic or multi-source timing models.",
+    "A Bayesian log-time state-space model reproduces the central-tendency pattern in 15,264 cleaned trials (R² = 0.7099). Its stationary noise model does not reproduce the observed decline in variability across durations, providing a clear target for heteroscedastic or multi-source models.",
   keywords: [
     "time reproduction",
     "Bayesian timing",
@@ -107,7 +106,7 @@ export const corticalStateTemporalInference: ResearchItem = {
   href: "/research/cortical-state-temporal-inference",
   linkLabel: "Open status page",
   summary:
-    "Research direction connecting cortical-state dynamics, EEG/fMRI-informed workflows, and temporal inference. Public detail remains status-limited until a public artifact is available.",
+    "Ongoing manuscript on cortical-state dynamics, temporal inference, and EEG/fMRI-informed analysis. Methods and results will be added when a public manuscript is available.",
   cover: "bayesian",
   visibility: "limited",
 };
@@ -115,9 +114,9 @@ export const corticalStateTemporalInference: ResearchItem = {
 export const abcdDevelopmentalNeuroimaging: ResearchItem = {
   title: "ABCD Autism-ADHD Developmental Neuroimaging Research Line",
   status: "Research line",
-  role: "Multi-investigator international project led by Peiman",
+  role: "ABCD developmental neuroimaging",
   summary:
-    "A developmental neuroimaging research line focused on adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-elevation using conservative, validation-first framing.",
+    "Developmental neuroimaging work using ABCD data to examine adolescent brain maturation, resting-state connectivity, and dimensional co-occurrence of autism- and ADHD-related traits.",
   keywords: [
     "ABCD developmental neuroimaging",
     "autism-ADHD traits",
@@ -144,7 +143,7 @@ export const limitedResearch: ResearchItem[] = [
   },
   {
     title: "Relativistic Neural Time Framework",
-    status: "Under review",
+    status: "Manuscript in preparation",
     cover: "minimal",
     visibility: "limited",
   },
@@ -170,7 +169,7 @@ export const publications = {
 
 export const statusTaxonomy: ClaimStatus[] = [
   "Published",
-  "Published research article with DOI",
+  "Research Square preprint with DOI",
   "SSRN preprint",
   "SSRN preprint with DOI",
   "Preprint",

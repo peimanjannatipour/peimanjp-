@@ -4,8 +4,8 @@ type StatusBadgeProps = {
 
 const statusStyles: Record<string, string> = {
   Published: "border-emerald-200 bg-emerald-50 text-emerald-800",
-  "Published research article with DOI":
-    "border-emerald-200 bg-emerald-50 text-emerald-800",
+  "Research Square preprint with DOI":
+    "border-cyan-200 bg-cyan-50 text-cyan-800",
   Preprint: "border-cyan-200 bg-cyan-50 text-cyan-800",
   "SSRN preprint": "border-cyan-200 bg-cyan-50 text-cyan-800",
   "SSRN preprint with DOI": "border-cyan-200 bg-cyan-50 text-cyan-800",

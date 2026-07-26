@@ -19,6 +19,7 @@ export default function VerificationPage() {
       <Section
         description="This page separates verified links, listed identifiers, hidden identifiers, and status labels."
         eyebrow="Verification"
+        headingLevel={1}
         title="Verification and status"
       >
         <div className="grid gap-4 md:grid-cols-2">

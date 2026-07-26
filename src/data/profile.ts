@@ -6,7 +6,7 @@ export const profile = {
   nationality: "Iranian",
   role: siteConfig.role,
   hero:
-    "Peiman Jannatipour is a computational neuroscience researcher, inventor, and neurotechnology systems developer working across EEG analysis, temporal cognition, Bayesian timing models, ABCD developmental neuroimaging, neural time-series modelling, privacy-preserving neurotechnology, biomedical systems, and research software.",
+    "I study how context, recent experience, and neural state shape human time perception. My work combines EEG, behavioural modelling, Bayesian methods, and developmental neuroimaging; I also build research software and privacy-aware neurotechnology.",
   about: [
     "Peiman Jannatipour builds inspectable research artifacts: manuscripts, code, workflows, and pre-production prototypes.",
     "The portfolio sits across computational neuroscience, EEG/fMRI analysis, biomedical systems, theoretical modeling, robotics, privacy-preserving AI, and full-stack research software.",
@@ -29,28 +29,14 @@ export const profile = {
   affiliations: [
     {
       institution: "Near East University",
-      role: "Faculty of Engineering / medical research interface",
+      role: "Author affiliation on the Bayesian timing preprint",
       iconUrl: "https://www.google.com/s2/favicons?domain=neu.edu.tr&sz=64",
-      proofUrl: "https://neu.edu.tr/?lang=en",
-      visible: true,
-    },
-    {
-      institution: "Near East University - Faculty of Engineering / Medical Research",
-      role: "CV-listed medical research and biomedical engineering context",
-      iconUrl: "https://www.google.com/s2/favicons?domain=neu.edu.tr&sz=64",
-      proofUrl: "https://neu.edu.tr/?lang=en",
-      visible: true,
-    },
-    {
-      institution: "Near East University Robotics Lab",
-      role: "Verified research and institutional context",
-      iconUrl: "https://www.google.com/s2/favicons?domain=neu.edu.tr&sz=64",
-      proofUrl: "https://neu.edu.tr/?lang=en",
+      proofUrl: "https://doi.org/10.2139/ssrn.6383218",
       visible: true,
     },
     {
       institution: "Universita Campus Bio-Medico di Roma (UCBM), Rome, Italy",
-      role: "Biomedical Engineering context",
+      role: "Biomedical Engineering context listed in the CV",
       iconUrl:
         "https://www.google.com/s2/favicons?domain=unicampus.it&sz=64",
       proofUrl: "https://www.unicampus.it/en/",

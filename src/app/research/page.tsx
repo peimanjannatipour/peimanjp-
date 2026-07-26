@@ -25,7 +25,7 @@ const researchFaq = [
   {
     question: "What are the two main public research anchors?",
     answer:
-      "The two main anchors are the Sensor-Level EEG Residual Prediction article and the Bayesian Log-Time State-Space Clock SSRN preprint.",
+      "The two main anchors are the Sensor-Level EEG Residual Prediction Research Square preprint and the Bayesian Log-Time State-Space Clock SSRN preprint.",
   },
   {
     question: "Where does graph-theoretic spacetime fit?",
@@ -54,21 +54,23 @@ export default function ResearchPage() {
       <Section
         description="The research center of this portfolio is temporal cognition: how human timing behaviour is biased by context, history, and cortical state."
         eyebrow="Research"
+        headingLevel={1}
         title="Computational neuroscience and temporal cognition"
       >
-        <p className="max-w-4xl rounded-lg border border-slate-200 bg-white p-6 text-base leading-8 text-slate-700">
-          The two strongest public anchors are the EEG residual-prediction
-          article and the Bayesian log-time state-space model. Together, they
-          frame timing as a systems-neuroscience problem involving behavioural
-          calibration, neural time-series, Bayesian inference, residual
-          dynamics, and conservative model checking.
+        <p className="max-w-4xl border-l-2 border-cyan-700 pl-6 text-base leading-8 text-slate-700">
+          The EEG preprint asks whether neural features improve prediction
+          after behavioural structure has been modelled. The Bayesian preprint
+          asks whether a log-time state-space model can reproduce both the mean
+          and variability of human time reproduction. Together, they connect
+          empirical EEG analysis with a falsifiable computational account of
+          timing.
         </p>
       </Section>
 
       <Section
         className="border-t border-slate-200 bg-slate-50"
-        description="These articles now lead the research page and define the computational neuroscience axis of the site."
-        eyebrow="Primary neuroscience articles"
+        description="The empirical EEG study and the Bayesian model are the two main public outputs on human timing."
+        eyebrow="Primary neuroscience preprints"
         title="EEG residual prediction and Bayesian timing"
       >
         <div className="grid gap-5 lg:grid-cols-2">
@@ -87,10 +89,10 @@ export default function ResearchPage() {
           <ResearchCard item={abcdDevelopmentalNeuroimaging} />
           <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
             <Image
-              alt="Illustrative research team reviewing results at a workstation."
+              alt="Researchers reviewing laboratory data."
               className="aspect-[4/3] w-full object-cover"
               height={900}
-              src="https://images.pexels.com/photos/9574543/pexels-photo-9574543.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              src="/images/stock-lab-data-analysis.jpg"
               width={1200}
             />
             <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
@@ -102,17 +104,17 @@ export default function ResearchPage() {
 
       <Section
         className="border-t border-slate-200 bg-slate-50"
-        description="Additional neuroscience directions remain status-labelled and lower than the two public neuroscience anchors."
+        description="Ongoing work examines cortical-state dynamics and EEG/fMRI-informed temporal inference."
         eyebrow="Neural time-series"
         title="Cortical state and EEG/fMRI-simulation directions"
       >
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
           <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
             <Image
-              alt="Illustrative data-analysis workspace on a laptop."
+              alt="Researcher working with a data-analysis notebook."
               className="aspect-[4/3] w-full object-cover"
               height={900}
-              src="https://images.unsplash.com/photo-1753613648137-602c669cbe07?auto=format&fit=crop&fm=jpg&q=82&w=1800"
+              src="/images/stock-data-dashboard.jpg"
               width={1200}
             />
             <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
@@ -125,7 +127,7 @@ export default function ResearchPage() {
 
       <Section
         className="border-t border-slate-200 bg-slate-50"
-        description="Software and neurotechnology systems are positioned as infrastructure and support systems around neural and behavioural modelling."
+        description="NeuroLab OS and the masking-index prototype translate parts of this work into research workflows and privacy-aware signal processing."
         eyebrow="Research systems"
         title="NeuroLab OS and NDMS"
       >
@@ -137,17 +139,17 @@ export default function ResearchPage() {
 
       <Section
         className="border-t border-slate-200 bg-white"
-        description="Biomedical modelling and evidence-system design remain supporting research directions."
+        description="Separate projects explore mitochondrial control models and structured review of scientific claims."
         eyebrow="Biomedical and evidence systems"
         title="Mitochondrial modelling and SMIS-ODS"
       >
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1fr]">
           <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
             <Image
-              alt="Illustrative laboratory team reviewing research data."
+              alt="Researchers working in a biomedical laboratory."
               className="w-full object-cover"
               height={1200}
-              src="https://images.pexels.com/photos/4031694/pexels-photo-4031694.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              src="/images/stock-neuroscience-research.jpg"
               width={1000}
             />
             <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
@@ -173,7 +175,7 @@ export default function ResearchPage() {
 
       <Section
         className="border-t border-slate-200 bg-slate-50"
-        description="Graph-spacetime remains available but is no longer the central identity of the research page."
+        description="This exploratory theoretical work is separate from the empirical neuroscience program."
         eyebrow="Exploratory theoretical modelling"
         title="Graph-theoretic spacetime"
       >

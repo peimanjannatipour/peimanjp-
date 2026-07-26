@@ -25,31 +25,10 @@ export default function Home() {
       <CredibilityStrip items={profile.credibility} />
 
       <Section
-        description="The public research center of the site is human temporal cognition and developmental neuroimaging: EEG residual prediction, Bayesian timing, ABCD research, neural time-series modelling, and conservative systems-neuroscience interpretation."
-        eyebrow="Neuroscience anchor"
-        title="Computational neuroscience and temporal cognition"
-      >
-        <div className="grid gap-5 lg:grid-cols-3">
-          {[
-            "The flagship article tests whether sensor-level EEG features explain residual temporal reproduction bias beyond behavioural structure.",
-            "The Bayesian log-time state-space preprint provides a computational timing model and a falsifiable benchmark for future timing models.",
-            "The broader portfolio connects ABCD developmental neuroimaging, neural time-series analysis, privacy-preserving neurotechnology, biomedical systems, and research-use software.",
-          ].map((paragraph) => (
-            <p
-              className="rounded-lg border border-slate-200 bg-white p-5 text-sm leading-7 text-slate-700"
-              key={paragraph}
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
-      </Section>
-
-      <Section
         className="border-t border-slate-200 bg-slate-50"
-        description="Two neuroscience articles now lead the portfolio. Graph-theoretic spacetime remains available lower on the site as exploratory theoretical modelling."
+        description="Two public preprints anchor the timing work: one empirical EEG study and one computational model."
         eyebrow="Primary research"
-        title="Neuroscience articles"
+        title="Selected research"
       >
         <div className="grid gap-6 lg:grid-cols-2">
           <ResearchCard item={eegTemporalReproductionBias} />
@@ -81,7 +60,7 @@ export default function Home() {
 
       <Section
         className="border-y border-slate-200 bg-white"
-        description="Biomedical and theoretical work is included as supporting context, with graph-spacetime explicitly positioned as exploratory theoretical modelling."
+        description="Additional work covers mitochondrial modelling, evidence-review systems, and an exploratory graph-theoretic model of spacetime."
         eyebrow="Supporting work"
         title="Biomedical, evidence, and exploratory modelling"
       >

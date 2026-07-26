@@ -24,6 +24,7 @@ export default function ContactPage() {
       <Section
         description="For research collaboration, mentorship, admissions verification, editorial review context, or technical/product discussions, contact by email."
         eyebrow="Contact"
+        headingLevel={1}
         title="Professional contact"
       >
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
