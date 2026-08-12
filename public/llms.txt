@@ -6,7 +6,7 @@ Peiman Jannatipour is a computational neuroscience researcher, inventor, and neu
 ORCID: 0009-0009-3205-2423
 GitHub: peimanjannatipour
 PCT/WIPO application: PCT/IB2025/060348
-Email: peiman.jannatipour@gmail.com
+Email: peiman@peimanjp.com
 
 ## Primary neuroscience articles
 Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias â€” Research Article, posted June 1st, 2026, DOI https://doi.org/10.21203/rs.3.rs-9852649/v1.
