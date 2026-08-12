@@ -15,6 +15,9 @@ export function Footer() {
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <p className="text-lg font-semibold">{siteConfig.name}</p>
+          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">
+            A PEIMAN JP portfolio
+          </p>
           <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">
             Researcher, inventor, and neurotechnology builder. Patent pending /
             PCT application filed: PCT/IB2025/060348.

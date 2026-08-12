@@ -2,7 +2,7 @@
 Name: Peiman Jannatipour
 Alias: Peiman JP
 Role: Computational Neuroscience Researcher, Inventor, Neurotechnology Systems Developer
-Contact: peiman.jannatipour@gmail.com
+Contact: peiman@peimanjp.com
 ORCID: 0009-0009-3205-2423
 GitHub: peimanjannatipour
 
