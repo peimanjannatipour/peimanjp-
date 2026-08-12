@@ -21,8 +21,8 @@ export const siteConfig = {
   shortName: "Peiman JP",
   role:
     "Computational Neuroscience Researcher · EEG, Human Timing & Neural Time-Series",
-  baseUrl: "https://peiman-jannatipour-portfolio.vercel.app",
-  email: "peiman.jannatipour@gmail.com",
+  baseUrl: "https://peimanjp.com",
+  email: "peiman@peimanjp.com",
   defaultTitle:
     "Peiman Jannatipour | Computational Neuroscience, EEG & Neurotechnology Systems",
   description:
@@ -73,7 +73,7 @@ export const externalLinks = {
   },
   website: {
     label: "Website",
-    value: "peiman-jannatipour-portfolio.vercel.app",
+    value: "peimanjp.com",
     href: siteConfig.baseUrl,
     visible: true,
   },
