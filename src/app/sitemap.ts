@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/research/cortical-state-temporal-inference",
     "/llms.txt",
     "/humans.txt",
+    "/privacy",
   ];
 
   return [...navItems.map((item) => item.href), ...extraRoutes].map((href) => ({
