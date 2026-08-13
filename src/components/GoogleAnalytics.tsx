@@ -128,12 +128,8 @@ export function GoogleAnalytics() {
           destination = "email";
         } else {
           const url = new URL(href, window.location.origin);
-          const downloadable = /\.(?:exe|zip|dmg|pdf)$/i.test(url.pathname);
 
-          if (downloadable) {
-            eventName = "file_download";
-            destination = url.pathname;
-          } else if (url.pathname === "/signup") {
+          if (url.pathname === "/signup") {
             eventName = "sign_up_start";
             destination = url.pathname;
           } else if (url.pathname === "/login") {
@@ -147,9 +143,6 @@ export function GoogleAnalytics() {
             destination = "/about#partner";
           } else if (url.hostname !== window.location.hostname && isPeimanJpHost(url.hostname)) {
             eventName = "product_navigation";
-            destination = url.hostname;
-          } else if (url.hostname !== window.location.hostname && /^https?:$/.test(url.protocol)) {
-            eventName = "outbound_click";
             destination = url.hostname;
           }
         }
