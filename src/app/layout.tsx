@@ -7,6 +7,7 @@ import { Navbar } from "@/components/Navbar";
 import { createPageMetadata } from "@/lib/metadata";
 import { personJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import "./globals.css";
+import "./theme-overrides.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
