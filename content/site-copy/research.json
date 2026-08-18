@@ -1,0 +1,25 @@
+{
+  "title": "Research Areas",
+  "cards": [
+    {
+      "id": "eeg-neural-time-series",
+      "title": "EEG and neural time-series",
+      "text": "Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability."
+    },
+    {
+      "id": "temporal-cognition",
+      "title": "Temporal cognition and human time reproduction",
+      "text": "Research on systematic bias in time reproduction, contextual effects, recent-trial influences, and computational accounts of temporal estimation."
+    },
+    {
+      "id": "bayesian-modelling",
+      "title": "Bayesian and state-space modelling",
+      "text": "Interpretable models of behavioural data, with emphasis on central tendency, multiplicative variability, and diagnostic evaluation of fit and misspecification."
+    },
+    {
+      "id": "neurotech-systems",
+      "title": "Neurotechnology and scientific systems",
+      "text": "Design of privacy-aware and reproducible systems for neural analysis, modelling, simulation, and applied multimodal inference."
+    }
+  ]
+}

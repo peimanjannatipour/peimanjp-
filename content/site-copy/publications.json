@@ -1,0 +1,29 @@
+{
+  "title": "Selected Publications and Preprints",
+  "entries": [
+    {
+      "id": "eeg-residual-prediction",
+      "title": "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias",
+      "description": "A preprint examining whether trial-level EEG information explains residual variation in time reproduction beyond the behavioural structure already captured by duration, context, and recent experience.",
+      "linkLabel": "View preprint",
+      "url": "https://doi.org/10.21203/rs.3.rs-9852649/v1",
+      "type": "preprint"
+    },
+    {
+      "id": "bayesian-log-time-clock",
+      "title": "A Bayesian Log-Time State-Space Clock for Human Time Reproduction",
+      "description": "A preprint presenting a Bayesian log-time state-space model of human time reproduction, focusing on central tendency, multiplicative error, and diagnostic evaluation of model adequacy.",
+      "linkLabel": "View preprint",
+      "url": "https://doi.org/10.2139/ssrn.6383218",
+      "type": "preprint"
+    },
+    {
+      "id": "neurolab-os-paper",
+      "title": "NeuroLab OS: A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation",
+      "description": "A technical manuscript describing a local-first scientific workbench for neural time-series ingestion, explicit quality control, computational model fitting, in silico perturbation workflows, and provenance-aware reporting.",
+      "linkLabel": "Open manuscript",
+      "url": "/assets/papers/neurolab-os-preprint.pdf",
+      "type": "manuscript"
+    }
+  ]
+}

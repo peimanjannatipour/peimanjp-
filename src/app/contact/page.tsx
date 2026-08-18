@@ -1,85 +1,48 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { LinkButton } from "@/components/LinkButton";
-import { Section } from "@/components/Section";
-import { externalLinks, siteConfig } from "@/data/links";
+import homepageData from "@/../content/site-copy/homepage.json";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Contact - Peiman Jannatipour",
+  title: "Contact | Peiman Jannatipour",
+  description: homepageData.contact.body,
   path: "/contact",
 });
 
 export default function ContactPage() {
-  const contactLinks = [
-    externalLinks.email,
-    externalLinks.github,
-    externalLinks.orcid,
-    externalLinks.ssrn,
-    externalLinks.website,
-  ].filter((item) => item.visible);
-
   return (
-    <main id="main">
-      <Section
-        description="For research collaboration, mentorship, admissions verification, editorial review context, or technical/product discussions, contact by email."
-        eyebrow="Contact"
-        headingLevel={1}
-        title="Professional contact"
-      >
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <div className="mb-6 flex items-center gap-4">
-              <Image
-                alt="Casual profile portrait of Peiman Jannatipour"
-                className="h-20 w-20 rounded-lg border border-slate-200 object-cover object-top"
-                height={320}
-                src="/images/peiman-jp-casual.jpg"
-                width={320}
-              />
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-700">
-                  Peiman JP
-                </p>
-                <p className="mt-1 text-sm font-semibold text-slate-950">
-                  {siteConfig.name}
-                </p>
-              </div>
-            </div>
-            <h2 className="text-xl font-semibold tracking-tight text-slate-950">
-              Preferred channel
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-slate-600">
-              Email is the best channel for collaboration, review, or
-              verification requests.
-            </p>
-            <div className="mt-6">
-              <LinkButton href={externalLinks.email.href ?? "#"}>
-                {externalLinks.email.value}
-              </LinkButton>
-            </div>
-          </div>
+    <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="max-w-3xl">
+          <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">
+            Inquiries
+          </span>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            {homepageData.contact.title}
+          </h1>
+          <p className="mt-6 text-lg leading-relaxed text-slate-300">
+            {homepageData.contact.body}
+          </p>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {contactLinks.map((item) => (
-              <a
-                className="rounded-lg border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-950"
-                href={item.href}
-                key={item.label}
-                rel={item.href?.startsWith("http") ? "noopener noreferrer" : undefined}
-                target={item.href?.startsWith("http") ? "_blank" : undefined}
-              >
-                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                  {item.label}
-                </span>
-                <span className="mt-2 block break-words text-sm font-semibold text-slate-950">
-                  {item.value}
-                </span>
-              </a>
-            ))}
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a
+              className="inline-flex items-center rounded-lg border border-sky-500/30 bg-sky-600/20 px-5 py-2.5 text-sm font-semibold text-sky-200 transition hover:bg-sky-600/40 hover:text-white"
+              href="https://orcid.org/0009-0009-3205-2423"
+              rel="noreferrer"
+              target="_blank"
+            >
+              ORCID Profile →
+            </a>
+            <a
+              className="inline-flex items-center rounded-lg border border-slate-700 bg-slate-800 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:bg-slate-700 hover:text-white"
+              href="https://www.researchgate.net/profile/Peiman-Jannatipour-2"
+              rel="noreferrer"
+              target="_blank"
+            >
+              ResearchGate Profile →
+            </a>
           </div>
         </div>
-      </Section>
+      </div>
     </main>
   );
 }

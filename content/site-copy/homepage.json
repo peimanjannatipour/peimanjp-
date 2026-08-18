@@ -1,0 +1,34 @@
+{
+  "eyebrow": "Computational neuroscience",
+  "h1": "Peiman Jannatipour",
+  "subtitle": "Computational Neuroscience Researcher · EEG, Human Timing, Neural Time-Series, and Neurotechnology Systems",
+  "heroParagraph": "Peiman Jannatipour works across computational neuroscience, EEG, temporal cognition, Bayesian modelling, scientific software, and privacy-aware neurotechnology. His work focuses on how behavioural context, recent experience, and neural state shape human time perception, while also developing reproducible tools and systems for neural time-series research.",
+  "primaryButtons": [
+    { "label": "View Research", "href": "/research" },
+    { "label": "Publications & Preprints", "href": "/publications" },
+    { "label": "Explore NeuroLab OS", "href": "/neurolab-os" },
+    { "label": "Patent & NDMS", "href": "/ndms" }
+  ],
+  "highlights": [
+    {
+      "title": "EEG and temporal cognition",
+      "text": "Research on human time reproduction, temporal bias, and the relationship between behavioural structure and trial-level neural state."
+    },
+    {
+      "title": "Bayesian and computational modelling",
+      "text": "Model-based work on time perception, central tendency, state-space dynamics, and interpretable computational mechanisms."
+    },
+    {
+      "title": "Research software and neurotechnology",
+      "text": "Development of local-first, provenance-aware software and privacy-conscious multimodal systems for scientific and translational use."
+    }
+  ],
+  "about": {
+    "title": "About",
+    "body": "Peiman Jannatipour is a researcher and inventor whose work spans computational neuroscience, EEG, behavioural modelling, scientific software, and neurotechnology. His research emphasizes rigorous interpretation, reproducible workflows, and technically clear communication. Across projects, he combines neural time-series analysis, modelling, and systems thinking to study cognitive processes and to build tools that make complex research more traceable and usable."
+  },
+  "contact": {
+    "title": "Contact",
+    "body": "For research, software, or project-related inquiries, use the contact pathways provided on this site or the linked public profiles where appropriate."
+  }
+}
