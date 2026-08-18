@@ -70,6 +70,12 @@ export const externalLinks = {
     href: "https://doi.org/10.2139/ssrn.5891994",
     visible: true,
   },
+  ssrn: {
+    label: "Graph-Theoretic Spacetime SSRN DOI",
+    value: "10.2139/ssrn.5891994",
+    href: "https://doi.org/10.2139/ssrn.5891994",
+    visible: true,
+  },
   pct: {
     label: "PCT application",
     value: "PCT/IB2025/060348",
