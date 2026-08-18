@@ -1,25 +1,42 @@
 {
   "title": "Research Areas",
+  "intro": "My work is organized around a set of connected research lines rather than a single method. The common thread is a preference for interpretable models, careful validation, reproducible analysis, and systems that keep scientific assumptions visible to the researcher.",
   "cards": [
     {
       "id": "eeg-neural-time-series",
       "title": "EEG and neural time-series",
-      "text": "Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability."
+      "text": "Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability.",
+      "href": "/research/eeg-temporal-reproduction-bias"
     },
     {
       "id": "temporal-cognition",
       "title": "Temporal cognition and human time reproduction",
-      "text": "Research on systematic bias in time reproduction, contextual effects, recent-trial influences, and computational accounts of temporal estimation."
+      "text": "Research on systematic bias in time reproduction, contextual effects, recent-trial influences, and computational accounts of temporal estimation.",
+      "href": "/research/bayesian-log-time-state-space-clock"
     },
     {
       "id": "bayesian-modelling",
       "title": "Bayesian and state-space modelling",
-      "text": "Interpretable models of behavioural data, with emphasis on central tendency, multiplicative variability, and diagnostic evaluation of fit and misspecification."
+      "text": "Interpretable behavioural models emphasizing central tendency, multiplicative variability, predictive diagnostics, and explicit model misspecification.",
+      "href": "/research/bayesian-log-time-state-space-clock"
+    },
+    {
+      "id": "developmental-neuroimaging",
+      "title": "ABCD developmental neuroimaging",
+      "text": "An ongoing research line using ABCD data to study adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-occurrence without disclosing unpublished analyses.",
+      "href": "/research/abcd-developmental-neuroimaging"
     },
     {
       "id": "neurotech-systems",
       "title": "Neurotechnology and scientific systems",
-      "text": "Design of privacy-aware and reproducible systems for neural analysis, modelling, simulation, and applied multimodal inference."
+      "text": "Design of privacy-aware and reproducible systems for neural analysis, modelling, simulation, multimodal inference, and research translation.",
+      "href": "/neurolab-os"
+    },
+    {
+      "id": "evidence-systems",
+      "title": "Evidence systems and scientific decision support",
+      "text": "Structured evidence-review work focused on separating claims, sources, study design, outcome relevance, risk of bias, and support direction.",
+      "href": "/projects/smis-ods"
     }
   ]
 }
