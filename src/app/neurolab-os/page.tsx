@@ -3,7 +3,7 @@ import Image from "next/image";
 import seoData from "@/../content/site-copy/seo.json";
 import { JsonLd } from "@/components/JsonLd";
 import { createPageMetadata } from "@/lib/metadata";
-import { scholarlyArticleJsonLd, softwareApplicationJsonLd } from "@/lib/structured-data";
+import { softwareApplicationJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "NeuroLab OS | Scientist-Reviewed Neural Time-Series Modelling",
@@ -20,16 +20,8 @@ export default function NeuroLabPage() {
       <JsonLd
         data={softwareApplicationJsonLd({
           name: "NeuroLab OS",
-          description: "A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation.",
+          description: "A local-first research-software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation.",
           path: "/neurolab-os",
-        })}
-      />
-      <JsonLd
-        data={scholarlyArticleJsonLd({
-          title: "NeuroLab OS: A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation",
-          description: "A technical manuscript describing a local-first scientific workbench for neural time-series ingestion, explicit quality control, computational model fitting, in silico perturbation workflows, and provenance-aware reporting.",
-          path: "/neurolab-os",
-          pdfUrl: "/assets/papers/neurolab-os-preprint.pdf",
         })}
       />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">

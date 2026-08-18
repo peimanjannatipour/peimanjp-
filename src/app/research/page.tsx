@@ -21,11 +21,28 @@ export default function ResearchPage() {
           name: "Research Areas | Peiman Jannatipour",
           description: "Peiman Jannatipour’s research spans EEG and neural time-series analysis, temporal cognition and human time reproduction, Bayesian and state-space modelling, developmental neuroimaging, research software, and neurotechnology.",
           path: "/research",
-          items: researchData.cards.map((c) => ({
-            name: c.title,
-            url: "/research",
-            description: c.text,
-          })),
+          items: [
+            {
+              name: "EEG and neural time-series",
+              url: "/research/eeg-temporal-reproduction-bias",
+              description: "Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability.",
+            },
+            {
+              name: "Temporal cognition and human time reproduction",
+              url: "/research/eeg-temporal-reproduction-bias",
+              description: "Research on systematic bias in time reproduction, contextual effects, recent-trial influences, and computational accounts of temporal estimation.",
+            },
+            {
+              name: "Bayesian and state-space modelling",
+              url: "/research/bayesian-log-time-state-space-clock",
+              description: "Interpretable models of behavioural data, with emphasis on central tendency, multiplicative variability, and diagnostic evaluation of fit and misspecification.",
+            },
+            {
+              name: "Neurotechnology and scientific systems",
+              url: "/neurolab-os",
+              description: "Design of privacy-aware and reproducible systems for neural analysis, modelling, simulation, and applied multimodal inference.",
+            },
+          ],
         })}
       />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">

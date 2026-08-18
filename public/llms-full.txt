@@ -81,7 +81,7 @@ The present evidence establishes software and release-level verification of the 
 
 ---
 
-## 5. NDMS (NEURO-DIAGNOSTIC MULTIMODAL SYSTEM)
+## 5. NDMS (NEURO DYNAMIC MASKING SYSTEM)
 
 NDMS is a privacy-aware multimodal neurotechnology project focused on structured multimodal signal integration, quality-aware inference, edge-oriented processing, and interpretable system design. It should be presented as an invention and technology-development program, not as a validated diagnostic or clinical product.
 

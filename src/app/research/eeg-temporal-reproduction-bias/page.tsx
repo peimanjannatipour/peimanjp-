@@ -25,7 +25,7 @@ export default function EEGTemporalReproductionBiasPage() {
         data={scholarlyArticleJsonLd({
           title,
           description:
-            "A preprint examining whether trial-level sensor-level EEG information explains residual variation in time reproduction beyond behavioural structure already captured by duration, task context, and recent experience.",
+            "A preprint examining whether trial-level EEG information explains residual variation in time reproduction beyond the behavioural structure already captured by duration, context, and recent experience.",
           path: "/research/eeg-temporal-reproduction-bias",
           doi,
         })}
@@ -64,30 +64,16 @@ export default function EEGTemporalReproductionBiasPage() {
         <div className="mt-12 grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8 space-y-8 text-slate-300 leading-relaxed">
             <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-              <h2 className="text-xl font-bold text-white mb-4">Research Summary</h2>
+              <h2 className="text-xl font-bold text-white mb-4">Research Overview</h2>
               <p>
-                This work examines whether trial-level sensor-level EEG information explains variation in temporal reproduction beyond behavioural structure already captured by duration, task context, and recent experience.
+                This work examines whether trial-level sensor-level EEG information explains variation in temporal reproduction beyond behavioural structure already captured by duration, task context, and recent experience. The interpretation should remain calibrated: the work evaluates incremental predictive information and should not be presented as establishing a universal EEG biomarker or direct neural clock.
               </p>
             </section>
 
             <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-              <h2 className="text-xl font-bold text-white mb-4">Methods &amp; Approach</h2>
+              <h2 className="text-xl font-bold text-white mb-4">Research Scope &amp; Focus</h2>
               <p>
-                The research applies sensor-level neural time-series analysis to trial-by-trial EEG recordings captured during human time reproduction tasks. By extracting spectral and temporal features across pre-stimulus, encoding, and reproduction intervals, the study isolates trial-level residual variance after accounting for standard psychophysical context effects.
-              </p>
-            </section>
-
-            <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-              <h2 className="text-xl font-bold text-white mb-4">Scientific Interpretation &amp; Calibration</h2>
-              <p>
-                The interpretation should remain calibrated: the work evaluates incremental predictive information and should not be presented as establishing a universal EEG biomarker or direct neural clock.
-              </p>
-            </section>
-
-            <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-              <h2 className="text-xl font-bold text-white mb-4">Limitations &amp; Caution</h2>
-              <p>
-                Sensor-level EEG signals reflect superpositions of distributed neural sources. While residual prediction demonstrates that electrophysiological state carries information relevant to temporal estimation bias, further source-localized and invasive recordings are required to pinpoint exact anatomical generators.
+                Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability.
               </p>
             </section>
 
@@ -121,7 +107,7 @@ export default function EEGTemporalReproductionBiasPage() {
                   Data Context
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                  EEG sensor-level analysis and residual prediction in cognitive timing experiments.
+                  Analysis of sensor-level neural signals and temporal reproduction bias.
                 </p>
               </div>
             </div>

@@ -64,30 +64,16 @@ export default function BayesianLogTimeStateSpaceClockPage() {
         <div className="mt-12 grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8 space-y-8 text-slate-300 leading-relaxed">
             <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-              <h2 className="text-xl font-bold text-white mb-4">Research Summary</h2>
+              <h2 className="text-xl font-bold text-white mb-4">Research Overview</h2>
               <p>
                 This work develops a computational account of human time reproduction using a Bayesian log-time state-space framework. It focuses on central tendency, multiplicative variability, predictive adequacy, and model diagnostics, with particular attention to where a compact timing model succeeds and where remaining structure motivates richer models.
               </p>
             </section>
 
             <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-              <h2 className="text-xl font-bold text-white mb-4">Methods &amp; Approach</h2>
+              <h2 className="text-xl font-bold text-white mb-4">Research Scope &amp; Focus</h2>
               <p>
-                The model formalizes temporal estimation on a logarithmic scale, incorporating state-space transition dynamics to capture trial-to-trial drift and contextual prior weighting. Parameter estimation and model comparison utilize MCMC posterior sampling and diagnostic residual evaluations.
-              </p>
-            </section>
-
-            <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-              <h2 className="text-xl font-bold text-white mb-4">Interpretation</h2>
-              <p>
-                The log-time formulation provides a parsimonious account of scalar variability and regression to the mean in time reproduction. By explicitly measuring model misspecification through posterior predictive checks, the paper demonstrates both the scope and boundaries of compact Bayesian clock mechanisms.
-              </p>
-            </section>
-
-            <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-              <h2 className="text-xl font-bold text-white mb-4">Limitations &amp; Caution</h2>
-              <p>
-                Model adequacy evaluations indicate that while compact log-time state-space models successfully reproduce central tendency, non-stationary task demands or extreme duration ranges require multi-scale or non-linear extension.
+                Interpretable models of behavioural data, with emphasis on central tendency, multiplicative variability, and diagnostic evaluation of fit and misspecification.
               </p>
             </section>
 
@@ -121,7 +107,7 @@ export default function BayesianLogTimeStateSpaceClockPage() {
                   Model Fit &amp; Analysis
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                  Bayesian MCMC sampling, state-space dynamics, and model diagnostic checks.
+                  Bayesian state-space dynamics and diagnostic model evaluation.
                 </p>
               </div>
             </div>
