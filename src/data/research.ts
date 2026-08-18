@@ -36,7 +36,7 @@ export const eegTemporalReproductionBias: ResearchItem = {
   status: "Research Square preprint with DOI",
   href: "/research/eeg-temporal-reproduction-bias",
   linkLabel: "Open article page",
-  doi: "https://doi.org/10.21203/rs.3.rs-9852649/v1",
+  doi: externalLinks.eegArticle.href,
   date: "2026",
   summary:
     "Across 19,419 trials from 27 participants, behavioural context and trial history explained most temporal reproduction error. Within-subject EEG calibration added a small but reliable improvement in held-out prediction (0.156%; permutation p = 0.010), without supporting a subject-independent biomarker or direct neural-clock claim.",
@@ -46,7 +46,6 @@ export const eegTemporalReproductionBias: ResearchItem = {
     "EEG",
     "residual prediction",
     "leave-one-subject-out cross-validation",
-    "Bayesian timing",
     "sensor-level neural state",
   ],
   role: "Research Square preprint / DOI",
@@ -59,8 +58,7 @@ export const bayesianLogTimeClock: ResearchItem = {
   status: "SSRN preprint with DOI",
   href: "/research/bayesian-log-time-state-space-clock",
   linkLabel: "Open article page",
-  doi: "https://doi.org/10.2139/ssrn.6383218",
-  affiliation: "Near East University",
+  doi: externalLinks.bayesianTiming.href,
   summary:
     "A Bayesian log-time state-space model reproduces the central-tendency pattern in 15,264 cleaned trials (R² = 0.7099). Its stationary noise model does not reproduce the observed decline in variability across durations, providing a clear target for heteroscedastic or multi-source models.",
   keywords: [
@@ -68,7 +66,6 @@ export const bayesianLogTimeClock: ResearchItem = {
     "Bayesian timing",
     "log-time",
     "state-space model",
-    "Kalman-like prior integration",
     "central tendency",
     "temporal cognition",
   ],
@@ -79,10 +76,11 @@ export const bayesianLogTimeClock: ResearchItem = {
 
 export const featuredResearch: ResearchItem = {
   title:
-    "Graph-Theoretic Framework for Representing Spacetime as Temporal Layers of Spatial Graphs",
+    "A Graph-Theoretic Framework for Representing Spacetime as Temporal Layers of Spatial Graphs",
   status: "SSRN preprint",
-  href: externalLinks.ssrn.href,
-  linkLabel: `DOI: ${externalLinks.ssrn.value}`,
+  href: externalLinks.graphSpacetime.href,
+  linkLabel: `DOI: ${externalLinks.graphSpacetime.value}`,
+  doi: externalLinks.graphSpacetime.href,
   summary:
     "Exploratory theoretical modelling work representing spacetime as ordered layers of spatial graphs, with attention to discrete structures, invariance metrics, and Lorentz-aware transformations.",
   keywords: [
@@ -100,13 +98,14 @@ export const featuredResearch: ResearchItem = {
 export const bayesianPreprint = bayesianLogTimeClock;
 
 export const corticalStateTemporalInference: ResearchItem = {
-  title: "Cortical State Temporal Inference Manuscript",
+  title:
+    "Cortical State Dynamics Support a Near-Linear Physiological Proxy for Temporal Inference Across fMRI, EEG, and Simulation",
   status: "Manuscript in preparation",
   role: "Systems neuroscience",
   href: "/research/cortical-state-temporal-inference",
-  linkLabel: "Open status page",
+  linkLabel: "Open manuscript status page",
   summary:
-    "Ongoing manuscript on cortical-state dynamics, temporal inference, and EEG/fMRI-informed analysis. Methods and results will be added when a public manuscript is available.",
+    "Systems-neuroscience manuscript on cortical-state dynamics and temporal inference across fMRI, EEG, and simulation. The public page intentionally limits detail while the work is not available as a public manuscript.",
   cover: "bayesian",
   visibility: "limited",
 };
@@ -115,6 +114,8 @@ export const abcdDevelopmentalNeuroimaging: ResearchItem = {
   title: "ABCD Autism-ADHD Developmental Neuroimaging Research Line",
   status: "Research line",
   role: "ABCD developmental neuroimaging",
+  href: "/research/abcd-developmental-neuroimaging",
+  linkLabel: "Open research-line page",
   summary:
     "Developmental neuroimaging work using ABCD data to examine adolescent brain maturation, resting-state connectivity, and dimensional co-occurrence of autism- and ADHD-related traits.",
   keywords: [
@@ -151,14 +152,15 @@ export const limitedResearch: ResearchItem[] = [
 
 export const publications = {
   neuroscienceArticles: [eegTemporalReproductionBias, bayesianLogTimeClock],
-  preprints: [bayesianLogTimeClock, featuredResearch],
-  manuscripts: limitedResearch.filter(
+  preprints: [eegTemporalReproductionBias, bayesianLogTimeClock, featuredResearch],
+  manuscripts: [corticalStateTemporalInference, ...limitedResearch.filter(
     (item) =>
-      item.status === "Manuscript in progress" ||
-      item.status === "Manuscript in preparation" ||
-      item.status === "Concept" ||
-      item.status === "Under review",
-  ),
+      item !== corticalStateTemporalInference &&
+      (item.status === "Manuscript in progress" ||
+        item.status === "Manuscript in preparation" ||
+        item.status === "Concept" ||
+        item.status === "Under review"),
+  )],
   technicalReports: limitedResearch.filter((item) => item.status === "Prototype"),
   patent: {
     title: "On-Device Estimation of Social Masking and Latent Affect",
