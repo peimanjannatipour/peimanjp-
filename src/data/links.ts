@@ -19,21 +19,18 @@ export type DownloadItem = {
 export const siteConfig = {
   name: "Peiman Jannatipour",
   shortName: "Peiman JP",
-  role:
-    "Computational Neuroscience Researcher · EEG, Human Timing & Neural Time-Series",
+  role: "Computational Neuroscience Researcher · EEG, Human Timing, Neural Time-Series, and Neurotechnology Systems",
   baseUrl: "https://peimanjp.com",
+  defaultTitle: "Peiman Jannatipour | Computational Neuroscience Researcher",
+  description: "Peiman Jannatipour works across computational neuroscience, EEG, temporal cognition, Bayesian modelling, scientific software, and privacy-aware neurotechnology.",
   email: "peiman@peimanjp.com",
-  defaultTitle:
-    "Peiman Jannatipour | Computational Neuroscience, EEG & Neurotechnology Systems",
-  description:
-    "Peiman Jannatipour works across computational neuroscience, EEG residual prediction, temporal cognition, Bayesian timing models, ABCD developmental neuroimaging, privacy-preserving neurotechnology, NeuroLab OS, NDMS, and biomedical time-series systems.",
 };
 
 export const externalLinks = {
   email: {
     label: "Email",
-    value: siteConfig.email,
-    href: `mailto:${siteConfig.email}`,
+    value: "peiman@peimanjp.com",
+    href: "mailto:peiman@peimanjp.com",
     visible: true,
   },
   github: {
@@ -48,20 +45,26 @@ export const externalLinks = {
     href: "https://orcid.org/0009-0009-3205-2423",
     visible: true,
   },
-  ssrn: {
-    label: "SSRN DOI",
-    value: "10.2139/ssrn.5891994",
-    href: "https://dx.doi.org/10.2139/ssrn.5891994",
+  researchGate: {
+    label: "ResearchGate",
+    value: "Peiman-Jannatipour-2",
+    href: "https://www.researchgate.net/profile/Peiman-Jannatipour-2",
     visible: true,
   },
   eegArticle: {
-    label: "EEG Preprint DOI",
+    label: "Sensor-Level EEG Preprint",
     value: "10.21203/rs.3.rs-9852649/v1",
     href: "https://doi.org/10.21203/rs.3.rs-9852649/v1",
     visible: true,
   },
   bayesianTiming: {
-    label: "Bayesian Timing DOI",
+    label: "Bayesian Log-Time Clock",
+    value: "10.2139/ssrn.6383218",
+    href: "https://doi.org/10.2139/ssrn.6383218",
+    visible: true,
+  },
+  ssrn: {
+    label: "SSRN DOI",
     value: "10.2139/ssrn.6383218",
     href: "https://doi.org/10.2139/ssrn.6383218",
     visible: true,
@@ -69,6 +72,25 @@ export const externalLinks = {
   pct: {
     label: "PCT application",
     value: "PCT/IB2025/060348",
+    href: "/ndms",
+    visible: true,
+  },
+  neurolabOS: {
+    label: "NeuroLab OS Website",
+    value: "neurolabos.peimanjp.com",
+    href: "https://neurolabos.peimanjp.com/",
+    visible: true,
+  },
+  ndms: {
+    label: "NDMS Website",
+    value: "ndms.peimanjp.com",
+    href: "https://ndms.peimanjp.com/",
+    visible: false,
+  },
+  primarySite: {
+    label: "Peiman JP Primary Website",
+    value: "peimanjp.com",
+    href: "https://peimanjp.com/",
     visible: true,
   },
   website: {
@@ -77,60 +99,31 @@ export const externalLinks = {
     href: siteConfig.baseUrl,
     visible: true,
   },
-  googleScholar: {
-    label: "Google Scholar",
-    value: "",
-    visible: false,
-  },
-  webOfScience: {
-    label: "Web of Science ResearcherID",
-    value: "",
-    visible: false,
-  },
-  linkedin: {
-    label: "LinkedIn",
-    value: "",
-    visible: false,
-  },
-} satisfies Record<string, ExternalLink>;
+};
+
+export const primaryCtas: NavItem[] = [
+  { label: "View Research", href: "/research" },
+  { label: "Publications & Preprints", href: "/publications" },
+];
 
 export const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Research", href: "/research" },
   { label: "Publications", href: "/publications" },
-  { label: "Patent", href: "/patent" },
   { label: "NeuroLab OS", href: "/neurolab-os" },
   { label: "Projects", href: "/projects" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Patent / NDMS", href: "/ndms" },
   { label: "CV", href: "/cv" },
   { label: "Contact", href: "/contact" },
   { label: "Verification", href: "/verification" },
 ];
 
-export const primaryCtas: NavItem[] = [
-  { label: "View Research", href: "/research" },
-  { label: "Publications", href: "/publications" },
-];
-
 export const downloadItems: DownloadItem[] = [
   {
-    label: "Download CV PDF",
-    href: "/docs/peiman-jannatipour-cv.pdf",
-    fileName: "peiman-jannatipour-cv.pdf",
-  },
-  {
-    label: "Research portfolio PDF",
-    href: "/docs/research-portfolio.pdf",
-    fileName: "research-portfolio.pdf",
-  },
-  {
-    label: "Patent summary PDF",
-    href: "/docs/patent-summary.pdf",
-    fileName: "patent-summary.pdf",
-  },
-  {
-    label: "NeuroLab OS overview PDF",
-    href: "/docs/neurolab-os-overview.pdf",
-    fileName: "neurolab-os-overview.pdf",
+    label: "NeuroLab OS Preprint PDF",
+    href: "/assets/papers/neurolab-os-preprint.pdf",
+    fileName: "neurolab-os-preprint.pdf",
   },
 ];

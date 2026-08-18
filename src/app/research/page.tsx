@@ -1,195 +1,163 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+import researchData from "@/../content/site-copy/research.json";
 import { JsonLd } from "@/components/JsonLd";
-import { ProjectCard } from "@/components/ProjectCard";
-import { ResearchCard } from "@/components/ResearchCard";
-import { Section } from "@/components/Section";
-import { projects } from "@/data/projects";
-import {
-  abcdDevelopmentalNeuroimaging,
-  bayesianLogTimeClock,
-  corticalStateTemporalInference,
-  eegTemporalReproductionBias,
-  featuredResearch,
-  limitedResearch,
-} from "@/data/research";
 import { createPageMetadata } from "@/lib/metadata";
-import { faqJsonLd } from "@/lib/structured-data";
-
-const researchFaq = [
-  {
-    question: "What is the central research focus?",
-    answer:
-      "The central focus is temporal cognition, EEG residual prediction, Bayesian timing models, ABCD developmental neuroimaging, and neural time-series analysis.",
-  },
-  {
-    question: "What are the two main public research anchors?",
-    answer:
-      "The two main anchors are the Sensor-Level EEG Residual Prediction Research Square preprint and the Bayesian Log-Time State-Space Clock SSRN preprint.",
-  },
-  {
-    question: "Where does graph-theoretic spacetime fit?",
-    answer:
-      "It is listed as exploratory theoretical modelling and is secondary to the neuroscience axis.",
-  },
-];
+import { collectionPageJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Research | Peiman Jannatipour | EEG, Temporal Cognition & Bayesian Timing",
+  title: "Research Areas | Peiman Jannatipour | Computational Neuroscience",
   description:
-    "Research by Peiman Jannatipour across EEG residual prediction, temporal cognition, Bayesian timing models, neural time-series workflows, NeuroLab OS, NDMS, biomedical modelling, and exploratory theoretical modelling.",
+    "Explore Peiman Jannatipour's research areas across EEG neural time-series, temporal cognition, Bayesian state-space modelling, and neurotechnology systems.",
   path: "/research",
 });
 
 export default function ResearchPage() {
-  const neurolabProject = projects.find((project) => project.title === "NeuroLab OS");
-  const ndmsProject = projects.find(
-    (project) => project.title === "Masking Index Prototype",
-  );
-  const smisProject = projects.find((project) => project.title === "SMIS-ODS");
-
   return (
-    <main id="main">
-      <JsonLd data={faqJsonLd(researchFaq)} />
-      <Section
-        description="The research center of this portfolio is temporal cognition: how human timing behaviour is biased by context, history, and cortical state."
-        eyebrow="Research"
-        headingLevel={1}
-        title="Computational neuroscience and temporal cognition"
-      >
-        <p className="max-w-4xl border-l-2 border-cyan-700 pl-6 text-base leading-8 text-slate-700">
-          The EEG preprint asks whether neural features improve prediction
-          after behavioural structure has been modelled. The Bayesian preprint
-          asks whether a log-time state-space model can reproduce both the mean
-          and variability of human time reproduction. Together, they connect
-          empirical EEG analysis with a falsifiable computational account of
-          timing.
-        </p>
-      </Section>
-
-      <Section
-        className="border-t border-slate-200 bg-slate-50"
-        description="The empirical EEG study and the Bayesian model are the two main public outputs on human timing."
-        eyebrow="Primary neuroscience preprints"
-        title="EEG residual prediction and Bayesian timing"
-      >
-        <div className="grid gap-5 lg:grid-cols-2">
-          <ResearchCard item={eegTemporalReproductionBias} />
-          <ResearchCard item={bayesianLogTimeClock} />
+    <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: "Research Areas | Peiman Jannatipour",
+          description: "Peiman Jannatipour’s research spans EEG and neural time-series analysis, temporal cognition and human time reproduction, Bayesian and state-space modelling, developmental neuroimaging, research software, and neurotechnology.",
+          path: "/research",
+          items: [
+            {
+              name: "EEG and neural time-series",
+              url: "/research/eeg-temporal-reproduction-bias",
+              description: "Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability.",
+            },
+            {
+              name: "Temporal cognition and human time reproduction",
+              url: "/research/eeg-temporal-reproduction-bias",
+              description: "Research on systematic bias in time reproduction, contextual effects, recent-trial influences, and computational accounts of temporal estimation.",
+            },
+            {
+              name: "Bayesian and state-space modelling",
+              url: "/research/bayesian-log-time-state-space-clock",
+              description: "Interpretable models of behavioural data, with emphasis on central tendency, multiplicative variability, and diagnostic evaluation of fit and misspecification.",
+            },
+            {
+              name: "Neurotechnology and scientific systems",
+              url: "/neurolab-os",
+              description: "Design of privacy-aware and reproducible systems for neural analysis, modelling, simulation, and applied multimodal inference.",
+            },
+          ],
+        })}
+      />
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="max-w-3xl">
+          <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">
+            Computational Neuroscience
+          </span>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            {researchData.title}
+          </h1>
+          <p className="mt-4 text-base leading-relaxed text-slate-300">
+            Peiman Jannatipour’s research spans EEG and neural time-series analysis, temporal cognition and human time reproduction, Bayesian and state-space modelling, developmental neuroimaging, research software, and neurotechnology. Across these areas, the emphasis is on explicit computational assumptions, careful validation, reproducible analysis, and scientifically interpretable outputs.
+          </p>
         </div>
-      </Section>
 
-      <Section
-        className="border-t border-slate-200 bg-white"
-        description="A CV-listed developmental neuroimaging line extends the portfolio from time perception into adolescent brain maturation and dimensional neurodevelopmental traits."
-        eyebrow="Developmental neuroimaging"
-        title="ABCD autism-ADHD research line"
-      >
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
-          <ResearchCard item={abcdDevelopmentalNeuroimaging} />
-          <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+        {/* Research Ecosystem Diagram */}
+        <div className="mt-12 rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-xl">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-sky-400">
+            Research Ecosystem Workflow
+          </h2>
+          <div className="mt-4 overflow-hidden rounded-lg">
             <Image
-              alt="Researchers reviewing laboratory data."
-              className="aspect-[4/3] w-full object-cover"
-              height={900}
-              src="/images/stock-lab-data-analysis.jpg"
-              width={1200}
+              alt="Research Ecosystem Diagram: EEG -> Behavioural Modelling -> Bayesian Analysis -> Scientific Software -> Reproducible Outputs"
+              className="w-full h-auto"
+              height={240}
+              src="/assets/figures/research-ecosystem.svg"
+              width={900}
             />
-            <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
-              Stock research-review context for developmental neuroimaging.
-            </figcaption>
-          </figure>
+          </div>
+          <p className="mt-3 text-xs text-slate-400">
+            Methodological integration from sensor-level EEG signal processing to reproducible scientific software outputs.
+          </p>
         </div>
-      </Section>
 
-      <Section
-        className="border-t border-slate-200 bg-slate-50"
-        description="Ongoing work examines cortical-state dynamics and EEG/fMRI-informed temporal inference."
-        eyebrow="Neural time-series"
-        title="Cortical state and EEG/fMRI-simulation directions"
-      >
-        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+        {/* 4 Cards Grid */}
+        <div className="mt-16 grid gap-8 md:grid-cols-2">
+          {researchData.cards.map((card, idx) => (
+            <div
+              className="flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-sm transition hover:border-slate-700"
+              key={card.id}
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-sky-400">
+                    Area 0{idx + 1}
+                  </span>
+                </div>
+                <h2 className="mt-4 text-xl font-bold text-white">
+                  {card.title}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  {card.text}
+                </p>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-slate-800 flex items-center justify-between">
+                <Link
+                  className="text-xs font-semibold text-sky-400 hover:text-sky-300 transition"
+                  href="/publications"
+                >
+                  View associated preprints &amp; publications →
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Stock Photo Grid Support */}
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
             <Image
-              alt="Researcher working with a data-analysis notebook."
-              className="aspect-[4/3] w-full object-cover"
-              height={900}
-              src="/images/stock-data-dashboard.jpg"
-              width={1200}
+              alt="Scientist working with EEG-related equipment"
+              className="h-60 w-full object-cover"
+              height={600}
+              src="/assets/stock/stock2.jpg"
+              width={800}
             />
-            <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
-              Stock computational-modelling context for Bayesian timing research.
-            </figcaption>
-          </figure>
-          <ResearchCard item={corticalStateTemporalInference} />
-        </div>
-      </Section>
-
-      <Section
-        className="border-t border-slate-200 bg-slate-50"
-        description="NeuroLab OS and the masking-index prototype translate parts of this work into research workflows and privacy-aware signal processing."
-        eyebrow="Research systems"
-        title="NeuroLab OS and NDMS"
-      >
-        <div className="grid gap-6 lg:grid-cols-2">
-          {neurolabProject ? <ProjectCard project={neurolabProject} /> : null}
-          {ndmsProject ? <ProjectCard project={ndmsProject} /> : null}
-        </div>
-      </Section>
-
-      <Section
-        className="border-t border-slate-200 bg-white"
-        description="Separate projects explore mitochondrial control models and structured review of scientific claims."
-        eyebrow="Biomedical and evidence systems"
-        title="Mitochondrial modelling and SMIS-ODS"
-      >
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1fr]">
-          <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
-            <Image
-              alt="Researchers working in a biomedical laboratory."
-              className="w-full object-cover"
-              height={1200}
-              src="/images/stock-neuroscience-research.jpg"
-              width={1000}
-            />
-            <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
-              Stock laboratory context for mitochondrial and biomedical modelling.
-            </figcaption>
-          </figure>
-          <div className="grid gap-5">
-            <div className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="text-xl font-semibold tracking-tight text-slate-950">
-                Modular mitochondrial control
-              </h2>
-              <p className="mt-4 text-sm leading-7 text-slate-600">
-                The mitochondrial control thread is framed as conceptual and
-                computational modelling around control interfaces, redox
-                coupling, Complex I assembly, and neuroenergetic
-                interpretation.
+            <div className="p-4 border-t border-slate-800">
+              <p className="text-xs text-slate-400">
+                EEG instrumentation &amp; signal acquisition environment
               </p>
             </div>
-            {smisProject ? <ProjectCard project={smisProject} /> : null}
           </div>
-        </div>
-      </Section>
 
-      <Section
-        className="border-t border-slate-200 bg-slate-50"
-        description="This exploratory theoretical work is separate from the empirical neuroscience program."
-        eyebrow="Exploratory theoretical modelling"
-        title="Graph-theoretic spacetime"
-      >
-        <div className="grid gap-5 lg:grid-cols-2">
-          <ResearchCard item={featuredResearch} />
-          <div className="grid gap-4">
-            {limitedResearch
-              .filter((item) => item.title.includes("Relativistic"))
-              .map((item) => (
-                <ResearchCard item={item} key={item.title} />
-              ))}
+          <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
+            <Image
+              alt="Brain imaging and neural signal display environment"
+              className="h-60 w-full object-cover"
+              height={600}
+              src="/assets/stock/stock3.jpg"
+              width={800}
+            />
+            <div className="p-4 border-t border-slate-800">
+              <p className="text-xs text-slate-400">
+                Neural signal visualization &amp; state-space analysis
+              </p>
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
+            <Image
+              alt="Close-up of data analysis on monitor"
+              className="h-60 w-full object-cover"
+              height={600}
+              src="/assets/stock/stock6.jpg"
+              width={800}
+            />
+            <div className="p-4 border-t border-slate-800">
+              <p className="text-xs text-slate-400">
+                Computational fitting &amp; diagnostic evaluation
+              </p>
+            </div>
           </div>
         </div>
-      </Section>
+      </div>
     </main>
   );
 }

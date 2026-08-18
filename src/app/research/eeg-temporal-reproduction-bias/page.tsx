@@ -1,144 +1,119 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
-import { LinkButton } from "@/components/LinkButton";
-import { Section } from "@/components/Section";
-import { StatusBadge } from "@/components/StatusBadge";
-import { eegTemporalReproductionBias } from "@/data/research";
+import { externalLinks } from "@/data/links";
 import { createPageMetadata } from "@/lib/metadata";
-import { faqJsonLd, scholarlyArticleJsonLd } from "@/lib/structured-data";
-
-const eegFaq = [
-  {
-    question: "What is the article about?",
-    answer:
-      "It tests whether sensor-level EEG features explain residual temporal reproduction bias beyond behavioural structure.",
-  },
-  {
-    question: "Does the article claim a subject-independent EEG biomarker?",
-    answer:
-      "No. The interpretation is intentionally cautious and does not claim a subject-independent EEG biomarker or direct neural-clock interpretation.",
-  },
-  {
-    question: "What is the status?",
-    answer:
-      "It is a Research Square preprint with a DOI. No peer-reviewed journal version is claimed here.",
-  },
-];
+import { scholarlyArticleJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
-  title:
-    "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias | Peiman Jannatipour",
+  title: "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias | Peiman Jannatipour",
   description:
-    "Research article by Peiman Jannatipour on EEG residual prediction, temporal reproduction bias, time perception, Bayesian timing, and sensor-level neural state.",
+    "A preprint examining whether trial-level EEG information explains residual variation in time reproduction beyond the behavioural structure already captured by duration, context, and recent experience.",
   path: "/research/eeg-temporal-reproduction-bias",
 });
 
-export default function EegTemporalReproductionBiasPage() {
+export default function EEGTemporalReproductionBiasPage() {
+  const title = "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias";
+  const status = "Preprint";
+  const author = "Peiman Jannatipour";
+  const doi = externalLinks.eegArticle.href;
+
   return (
-    <main id="main">
-      <JsonLd data={faqJsonLd(eegFaq)} />
+    <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
       <JsonLd
         data={scholarlyArticleJsonLd({
-          name: eegTemporalReproductionBias.title,
-          description: eegTemporalReproductionBias.summary ?? "",
-          urlPath: "/research/eeg-temporal-reproduction-bias",
-          status: eegTemporalReproductionBias.status,
-          identifier: eegTemporalReproductionBias.doi,
-          datePublished: "2026-06-01",
-          keywords: eegTemporalReproductionBias.keywords,
+          title,
+          description:
+            "A preprint examining whether trial-level EEG information explains residual variation in time reproduction beyond the behavioural structure already captured by duration, context, and recent experience.",
+          path: "/research/eeg-temporal-reproduction-bias",
+          doi,
         })}
       />
-      <Section
-        description="Research Square preprint · 2026 · DOI 10.21203/rs.3.rs-9852649/v1"
-        eyebrow="EEG and temporal cognition"
-        headingLevel={1}
-        title={eegTemporalReproductionBias.title}
-      >
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
-            <Image
-              alt="Researchers working in a biomedical laboratory."
-              className="aspect-[4/3] w-full object-cover"
-              height={900}
-              priority
-              src="/images/stock-neuroscience-research.jpg"
-              width={1200}
-            />
-            <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
-              Illustrative research context; not an image from the reported experiment.
-            </figcaption>
-          </figure>
 
-          <aside className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <StatusBadge status={eegTemporalReproductionBias.status} />
-            <h2 className="mt-5 text-xl font-semibold tracking-tight text-slate-950">
-              Article metadata
-            </h2>
-            <dl className="mt-5 grid gap-3 text-sm text-slate-600">
-              <div>
-                <dt className="font-semibold text-slate-950">Author</dt>
-                <dd>Peiman Jannatipour</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-slate-950">ORCID</dt>
-                <dd>0009-0009-3205-2423</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-slate-950">DOI</dt>
-                <dd>{eegTemporalReproductionBias.doi}</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-slate-950">Publication status</dt>
-                <dd>
-                  Research Square preprint; peer review is not claimed.
-                </dd>
-              </div>
-            </dl>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <LinkButton href={eegTemporalReproductionBias.doi ?? "/research"}>
-                Open DOI
-              </LinkButton>
-              <LinkButton href="/research" variant="secondary">
-                Back to research
-              </LinkButton>
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="max-w-4xl">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-400">
+              {status}
+            </span>
+            <span className="text-xs text-slate-400 font-mono">
+              Author: {author}
+            </span>
+          </div>
+
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            {title}
+          </h1>
+
+          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-slate-300">
+            <a
+              className="inline-flex items-center rounded-lg border border-sky-500/30 bg-sky-600/20 px-5 py-2.5 text-sm font-semibold text-sky-200 transition hover:bg-sky-600/40 hover:text-white"
+              href={doi}
+              rel="noreferrer"
+              target="_blank"
+            >
+              View preprint (DOI) →
+            </a>
+            <span className="text-xs text-slate-500 font-mono">
+              DOI: 10.21203/rs.3.rs-9852649/v1
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-8 space-y-8 text-slate-300 leading-relaxed">
+            <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
+              <h2 className="text-xl font-bold text-white mb-4">Research Overview</h2>
+              <p>
+                This work examines whether trial-level sensor-level EEG information explains variation in temporal reproduction beyond behavioural structure already captured by duration, task context, and recent experience. The interpretation should remain calibrated: the work evaluates incremental predictive information and should not be presented as establishing a universal EEG biomarker or direct neural clock.
+              </p>
+            </section>
+
+            <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
+              <h2 className="text-xl font-bold text-white mb-4">Research Scope &amp; Focus</h2>
+              <p>
+                Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability.
+              </p>
+            </section>
+
+            <div className="pt-6 border-t border-slate-800 flex flex-wrap gap-4">
+              <Link
+                className="text-sm font-semibold text-sky-400 hover:text-sky-300 transition"
+                href="/research/bayesian-log-time-state-space-clock"
+              >
+                Related: A Bayesian Log-Time State-Space Clock →
+              </Link>
+              <Link
+                className="text-sm font-semibold text-sky-400 hover:text-sky-300 transition"
+                href="/publications"
+              >
+                All Publications →
+              </Link>
             </div>
-          </aside>
-        </div>
-      </Section>
+          </div>
 
-      <Section
-        className="border-t border-slate-200 bg-slate-50"
-        description="Behavioural structure explains most timing error; calibrated EEG adds a small incremental signal."
-        eyebrow="Research summary"
-        title="What the EEG added — and what it did not"
-      >
-        <div className="max-w-4xl space-y-5 text-base leading-8 text-slate-700">
-          <p>
-            The study analyzes 19,419 target–reproduction trials from 27
-            participants. It first models timing error from target duration,
-            task context, range, trial order, and previous-trial history, then
-            tests whether sensor-level theta, alpha, beta, and low-gamma
-            features improve held-out prediction under leave-one-subject-out
-            cross-validation, nested ridge regularization, shadow controls,
-            ablations, artifact-sensitivity analyses, and subject-level
-            inference.
-          </p>
-          <p>
-            Strict train-only EEG standardization did not improve held-out
-            prediction. Unsupervised within-subject calibration produced a
-            small but reliable gain over the behavioural model: RMSE fell from
-            0.211012 to 0.210683 (0.156%; permutation p = 0.010), and the
-            improvement exceeded the within-subject shadow control.
-          </p>
-          <p>
-            The result does not establish a subject-independent EEG biomarker
-            or a direct neural clock. It supports individualized,
-            calibration-dependent prediction in which behavioural context and
-            history remain the dominant sources of temporal reproduction error.
-          </p>
+          <div className="lg:col-span-4">
+            <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl sticky top-24">
+              <Image
+                alt="Scientist working with EEG-related equipment"
+                className="h-64 w-full object-cover"
+                height={800}
+                src="/assets/stock/stock2.jpg"
+                width={1200}
+              />
+              <div className="p-6">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-sky-400">
+                  Data Context
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                  Analysis of sensor-level neural signals and temporal reproduction bias.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </Section>
+      </div>
     </main>
   );
 }

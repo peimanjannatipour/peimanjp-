@@ -1,126 +1,111 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import publicationsData from "@/../content/site-copy/publications.json";
 import { JsonLd } from "@/components/JsonLd";
-import { PublicationCard } from "@/components/PublicationCard";
-import { Section } from "@/components/Section";
-import { StatusBadge } from "@/components/StatusBadge";
-import { abcdDevelopmentalNeuroimaging, publications } from "@/data/research";
 import { createPageMetadata } from "@/lib/metadata";
-import { faqJsonLd, preprintJsonLd } from "@/lib/structured-data";
-
-const publicationsFaq = [
-  {
-    question: "What leads the publication record?",
-    answer:
-      "The publication record starts with two computational neuroscience preprints on EEG residual prediction and Bayesian log-time state-space timing.",
-  },
-  {
-    question: "Is the Research Square article a peer-reviewed journal article?",
-    answer:
-      "It is a Research Square preprint with a DOI. No peer-reviewed journal version is claimed here.",
-  },
-  {
-    question: "How are other outputs classified?",
-    answer:
-      "Other outputs are separated as manuscripts, patent-pending invention work, research software, evidence systems, or exploratory theoretical modelling.",
-  },
-];
+import { collectionPageJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Publications | Peiman Jannatipour | Computational Neuroscience Articles",
+  title: "Selected Publications & Preprints | Peiman Jannatipour",
   description:
-    "Computational neuroscience preprints, manuscripts, PCT-filed invention work, research software, and exploratory modelling by Peiman Jannatipour.",
+    "Selected publications, preprints, and manuscripts by Peiman Jannatipour covering EEG residual prediction, Bayesian timing models, and NeuroLab OS.",
   path: "/publications",
 });
 
 export default function PublicationsPage() {
   return (
-    <main id="main">
-      <JsonLd data={preprintJsonLd} />
-      <JsonLd data={faqJsonLd(publicationsFaq)} />
-      <Section
-        description="Public preprints, ongoing manuscripts, software, and patent work are listed separately with their current status."
-        eyebrow="Publications"
-        headingLevel={1}
-        title="Publications and manuscripts"
-      >
-        <div className="grid gap-8">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
-              Computational neuroscience preprints
-            </h2>
-            <div className="mt-5 grid gap-5">
-              {publications.neuroscienceArticles.map((item) => (
-                <PublicationCard item={item} key={item.title} />
-              ))}
-            </div>
+    <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: "Selected Publications & Preprints | Peiman Jannatipour",
+          description: "Preprints and technical manuscripts documenting empirical findings, computational models, and scientific software systems.",
+          path: "/publications",
+          items: publicationsData.entries.map((p) => ({
+            name: p.title,
+            url: p.url,
+            description: p.description,
+          })),
+        })}
+      />
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="max-w-3xl">
+          <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">
+            Scholarly Outputs
+          </span>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            {publicationsData.title}
+          </h1>
+          <p className="mt-4 text-base leading-relaxed text-slate-300">
+            This section presents public preprints and technical manuscripts across computational neuroscience, human timing, EEG, Bayesian modelling, and research software. Publication status must be represented accurately. A preprint must not be described as peer reviewed unless a peer-reviewed version exists and is explicitly linked.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:items-start">
+          <div className="lg:col-span-8 space-y-8">
+            {publicationsData.entries.map((entry, idx) => (
+              <div
+                className="rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-sm transition hover:border-slate-700"
+                key={entry.id}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-sky-400">
+                    Entry 0{idx + 1} · {entry.type === "preprint" ? "Preprint" : "Technical Manuscript"}
+                  </span>
+                </div>
+
+                <h2 className="mt-4 text-xl font-bold text-white">
+                  {entry.title}
+                </h2>
+
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  {entry.description}
+                </p>
+
+                <div className="mt-6 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                  <a
+                    className="inline-flex items-center rounded-lg border border-sky-500/30 bg-sky-600/20 px-4 py-2 text-sm font-semibold text-sky-200 transition hover:bg-sky-600/40 hover:text-white"
+                    href={entry.url}
+                    rel="noreferrer"
+                    target={entry.url.startsWith("http") ? "_blank" : "_self"}
+                  >
+                    {entry.linkLabel} →
+                  </a>
+
+                  {entry.url.startsWith("http") ? (
+                    <span className="text-xs text-slate-500 font-mono">
+                      DOI: {entry.url.replace("https://doi.org/", "")}
+                    </span>
+                  ) : (
+                    <span className="text-xs text-slate-500 font-mono">
+                      Local PDF Fallback
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
-              Ongoing manuscripts and research
-            </h2>
-            <div className="mt-5 grid gap-3 md:grid-cols-2">
-              <div className="rounded-lg border border-slate-200 bg-white p-5">
-                <StatusBadge status={abcdDevelopmentalNeuroimaging.status} />
-                <p className="mt-4 font-semibold text-slate-950">
-                  {abcdDevelopmentalNeuroimaging.title}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  {abcdDevelopmentalNeuroimaging.summary}
+          <div className="lg:col-span-4">
+            <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl">
+              <Image
+                alt="Scholarly manuscript review scene"
+                className="h-64 w-full object-cover"
+                height={800}
+                src="/assets/stock/stock10.jpg"
+                width={1200}
+              />
+              <div className="p-6">
+                <h3 className="text-base font-semibold text-white">
+                  Research outputs and provenance
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                  All preprints and manuscripts prioritize clear data provenance, explicit quality control, and verifiable computational models.
                 </p>
               </div>
-              {publications.manuscripts.map((item) => (
-                <div
-                  className="rounded-lg border border-slate-200 bg-white p-5"
-                  key={item.title}
-                >
-                  <StatusBadge status={item.status} />
-                  <p className="mt-4 font-semibold text-slate-950">
-                    {item.title}
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {item.summary ??
-                      "This work is in preparation; methods and results will be added with a public manuscript."}
-                  </p>
-                  {item.href ? (
-                    <a
-                      className="mt-4 inline-flex text-sm font-semibold text-cyan-800 underline-offset-4 hover:underline"
-                      href={item.href}
-                    >
-                      Open status page
-                    </a>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
-              Patent-pending invention
-            </h2>
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              <StatusBadge status={publications.patent.status} />
-              <StatusBadge status="PCT application filed" />
-            </div>
-            <p className="mt-4 font-semibold text-slate-950">
-              {publications.patent.title}
-            </p>
-            <p className="mt-2 text-sm text-slate-600">
-              Application: {publications.patent.identifier}
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
-              Exploratory theoretical modelling
-            </h2>
-            <div className="mt-5 grid gap-5">
-              <PublicationCard item={publications.preprints[1]} />
             </div>
           </div>
         </div>
-      </Section>
+      </div>
     </main>
   );
 }

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="100%" height="100%" aria-label="Peiman Jannatipour Research Portfolio Knowledge Map">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; rx: 12px; }
+      .center-box { fill: #0284c7; stroke: #38bdf8; stroke-width: 2; rx: 10px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); }
+      .node-box { fill: #1e293b; stroke: #334155; stroke-width: 1.5; rx: 8px; }
+      .text-center-title { fill: #ffffff; font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .text-center-sub { fill: #e0f2fe; font-family: system-ui, -apple-system, sans-serif; font-size: 11px; text-anchor: middle; }
+      .text-node-title { fill: #f8fafc; font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; }
+      .text-node-sub { fill: #94a3b8; font-family: system-ui, -apple-system, sans-serif; font-size: 11px; }
+      .line { stroke: #38bdf8; stroke-width: 1.5; stroke-dasharray: 4 2; opacity: 0.7; }
+    </style>
+  </defs>
+
+  <rect width="800" height="360" class="bg" />
+
+  <!-- Connecting Lines -->
+  <line x1="400" y1="180" x2="160" y2="80" class="line" />
+  <line x1="400" y1="180" x2="640" y2="80" class="line" />
+  <line x1="400" y1="180" x2="160" y2="180" class="line" />
+  <line x1="400" y1="180" x2="640" y2="180" class="line" />
+  <line x1="400" y1="180" x2="160" y2="280" class="line" />
+  <line x1="400" y1="180" x2="640" y2="280" class="line" />
+
+  <!-- Center Hub -->
+  <rect x="300" y="145" width="200" height="70" class="center-box" />
+  <text x="400" y="175" class="text-center-title">Peiman Jannatipour</text>
+  <text x="400" y="195" class="text-center-sub">Computational Neuroscience Hub</text>
+
+  <!-- Left Top: Research -->
+  <rect x="50" y="45" width="220" height="70" class="node-box" />
+  <text x="70" y="73" class="text-node-title">Research Areas</text>
+  <text x="70" y="93" class="text-node-sub">EEG, Temporal Cognition &amp; Bayes</text>
+
+  <!-- Right Top: Publications -->
+  <rect x="530" y="45" width="220" height="70" class="node-box" />
+  <text x="550" y="73" class="text-node-title">Publications &amp; Preprints</text>
+  <text x="550" y="93" class="text-node-sub">EEG Bias, Log-Time Clock, Manuscripts</text>
+
+  <!-- Left Mid: NeuroLab OS -->
+  <rect x="50" y="145" width="220" height="70" class="node-box" />
+  <text x="70" y="173" class="text-node-title">NeuroLab OS</text>
+  <text x="70" y="193" class="text-node-sub">Local-first scientific software</text>
+
+  <!-- Right Mid: NDMS -->
+  <rect x="530" y="145" width="220" height="70" class="node-box" />
+  <text x="550" y="173" class="text-node-title">NDMS Invention</text>
+  <text x="550" y="193" class="text-node-sub">Privacy-aware neurotechnology concept</text>
+
+  <!-- Left Bottom: ResearchGate -->
+  <rect x="50" y="245" width="220" height="70" class="node-box" />
+  <text x="70" y="273" class="text-node-title">ResearchGate Profile</text>
+  <text x="70" y="293" class="text-node-sub">Public scholarly presence</text>
+
+  <!-- Right Bottom: ORCID -->
+  <rect x="530" y="245" width="220" height="70" class="node-box" />
+  <text x="550" y="273" class="text-node-title">ORCID Identity</text>
+  <text x="550" y="293" class="text-node-sub">Persistent record 0009-0009-3205-2423</text>
+</svg>

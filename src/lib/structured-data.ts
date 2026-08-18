@@ -1,48 +1,46 @@
 import { externalLinks, siteConfig } from "@/data/links";
-import { featuredResearch } from "@/data/research";
+
+export const PERSON_ID = `${siteConfig.baseUrl}/#person`;
+export const WEBSITE_ID = `${siteConfig.baseUrl}/#website`;
 
 export const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": PERSON_ID,
   name: siteConfig.name,
   alternateName: siteConfig.shortName,
-  nationality: "Iranian",
-  email: siteConfig.email,
   url: siteConfig.baseUrl,
-  jobTitle:
-    "Computational Neuroscience Researcher, Inventor, Neurotechnology Systems Developer",
+  jobTitle: "Computational Neuroscience Researcher",
   sameAs: [
     externalLinks.orcid.href,
+    externalLinks.researchGate.href,
     externalLinks.github.href,
-    externalLinks.ssrn.href,
   ].filter(Boolean),
 };
 
 export const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": WEBSITE_ID,
   name: `${siteConfig.name} Portfolio`,
   url: siteConfig.baseUrl,
   description: siteConfig.description,
   publisher: {
-    "@type": "Person",
-    name: siteConfig.name,
+    "@id": PERSON_ID,
   },
 };
 
-export const preprintJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "CreativeWork",
-  name: featuredResearch.title,
-  author: {
-    "@type": "Person",
+export function profilePageJsonLd(path = "/") {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    url: `${siteConfig.baseUrl}${path}`,
     name: siteConfig.name,
-  },
-  url: featuredResearch.href,
-  identifier: externalLinks.ssrn.value,
-  creativeWorkStatus: "Preprint",
-  description: featuredResearch.summary,
-};
+    mainEntity: {
+      "@id": PERSON_ID,
+    },
+  };
+}
 
 export function faqJsonLd(
   questions: Array<{ question: string; answer: string }>,
@@ -61,72 +59,119 @@ export function faqJsonLd(
   };
 }
 
-export function scholarlyArticleJsonLd({
+export function collectionPageJsonLd({
   name,
   description,
-  urlPath,
-  status,
-  identifier,
-  datePublished,
-  keywords,
+  path,
+  items,
 }: {
   name: string;
   description: string;
-  urlPath: string;
-  status: string;
-  identifier?: string;
+  path: string;
+  items: Array<{ name: string; url: string; description?: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    url: `${siteConfig.baseUrl}${path}`,
+    name,
+    description,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        url: item.url.startsWith("http") ? item.url : `${siteConfig.baseUrl}${item.url}`,
+        description: item.description,
+      })),
+    },
+  };
+}
+
+export function scholarlyArticleJsonLd({
+  title,
+  description,
+  path,
+  doi,
+  pdfUrl,
+  datePublished,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  doi?: string;
+  pdfUrl?: string;
   datePublished?: string;
-  keywords?: string[];
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    name,
-    headline: name,
+    headline: title,
     description,
-    identifier,
-    datePublished,
-    keywords,
-    url: new URL(urlPath, siteConfig.baseUrl).toString(),
+    url: `${siteConfig.baseUrl}${path}`,
     author: {
-      "@type": "Person",
-      name: siteConfig.name,
+      "@id": PERSON_ID,
     },
-    creativeWorkStatus: status,
+    ...(doi ? { sameAs: doi.startsWith("http") ? doi : `https://doi.org/${doi}` } : {}),
+    ...(pdfUrl ? { encoding: { "@type": "MediaObject", contentUrl: pdfUrl.startsWith("http") ? pdfUrl : `${siteConfig.baseUrl}${pdfUrl}` } } : {}),
+    ...(datePublished ? { datePublished } : {}),
   };
 }
 
-export const neurolabSoftwareJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "NeuroLab OS",
-  applicationCategory: "ResearchApplication",
-  operatingSystem: "Web",
-  description:
-    "Research-use workflow platform concept for neural and biomedical time-series ingestion, validation, QC, fitting, simulation, optimization, and reporting.",
-  author: {
-    "@type": "Person",
-    name: siteConfig.name,
-  },
-  url: new URL("/neurolab-os", siteConfig.baseUrl).toString(),
-};
+export function softwareApplicationJsonLd({
+  name,
+  description,
+  path,
+  applicationCategory = "ScientificSoftware",
+}: {
+  name: string;
+  description: string;
+  path: string;
+  applicationCategory?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name,
+    description,
+    url: `${siteConfig.baseUrl}${path}`,
+    applicationCategory,
+    operatingSystem: "Cross-platform (Electron, Python/FastAPI)",
+    author: {
+      "@id": PERSON_ID,
+    },
+  };
+}
 
-export const patentTechArticleJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  name: "On-Device Estimation of Social Masking and Latent Affect",
-  description:
-    "Patent-pending PCT application page for privacy-preserving on-device multimodal masking estimation. The page does not claim issued patent or diagnostic status.",
-  author: {
-    "@type": "Person",
-    name: siteConfig.name,
-  },
-  url: new URL("/patent", siteConfig.baseUrl).toString(),
-  keywords: [
-    "patent pending",
-    "PCT application filed",
-    "privacy-preserving AI",
-    "on-device processing",
-    "non-diagnostic",
-  ],
-};
+export function techArticleJsonLd({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: title,
+    description,
+    url: `${siteConfig.baseUrl}${path}`,
+    author: {
+      "@id": PERSON_ID,
+    },
+  };
+}
+
+export function contactPageJsonLd(path = "/contact") {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    url: `${siteConfig.baseUrl}${path}`,
+    mainEntity: {
+      "@id": PERSON_ID,
+    },
+  };
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Website Portfolio",
+  "introText": "This portfolio brings together Peiman Jannatipour’s primary research presence, software work, invention-related projects, and public scholarly profiles.",
+  "items": [
+    {
+      "id": "peiman-jp",
+      "title": "Peiman JP",
+      "text": "Primary website for research, publications, projects, and professional profile.",
+      "url": "https://peimanjp.com/",
+      "available": true
+    },
+    {
+      "id": "neurolab-os",
+      "title": "NeuroLab OS",
+      "text": "Software-focused site for the local-first neural time-series research workbench.",
+      "url": "https://neurolabos.peimanjp.com/",
+      "available": true
+    },
+    {
+      "id": "ndms",
+      "title": "NDMS",
+      "text": "Project and invention presence for a privacy-aware multimodal neurotechnology system.",
+      "url": "https://ndms.peimanjp.com/",
+      "available": false
+    },
+    {
+      "id": "researchgate",
+      "title": "ResearchGate",
+      "text": "Public scholarly profile with listed publications and research presence.",
+      "url": "https://www.researchgate.net/profile/Peiman-Jannatipour-2",
+      "available": true
+    },
+    {
+      "id": "orcid",
+      "title": "ORCID",
+      "text": "Persistent scholarly identity and publication linkage.",
+      "url": "https://orcid.org/0009-0009-3205-2423",
+      "available": true
+    }
+  ]
+}

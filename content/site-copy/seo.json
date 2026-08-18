@@ -1,0 +1,19 @@
+{
+  "siteTitle": "Peiman Jannatipour | Computational Neuroscience Researcher",
+  "defaultDescription": "Peiman Jannatipour works across computational neuroscience, EEG, temporal cognition, Bayesian modelling, scientific software, and privacy-aware neurotechnology.",
+  "openGraph": {
+    "type": "website",
+    "locale": "en_US",
+    "siteName": "Peiman Jannatipour Portfolio",
+    "image": "/assets/stock/stock1.jpg"
+  },
+  "neurolabOS": {
+    "title": "NeuroLab OS",
+    "bodyText": "NeuroLab OS is a local-first software environment designed for scientist-reviewed neural time-series modelling and provenance-aware simulation. It supports structured input workflows, explicit preprocessing and quality control, computational model management, seeded fitting, in silico perturbation operations, and traceable report generation. The goal is to preserve continuity between researcher-visible model meaning and executable analysis provenance within a single workflow.",
+    "figureCaption": "NeuroLab OS workflow: local-first neural time-series inputs, explicit quality control, scientist-reviewed model contract, seeded fitting and simulation, in silico perturbation, and provenance-aware report bundling."
+  },
+  "ndms": {
+    "title": "NDMS",
+    "bodyText": "NDMS is a privacy-aware multimodal neurotechnology concept focused on structured signal integration, real-time inference, and interpretable system design. Within the website, present NDMS as an invention and technology direction rather than as generic marketing copy."
+  }
+}

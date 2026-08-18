@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" width="100%" height="100%" aria-label="Research Ecosystem Flow Diagram">
+  <defs>
+    <style>
+      .bg { fill: #0f172a; rx: 12px; }
+      .box { fill: #1e293b; stroke: #334155; stroke-width: 1.5; rx: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+      .box-active { fill: #0f2d4a; stroke: #0284c7; stroke-width: 1.5; rx: 8px; }
+      .text-title { fill: #f8fafc; font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 600; }
+      .text-sub { fill: #94a3b8; font-family: system-ui, -apple-system, sans-serif; font-size: 11px; }
+      .arrow { stroke: #38bdf8; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .step-num { fill: #38bdf8; font-family: system-ui, -apple-system, sans-serif; font-size: 10px; font-weight: 700; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#38bdf8" />
+    </marker>
+  </defs>
+
+  <rect width="900" height="240" class="bg" />
+
+  <!-- Node 1: EEG Data -->
+  <rect x="30" y="70" width="140" height="100" class="box" />
+  <text x="45" y="95" class="step-num">01 / INPUT</text>
+  <text x="45" y="118" class="text-title">Sensor-Level EEG</text>
+  <text x="45" y="136" class="text-sub">Trial time-series</text>
+  <text x="45" y="152" class="text-sub">&amp; quality control</text>
+
+  <!-- Arrow 1 -->
+  <path d="M 170 120 L 200 120" class="arrow" />
+
+  <!-- Node 2: Behavioural Modelling -->
+  <rect x="202" y="70" width="140" height="100" class="box" />
+  <text x="217" y="95" class="step-num">02 / COGNITION</text>
+  <text x="217" y="118" class="text-title">Behavioural Model</text>
+  <text x="217" y="136" class="text-sub">Temporal reproduction</text>
+  <text x="217" y="152" class="text-sub">&amp; bias extraction</text>
+
+  <!-- Arrow 2 -->
+  <path d="M 342 120 L 372 120" class="arrow" />
+
+  <!-- Node 3: Bayesian Analysis -->
+  <rect x="374" y="70" width="140" height="100" class="box" />
+  <text x="389" y="95" class="step-num">03 / INFERENCE</text>
+  <text x="389" y="118" class="text-title">Bayesian Clock</text>
+  <text x="389" y="136" class="text-sub">State-space dynamic</text>
+  <text x="389" y="152" class="text-sub">&amp; log-time estimation</text>
+
+  <!-- Arrow 3 -->
+  <path d="M 514 120 L 544 120" class="arrow" />
+
+  <!-- Node 4: Scientific Software -->
+  <rect x="546" y="70" width="140" height="100" class="box-active" />
+  <text x="561" y="95" class="step-num">04 / SYSTEM</text>
+  <text x="561" y="118" class="text-title">NeuroLab OS</text>
+  <text x="561" y="136" class="text-sub">Local-first workbench</text>
+  <text x="561" y="152" class="text-sub">&amp; perturbation engine</text>
+
+  <!-- Arrow 4 -->
+  <path d="M 686 120 L 716 120" class="arrow" />
+
+  <!-- Node 5: Reproducible Outputs -->
+  <rect x="718" y="70" width="150" height="100" class="box" />
+  <text x="733" y="95" class="step-num">05 / OUTPUT</text>
+  <text x="733" y="118" class="text-title">Traceable Reports</text>
+  <text x="733" y="136" class="text-sub">Provenanced simulation</text>
+  <text x="733" y="152" class="text-sub">&amp; peer-review bundles</text>
+</svg>

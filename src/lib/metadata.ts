@@ -13,7 +13,7 @@ export function createPageMetadata({
   path = "/",
 }: PageMetadataInput): Metadata {
   const url = new URL(path, siteConfig.baseUrl);
-  const imageUrl = new URL("/images/inventor-photo.jpg", siteConfig.baseUrl);
+  const imageUrl = new URL("/assets/stock/stock1.jpg", siteConfig.baseUrl);
 
   return {
     title,
@@ -28,33 +28,23 @@ export function createPageMetadata({
       "Peiman Jannatipour",
       "Peiman JP",
       "computational neuroscience",
-      "Peiman Jannatipour computational neuroscience",
-      "Peiman Jannatipour EEG",
-      "Peiman Jannatipour temporal cognition",
-      "Peiman Jannatipour time perception",
-      "Peiman Jannatipour Bayesian timing",
-      "Peiman Jannatipour neural time-series",
-      "Peiman Jannatipour ABCD",
-      "Peiman Jannatipour developmental neuroimaging",
-      "Peiman Jannatipour UCBM",
-      "Peiman Jannatipour Near East University",
-      "Peiman Jannatipour NeuroLab OS",
-      "Peiman Jannatipour NDMS",
-      "neurotechnology",
       "EEG",
-      "fMRI",
-      "biomedical systems",
-      "privacy-preserving AI",
+      "temporal cognition",
+      "human time reproduction",
+      "Bayesian modelling",
+      "neural time-series",
       "NeuroLab OS",
       "NDMS",
-      "research software",
-      "patent pending",
-      "PCT/IB2025/060348",
-      "SSRN preprint",
+      "neurotechnology",
+      "scientific software",
       "ORCID 0009-0009-3205-2423",
+      "ResearchGate",
     ],
     alternates: {
       canonical: url,
+    },
+    verification: {
+      google: "4SSraSx2Ayvgx16k6iU9T0dp8PHpGpRBk0k_HTEWNAk",
     },
     robots: {
       index: true,
@@ -67,9 +57,6 @@ export function createPageMetadata({
         "max-video-preview": -1,
       },
     },
-    verification: {
-      google: "4SSraSx2Ayvgx16k6iU9T0dp8PHpGpRBk0k_HTEWNAk",
-    },
     openGraph: {
       title: typeof title === "string" ? title : siteConfig.defaultTitle,
       description,
@@ -78,8 +65,8 @@ export function createPageMetadata({
         {
           url: imageUrl,
           width: 1200,
-          height: 1200,
-          alt: "Professional portrait of Peiman Jannatipour",
+          height: 800,
+          alt: "Computational neuroscience workstation",
         },
       ],
       siteName: siteConfig.name,

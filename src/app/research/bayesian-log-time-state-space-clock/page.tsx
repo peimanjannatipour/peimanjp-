@@ -1,126 +1,119 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
-import { LinkButton } from "@/components/LinkButton";
-import { Section } from "@/components/Section";
-import { StatusBadge } from "@/components/StatusBadge";
-import { bayesianLogTimeClock } from "@/data/research";
+import { externalLinks } from "@/data/links";
 import { createPageMetadata } from "@/lib/metadata";
-import { faqJsonLd, scholarlyArticleJsonLd } from "@/lib/structured-data";
-
-const bayesianFaq = [
-  {
-    question: "What is the Bayesian Log-Time article about?",
-    answer:
-      "It models human time reproduction using a Bayesian log-time state-space clock with Kalman-like prior integration and lognormal observation noise.",
-  },
-  {
-    question: "What is its main contribution?",
-    answer:
-      "It provides a quantitative timing benchmark and identifies a mean-variance dissociation that motivates heteroscedastic or multi-source timing models.",
-  },
-  {
-    question: "What is the status?",
-    answer: "SSRN preprint with DOI.",
-  },
-];
+import { scholarlyArticleJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
-  title:
-    "A Bayesian Log-Time State-Space Clock for Human Time Reproduction | Peiman Jannatipour",
+  title: "A Bayesian Log-Time State-Space Clock for Human Time Reproduction | Peiman Jannatipour",
   description:
-    "SSRN preprint by Peiman Jannatipour on Bayesian timing, log-time state-space modelling, central tendency, temporal cognition, and human time reproduction.",
+    "A preprint presenting a Bayesian log-time state-space model of human time reproduction, focusing on central tendency, multiplicative error, and diagnostic evaluation of model adequacy.",
   path: "/research/bayesian-log-time-state-space-clock",
 });
 
 export default function BayesianLogTimeStateSpaceClockPage() {
+  const title = "A Bayesian Log-Time State-Space Clock for Human Time Reproduction";
+  const status = "Preprint";
+  const author = "Peiman Jannatipour";
+  const doi = externalLinks.bayesianTiming.href;
+
   return (
-    <main id="main">
-      <JsonLd data={faqJsonLd(bayesianFaq)} />
+    <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
       <JsonLd
         data={scholarlyArticleJsonLd({
-          name: bayesianLogTimeClock.title,
-          description: bayesianLogTimeClock.summary ?? "",
-          urlPath: "/research/bayesian-log-time-state-space-clock",
-          status: bayesianLogTimeClock.status,
-          identifier: bayesianLogTimeClock.doi,
-          keywords: bayesianLogTimeClock.keywords,
+          title,
+          description:
+            "A preprint presenting a Bayesian log-time state-space model of human time reproduction, focusing on central tendency, multiplicative error, and diagnostic evaluation of model adequacy.",
+          path: "/research/bayesian-log-time-state-space-clock",
+          doi,
         })}
       />
-      <Section
-        description="SSRN preprint with DOI · Near East University"
-        eyebrow="Second neuroscience anchor"
-        headingLevel={1}
-        title={bayesianLogTimeClock.title}
-      >
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <figure className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
-            <Image
-              alt="Researcher working with a data-analysis notebook."
-              className="aspect-[4/3] w-full object-cover"
-              height={900}
-              priority
-              src="/images/stock-data-dashboard.jpg"
-              width={1200}
-            />
-            <figcaption className="border-t border-slate-200 px-4 py-3 text-xs leading-5 text-slate-500">
-              Stock computational-modelling context for Bayesian timing research.
-            </figcaption>
-          </figure>
 
-          <aside className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-            <StatusBadge status={bayesianLogTimeClock.status} />
-            <h2 className="mt-5 text-xl font-semibold tracking-tight text-slate-950">
-              Article metadata
-            </h2>
-            <dl className="mt-5 grid gap-3 text-sm text-slate-600">
-              <div>
-                <dt className="font-semibold text-slate-950">Author</dt>
-                <dd>Peiman Jannatipour</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-slate-950">Affiliation</dt>
-                <dd>Near East University</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-slate-950">DOI</dt>
-                <dd>{bayesianLogTimeClock.doi}</dd>
-              </div>
-            </dl>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <LinkButton href={bayesianLogTimeClock.doi ?? "/research"}>
-                Open DOI
-              </LinkButton>
-              <LinkButton href="/research" variant="secondary">
-                Back to research
-              </LinkButton>
-            </div>
-          </aside>
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="max-w-4xl">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-400">
+              {status}
+            </span>
+            <span className="text-xs text-slate-400 font-mono">
+              Author: {author}
+            </span>
+          </div>
+
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            {title}
+          </h1>
+
+          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-slate-300">
+            <a
+              className="inline-flex items-center rounded-lg border border-sky-500/30 bg-sky-600/20 px-5 py-2.5 text-sm font-semibold text-sky-200 transition hover:bg-sky-600/40 hover:text-white"
+              href={doi}
+              rel="noreferrer"
+              target="_blank"
+            >
+              View preprint (SSRN) →
+            </a>
+            <span className="text-xs text-slate-500 font-mono">
+              DOI: 10.2139/ssrn.6383218
+            </span>
+          </div>
         </div>
-      </Section>
 
-      <Section
-        className="border-t border-slate-200 bg-slate-50"
-        description="The article is presented as a computational neuroscience preprint and timing-model benchmark."
-        eyebrow="Research summary"
-        title="Bayesian timing benchmark"
-      >
-        <p className="max-w-4xl text-base leading-8 text-slate-700">
-          This article models human time reproduction using a Bayesian log-time
-          state-space clock with Kalman-like prior integration and lognormal
-          observation noise. It analyzes cleaned trial-level behavioural data
-          with Nclean = 15,264 of Nraw = 15,336 trials and achieves strong
-          mean-level predictive performance, including RMSE = 0.8237 s, MAE =
-          0.5833 s, R2 = 0.7099, log-RMSE = 0.2490, and log-MAE = 0.1862. The
-          model reproduces the canonical central-tendency profile:
-          overestimation at short durations and underestimation at long
-          durations. Its major contribution is not only fit quality, but
-          falsification: it identifies a mean-variance dissociation where
-          empirical CV decreases with duration while stationary
-          posterior-predictive CV remains near constant, motivating
-          next-generation heteroscedastic or multi-source timing models.
-        </p>
-      </Section>
+        <div className="mt-12 grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-8 space-y-8 text-slate-300 leading-relaxed">
+            <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
+              <h2 className="text-xl font-bold text-white mb-4">Research Overview</h2>
+              <p>
+                This work develops a computational account of human time reproduction using a Bayesian log-time state-space framework. It focuses on central tendency, multiplicative variability, predictive adequacy, and model diagnostics, with particular attention to where a compact timing model succeeds and where remaining structure motivates richer models.
+              </p>
+            </section>
+
+            <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
+              <h2 className="text-xl font-bold text-white mb-4">Research Scope &amp; Focus</h2>
+              <p>
+                Interpretable models of behavioural data, with emphasis on central tendency, multiplicative variability, and diagnostic evaluation of fit and misspecification.
+              </p>
+            </section>
+
+            <div className="pt-6 border-t border-slate-800 flex flex-wrap gap-4">
+              <Link
+                className="text-sm font-semibold text-sky-400 hover:text-sky-300 transition"
+                href="/research/eeg-temporal-reproduction-bias"
+              >
+                Related: Sensor-Level EEG Residual Prediction →
+              </Link>
+              <Link
+                className="text-sm font-semibold text-sky-400 hover:text-sky-300 transition"
+                href="/publications"
+              >
+                All Publications →
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-4">
+            <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl sticky top-24">
+              <Image
+                alt="Data analysis display showing Bayesian computational fitting"
+                className="h-64 w-full object-cover"
+                height={800}
+                src="/assets/stock/stock6.jpg"
+                width={1200}
+              />
+              <div className="p-6">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-sky-400">
+                  Model Fit &amp; Analysis
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                  Bayesian state-space dynamics and diagnostic model evaluation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
