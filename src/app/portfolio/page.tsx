@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import portfolioData from "@/../content/site-copy/portfolio.json";
+import { JsonLd } from "@/components/JsonLd";
 import { createPageMetadata } from "@/lib/metadata";
+import { collectionPageJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Website Portfolio | Peiman Jannatipour",
@@ -13,6 +15,18 @@ export const metadata: Metadata = createPageMetadata({
 export default function PortfolioPage() {
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: "Website Portfolio | Peiman Jannatipour",
+          description: "This portfolio connects Peiman Jannatipour’s research presence, scientific software, invention-related work, scholarly profiles, and associated project websites.",
+          path: "/portfolio",
+          items: portfolioData.items.filter((item) => item.available !== false).map((item) => ({
+            name: item.title,
+            url: item.url,
+            description: item.text,
+          })),
+        })}
+      />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">

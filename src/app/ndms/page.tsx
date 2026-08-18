@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import seoData from "@/../content/site-copy/seo.json";
+import { JsonLd } from "@/components/JsonLd";
 import { createPageMetadata } from "@/lib/metadata";
+import { techArticleJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "NDMS | Privacy-Aware Multimodal Neurotechnology Concept",
@@ -15,6 +17,13 @@ export default function NDMSPage() {
 
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd
+        data={techArticleJsonLd({
+          title: "NDMS — Privacy-Aware Multimodal Neurotechnology Project",
+          description: "NDMS is a privacy-aware multimodal neurotechnology project focused on structured multimodal signal integration, quality-aware inference, edge-oriented processing, and interpretable system design.",
+          path: "/ndms",
+        })}
+      />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">
@@ -24,7 +33,7 @@ export default function NDMSPage() {
             {data.title}
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-300">
-            {data.bodyText}
+            NDMS is a privacy-aware multimodal neurotechnology project focused on structured multimodal signal integration, quality-aware inference, edge-oriented processing, and interpretable system design. It should be presented as an invention and technology-development program, not as a validated diagnostic or clinical product.
           </p>
         </div>
 

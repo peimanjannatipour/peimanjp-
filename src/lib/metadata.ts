@@ -43,6 +43,9 @@ export function createPageMetadata({
     alternates: {
       canonical: url,
     },
+    verification: {
+      google: "4SSraSx2Ayvgx16k6iU9T0dp8PHpGpRBk0k_HTEWNAk",
+    },
     robots: {
       index: true,
       follow: true,

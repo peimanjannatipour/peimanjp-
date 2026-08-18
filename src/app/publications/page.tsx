@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import publicationsData from "@/../content/site-copy/publications.json";
+import { JsonLd } from "@/components/JsonLd";
 import { createPageMetadata } from "@/lib/metadata";
+import { collectionPageJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Selected Publications & Preprints | Peiman Jannatipour",
@@ -13,6 +15,18 @@ export const metadata: Metadata = createPageMetadata({
 export default function PublicationsPage() {
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: "Selected Publications & Preprints | Peiman Jannatipour",
+          description: "Preprints and technical manuscripts documenting empirical findings, computational models, and scientific software systems.",
+          path: "/publications",
+          items: publicationsData.entries.map((p) => ({
+            name: p.title,
+            url: p.url,
+            description: p.description,
+          })),
+        })}
+      />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">
@@ -22,7 +36,7 @@ export default function PublicationsPage() {
             {publicationsData.title}
           </h1>
           <p className="mt-4 text-base leading-relaxed text-slate-300">
-            Preprints and technical manuscripts documenting empirical findings, computational models, and scientific software systems.
+            This section presents public preprints and technical manuscripts across computational neuroscience, human timing, EEG, Bayesian modelling, and research software. Publication status must be represented accurately. A preprint must not be described as peer reviewed unless a peer-reviewed version exists and is explicitly linked.
           </p>
         </div>
 
@@ -82,7 +96,7 @@ export default function PublicationsPage() {
               />
               <div className="p-6">
                 <h3 className="text-base font-semibold text-white">
-                  Rigorous Peer-Review &amp; Provenance
+                  Research outputs and provenance
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-400">
                   All preprints and manuscripts prioritize clear data provenance, explicit quality control, and verifiable computational models.

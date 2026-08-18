@@ -31,13 +31,13 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden items-center gap-1 xl:flex">
           {navItems.map((item) => {
             const active =
               item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
               <Link
-                className={`rounded-full px-3 py-2 text-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                className={`rounded-full px-2.5 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                   active
                     ? "bg-white text-slate-950"
                     : "text-slate-300 hover:bg-white/10 hover:text-white"
@@ -51,11 +51,51 @@ export function Navbar() {
           })}
         </div>
 
+        {/* Medium Screen Dropdown / Navigation */}
+        <div className="hidden items-center gap-1 lg:flex xl:hidden">
+          {navItems.slice(0, 5).map((item) => {
+            const active =
+              item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+            return (
+              <Link
+                className={`rounded-full px-2.5 py-1.5 text-xs font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                  active
+                    ? "bg-white text-slate-950"
+                    : "text-slate-300 hover:bg-white/10 hover:text-white"
+                }`}
+                href={item.href}
+                key={item.href}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+          <div className="relative group">
+            <button
+              className="rounded-full px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:bg-white/10 hover:text-white transition"
+              type="button"
+            >
+              More ▾
+            </button>
+            <div className="absolute right-0 top-full mt-2 hidden w-44 rounded-xl border border-slate-800 bg-slate-900 p-2 shadow-xl group-hover:block">
+              {navItems.slice(5).map((item) => (
+                <Link
+                  className="block rounded-lg px-3 py-2 text-xs text-slate-300 hover:bg-slate-800 hover:text-white"
+                  href={item.href}
+                  key={item.href}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <button
           aria-controls="mobile-navigation"
           aria-expanded={open}
           aria-label="Toggle navigation menu"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
           onClick={() => setOpen((value) => !value)}
           type="button"
         >
@@ -70,7 +110,7 @@ export function Navbar() {
 
       {open ? (
         <div
-          className="border-t border-white/10 bg-slate-950 px-5 py-4 lg:hidden"
+          className="border-t border-white/10 bg-slate-950 px-5 py-4 xl:hidden"
           id="mobile-navigation"
         >
           <div className="mx-auto grid max-w-7xl gap-2">

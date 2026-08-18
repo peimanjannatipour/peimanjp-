@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import researchData from "@/../content/site-copy/research.json";
+import { JsonLd } from "@/components/JsonLd";
 import { createPageMetadata } from "@/lib/metadata";
+import { collectionPageJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Research Areas | Peiman Jannatipour | Computational Neuroscience",
@@ -14,6 +16,18 @@ export const metadata: Metadata = createPageMetadata({
 export default function ResearchPage() {
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: "Research Areas | Peiman Jannatipour",
+          description: "Peiman Jannatipour’s research spans EEG and neural time-series analysis, temporal cognition and human time reproduction, Bayesian and state-space modelling, developmental neuroimaging, research software, and neurotechnology.",
+          path: "/research",
+          items: researchData.cards.map((c) => ({
+            name: c.title,
+            url: "/research",
+            description: c.text,
+          })),
+        })}
+      />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">
@@ -23,7 +37,7 @@ export default function ResearchPage() {
             {researchData.title}
           </h1>
           <p className="mt-4 text-base leading-relaxed text-slate-300">
-            Peiman Jannatipour&apos;s research program integrates empirical EEG time-series analysis, cognitive behavioral dynamics, Bayesian state-space modeling, and local-first research systems.
+            Peiman Jannatipour’s research spans EEG and neural time-series analysis, temporal cognition and human time reproduction, Bayesian and state-space modelling, developmental neuroimaging, research software, and neurotechnology. Across these areas, the emphasis is on explicit computational assumptions, careful validation, reproducible analysis, and scientifically interpretable outputs.
           </p>
         </div>
 

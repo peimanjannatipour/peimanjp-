@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import homepageData from "@/../content/site-copy/homepage.json";
+import { JsonLd } from "@/components/JsonLd";
 import { createPageMetadata } from "@/lib/metadata";
+import { profilePageJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About | Peiman Jannatipour",
@@ -12,6 +14,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function AboutPage() {
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd data={profilePageJsonLd("/about")} />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">

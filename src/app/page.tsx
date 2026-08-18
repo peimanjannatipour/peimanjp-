@@ -4,10 +4,13 @@ import homepageData from "@/../content/site-copy/homepage.json";
 import portfolioData from "@/../content/site-copy/portfolio.json";
 import publicationsData from "@/../content/site-copy/publications.json";
 import researchData from "@/../content/site-copy/research.json";
+import { JsonLd } from "@/components/JsonLd";
+import { profilePageJsonLd } from "@/lib/structured-data";
 
 export default function Home() {
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen" id="main">
+      <JsonLd data={profilePageJsonLd("/")} />
       {/* Hero Section */}
       <section className="relative border-b border-slate-800 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">

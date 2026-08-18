@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import seoData from "@/../content/site-copy/seo.json";
+import { JsonLd } from "@/components/JsonLd";
 import { createPageMetadata } from "@/lib/metadata";
+import { scholarlyArticleJsonLd, softwareApplicationJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "NeuroLab OS | Scientist-Reviewed Neural Time-Series Modelling",
@@ -15,6 +17,21 @@ export default function NeuroLabPage() {
 
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd
+        data={softwareApplicationJsonLd({
+          name: "NeuroLab OS",
+          description: "A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation.",
+          path: "/neurolab-os",
+        })}
+      />
+      <JsonLd
+        data={scholarlyArticleJsonLd({
+          title: "NeuroLab OS: A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation",
+          description: "A technical manuscript describing a local-first scientific workbench for neural time-series ingestion, explicit quality control, computational model fitting, in silico perturbation workflows, and provenance-aware reporting.",
+          path: "/neurolab-os",
+          pdfUrl: "/assets/papers/neurolab-os-preprint.pdf",
+        })}
+      />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">
@@ -24,7 +41,19 @@ export default function NeuroLabPage() {
             {data.title}
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-slate-300">
-            {data.bodyText}
+            NeuroLab OS is a local-first research-software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation. The evaluated technical beta combines an Electron/React desktop interface with a local Python/FastAPI scientific engine.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-slate-300">
+            The workflow connects neural time-series ingestion, preprocessing, explicit quality-control review, scientist-visible model specifications, seeded model fitting, simulation, in silico perturbation, and provenance-aware reporting within one local execution path.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-slate-300">
+            The evaluated runtime supports EEG-oriented and generic time-series ingestion together with ROI/BOLD matrix workflows. It contains 11 computational model families and eight explicitly in silico model-space perturbation operations.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-slate-300">
+            NeuroLab OS is designed to preserve continuity between researcher-visible model semantics and executable computational provenance. Its scientific contribution is therefore centered on traceability between model interpretation and execution rather than the introduction of a new neural equation.
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-slate-300 font-medium text-slate-400">
+            The present evidence establishes software and release-level verification of the evaluated technical beta. It should not be described as establishing biological, diagnostic, therapeutic, or clinical validity. External reference-dataset validation remains a distinct evidential requirement.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import homepageData from "@/../content/site-copy/homepage.json";
+import { JsonLd } from "@/components/JsonLd";
 import { createPageMetadata } from "@/lib/metadata";
+import { contactPageJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact | Peiman Jannatipour",
@@ -11,6 +13,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function ContactPage() {
   return (
     <main className="bg-slate-950 text-slate-100 min-h-screen py-16 lg:py-24" id="main">
+      <JsonLd data={contactPageJsonLd("/contact")} />
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <span className="inline-block rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-400">

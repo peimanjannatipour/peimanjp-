@@ -108,11 +108,16 @@ export const primaryCtas: NavItem[] = [
 
 export const navItems: NavItem[] = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
   { label: "Research", href: "/research" },
   { label: "Publications", href: "/publications" },
   { label: "NeuroLab OS", href: "/neurolab-os" },
+  { label: "Projects", href: "/projects" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Patent & NDMS", href: "/ndms" },
+  { label: "Patent / NDMS", href: "/ndms" },
+  { label: "CV", href: "/cv" },
+  { label: "Contact", href: "/contact" },
+  { label: "Verification", href: "/verification" },
 ];
 
 export const downloadItems: DownloadItem[] = [
