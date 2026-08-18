@@ -1,29 +1,66 @@
 {
-  "title": "Selected Publications and Preprints",
+  "title": "Publications, Preprints, and Manuscripts",
+  "intro": "This page separates public preprints, technical manuscripts, and manuscripts in development. Status labels are intentionally explicit so that early-stage work is not presented as peer reviewed or published when it is not.",
   "entries": [
     {
       "id": "eeg-residual-prediction",
       "title": "Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias",
-      "description": "A preprint examining whether trial-level EEG information explains residual variation in time reproduction beyond the behavioural structure already captured by duration, context, and recent experience.",
+      "description": "A Research Square preprint examining whether trial-level EEG information explains residual variation in time reproduction beyond behavioural structure already captured by duration, context, and recent experience.",
       "linkLabel": "View preprint",
       "url": "https://doi.org/10.21203/rs.3.rs-9852649/v1",
-      "type": "preprint"
+      "type": "preprint",
+      "status": "Research Square preprint · 2026",
+      "topic": "EEG · temporal cognition · residual prediction"
     },
     {
       "id": "bayesian-log-time-clock",
       "title": "A Bayesian Log-Time State-Space Clock for Human Time Reproduction",
-      "description": "A preprint presenting a Bayesian log-time state-space model of human time reproduction, focusing on central tendency, multiplicative error, and diagnostic evaluation of model adequacy.",
+      "description": "An SSRN preprint presenting a Bayesian log-time state-space account of human time reproduction with explicit attention to central tendency, multiplicative variability, prediction, and diagnostic model adequacy.",
       "linkLabel": "View preprint",
       "url": "https://doi.org/10.2139/ssrn.6383218",
-      "type": "preprint"
+      "type": "preprint",
+      "status": "SSRN preprint · 2026",
+      "topic": "Bayesian modelling · time reproduction · state-space dynamics"
     },
     {
       "id": "neurolab-os-paper",
       "title": "NeuroLab OS: A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation",
       "description": "A technical manuscript describing a local-first scientific workbench for neural time-series ingestion, explicit quality control, computational model fitting, in silico perturbation workflows, and provenance-aware reporting.",
-      "linkLabel": "Open manuscript",
+      "linkLabel": "Open manuscript PDF",
       "url": "/assets/papers/neurolab-os-preprint.pdf",
-      "type": "manuscript"
+      "type": "manuscript",
+      "status": "Technical manuscript · 2026",
+      "topic": "Research software · neural time-series · reproducibility"
+    },
+    {
+      "id": "graph-spacetime",
+      "title": "A Graph-Theoretic Framework for Representing Spacetime as Temporal Layers of Spatial Graphs",
+      "description": "An exploratory theoretical preprint representing spacetime as ordered layers of spatial graphs, with emphasis on discrete structure, temporal layering, invariance, and graph-based modelling.",
+      "linkLabel": "View SSRN preprint",
+      "url": "https://doi.org/10.2139/ssrn.5891994",
+      "type": "preprint",
+      "status": "SSRN preprint · 2025",
+      "topic": "Exploratory theory · graph modelling · spacetime"
+    },
+    {
+      "id": "cortical-state-temporal-inference",
+      "title": "Cortical State Dynamics Support a Near-Linear Physiological Proxy for Temporal Inference Across fMRI, EEG, and Simulation",
+      "description": "A systems-neuroscience manuscript on cortical-state dynamics and temporal inference across fMRI, EEG, and simulation. The public site presents the research direction without disclosing unpublished analyses beyond the material already made public.",
+      "linkLabel": "Open manuscript status page",
+      "url": "/research/cortical-state-temporal-inference",
+      "type": "manuscript",
+      "status": "Manuscript · 2026",
+      "topic": "Cortical dynamics · temporal inference · EEG/fMRI"
+    },
+    {
+      "id": "band-specific-sensorimotor-topographies",
+      "title": "Band-Specific Sensorimotor Topographies During Temporal Reproduction: A Non-Circular EEG Validation Study",
+      "description": "An EEG manuscript under revision following editorial feedback on sensor-space topographic interpretation and figure presentation. It remains a manuscript rather than a peer-reviewed publication.",
+      "linkLabel": "",
+      "url": "",
+      "type": "manuscript",
+      "status": "Manuscript under revision · 2026",
+      "topic": "EEG topography · sensorimotor dynamics · temporal reproduction"
     }
   ]
 }

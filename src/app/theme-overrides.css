@@ -1,0 +1,85 @@
+/* Theme bridge for legacy light components. Scoped to main content so navigation states stay intact. */
+html[data-theme="dark"] main .bg-white {
+  background-color: #020617 !important;
+}
+
+html[data-theme="dark"] main .bg-slate-50,
+html[data-theme="dark"] main .bg-slate-100 {
+  background-color: #0f172a !important;
+}
+
+html[data-theme="dark"] main .text-slate-950,
+html[data-theme="dark"] main .text-slate-900,
+html[data-theme="dark"] main .text-slate-800 {
+  color: #f8fafc !important;
+}
+
+html[data-theme="dark"] main .text-slate-700,
+html[data-theme="dark"] main .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+html[data-theme="dark"] main .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+html[data-theme="dark"] main .border-slate-200,
+html[data-theme="dark"] main .border-slate-300 {
+  border-color: #334155 !important;
+}
+
+html[data-theme="dark"] main .text-cyan-700 {
+  color: #67e8f9 !important;
+}
+
+html[data-theme="dark"] main .bg-amber-50 {
+  background-color: #451a03 !important;
+}
+
+html[data-theme="dark"] main .border-amber-200 {
+  border-color: #92400e !important;
+}
+
+html[data-theme="dark"] main .text-amber-950 {
+  color: #fef3c7 !important;
+}
+
+html[data-theme="dark"] main input,
+html[data-theme="dark"] main textarea,
+html[data-theme="dark"] main select {
+  background-color: #0f172a;
+  color: #f8fafc;
+  border-color: #475569;
+}
+
+html[data-theme="light"] main .shadow-2xl,
+html[data-theme="light"] main .shadow-xl,
+html[data-theme="light"] main .shadow-sm {
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Sky text used on dark surfaces needs a darker accessible equivalent on light surfaces. */
+html[data-theme="light"] .text-sky-100,
+html[data-theme="light"] .text-sky-200,
+html[data-theme="light"] .text-sky-300,
+html[data-theme="light"] .text-sky-400,
+html[data-theme="light"] .text-cyan-200 {
+  color: #075985 !important;
+}
+
+/* Keep keyboard/current-page states visible in the light navigation. */
+html[data-theme="light"] header [aria-current="page"] {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="light"] header details > div {
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme="light"] footer a:focus-visible,
+html[data-theme="light"] header a:focus-visible,
+html[data-theme="light"] header button:focus-visible,
+html[data-theme="light"] header summary:focus-visible {
+  outline-color: #0369a1;
+}
