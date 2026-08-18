@@ -1,34 +1,51 @@
 {
-  "eyebrow": "Computational neuroscience",
+  "eyebrow": "Computational neuroscience · research systems · neurotechnology",
   "h1": "Peiman Jannatipour",
-  "subtitle": "Computational Neuroscience Researcher · EEG, Human Timing, Neural Time-Series, and Neurotechnology Systems",
-  "heroParagraph": "Peiman Jannatipour works across computational neuroscience, EEG, temporal cognition, Bayesian modelling, scientific software, and privacy-aware neurotechnology. His work focuses on how behavioural context, recent experience, and neural state shape human time perception, while also developing reproducible tools and systems for neural time-series research.",
+  "subtitle": "Computational Neuroscience Researcher · EEG, Human Timing, Developmental Neuroimaging, Research Software, and Neurotechnology",
+  "heroParagraph": "I work across computational neuroscience, EEG, temporal cognition, Bayesian modelling, developmental neuroimaging, scientific software, and privacy-aware neurotechnology. My research asks how behavioural context, recent experience, and neural state shape human cognition, while my systems work focuses on making complex scientific workflows more reproducible, interpretable, and usable.",
+  "heroSecondary": "The portfolio brings together empirical neuroscience, computational modelling, ongoing ABCD developmental-neuroimaging work, NeuroLab OS, the NDMS invention programme, and evidence-review systems such as SMIS-ODS. Public pages distinguish preprints, manuscripts, research lines, prototypes, and patent-pending work so that status and evidence remain clear.",
   "primaryButtons": [
-    { "label": "View Research", "href": "/research" },
-    { "label": "Publications & Preprints", "href": "/publications" },
-    { "label": "Explore NeuroLab OS", "href": "/neurolab-os" },
-    { "label": "Patent & NDMS", "href": "/ndms" }
+    { "label": "Explore Research", "href": "/research" },
+    { "label": "Publications & Manuscripts", "href": "/publications" },
+    { "label": "Current Projects", "href": "/projects" },
+    { "label": "Contact", "href": "/contact" }
   ],
   "highlights": [
     {
       "title": "EEG and temporal cognition",
-      "text": "Research on human time reproduction, temporal bias, and the relationship between behavioural structure and trial-level neural state."
+      "text": "Research on human time reproduction, temporal bias, behavioural history, and the incremental information carried by trial-level neural state."
     },
     {
       "title": "Bayesian and computational modelling",
-      "text": "Model-based work on time perception, central tendency, state-space dynamics, and interpretable computational mechanisms."
+      "text": "Interpretable models of human behaviour with explicit diagnostics for central tendency, variability structure, prediction, and model misspecification."
     },
     {
-      "title": "Research software and neurotechnology",
-      "text": "Development of local-first, provenance-aware software and privacy-conscious multimodal systems for scientific and translational use."
+      "title": "Developmental neuroimaging",
+      "text": "Ongoing ABCD research on adolescent brain maturation, resting-state connectivity, and dimensional neurodevelopmental traits, presented publicly at a non-spoiling research-line level."
+    },
+    {
+      "title": "Research software and invention",
+      "text": "Local-first scientific software, privacy-aware multimodal neurotechnology, and structured evidence systems designed around traceability and responsible use."
     }
   ],
+  "researchProgramme": [
+    "My empirical neuroscience work focuses on timing and cognitive variability: what people reproduce, how context and previous trials bias that behaviour, and whether neural state adds information beyond those behavioural structures.",
+    "My computational work treats model fit as only one part of the scientific question. I emphasize predictive evaluation, residual diagnostics, model limitations, and interpretable mechanisms rather than relying on headline accuracy alone.",
+    "Alongside published and preprint work, I maintain active research lines in developmental neuroimaging and research infrastructure. High-level descriptions are public, while unpublished hypotheses, analyses, and results remain private until they are ready for scientific release."
+  ],
+  "principles": [
+    "Reproducibility and provenance",
+    "Explicit quality control",
+    "Model falsification and diagnostics",
+    "Privacy-aware system design",
+    "Clear separation of evidence, inference, and product claims"
+  ],
   "about": {
-    "title": "About",
-    "body": "Peiman Jannatipour is a researcher and inventor whose work spans computational neuroscience, EEG, behavioural modelling, scientific software, and neurotechnology. His research emphasizes rigorous interpretation, reproducible workflows, and technically clear communication. Across projects, he combines neural time-series analysis, modelling, and systems thinking to study cognitive processes and to build tools that make complex research more traceable and usable."
+    "title": "Researcher, inventor, and scientific-systems builder",
+    "body": "Peiman Jannatipour works at the intersection of computational neuroscience, neural time-series analysis, behavioural modelling, developmental neuroimaging, scientific software, and neurotechnology. Across projects, the emphasis is on technically explicit methods, conservative interpretation, reproducible workflows, and communication that makes the evidence boundary visible. The portfolio includes public preprints, manuscripts in development, research software, an international patent application, and exploratory research systems."
   },
   "contact": {
-    "title": "Contact",
-    "body": "For research, software, or project-related inquiries, use the contact pathways provided on this site or the linked public profiles where appropriate."
+    "title": "Research and collaboration",
+    "body": "For research collaboration, scientific software, neurotechnology, evidence systems, editorial discussion, or other project-related inquiries, use the contact page or the linked ORCID, ResearchGate, and GitHub profiles."
   }
 }
