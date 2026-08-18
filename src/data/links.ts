@@ -19,10 +19,11 @@ export type DownloadItem = {
 export const siteConfig = {
   name: "Peiman Jannatipour",
   shortName: "Peiman JP",
-  role: "Computational Neuroscience Researcher · EEG, Human Timing, Neural Time-Series, and Neurotechnology Systems",
+  role: "Computational Neuroscience Researcher · EEG, Human Timing, Developmental Neuroimaging, Research Software, and Neurotechnology",
   baseUrl: "https://peimanjp.com",
   defaultTitle: "Peiman Jannatipour | Computational Neuroscience Researcher",
-  description: "Peiman Jannatipour works across computational neuroscience, EEG, temporal cognition, Bayesian modelling, scientific software, and privacy-aware neurotechnology.",
+  description:
+    "Research portfolio spanning computational neuroscience, EEG, temporal cognition, developmental neuroimaging, scientific software, evidence systems, and privacy-aware neurotechnology.",
   email: "peiman@peimanjp.com",
 };
 
@@ -63,10 +64,10 @@ export const externalLinks = {
     href: "https://doi.org/10.2139/ssrn.6383218",
     visible: true,
   },
-  ssrn: {
-    label: "SSRN DOI",
-    value: "10.2139/ssrn.6383218",
-    href: "https://doi.org/10.2139/ssrn.6383218",
+  graphSpacetime: {
+    label: "Graph-Theoretic Spacetime Preprint",
+    value: "10.2139/ssrn.5891994",
+    href: "https://doi.org/10.2139/ssrn.5891994",
     visible: true,
   },
   pct: {
@@ -85,7 +86,7 @@ export const externalLinks = {
     label: "NDMS Website",
     value: "ndms.peimanjp.com",
     href: "https://ndms.peimanjp.com/",
-    visible: false,
+    visible: true,
   },
   primarySite: {
     label: "Peiman JP Primary Website",
@@ -103,7 +104,8 @@ export const externalLinks = {
 
 export const primaryCtas: NavItem[] = [
   { label: "View Research", href: "/research" },
-  { label: "Publications & Preprints", href: "/publications" },
+  { label: "Publications & Manuscripts", href: "/publications" },
+  { label: "Current Projects", href: "/projects" },
 ];
 
 export const navItems: NavItem[] = [
@@ -113,8 +115,8 @@ export const navItems: NavItem[] = [
   { label: "Publications", href: "/publications" },
   { label: "NeuroLab OS", href: "/neurolab-os" },
   { label: "Projects", href: "/projects" },
+  { label: "NDMS / Patent", href: "/ndms" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Patent / NDMS", href: "/ndms" },
   { label: "CV", href: "/cv" },
   { label: "Contact", href: "/contact" },
   { label: "Verification", href: "/verification" },
@@ -122,7 +124,7 @@ export const navItems: NavItem[] = [
 
 export const downloadItems: DownloadItem[] = [
   {
-    label: "NeuroLab OS Preprint PDF",
+    label: "NeuroLab OS Manuscript PDF",
     href: "/assets/papers/neurolab-os-preprint.pdf",
     fileName: "neurolab-os-preprint.pdf",
   },
