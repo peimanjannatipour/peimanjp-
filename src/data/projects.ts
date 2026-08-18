@@ -79,12 +79,12 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "NDMS / Masking Index Prototype",
-    status: "Patent pending / technology development",
+    title: "Masking Index Prototype",
+    status: "NDMS · patent pending / technology development",
     href: "/ndms",
     summary:
-      "Privacy-aware multimodal neurotechnology programme tied to the PCT application, with emphasis on quality-aware multimodal inference, edge-oriented processing, and responsible-use boundaries.",
-    tags: ["Privacy", "Multimodal AI", "Edge inference", "PCT application filed"],
+      "NDMS privacy-aware multimodal neurotechnology programme tied to the PCT application, with emphasis on quality-aware multimodal inference, edge-oriented processing, and responsible-use boundaries.",
+    tags: ["NDMS", "Privacy", "Multimodal AI", "Edge inference", "PCT application filed"],
     category: "Privacy-Preserving Neurotechnology",
     image: {
       src: "/images/inventor-photo.jpg",
