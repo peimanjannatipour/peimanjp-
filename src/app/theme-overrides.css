@@ -57,3 +57,20 @@ html[data-theme="light"] main .shadow-xl,
 html[data-theme="light"] main .shadow-sm {
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08) !important;
 }
+
+/* Keep keyboard/current-page states visible in the light navigation. */
+html[data-theme="light"] header [aria-current="page"] {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="light"] header details > div {
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme="light"] footer a:focus-visible,
+html[data-theme="light"] header a:focus-visible,
+html[data-theme="light"] header button:focus-visible,
+html[data-theme="light"] header summary:focus-visible {
+  outline-color: #0369a1;
+}
