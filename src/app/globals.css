@@ -3,6 +3,18 @@
 :root {
   --background: #f8fafc;
   --foreground: #0f172a;
+  --focus-ring: #0369a1;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #020617;
+  --foreground: #f8fafc;
+  --focus-ring: #67e8f9;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
 }
 
 @theme inline {
@@ -24,6 +36,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -37,6 +55,33 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  padding: 0.2rem;
+  background: rgba(15, 23, 42, 0.86);
+}
+
+.theme-toggle-button {
+  min-height: 2.25rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.4rem 0.65rem;
+  background: transparent;
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.theme-toggle-button[aria-pressed="true"] {
+  background: #e2e8f0;
+  color: #0f172a;
 }
 
 @keyframes fade-up {
@@ -200,6 +245,69 @@ body {
   margin-left: auto;
   opacity: 0.82;
   pointer-events: auto;
+}
+
+/* Light-theme compatibility for the dark Tailwind palette used across the portfolio. */
+html[data-theme="light"] .bg-slate-950,
+html[data-theme="light"] .bg-slate-950\/95,
+html[data-theme="light"] .bg-slate-900,
+html[data-theme="light"] .bg-slate-900\/80,
+html[data-theme="light"] .bg-slate-900\/60,
+html[data-theme="light"] .bg-slate-900\/50,
+html[data-theme="light"] .bg-slate-900\/30,
+html[data-theme="light"] .bg-slate-800 {
+  background-color: #ffffff !important;
+}
+
+html[data-theme="light"] .text-white,
+html[data-theme="light"] .text-slate-100,
+html[data-theme="light"] .text-slate-200 {
+  color: #0f172a !important;
+}
+
+html[data-theme="light"] .text-slate-300 {
+  color: #334155 !important;
+}
+
+html[data-theme="light"] .text-slate-400,
+html[data-theme="light"] .text-slate-500 {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .border-slate-800,
+html[data-theme="light"] .border-slate-700,
+html[data-theme="light"] .border-white\/10,
+html[data-theme="light"] .border-white\/20 {
+  border-color: #cbd5e1 !important;
+}
+
+html[data-theme="light"] .from-slate-950,
+html[data-theme="light"] .from-slate-900,
+html[data-theme="light"] .via-slate-900,
+html[data-theme="light"] .to-slate-950 {
+  --tw-gradient-from: #f8fafc var(--tw-gradient-from-position) !important;
+  --tw-gradient-via: #ffffff var(--tw-gradient-via-position) !important;
+  --tw-gradient-to: #eef2f7 var(--tw-gradient-to-position) !important;
+}
+
+html[data-theme="light"] .theme-toggle {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+}
+
+html[data-theme="light"] .theme-toggle-button {
+  color: #334155;
+}
+
+html[data-theme="light"] .theme-toggle-button[aria-pressed="true"] {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+html[data-theme="light"] .research-grid {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
 }
 
 @media (max-width: 700px) {
