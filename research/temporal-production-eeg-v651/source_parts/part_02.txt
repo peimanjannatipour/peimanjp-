@@ -1,0 +1,300 @@
+    end
+    if numel(unique(lower(string(cfg.scalpLabels)))) ~= numel(cfg.scalpLabels)
+        error('v4:DuplicateConfiguredLabels', 'Configured scalp labels are not unique.');
+    end
+    if any(ismember(lower(string(cfg.scalpLabels)), lower(string(cfg.auxLabels))))
+        error('v4:ScalpAuxOverlap', 'Scalp and auxiliary label lists overlap.');
+    end
+    if any(cfg.lambdaGrid <= 0) || any(diff(cfg.lambdaGrid) <= 0)
+        error('v4:LambdaGrid', 'lambdaGrid must be positive and strictly increasing.');
+    end
+    if ~ismember(lower(string(cfg.referenceMode)), ["linked_mastoids","scalp_average"])
+        error('v4:ReferenceMode', 'referenceMode must be linked_mastoids or scalp_average.');
+    end
+    if ~ismember(lower(string(cfg.splitMode)), ["tertile","median"])
+        error('v4:SplitMode', 'splitMode must be tertile or median.');
+    end
+    if size(cfg.predBands,1) ~= numel(cfg.predBandNames) || size(cfg.predBands,2) ~= 2
+        error('v4:BandConfiguration', 'predBands and predBandNames are inconsistent.');
+    end
+    if cfg.nPermutation < 0 || cfg.nBootstrap < 0 || cfg.topoPermutations < 1 || ...
+            cfg.nShuffle < 1 || cfg.innerFolds < 3
+        error('v4:ResamplingConfiguration', 'Resampling counts/folds are invalid.');
+    end
+    if cfg.maxExactSignFlipSubjects < 1 || cfg.maxExactSignFlipSubjects > 20
+        error('v4:ExactSignFlipConfiguration', ...
+            'maxExactSignFlipSubjects must be between 1 and 20.');
+    end
+    if cfg.minTrialGoodFraction <= 0 || cfg.minTrialGoodFraction > 1 || ...
+            cfg.minBaselineGoodFraction <= 0 || cfg.minBaselineGoodFraction > 1
+        error('v4:QCThreshold', 'Good-fraction thresholds must be in (0,1].');
+    end
+    if cfg.causalImpulseTailEnergy <= 0 || cfg.causalImpulseTailEnergy >= 1 || ...
+            cfg.causalImpulseMaxSec < 10
+        error('v4:CausalFilterConfiguration', ...
+            'Causal impulse tail energy must be in (0,1) and max duration at least 10 s.');
+    end
+    if cfg.minCausalHistoryGoodFraction <= 0 || cfg.minCausalHistoryGoodFraction > 1 || ...
+            cfg.minPrestartGoodFraction <= 0 || cfg.minPrestartGoodFraction > 1
+        error('v6:CausalQCThreshold', 'Causal good-fraction thresholds must be in (0,1].');
+    end
+    if cfg.maxRealignmentMismatchSec ~= cfg.maxDurationMismatchSec
+        error('v6:AlignmentToleranceContract', ...
+            'maxRealignmentMismatchSec must equal maxDurationMismatchSec to avoid post-alignment dropping.');
+    end
+    if cfg.minimumIncludedSubjects < 3 || cfg.minimumPredictionSubjects < 3 || ...
+            cfg.minimumSensitivitySubjects < 3 || cfg.minimumTopoSubjects < 3 || cfg.minTopoTrialsPerCondition < 1
+        error('v6:MinimumSampleConfiguration', 'Minimum cohort/endpoint subject or trial counts are invalid.');
+    end
+    if cfg.minAlignmentCoverage <= 0 || cfg.minAlignmentCoverage > 1 || ...
+            cfg.minAlignmentCoverageWarn < cfg.minAlignmentCoverage || cfg.minAlignmentCoverageWarn > 1
+        error('v62:AlignmentCoverageConfiguration', ...
+            'Require 0 < minAlignmentCoverage <= minAlignmentCoverageWarn <= 1.');
+    end
+    if cfg.minFeedbackValidationTrials < 1 || cfg.maxFeedbackDisagreementRate < 0 || ...
+            cfg.maxFeedbackDisagreementRate > 1
+        error('v62:FeedbackQCConfiguration', 'Feedback-QC configuration is invalid.');
+    end
+    if cfg.expectedProductionTrials < 1 || cfg.expectedPerceptionTrials < 1 || ...
+            ~isscalar(cfg.requireOfficialProductionFeedback) || ...
+            ~isscalar(cfg.trialsPerProtocolBlock) || cfg.trialsPerProtocolBlock ~= 10 || ...
+            ~isscalar(cfg.runStrictBlockSensitivity)
+        error('v65:BehaviorAuditConfiguration', ...
+            ['Behavior audit configuration is invalid. For OpenNeuro ds004200, ' ...
+             'trialsPerProtocolBlock is fixed at the protocol-defined value of 10.']);
+    end
+    if ~isscalar(cfg.maxTrialDurMultiplier) || cfg.maxTrialDurMultiplier <= 0 || ...
+            numel(cfg.maxTrialDurSecByTempo) ~= 3 || ...
+            any(abs(cfg.maxTrialDurSecByTempo(:)' - cfg.targetDurationsSec(:)' .* cfg.maxTrialDurMultiplier) > 1e-12)
+        error('v65:DurationQCConfiguration', ...
+            'Production-duration limits must equal [0.2, 5 x target duration] for each tempo.');
+    end
+    if abs(cfg.minTrialDurSec - 0.2) > 1e-12 || ...
+            abs(cfg.maxTrialDurMultiplier - 5.0) > 1e-12 || ...
+            any(abs(cfg.targetDurationsSec(:)' - [0.800 1.650 2.500]) > 1e-12)
+        error('v65:FrozenOriginalPaperDurationContract', ...
+            ['This original-compatible pipeline freezes the published production-QC contract: ' ...
+             'targets [0.8 1.65 2.5] s, lower bound 0.2 s, upper bound 5 x target.']);
+    end
+    if ~strcmpi(string(cfg.primaryAdjacencyMode), "original_condition_sequence")
+        error('v64:PrimaryAdjacencyMode', ...
+            'Primary adjacency is fixed to the original-paper condition sequence for this frozen pipeline.');
+    end
+    if cfg.doNotchFilter
+        error('v64:CausalNotchUnsupported', ...
+            ['doNotchFilter=true is intentionally unsupported in the frozen causal pipeline. ' ...
+             'The 45-Hz low-pass excludes 50-Hz line noise; enabling a zero-phase notch only in one branch would violate branch equivalence.']);
+    end
+    if cfg.requireEmptyOutput && exist(cfg.outRoot, 'dir')
+        entries = dir(cfg.outRoot);
+        entries = entries(~ismember({entries.name},{'.','..'}));
+        if ~isempty(entries)
+            statusPath = fullfile(cfg.outRoot, 'RUN_STATUS.txt');
+            successPath = fullfile(cfg.outRoot, 'SUCCESS');
+            resumable = false;
+            if cfg.resumeIncompleteRun && ~exist(successPath,'file') && exist(statusPath,'file')
+                statusText = strtrim(fileread(statusPath));
+                resumable = any(strcmpi(statusText, {'STARTED','FAILED'}));
+            end
+            if ~resumable
+                error('v4:NonemptyOutput', ...
+                    ['Output directory is not an incomplete resumable run. ' ...
+                     'Choose a new runLabel: %s'], cfg.outRoot);
+            end
+        end
+    end
+end
+
+function preflight_environment_v6(cfg)
+    requiredFunctions = {'pop_loadset','eeg_checkset','pop_resample', ...
+        'pop_eegfiltnew','pop_reref','pop_select','pop_interp','topoplot','readlocs', ...
+        'butter','freqz','filtfilt','hilbert','pwelch','tinv','exportgraphics', ...
+        'zp2sos','sosfilt'};
+
+    if cfg.doICA
+        requiredFunctions = [requiredFunctions, {'pop_runica','pop_subcomp','iclabel'}];
+    end
+
+    missing = strings(0,1);
+
+    for i = 1:numel(requiredFunctions)
+        if isempty(which(requiredFunctions{i}))
+            missing(end+1,1) = string(requiredFunctions{i}); %#ok<AGROW>
+        end
+    end
+
+    if ~isempty(missing)
+        error('v4:MissingDependency', ...
+            'Missing required functions: %s', ...
+            strjoin(missing, ', '));
+    end
+
+    if isMATLABReleaseOlderThan("R2022b")
+        error('v4:MATLABVersion', ...
+            'MATLAB R2022b or later is required.');
+    end
+
+    if ~exist(cfg.montageFile,'file')
+        error('v4:MissingMontageFile', ...
+            'Official montage file is missing: %s', ...
+            cfg.montageFile);
+    end
+end
+
+
+
+function run_self_tests_v6(cfg)
+    fprintf('Running v6.4 synthetic self-tests...\n');
+    fs = cfg.targetFs;
+    seconds = 12;
+    t = (0:(seconds*fs-1))' / fs;
+    testHz = [6 10 18 35];
+    expected = {'theta','alpha','beta_low','gamma'};
+    for i = 1:numel(testHz)
+        x = sin(2*pi*testHz(i)*t);
+        score = nan(numel(cfg.predBandNames),1);
+        for b = 1:numel(cfg.predBandNames)
+            [fb,fa] = design_validated_band_filter(cfg.predBands(b,:), fs, cfg.bandFilterOrder);
+            y = filtfilt(fb,fa,x);
+            score(b) = sqrt(mean(y.^2));
+        end
+        [~,winner] = max(score);
+        if ~strcmp(cfg.predBandNames{winner}, expected{i})
+            error('v4:SelfTestBand', '%g-Hz test was assigned to %s, expected %s.', ...
+                testHz(i), cfg.predBandNames{winner}, expected{i});
+        end
+    end
+
+    spike = zeros(2, 10*fs);
+    spike(1,5*fs) = 10*cfg.artifactAbsUv;
+    mask = make_artifact_mask(spike, cfg, fs);
+    if mask(5*fs) || mean(~mask) < cfg.artifactExpandSec/(10)
+        error('v4:SelfTestArtifactMask', 'Injected spike was not expanded and rejected.');
+    end
+
+    % A future artifact must never invalidate earlier samples in the causal mask.
+    futureSpike = zeros(1, 10*fs);
+    spikeAt = 5*fs;
+    futureSpike(spikeAt) = 10*cfg.artifactAbsUv;
+    causalMaskTest = make_causal_artifact_mask(futureSpike, cfg, fs);
+    if ~all(causalMaskTest(1:(spikeAt-1))) || causalMaskTest(spikeAt)
+        error('v6:SelfTestCausalArtifactMask', ...
+            'Future artifact contaminated pre-artifact eligibility in causal mask.');
+    end
+
+    finiteTest = zeros(2, 10*fs);
+    finiteTest(1, round(4.2*fs)) = NaN;
+    [~,~,finiteGood] = causal_qc_bandpass(finiteTest, cfg, fs, 'self-test nonfinite');
+    if finiteGood(round(4.2*fs))
+        error('v4:SelfTestNonfiniteMask', 'Raw nonfinite sample was not preserved as invalid.');
+    end
+
+    clean = sin(2*pi*3*t)';
+    contaminated = clean;
+    contaminated(round(numel(clean)/2)) = 1000;
+    spikeMask = make_artifact_mask(contaminated, cfg, fs);
+    repaired = interpolate_masked_samples(contaminated, spikeMask, 'self-test spike');
+    [fb,fa] = design_validated_band_filter([1 4], fs, cfg.bandFilterOrder);
+    cleanFiltered = filtfilt(fb,fa,clean')';
+    repairedFiltered = filtfilt(fb,fa,repaired')';
+    outside = spikeMask(:)';
+    if sqrt(mean((cleanFiltered(outside)-repairedFiltered(outside)).^2)) > 0.10
+        error('v4:SelfTestFilterRinging', ...
+            'Bounded raw interpolation did not control synthetic delta-band ringing.');
+    end
+
+    gapCurve = sin(2*pi*(0:199)'/200);
+    gapCurve(51:60) = nan; % 5%% masked gap
+    [gapAuc,gapSlope] = finite_curve_metrics(gapCurve, (0:199)'/fs, 0.90, 'self-test gap');
+    if ~isfinite(gapAuc) || ~isfinite(gapSlope)
+        error('v4:SelfTestMaskedCurve', 'Masked-gap feature summaries are nonfinite.');
+    end
+
+    groups = repelem((1:10)',5);
+    foldA = grouped_folds(groups,5,cfg.masterSeed+99);
+    foldB = grouped_folds(groups,5,cfg.masterSeed+99);
+    if ~isequal(foldA,foldB)
+        error('v4:SelfTestRNG', 'Grouped folds are not deterministic.');
+    end
+    for g = 1:10
+        if numel(unique(foldA(groups == g))) ~= 1
+            error('v4:SelfTestGrouping', 'One subject spans inner folds.');
+        end
+    end
+
+    % Official BIDS block labels are block TYPES, not unique physical blocks.
+    % Reconstruct physical blocks from trial-number resets for sensitivity only.
+    trialTest = [1:10, 1:10]';
+    typeTest = [ones(10,1); ones(10,1)];
+    idsTest = reconstruct_task_protocol_blocks(trialTest, typeTest, ...
+        'sub-test', "production", cfg);
+    if ~isequal(idsTest, [ones(10,1); 2*ones(10,1)])
+        error('v64:SelfTestProtocolBlockReconstruction', ...
+            'Protocol blocks were not reconstructed from official trial-number resets.');
+    end
+
+    % Primary negative-control grouping must follow the original condition sequence,
+    % not strict physical blocks. Use two conditions and repeated physical blocks.
+    nShiftTest = 12;
+    TS = table();
+    TS.subject = repmat("sub-test", nShiftTest, 1);
+    TS.task = repmat("production", nShiftTest,1);
+    TS.conditionCode = [ones(6,1); 2*ones(6,1)];
+    TS.block = TS.conditionCode;
+    TS.conditionTrialSeq = [repmat((1:6)',2,1)];
+    TS.protocolBlock = [ones(3,1);2*ones(3,1);3*ones(3,1);4*ones(3,1)];
+    TS.withinBlockSeq = repmat((1:3)',4,1);
+    TS.causalPrestartWindowValid = true(nShiftTest,1);
+    TS.causalFullWindowValid = true(nShiftTest,1);
+    TS.currentBehaviorValid = true(nShiftTest,1);
+    TS.prevBehaviorValid = true(nShiftTest,1);
+    TS.nextBehaviorValid = true(nShiftTest,1);
+    TS.relError = linspace(-0.2,0.2,nShiftTest)';
+    TS.prevRelError = linspace(-0.1,0.1,nShiftTest)';
+    TS.nextRelError = linspace(-0.15,0.25,nShiftTest)';
+    TS.prevFeedbackSigned = repmat([-1;0;1],4,1);
+    TS.feedbackSigned = repmat([0;1;-1],4,1);
+    primaryBands = string(cfg.predBandNames(2:end));
+    for bb = 1:numel(primaryBands)
+        TS.("prestart_" + primaryBands(bb) + "_power") = (1:nShiftTest)' + 10*bb;
+        TS.("causalFull_" + primaryBands(bb) + "_power") = (1:nShiftTest)' + 100 + 10*bb;
+    end
+    [TS2, shiftQC] = shift_eeg_features_within_subject_condition(TS, cfg.masterSeed + 12345, cfg);
+    if shiftQC.nChangedPrestartRows == 0 || shiftQC.nChangedFullRows == 0
+        error('v64:SelfTestNegativeShuffle', 'Synthetic condition-sequence EEG shuffle was a no-op.');
+    end
+    % Values must remain within their original official condition code.
+    preName = char("prestart_" + primaryBands(1) + "_power");
+    for cc = 1:2
+        idxc = find(TS.conditionCode == cc);
+        if ~isequal(sort(TS2.(preName)(idxc)), sort(TS.(preName)(idxc)))
+            error('v64:SelfTestConditionShuffle', ...
+                'Primary EEG null shuffle crossed an official condition-code boundary.');
+        end
+    end
+
+    % Alignment must be independent of feedback labels. Deliberately opposite
+    % feedback values must not change duration/order pairing, but must be reported
+    % by the independent post-alignment QC.
+    Etest = table((1:4)', ones(4,1), [0.81;1.64;2.49;0.82], [1;-1;1;-1], ...
+        'VariableNames', {'eegProdSeq','tempo','producedDurationEEG','feedbackSignedEEG'});
+    Btest = table((1:4)', ones(4,1), [0.80;1.65;2.50;0.80], [-1;1;-1;1], ...
+        'VariableNames', {'prodSeq','tempo','producedDuration','feedbackSigned'});
+    [EaTest, BaTest, qaTest] = align_eeg_behavior_trials(Etest, Btest, cfg);
+    if height(EaTest) ~= 4 || height(BaTest) ~= 4 || qaTest.nFeedbackKnown ~= 4 || ...
+            qaTest.nFeedbackDisagree ~= 4 || abs(qaTest.feedbackDisagreementRate - 1) > 1e-12
+        error('v62:SelfTestFeedbackIndependentAlignment', ...
+            'Feedback labels influenced alignment or independent feedback QC failed.');
+    end
+
+    % A post-window perturbation must not alter trial-wise causal features.
+    nativeCausalFs = 1000;
+    nCausal = 75*nativeCausalFs;
+    st = 65*fs;
+    rp = st + round(0.9*fs);
+    stNative = round(((st-1)/fs)*nativeCausalFs) + 1;
+    rpNative = round(((rp-1)/fs)*nativeCausalFs) + 1;
+    causalA = repmat(sin(2*pi*10*(0:nCausal-1)/nativeCausalFs), 2, 1);
+    causalB = causalA;
+    fixedEndNative = stNative + round(cfg.fixedEarlyWinSec(2)*nativeCausalFs);
+    causalB(:,fixedEndNative + 1:end) = causalB(:,fixedEndNative + 1:end) + 1e4;
