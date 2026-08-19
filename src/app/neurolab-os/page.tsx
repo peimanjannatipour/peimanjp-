@@ -12,6 +12,29 @@ export const metadata: Metadata = createPageMetadata({
   path: "/neurolab-os",
 });
 
+const capabilityCards = [
+  {
+    label: "Execution model",
+    value: "Local-first",
+    text: "Electron/React desktop interface connected to a local Python/FastAPI scientific engine.",
+  },
+  {
+    label: "Model registry",
+    value: "11 families",
+    text: "Computational model families are exposed through scientist-visible model specifications rather than hidden behind a single opaque workflow.",
+  },
+  {
+    label: "Perturbation layer",
+    value: "8 operations",
+    text: "Explicitly in silico model-space perturbation operations support structured simulation and counterfactual exploration.",
+  },
+  {
+    label: "Scientific control",
+    value: "QC + provenance",
+    text: "Quality-control decisions, seeded fitting, and report generation are connected to a traceable execution path.",
+  },
+];
+
 export default function NeuroLabPage() {
   const data = seoData.neurolabOS;
 
@@ -50,6 +73,16 @@ export default function NeuroLabPage() {
           </div>
         </div>
 
+        <section className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-label="NeuroLab OS capabilities">
+          {capabilityCards.map((card) => (
+            <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6" key={card.label}>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{card.label}</p>
+              <p className="mt-2 text-2xl font-extrabold text-white">{card.value}</p>
+              <p className="mt-3 text-sm leading-7 text-slate-300">{card.text}</p>
+            </article>
+          ))}
+        </section>
+
         <section className="mt-16 rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-2xl" aria-labelledby="neurolab-workflow-title">
           <h2 className="mb-6 text-xl font-bold text-white" id="neurolab-workflow-title">Workflow architecture and execution pipeline</h2>
           <figure>
@@ -60,15 +93,21 @@ export default function NeuroLabPage() {
           </figure>
         </section>
 
-        <section className="mt-16 grid gap-8 md:grid-cols-2" aria-label="Illustrative scientific software contexts">
-          <figure className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
-            <Image alt="Scientific data-analysis workspace" className="h-64 w-full object-cover" height={700} src="/images/stock-data-dashboard.jpg" width={900} />
-            <figcaption className="border-t border-slate-800 p-4 text-xs leading-6 text-slate-400">Illustrative computational-analysis context for local model fitting and provenance review.</figcaption>
-          </figure>
-          <figure className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
-            <Image alt="Biomedical neuroscience research environment" className="h-64 w-full object-cover" height={700} src="/images/stock-neuroscience-research.jpg" width={900} />
-            <figcaption className="border-t border-slate-800 p-4 text-xs leading-6 text-slate-400">Illustrative neuroscience context; not a screenshot of NeuroLab OS or a project dataset.</figcaption>
-          </figure>
+        <section className="mt-16 grid gap-6 lg:grid-cols-3" aria-labelledby="neurolab-science-title">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Scientific design</p>
+            <h2 className="mt-2 text-3xl font-bold text-white" id="neurolab-science-title">Why the workflow is structured this way</h2>
+          </div>
+          <div className="grid gap-5 lg:col-span-2 md:grid-cols-2">
+            <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+              <h3 className="text-lg font-semibold text-white">Researcher-visible model meaning</h3>
+              <p className="mt-3 text-sm leading-7 text-slate-300">Model specifications remain explicit enough for the researcher to understand what is being fitted or simulated, reducing the distance between scientific interpretation and execution.</p>
+            </article>
+            <article className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+              <h3 className="text-lg font-semibold text-white">Executable lineage</h3>
+              <p className="mt-3 text-sm leading-7 text-slate-300">The same workflow records quality control, seeded fitting, simulation, perturbation, and reporting so that the path from input to output is easier to inspect and reproduce.</p>
+            </article>
+          </div>
         </section>
       </div>
     </main>
