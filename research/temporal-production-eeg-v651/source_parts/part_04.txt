@@ -1,0 +1,300 @@
+    EEG = eeg_checkset(EEG);
+
+    if any(~isfinite(double(EEG.data(:))))
+        error('v4:NonfiniteAfterFilter', '%s contains nonfinite samples after filtering.', subID);
+    end
+
+    badIdx = detect_bad_scalp_channels(double(EEG.data), cfg);
+    postBadLabels = string({EEG.chanlocs(badIdx).labels});
+    badLabels = unique([preliminaryBadLabels(:); postBadLabels(:)], 'stable');
+    if numel(badLabels) > cfg.maxBadScalpChannels
+        error('v4:TooManyBadChannels', '%s has %d bad scalp channels.', subID, numel(badLabels));
+    end
+    prepQC.badChannelCount = numel(badLabels);
+    prepQC.badChannelLabels = strjoin(badLabels, ';');
+    if ~isempty(badIdx)
+        EEG = pop_select(EEG, 'nochannel', badIdx);
+        EEGcausal = pop_select(EEGcausal, 'nochannel', badIdx);
+    end
+
+    if cfg.doICA
+        [EEG, rejectedIC, icaModel] = run_iclabel_cleaning(EEG, rawGoodMask, cfg, subID);
+        EEGcausal = apply_ica_rejection_model(EEGcausal, icaModel, rejectedIC, subID);
+        prepQC.rejectedICCount = numel(rejectedIC);
+        prepQC.rejectedICLabels = strjoin("IC" + string(rejectedIC(:)'), ';');
+    end
+
+    if ~isempty(badLabels)
+        EEG = pop_interp(EEG, scalpTemplate, 'spherical');
+        EEGcausal = pop_interp(EEGcausal, scalpTemplate, 'spherical');
+    end
+
+    % Reorder canonically after interpolation and apply the prespecified
+    % sensitivity reference only after all auxiliary channels are absent.
+    labelsNow = get_chan_labels(EEG);
+    [present, scalpIdx] = ismember(lower(string(cfg.scalpLabels)), lower(labelsNow));
+    if ~all(present)
+        error('v4:InterpolationFailure', '%s did not restore the scalp montage.', subID);
+    end
+    EEG = pop_select(EEG, 'channel', scalpIdx);
+    causalLabels = get_chan_labels(EEGcausal);
+    [causalPresent, causalIdx] = ismember(lower(string(cfg.scalpLabels)), lower(causalLabels));
+    if ~all(causalPresent)
+        error('v4:CausalMontageFailure', '%s causal branch did not restore the scalp montage.', subID);
+    end
+    EEGcausal = pop_select(EEGcausal, 'channel', causalIdx);
+    if strcmpi(cfg.referenceMode, 'scalp_average')
+        EEG = pop_reref(EEG, []);
+        EEGcausal = pop_reref(EEGcausal, []);
+    elseif ~strcmpi(cfg.referenceMode, 'linked_mastoids')
+        error('v4:ReferenceMode', 'Unknown referenceMode: %s', cfg.referenceMode);
+    end
+    EEG = eeg_checkset(EEG);
+    EEGcausal = eeg_checkset(EEGcausal);
+    validate_scalp_layout(EEG.chanlocs, string(cfg.scalpLabels), subID);
+    validate_scalp_layout(EEGcausal.chanlocs, string(cfg.scalpLabels), ...
+        char(string(subID) + " causal"));
+    causalData = double(EEGcausal.data);
+    if size(causalData,1) ~= size(EEG.data,1) || any(~isfinite(causalData(:))) || ...
+            abs(EEGcausal.srate - causalFs) > 1e-9
+        error('v4:CausalBranchFailure', '%s causal branch is nonfinite or dimensionally inconsistent.', subID);
+    end
+end
+
+function EEG = apply_official_layout(EEG, cfg, subID)
+    template = readlocs(cfg.montageFile);
+    templateLabels = strtrim(string({template.labels}));
+    rawLabels = strtrim(get_chan_labels(EEG));
+    [present, order] = ismember(lower(rawLabels), lower(templateLabels));
+    if ~all(present)
+        error('v4:UnknownRawChannel', '%s contains channels absent from the official layout: %s', ...
+            subID, strjoin(rawLabels(~present), ', '));
+    end
+    EEG.chanlocs = template(order);
+    EEG = eeg_checkset(EEG);
+end
+
+function afzLoc = official_afz_chanloc(cfg)
+    template = readlocs(cfg.montageFile);
+    labels = strtrim(string({template.labels}));
+    idx = find(strcmpi(labels,'AFz'));
+    if numel(idx) ~= 1
+        error('v4:MontageAFzContract', 'Official montage must contain exactly one AFz row.');
+    end
+    afzLoc = template(idx);
+end
+
+function EEG = linked_mastoid_rereference(EEG, cfg, subID)
+    labels = get_chan_labels(EEG);
+    [present, idx] = ismember(lower(string(cfg.mastoidLabels)), lower(labels));
+    if ~all(present) || numel(unique(idx)) ~= 2
+        error('v4:LinkedMastoidContract', '%s cannot resolve LM/RM for rereferencing.', subID);
+    end
+    referenceSignal = mean(double(EEG.data(idx,:)),1);
+    EEG.data = cast(double(EEG.data) - referenceSignal, 'like', EEG.data);
+    EEG.ref = 'LM_RM';
+    EEG = eeg_checkset(EEG);
+    afzIdx = find(strcmpi(get_chan_labels(EEG),'AFz'));
+    if numel(afzIdx) ~= 1 || std(double(EEG.data(afzIdx,:))) <= 0
+        error('v4:AFzRecoveryFailure', '%s AFz reconstruction after rereferencing failed.', subID);
+    end
+end
+
+function validate_afz_placeholder(EEG, afzIdx, subID, cfg)
+    x = double(EEG.data(afzIdx,:));
+    if any(~isfinite(x)) || std(x) > cfg.afzPlaceholderMaxStdUv
+        error('v4:UnexpectedAFzData', ...
+            '%s AFz is not the expected zero-valued BIDS reference placeholder.', subID);
+    end
+    loc = EEG.chanlocs(afzIdx);
+    if ~isfield(loc,'theta') || ~isfield(loc,'radius') || ...
+            isempty(loc.theta) || isempty(loc.radius) || ...
+            abs(double(loc.theta)) > cfg.afzThetaToleranceDeg || ...
+            abs(double(loc.radius) - cfg.afzRadius) > cfg.afzCoordinateTolerance
+        error('v4:InvalidAFzLocation', ...
+            '%s AFz location does not match official neuroscan37.locs.', subID);
+    end
+end
+
+function [stdUv, stepFraction] = validate_mastoid_channels(EEGqc, EEGraw, subID, cfg)
+    labels = get_chan_labels(EEGqc);
+    rawLabels = get_chan_labels(EEGraw);
+    [present, mastoidIdx] = ismember(lower(string(cfg.mastoidLabels)), lower(labels));
+    [rawPresent, rawMastoidIdx] = ismember(lower(string(cfg.mastoidLabels)), lower(rawLabels));
+    if ~all(present) || ~all(rawPresent) || numel(unique(mastoidIdx)) ~= 2 || ...
+            numel(unique(rawMastoidIdx)) ~= 2
+        error('v4:MissingMastoids', '%s does not contain distinct LM and RM channels.', subID);
+    end
+    recordedScalp = setdiff(string(cfg.scalpLabels), "AFz", 'stable');
+    [scalpPresent, scalpIdx] = ismember(lower(recordedScalp), lower(labels));
+    if ~all(scalpPresent)
+        error('v4:MastoidQCScalpContract', '%s lacks recorded scalp channels for mastoid QC.', subID);
+    end
+    scalpStd = std(double(EEGqc.data(scalpIdx,:)),0,2,'omitnan');
+    referenceScale = median(scalpStd(isfinite(scalpStd) & scalpStd > 0));
+    if ~isfinite(referenceScale) || referenceScale <= 0
+        error('v4:InvalidFilteredScalpScale', '%s has invalid filtered scalp variance.', subID);
+    end
+
+    stdUv = nan(1,2);
+    stepFraction = nan(1,2);
+    for i = 1:2
+        x = double(EEGqc.data(mastoidIdx(i),:));
+        finiteFraction = mean(isfinite(x));
+        if finiteFraction < 0.999
+            error('v4:NonfiniteMastoid', '%s %s has %.2f%% finite samples.', ...
+                subID, cfg.mastoidLabels{i}, 100*finiteFraction);
+        end
+        x = x - median(x,'omitnan');
+        stdUv(i) = std(x,0,'omitnan');
+        ratio = stdUv(i) / referenceScale;
+        stepFraction(i) = mean(abs(diff(x)) > cfg.artifactStepUv);
+        extremeFraction = mean(abs(x) > cfg.artifactAbsUv);
+
+        rawx = double(EEGraw.data(rawMastoidIdx(i),:));
+        rawFiniteFraction = mean(isfinite(rawx));
+        if rawFiniteFraction < 0.999
+            error('v4:NonfiniteRawMastoid', '%s %s raw channel has %.2f%% finite samples.', ...
+                subID, cfg.mastoidLabels{i}, 100*rawFiniteFraction);
+        end
+        rawx = rawx - median(rawx,'omitnan');
+        lineRatio = estimate_line_noise_ratio(rawx, EEGraw.srate);
+
+        % Structural mastoid validity remains a hard gate. Borderline transient
+        % burden and raw 50-Hz line-noise are QC warnings here; existing
+        % downstream sample-level artifact, clean-data, ICA, bad-channel, and
+        % trial-sufficiency gates remain active.
+        if ~isfinite(ratio) || ratio < cfg.mastoidStdRatioRange(1) || ...
+                ratio > cfg.mastoidStdRatioRange(2) || ~isfinite(lineRatio)
+            error('v4:BadMastoidStructural', ...
+                '%s %s failed structural mastoid QC (std ratio %.3f, raw line ratio %.2f).', ...
+                subID, cfg.mastoidLabels{i}, ratio, lineRatio);
+        end
+
+        softReasons = strings(0,1);
+        if stepFraction(i) > cfg.mastoidMaxStepFraction
+            softReasons(end+1,1) = sprintf('step %.4f > %.4f', ...
+                stepFraction(i), cfg.mastoidMaxStepFraction); %#ok<AGROW>
+        end
+        if extremeFraction > cfg.mastoidMaxExtremeFraction
+            softReasons(end+1,1) = sprintf('extreme %.4f > %.4f', ...
+                extremeFraction, cfg.mastoidMaxExtremeFraction); %#ok<AGROW>
+        end
+        if lineRatio > cfg.mastoidMaxLineNoiseRatio
+            softReasons(end+1,1) = sprintf('raw line ratio %.2f > %.2f', ...
+                lineRatio, cfg.mastoidMaxLineNoiseRatio); %#ok<AGROW>
+        end
+        if ~isempty(softReasons)
+            warning('v4:MastoidQCFlag', ...
+                '%s %s retained with mastoid QC flag(s): %s. Downstream clean-data gates remain active.', ...
+                subID, cfg.mastoidLabels{i}, strjoin(softReasons, '; '));
+        end
+    end
+end
+
+function ratio = estimate_line_noise_ratio(x, fs)
+    nwin = min(numel(x), max(256, round(4*fs)));
+    noverlap = floor(nwin/2);
+    nfft = max(512, 2^nextpow2(nwin));
+    [pxx,f] = pwelch(detrend(x(:)), hamming(nwin), noverlap, nfft, fs);
+    line = f >= 49 & f <= 51;
+    neighbour = (f >= 45 & f <= 48) | (f >= 52 & f <= 55);
+    if ~any(line) || ~any(neighbour)
+        ratio = nan;
+        return;
+    end
+    ratio = mean(pxx(line)) / max(mean(pxx(neighbour)), realmin('double'));
+end
+
+function repaired = interpolate_masked_samples(data, goodMask, context)
+    data = double(data);
+    goodMask = logical(goodMask(:)');
+    if size(data,2) ~= numel(goodMask)
+        error('v4:InterpolationMaskLength', '%s mask length does not match data.', context);
+    end
+    if mean(goodMask) < 0.50
+        error('v4:TooFewSamplesForInterpolation', ...
+            '%s has fewer than 50%% clean samples for bounded interpolation.', context);
+    end
+    repaired = data;
+    query = 1:size(data,2);
+    for ch = 1:size(data,1)
+        usable = goodMask & isfinite(data(ch,:));
+        idx = find(usable);
+        if numel(idx) < 2
+            error('v4:InterpolationFailure', '%s channel %d has fewer than two clean samples.', context, ch);
+        end
+        y = interp1(idx, data(ch,idx), query, 'linear', nan);
+        y(1:(idx(1)-1)) = data(ch,idx(1));
+        y((idx(end)+1):end) = data(ch,idx(end));
+        if any(~isfinite(y))
+            error('v4:InterpolationFailure', '%s channel %d interpolation is nonfinite.', context, ch);
+        end
+        repaired(ch,:) = y;
+    end
+end
+
+function repaired = repair_masked_samples_causal(data, goodMask, context)
+    data = double(data);
+    goodMask = logical(goodMask(:)');
+    if size(data,2) ~= numel(goodMask)
+        error('v4:CausalRepairMaskLength', '%s causal mask length does not match data.', context);
+    end
+    if mean(goodMask) < 0.50
+        error('v4:TooFewSamplesForCausalRepair', ...
+            '%s has fewer than 50%% clean samples for causal repair.', context);
+    end
+    repaired = zeros(size(data));
+    for ch = 1:size(data,1)
+        last = 0;
+        havePast = false;
+        for t = 1:size(data,2)
+            if goodMask(t) && isfinite(data(ch,t))
+                last = data(ch,t);
+                havePast = true;
+            end
+            if havePast
+                repaired(ch,t) = last;
+            else
+                % A fixed zero initialization contains no future sample.
+                repaired(ch,t) = 0;
+            end
+        end
+    end
+    if any(~isfinite(repaired(:)))
+        error('v4:CausalRepairFailure', '%s causal repair produced nonfinite samples.', context);
+    end
+end
+
+function targetGood = resample_good_mask_conservative(nativeGood, nativeFs, targetFs, nTarget)
+    nativeGood = logical(nativeGood(:)');
+    if nativeFs <= 0 || targetFs <= 0 || nTarget < 1
+        error('v6:MaskResampleConfiguration', 'Invalid sampling rate or target mask length.');
+    end
+
+    % A target sample is good only if every native sample in its temporal bin
+    % is good. This prevents brief native-rate artifacts from disappearing when
+    % the mask is downsampled.
+    bad = ~nativeGood;
+    cBad = [0, cumsum(double(bad))];
+    t = ((0:nTarget-1)' / targetFs);
+    halfBin = 0.5 / targetFs;
+    nativeEndTime = (numel(nativeGood)-1) / nativeFs;
+    lo = floor(max(0, t-halfBin) * nativeFs) + 1;
+    hi = ceil(min(nativeEndTime, t+halfBin) * nativeFs) + 1;
+    lo = min(max(lo,1), numel(nativeGood));
+    hi = min(max(hi,lo), numel(nativeGood));
+    hiCum = cBad(hi+1); hiCum = hiCum(:);
+    loCum = cBad(lo); loCum = loCum(:);
+    nBad = hiCum - loCum;
+    targetGood = (nBad == 0);
+    targetGood = logical(targetGood(:));
+    if numel(targetGood) ~= nTarget
+        error('v6:MaskResampleFailure', 'Resampled artifact mask has the wrong length.');
+    end
+end
+
+function badIdx = detect_bad_scalp_channels(data, cfg)
+    missingFraction = mean(~isfinite(data), 2);
+    channelStd = std(data, 0, 2, 'omitnan');
+    logVar = log(var(data, 0, 2, 'omitnan') + realmin('double'));
