@@ -35,6 +35,24 @@ const capabilityCards = [
   },
 ];
 
+const systemVisuals = [
+  {
+    src: "/assets/figures/neurolab-architecture.svg",
+    title: "System architecture",
+    alt: "NeuroLab OS architecture linking the desktop shell, FastAPI engine, ingestion, quality control, model execution, in silico intervention, provenance, and reporting.",
+  },
+  {
+    src: "/assets/figures/neurolab-workflow-detail.svg",
+    title: "Execution workflow",
+    alt: "NeuroLab OS execution workflow from project ingest and metadata through quality control, model review, seeded fitting, optional intervention, and report generation.",
+  },
+  {
+    src: "/assets/figures/neurolab-model-inventory.svg",
+    title: "Executable model inventory",
+    alt: "NeuroLab OS executable model inventory grouped into population, oscillator, state-space, stochastic, and ROI BOLD-oriented model families.",
+  },
+];
+
 export default function NeuroLabPage() {
   const data = seoData.neurolabOS;
 
@@ -91,6 +109,24 @@ export default function NeuroLabPage() {
             </div>
             <figcaption className="mt-4 border-t border-slate-800 pt-4 text-xs font-medium leading-6 text-slate-400">{data.figureCaption}</figcaption>
           </figure>
+        </section>
+
+        <section className="mt-16" aria-labelledby="neurolab-system-visuals-title">
+          <div className="max-w-4xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Project-specific technical visuals</p>
+            <h2 className="mt-2 text-3xl font-bold text-white" id="neurolab-system-visuals-title">Architecture, workflow, and model registry</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-300">These diagrams are derived from the project&apos;s own architecture, workflow, and model-inventory specifications rather than generic stock imagery.</p>
+          </div>
+          <div className="mt-8 grid gap-6">
+            {systemVisuals.map((visual) => (
+              <figure className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5" key={visual.src}>
+                <div className="overflow-x-auto rounded-xl bg-white p-3">
+                  <Image alt={visual.alt} className="h-auto min-w-[760px] w-full object-contain" height={520} src={visual.src} unoptimized width={1500} />
+                </div>
+                <figcaption className="mt-4 text-sm font-semibold text-slate-200">{visual.title}</figcaption>
+              </figure>
+            ))}
+          </div>
         </section>
 
         <section className="mt-16 grid gap-6 lg:grid-cols-3" aria-labelledby="neurolab-science-title">
