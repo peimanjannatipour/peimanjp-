@@ -1,3 +1,4 @@
+
 plot_behavior_qc(behMaster, cfg);
 
 %% ===================== SUBJECT LOOP: FEATURES + TOPO + PSD =====================
@@ -297,3 +298,4 @@ function validate_config_v6(cfg)
     end
     if cfg.targetFs <= 2*max(cfg.predBands(:))
         error('v4:Nyquist', 'targetFs must exceed twice the highest band edge.');
+    end
