@@ -1,0 +1,300 @@
+            Trials.baselineGoodFraction(tr) >= cfg.minBaselineGoodFraction && ...
+            Trials.intervalGoodFraction(tr) >= cfg.minTrialGoodFraction;
+    end
+    nBeforeEEGQC = height(Trials);
+    nDescriptiveQualityPass = sum(Trials.eegQualityPass);
+
+    % Do NOT globally drop trials by current-interval EEG quality. Current-error
+    % prediction must remain eligible using pre-start EEG only; next-error and
+    % descriptive analyses use their own endpoint-specific quality gates below.
+    errorMetric = Trials.absRelError;
+    errorMetric(~Trials.currentBehaviorValid) = NaN;
+    % True correction gain: positive = successor moved closer to target;
+    % negative = successor moved farther from target. Do not confuse this with
+    % the original-paper signed adjustment variable paperNextAdjustmentSec.
+    correctionMetric = Trials.correctionGain;
+    correctionMetric(~(Trials.currentBehaviorValid & Trials.nextBehaviorValid)) = NaN;
+    Trials.errorCondition = assign_high_low_stratified(errorMetric, Trials.tempo, cfg.splitMode);
+    Trials.correctionGainCondition = assign_high_low_stratified(correctionMetric, Trials.tempo, cfg.splitMode);
+    strictCorrectionMetric = Trials.strictCorrectionGain;
+    strictCorrectionMetric(~(Trials.currentBehaviorValid & Trials.strictNextBehaviorValid)) = NaN;
+    Trials.correctionGainConditionStrict = assign_high_low_stratified(strictCorrectionMetric, Trials.tempo, cfg.splitMode);
+
+    fprintf('%s: computing scalp-only continuous envelopes...\n', subID);
+    env = compute_all_channel_envelopes(spectralData, fs, cfg);
+    env = apply_good_mask_to_envelopes(env, goodMask);
+    [causalPrestartDb, Trials.causalPrestartWindowValid] = ...
+        compute_trialwise_causal_prestart_bandpower( ...
+            causalData(roiIdx,:), Trials, causalGoodMask, causalFs, fs, cfg);
+    [causalFullDb, Trials.causalFullWindowValid] = ...
+        compute_trialwise_causal_bandpower( ...
+            causalData(roiIdx,:), Trials, causalGoodMask, causalFs, fs, cfg, 'full');
+
+    if max(sum(Trials.causalPrestartWindowValid), sum(Trials.causalFullWindowValid)) < cfg.minTrialsPerSubject
+        warning('v61:PredictionEndpointSparse', ...
+            ['%s has fewer than %d usable trials for both causal prediction endpoints. ' ...
+             'The subject remains eligible for independent descriptive/topographic endpoints.'], ...
+            subID, cfg.minTrialsPerSubject);
+    end
+
+    % Predictive ROI features
+    for tr = 1:height(Trials)
+        st = Trials.startSample(tr);
+        rp = Trials.respSample(tr);
+
+        if st < 1 || rp > env.nSamples || rp <= st
+            continue;
+        end
+
+        durationSec = (rp - st) / fs;
+        if ~Trials.currentBehaviorValid(tr) || ...
+                ~valid_production_duration(durationSec, Trials.tempo(tr), cfg)
+            continue;
+        end
+
+        feat = extract_prediction_features(env, causalPrestartDb(tr,:), causalFullDb(tr,:), ...
+            roiIdx, st, rp, Trials.causalPrestartWindowValid(tr), ...
+            Trials.causalFullWindowValid(tr), cfg);
+
+        row = height(Tfeat) + 1;
+        vars = Trials.Properties.VariableNames;
+        for v = 1:numel(vars)
+            Tfeat.(vars{v})(row,1) = Trials.(vars{v})(tr);
+        end
+
+        Tfeat.intervalGoodSamplePct(row,1) = 100 * Trials.intervalGoodFraction(tr);
+        Tfeat.baselineGoodSamplePct(row,1) = 100 * Trials.baselineGoodFraction(tr);
+
+        names = fieldnames(feat);
+        for f = 1:numel(names)
+            if ~isscalar(feat.(names{f}))
+                error('v4:NonScalarTrialFeature', ...
+                    '%s trial %d feature %s is not scalar.', subID, tr, names{f});
+            end
+            Tfeat.(names{f})(row,1) = feat.(names{f});
+        end
+    end
+
+    % Descriptive/topographic analyses may depend on current-interval quality,
+    % unlike the prospective current-error predictor.
+    TrialsDescriptive = Trials(Trials.eegQualityPass & Trials.currentBehaviorValid, :);
+
+    % Topomap table
+    Ttopo = extract_subject_topomap_table_causal( ...
+        subID, causalData, causalGoodMask, causalFs, fs, TrialsDescriptive, labels, cfg);
+
+    % PSD table
+    Tpsd = extract_subject_psd_table(subID, spectralData, TrialsDescriptive, goodMask, fs, cfg);
+
+    QC.subject = string(subID);
+    QC.originalFs = originalFs;
+    QC.finalFs = fs;
+    QC.causalFs = causalFs;
+    QC.nChannels = EEG.nbchan;
+    QC.nRoiChannels = numel(roiIdx);
+    QC.nEvents = numel(EEG.event);
+    QC.nProdTrialsEEG = height(prodTrials);
+    QC.nAlignedTrials = height(Trials);
+    QC.nAlignedBeforeMismatch = nAlignedBeforeMismatch;
+    QC.nTrialsBeforeEEGQC = nBeforeEEGQC;
+    QC.nTrialsRejectedEEGQC = nBeforeEEGQC - nDescriptiveQualityPass;
+    QC.nDescriptiveQualityPassTrials = nDescriptiveQualityPass;
+    QC.nFeatureTrials = height(Tfeat);
+    QC.nCurrentBehaviorValid = sum(Trials.currentBehaviorValid);
+    QC.nPrevBehaviorValid = sum(Trials.prevBehaviorValid);
+    QC.nNextBehaviorValid = sum(Trials.nextBehaviorValid);
+    QC.nCausalPrestartWindowTrials = sum(Trials.causalPrestartWindowValid);
+    QC.nCausalFullWindowTrials = sum(Trials.causalFullWindowValid);
+    QC.behaviorAlignmentCoverage = behaviorAlignmentCoverage;
+    QC.eegAlignmentCoverage = eegAlignmentCoverage;
+    QC.nFeedbackKnown = alignQC.nFeedbackKnown;
+    QC.nBehaviorFeedbackKnown = nBehaviorFeedbackKnown;
+    QC.feedbackValidationStatus = string(feedbackValidationStatus);
+    QC.nFeedbackAgree = alignQC.nFeedbackAgree;
+    QC.nFeedbackDisagree = alignQC.nFeedbackDisagree;
+    QC.feedbackDisagreementRate = alignQC.feedbackDisagreementRate;
+    QC.feedbackModelUsable = logical(feedbackModelUsable);
+    QC.goodSamplePct = goodSamplePct;
+    QC.durationMismatchRate = mismatchRate;
+    QC.medianDurationMismatchSec = median(Trials.durationMismatchSec, 'omitnan');
+    QC.meanIntervalGoodSamplePct = mean(Tfeat.intervalGoodSamplePct, 'omitnan');
+    QC.nHighErrorTrials = sum(Trials.errorCondition == "high");
+    QC.nLowErrorTrials = sum(Trials.errorCondition == "low");
+    QC.nHighCorrectionGainTrials = sum(Trials.correctionGainCondition == "high");
+    QC.nLowCorrectionGainTrials = sum(Trials.correctionGainCondition == "low");
+    QC.referenceMode = string(cfg.referenceMode);
+    QC.badChannelCount = prepQC.badChannelCount;
+    QC.badChannelLabels = prepQC.badChannelLabels;
+    QC.rejectedICCount = prepQC.rejectedICCount;
+    QC.rejectedICLabels = prepQC.rejectedICLabels;
+    QC.afzMode = prepQC.afzMode;
+    QC.leftMastoidStdUv = prepQC.mastoidStdUv(1);
+    QC.rightMastoidStdUv = prepQC.mastoidStdUv(2);
+    QC.leftMastoidStepFraction = prepQC.mastoidStepFraction(1);
+    QC.rightMastoidStepFraction = prepQC.mastoidStepFraction(2);
+end
+
+function cond = assign_high_low(x, splitMode)
+    cond = strings(numel(x),1);
+    ok = isfinite(x);
+
+    if sum(ok) < 6
+        cond(ok) = "all";
+        cond(~ok) = "missing";
+        return;
+    end
+
+    if strcmpi(splitMode, 'tertile')
+        qs = quantile(x(ok), [1/3 2/3]);
+        cond(ok & x <= qs(1)) = "low";
+        cond(ok & x >= qs(2)) = "high";
+        mid = ok & cond == "";
+        cond(mid) = "middle";
+    else
+        med = median(x(ok), 'omitnan');
+        cond(ok & x <= med) = "low";
+        cond(ok & x > med) = "high";
+    end
+
+    cond(~ok) = "missing";
+end
+
+function cond = assign_high_low_stratified(x, strata, splitMode)
+    cond = repmat("missing", numel(x), 1);
+    levels = unique(strata(isfinite(strata)));
+    for i = 1:numel(levels)
+        idx = strata == levels(i);
+        cond(idx) = assign_high_low(x(idx), splitMode);
+    end
+end
+
+function [qcData, burnIn, nativeFiniteGood] = causal_qc_bandpass(data, cfg, fs, context)
+    data = double(data);
+    nativeFiniteGood = all(isfinite(data),1);
+    if mean(nativeFiniteGood) < 0.50
+        error('v4:TooFewFiniteSamplesForCausalQC', ...
+            '%s has fewer than 50%% jointly finite samples before causal QC.', context);
+    end
+    if ~all(nativeFiniteGood)
+        data = repair_masked_samples_causal(data, nativeFiniteGood, ...
+            char(string(context) + " causal-QC finite repair"));
+    end
+    data = data - median(data,2,'omitnan');
+    sos = design_validated_causal_band_sos(cfg.broadBandHz, fs, cfg.bandFilterOrder);
+    burnIn = causal_filter_burnin_samples(sos, fs, cfg);
+    qcData = sosfilt(sos, data')';
+    if any(~isfinite(qcData(:)))
+        error('v4:CausalQCFilterFailure', ...
+            '%s causal QC filter produced nonfinite samples.', context);
+    end
+end
+
+function goodMask = make_artifact_mask(data, cfg, fs)
+    if nargin < 3
+        fs = cfg.targetFs;
+    end
+    data = double(data);
+    nonfiniteBad = any(~isfinite(data), 1);
+    absBad = any(abs(data) > cfg.artifactAbsUv, 1);
+    d = [zeros(size(data,1),1), diff(data,1,2)];
+    stepBad = any(abs(d) > cfg.artifactStepUv, 1);
+    bad = nonfiniteBad | absBad | stepBad;
+    halfWidth = max(1, round(cfg.artifactExpandSec * fs));
+    kernel = ones(1, 2*halfWidth + 1);
+    badExpanded = conv(double(bad), kernel, 'same') > 0;
+    goodMask = ~badExpanded(:);
+end
+
+function goodMask = make_causal_artifact_mask(data, cfg, fs)
+    % Past-only eligibility mask. An artifact at sample t can invalidate t and
+    % subsequent samples (ringing/recovery), but never samples before t.
+    if nargin < 3
+        fs = cfg.targetFs;
+    end
+    data = double(data);
+    nonfiniteBad = any(~isfinite(data), 1);
+    absBad = any(abs(data) > cfg.artifactAbsUv, 1);
+    d = [zeros(size(data,1),1), diff(data,1,2)];
+    stepBad = any(abs(d) > cfg.artifactStepUv, 1);
+    bad = nonfiniteBad | absBad | stepBad;
+    width = max(1, round(cfg.artifactExpandSec * fs));
+    % A causal FIR expansion invalidates each bad sample and only subsequent samples.
+    expanded = filter(ones(1, width + 1), 1, double(bad)) > 0;
+    goodMask = ~expanded(:);
+end
+
+function env = compute_all_channel_envelopes(data, fs, cfg)
+    nBands = numel(cfg.predBandNames);
+    nChan = size(data,1);
+    nSamples = size(data,2);
+
+    env = struct();
+    env.fs = fs;
+    env.nSamples = nSamples;
+    env.bandNames = cfg.predBandNames;
+
+    if any(~isfinite(data(:)))
+        error('v4:NonfiniteEEG', 'Nonfinite EEG reached spectral filtering.');
+    end
+
+    for b = 1:nBands
+        bandName = cfg.predBandNames{b};
+        bandRange = cfg.predBands(b,:);
+
+        fprintf('  band %s [%g %g] Hz\n', bandName, bandRange(1), bandRange(2));
+
+        [filterB, filterA] = design_validated_band_filter(bandRange, fs, cfg.bandFilterOrder);
+        E = nan(nChan, nSamples, 'single');
+        for ch = 1:nChan
+            x = double(data(ch,:))';
+            x = detrend(x);
+            y = filtfilt(filterB, filterA, x);
+            if any(~isfinite(y))
+                error('v4:BandFilterFailure', 'Nonfinite output for channel %d, band %s.', ch, bandName);
+            end
+            E(ch,:) = single(abs(hilbert(y))');
+        end
+
+        env.(bandName).chanEnv = E;
+        env.(bandName).chanPower = E.^2;
+    end
+end
+
+function [b, a] = design_validated_band_filter(bandRange, fs, order)
+    nyq = fs/2;
+    if numel(bandRange) ~= 2 || bandRange(1) <= 0 || ...
+            bandRange(2) >= nyq || bandRange(1) >= bandRange(2)
+        error('v4:InvalidBand', 'Invalid band [%g %g] at fs=%g.', bandRange(1), bandRange(2), fs);
+    end
+    [b, a] = butter(order, bandRange/nyq, 'bandpass');
+    [h, f] = freqz(b, a, 4096, fs);
+    centerGain = interp1(f, abs(h), mean(bandRange), 'linear');
+    pass = f >= bandRange(1) & f <= bandRange(2);
+    if any(~isfinite([b(:); a(:); h(:)])) || ~isfinite(centerGain) || ...
+            centerGain < 0.5 || ~any(pass) || max(abs(h(pass))) > 1.05
+        error('v4:FilterDesignFailure', 'Filter validation failed for [%g %g] Hz.', ...
+            bandRange(1), bandRange(2));
+    end
+end
+
+function env = apply_good_mask_to_envelopes(env, goodMask)
+    if numel(goodMask) ~= env.nSamples
+        error('v4:MaskLength', 'Artifact-mask length does not match EEG samples.');
+    end
+    bad = ~goodMask(:)';
+    for b = 1:numel(env.bandNames)
+        name = env.bandNames{b};
+        env.(name).chanEnv(:,bad) = NaN;
+        env.(name).chanPower(:,bad) = NaN;
+    end
+end
+
+function [bandLogPower, validTrial] = compute_trialwise_causal_prestart_bandpower( ...
+        roiData, Trials, goodMask, fs, trialFs, cfg)
+    % Outcome-independent current-trial EEG predictors. Every feature sample
+    % occurs before the trial start; eligibility therefore cannot depend on the
+    % current produced duration or relative error.
+    roiData = double(roiData);
+    goodMask = logical(goodMask(:)');
+    nTrials = height(Trials);
+    nBands = numel(cfg.predBandNames);
