@@ -28,6 +28,14 @@ const pillars = [
   },
 ];
 
+const architecture = [
+  { step: "01", title: "Synchronized inputs", text: "Audio and visual streams enter a time-aligned processing path." },
+  { step: "02", title: "Windowed features", text: "Features are extracted over consecutive analysis windows rather than treated as one undifferentiated recording." },
+  { step: "03", title: "Signal quality", text: "Per-modality quality information is estimated alongside the behavioural features." },
+  { step: "04", title: "Quality-conditioned gating", text: "The inference path can favor multimodal or single-modality processing when signal quality changes." },
+  { step: "05", title: "Continuous estimate", text: "The system produces a continuous masking-probability estimate rather than a categorical diagnostic label." },
+];
+
 export default function NDMSPage() {
   return (
     <main className="min-h-screen bg-slate-950 py-16 text-slate-100 lg:py-24" id="main">
@@ -81,19 +89,47 @@ export default function NDMSPage() {
           </div>
         </section>
 
-        <section className="mt-16 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center" aria-labelledby="ndms-boundary-title">
-          <figure className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900">
-            <Image alt="Biomedical neuroscience research environment" className="aspect-[4/3] w-full object-cover" height={900} src="/images/stock-neuroscience-research.jpg" width={1200} />
-            <figcaption className="border-t border-slate-800 p-4 text-xs leading-6 text-slate-400">Illustrative neurotechnology research context; not an NDMS validation experiment.</figcaption>
-          </figure>
+        <section className="mt-16 rounded-2xl border border-slate-800 bg-slate-900 p-7 lg:p-8" aria-labelledby="ndms-architecture-title">
+          <div className="max-w-4xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Public architecture schematic</p>
+            <h2 className="mt-2 text-3xl font-bold text-white" id="ndms-architecture-title">From synchronized signals to a quality-aware continuous estimate</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-300">This schematic shows the public system logic at a deliberately high level. It communicates the engineering structure without turning the portfolio into a disclosure of unpublished implementation details or claim drafting.</p>
+          </div>
+
+          <div className="mt-8 grid gap-4 lg:grid-cols-5" role="list" aria-label="NDMS public processing architecture">
+            {architecture.map((item, index) => (
+              <div className="relative rounded-2xl border border-slate-700 bg-slate-950/60 p-5" key={item.step} role="listitem">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-mono text-xs font-bold text-sky-300">{item.step}</span>
+                  {index < architecture.length - 1 ? <span aria-hidden="true" className="hidden text-slate-600 lg:block">→</span> : null}
+                </div>
+                <h3 className="mt-3 text-base font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-xs leading-6 text-slate-400">{item.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-slate-300">
+            <span className="rounded-full border border-slate-700 px-3 py-1.5">Edge-oriented execution</span>
+            <span className="rounded-full border border-slate-700 px-3 py-1.5">Quality-aware routing</span>
+            <span className="rounded-full border border-slate-700 px-3 py-1.5">Multimodal / single-modality fallback</span>
+            <span className="rounded-full border border-slate-700 px-3 py-1.5">Continuous output</span>
+          </div>
+        </section>
+
+        <section className="mt-16 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start" aria-labelledby="ndms-boundary-title">
           <div className="rounded-2xl border border-slate-800 bg-slate-900 p-7">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Claim boundary</p>
             <h2 className="mt-2 text-2xl font-bold text-white" id="ndms-boundary-title">Technology development is not clinical validation</h2>
             <p className="mt-4 text-sm leading-7 text-slate-300">
               Patent status, prototype development, and system architecture do not establish clinical validity. The site therefore separates invention claims from evidence claims and avoids describing NDMS as a diagnostic, therapeutic, or clinically validated product.
             </p>
+          </div>
+          <div className="rounded-2xl border border-slate-800 bg-slate-900 p-7">
+            <h2 className="text-2xl font-bold text-white">Responsible-use boundary</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-300">The public positioning does not frame NDMS as a hiring, surveillance, or coercive decision system. The emphasis is consent-aware, privacy-conscious technology development with calibrated outputs and explicit limitations.</p>
             <div className="mt-5 flex flex-wrap gap-4">
-              <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/projects">View related projects</Link>
+              <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/patent">Patent record and status</Link>
               <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/contact">Technology and collaboration contact</Link>
             </div>
           </div>
