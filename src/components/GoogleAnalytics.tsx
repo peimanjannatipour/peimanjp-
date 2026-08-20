@@ -21,6 +21,7 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: GtagArguments) => void;
     __pjpAnalyticsLoaded?: boolean;
+    __pjpAnalyticsConfigured?: boolean;
     __pjpLastPagePath?: string;
   }
 }
@@ -41,6 +42,46 @@ function isPeimanJpHost(hostname: string) {
   return hostname === "peimanjp.com" || hostname.endsWith(".peimanjp.com");
 }
 
+function ensureGtag() {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag =
+    window.gtag ||
+    ((...args: GtagArguments) => {
+      window.dataLayer?.push(args);
+    });
+}
+
+function loadAnalytics() {
+  ensureGtag();
+
+  if (!window.__pjpAnalyticsConfigured) {
+    window.gtag?.("consent", "default", {
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
+    window.gtag?.("set", "ads_data_redaction", true);
+    window.gtag?.("js", new Date());
+    window.gtag?.("config", MEASUREMENT_ID, {
+      allow_ad_personalization_signals: false,
+      allow_google_signals: false,
+      cookie_domain: "auto",
+      send_page_view: false,
+    });
+    window.__pjpAnalyticsConfigured = true;
+  }
+
+  if (!window.__pjpAnalyticsLoaded) {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
+    script.dataset.pjpAnalytics = "true";
+    document.head.appendChild(script);
+    window.__pjpAnalyticsLoaded = true;
+  }
+}
+
 export function GoogleAnalytics() {
   const pathname = usePathname();
   const [ready, setReady] = useState(false);
@@ -51,37 +92,8 @@ export function GoogleAnalytics() {
     if (!ALLOWED_HOSTS.has(window.location.hostname)) return;
 
     const savedPreference = readConsent();
-
-    window.dataLayer = window.dataLayer || [];
-    window.gtag =
-      window.gtag ||
-      ((...args: GtagArguments) => {
-        window.dataLayer?.push(args);
-      });
-
-    window.gtag("consent", "default", {
-      analytics_storage: savedPreference === "granted" ? "granted" : "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-      wait_for_update: 500,
-    });
-    window.gtag("set", "ads_data_redaction", true);
-    window.gtag("js", new Date());
-    window.gtag("config", MEASUREMENT_ID, {
-      allow_ad_personalization_signals: false,
-      allow_google_signals: false,
-      cookie_domain: "auto",
-      send_page_view: false,
-    });
-
-    if (!window.__pjpAnalyticsLoaded) {
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
-      script.dataset.pjpAnalytics = "true";
-      document.head.appendChild(script);
-      window.__pjpAnalyticsLoaded = true;
+    if (savedPreference === "granted") {
+      loadAnalytics();
     }
 
     const stateTimer = window.setTimeout(() => {
@@ -94,7 +106,10 @@ export function GoogleAnalytics() {
   }, []);
 
   useEffect(() => {
-    if (!ready || !window.gtag) return;
+    if (!ready || preference !== "granted") return;
+
+    loadAnalytics();
+    if (!window.gtag) return;
 
     const pagePath = pathname || window.location.pathname;
     if (window.__pjpLastPagePath === pagePath) return;
@@ -105,10 +120,10 @@ export function GoogleAnalytics() {
       page_path: pagePath,
       page_title: document.title,
     });
-  }, [pathname, ready]);
+  }, [pathname, preference, ready]);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || preference !== "granted") return;
 
     const trackClick = (event: MouseEvent) => {
       const clicked =
@@ -158,7 +173,7 @@ export function GoogleAnalytics() {
 
     document.addEventListener("click", trackClick);
     return () => document.removeEventListener("click", trackClick);
-  }, [ready]);
+  }, [preference, ready]);
 
   if (!ready) return null;
 
@@ -166,12 +181,23 @@ export function GoogleAnalytics() {
     storeConsent(value);
     setPreference(value);
     setPanelOpen(false);
-    window.gtag?.("consent", "update", {
-      analytics_storage: value,
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-    });
+
+    if (value === "granted") {
+      loadAnalytics();
+      window.gtag?.("consent", "update", {
+        analytics_storage: "granted",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      });
+    } else if (window.gtag) {
+      window.gtag("consent", "update", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      });
+    }
   };
 
   return (
@@ -181,8 +207,8 @@ export function GoogleAnalytics() {
           <div>
             <p id="pjp-consent-title">Privacy-respecting analytics</p>
             <span>
-              We use Google Analytics to understand site performance. Advertising
-              personalisation stays off. You can accept or reject analytics cookies.
+              We load Google Analytics only after you accept analytics cookies.
+              Advertising personalisation stays off. You can change this choice at any time.
               {" "}
               <a href="https://peimanjp.com/privacy">Privacy policy</a>
             </span>
