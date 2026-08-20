@@ -25,9 +25,9 @@
     {
       "id": "neurolab-os-paper",
       "title": "NeuroLab OS: A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation",
-      "description": "A technical manuscript describing a local-first scientific workbench for neural time-series ingestion, explicit quality control, computational model fitting, in silico perturbation workflows, and provenance-aware reporting.",
-      "linkLabel": "Open manuscript PDF",
-      "url": "/assets/papers/neurolab-os-preprint.pdf",
+      "description": "A technical manuscript describing a local-first scientific workbench for neural time-series ingestion, explicit quality control, computational model fitting, in silico perturbation workflows, and provenance-aware reporting. A complete journal-style full-text article view is available on this site.",
+      "linkLabel": "Read full article",
+      "url": "/articles/neurolab-os",
       "type": "manuscript",
       "status": "Technical manuscript · 2026",
       "topic": "Research software · neural time-series · reproducibility"
