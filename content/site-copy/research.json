@@ -1,41 +1,47 @@
 {
-  "title": "Research Areas",
-  "intro": "My work is organized around a set of connected research lines rather than a single method. The common thread is a preference for interpretable models, careful validation, reproducible analysis, and systems that keep scientific assumptions visible to the researcher.",
+  "title": "Computational neuroscience, EEG, human timing, and neurotechnology",
+  "intro": "My work is organized around connected research lines rather than a single method. The common thread is interpretable modelling, careful validation, reproducible analysis, developmental neuroimaging, and systems that keep scientific assumptions visible to the researcher.",
   "cards": [
     {
       "id": "eeg-neural-time-series",
       "title": "EEG and neural time-series",
       "text": "Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability.",
+      "plainLanguage": "Why it matters: tests whether neural signals add useful information beyond what behaviour already explains.",
       "href": "/research/eeg-temporal-reproduction-bias"
     },
     {
       "id": "temporal-cognition",
       "title": "Temporal cognition and human time reproduction",
       "text": "Research on systematic bias in time reproduction, contextual effects, recent-trial influences, and computational accounts of temporal estimation.",
+      "plainLanguage": "Why it matters: explains why reproduced durations systematically drift with context and recent experience.",
       "href": "/research/bayesian-log-time-state-space-clock"
     },
     {
       "id": "bayesian-modelling",
       "title": "Bayesian and state-space modelling",
       "text": "Interpretable behavioural models emphasizing central tendency, multiplicative variability, predictive diagnostics, and explicit model misspecification.",
+      "plainLanguage": "Why it matters: makes model successes and failure modes visible instead of relying on fit alone.",
       "href": "/research/bayesian-log-time-state-space-clock"
     },
     {
       "id": "developmental-neuroimaging",
       "title": "ABCD developmental neuroimaging",
       "text": "An ongoing research line using ABCD data to study adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-occurrence without disclosing unpublished analyses.",
+      "plainLanguage": "Why it matters: studies developmental variation at a scale that can connect brain maturation with dimensional traits.",
       "href": "/research/abcd-developmental-neuroimaging"
     },
     {
       "id": "neurotech-systems",
       "title": "Neurotechnology and scientific systems",
       "text": "Design of privacy-aware and reproducible systems for neural analysis, modelling, simulation, multimodal inference, and research translation.",
+      "plainLanguage": "Why it matters: turns complex scientific workflows into systems that are easier to inspect, reproduce, and audit.",
       "href": "/neurolab-os"
     },
     {
       "id": "evidence-systems",
       "title": "Evidence systems and scientific decision support",
       "text": "Structured evidence-review work focused on separating claims, sources, study design, outcome relevance, risk of bias, and support direction.",
+      "plainLanguage": "Why it matters: separates evidence quality from the claim being made before a conclusion is presented.",
       "href": "/projects/smis-ods"
     }
   ]
