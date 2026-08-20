@@ -10,6 +10,7 @@ export const personJsonLd = {
   name: siteConfig.name,
   alternateName: siteConfig.shortName,
   url: siteConfig.baseUrl,
+  image: `${siteConfig.baseUrl}/images/inventor-photo.jpg`,
   jobTitle: "Computational Neuroscience Researcher",
   sameAs: [
     externalLinks.orcid.href,
