@@ -15,6 +15,53 @@ const currentWorkTitles = [
   "SMIS-ODS",
 ];
 
+const verificationLinks = [
+  {
+    label: "ORCID",
+    href: externalLinks.orcid.href,
+    detail: "Persistent scholarly identity",
+  },
+  {
+    label: "ResearchGate",
+    href: externalLinks.researchGate.href,
+    detail: "Public scholarly profile",
+  },
+  {
+    label: "GitHub",
+    href: externalLinks.github.href,
+    detail: "Public code and project identity",
+  },
+  {
+    label: "DOI-linked outputs",
+    href: "/publications",
+    detail: "Preprints and manuscripts with source links",
+  },
+  {
+    label: "Patent Center",
+    href: "/patent",
+    detail: "Public PCT and invention-status context",
+  },
+];
+
+const statusGuide = [
+  {
+    label: "Preprint",
+    text: "A publicly available research manuscript; it should not be described as peer reviewed unless a verified journal version is linked.",
+  },
+  {
+    label: "Manuscript",
+    text: "Research work presented with its current public status; unpublished analyses and results remain outside the public description.",
+  },
+  {
+    label: "Technical beta",
+    text: "Software verification and release-level testing do not imply biological, diagnostic, therapeutic, or clinical validation.",
+  },
+  {
+    label: "Patent pending",
+    text: "An application or PCT-stage invention status is not the same as an issued patent or a validated commercial product.",
+  },
+];
+
 export default function Home() {
   const currentWork = projects.filter((project) => currentWorkTitles.includes(project.title));
 
@@ -66,14 +113,16 @@ export default function Home() {
 
             <div className="lg:col-span-5">
               <figure className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl">
-                <Image
-                  alt="Peiman Jannatipour, researcher and inventor"
-                  className="aspect-[4/5] w-full object-cover object-center"
-                  height={1200}
-                  priority
-                  src="/images/inventor-photo.jpg"
-                  width={960}
-                />
+                <div className="relative aspect-[4/5] w-full">
+                  <Image
+                    alt="Peiman Jannatipour, researcher and inventor"
+                    className="object-cover object-center"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 40vw, (min-width: 640px) 70vw, 100vw"
+                    src="/images/inventor-photo.jpg"
+                  />
+                </div>
                 <figcaption className="border-t border-slate-800 px-5 py-4 text-xs leading-5 text-slate-400">
                   Peiman Jannatipour · computational neuroscience, research software, and neurotechnology.
                 </figcaption>
@@ -87,7 +136,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Research profile</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="research-highlights">Connected research lines</h2>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="research-highlights">Connected computational neuroscience research lines</h2>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {homepageData.highlights.map((highlight, index) => (
@@ -106,7 +155,7 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Scientific approach</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="programme-title">A research programme built around evidence, models, and reproducibility</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="programme-title">A computational neuroscience programme built around evidence, models, and reproducibility</h2>
               <ul className="mt-6 space-y-3 text-sm leading-7 text-slate-300">
                 {homepageData.principles.map((principle) => (
                   <li className="flex gap-3" key={principle}>
@@ -140,6 +189,7 @@ export default function Home() {
               <Link className="group rounded-xl border border-slate-800 bg-slate-900 p-6 transition hover:border-sky-500/60" href={card.href} key={card.id}>
                 <h3 className="text-lg font-semibold text-white group-hover:text-sky-200">{card.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{card.text}</p>
+                <p className="mt-4 border-l-2 border-sky-500/50 pl-4 text-xs leading-6 text-slate-400">{card.plainLanguage}</p>
                 <span className="mt-5 inline-block text-sm font-semibold text-sky-300">Explore this research line →</span>
               </Link>
             ))}
@@ -195,11 +245,66 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-b border-slate-800 py-16 lg:py-20" aria-labelledby="verification-title">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">External verification</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="verification-title">Source trails for research identity, outputs, and invention status</h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300">
+                Public claims on this portfolio are linked to external scholarly identities, DOI records, public project sources, or explicit status pages wherever a suitable source is available.
+              </p>
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                {verificationLinks.map((item) => {
+                  const external = item.href.startsWith("http");
+                  return external ? (
+                    <a className="rounded-xl border border-slate-800 bg-slate-900 p-4 transition hover:border-sky-500/60" href={item.href} key={item.label} rel="noreferrer" target="_blank">
+                      <span className="block text-sm font-semibold text-sky-200">{item.label} ↗</span>
+                      <span className="mt-1 block text-xs leading-5 text-slate-400">{item.detail}</span>
+                    </a>
+                  ) : (
+                    <Link className="rounded-xl border border-slate-800 bg-slate-900 p-4 transition hover:border-sky-500/60" href={item.href} key={item.label}>
+                      <span className="block text-sm font-semibold text-sky-200">{item.label} →</span>
+                      <span className="mt-1 block text-xs leading-5 text-slate-400">{item.detail}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">How to read this portfolio</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white">Research and technology status labels are intentionally distinct</h2>
+              <dl className="mt-7 grid gap-4 sm:grid-cols-2">
+                {statusGuide.map((item) => (
+                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5" key={item.label}>
+                    <dt className="text-sm font-semibold text-white">{item.label}</dt>
+                    <dd className="mt-2 text-xs leading-6 text-slate-400">{item.text}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-6 flex flex-wrap gap-4 text-sm">
+                <Link className="font-semibold text-sky-300 underline underline-offset-4" href="/verification">Verification policy</Link>
+                <Link className="font-semibold text-sky-300 underline underline-offset-4" href="/contact">Contact for clarification</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 lg:py-20" aria-labelledby="about-title">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
             <figure className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900">
-              <Image alt="Peiman Jannatipour" className="aspect-[4/3] w-full object-cover" height={900} src="/images/peiman-jp-casual.jpg" width={1200} />
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  alt="Peiman Jannatipour"
+                  className="object-cover"
+                  fill
+                  sizes="(min-width: 1024px) 38vw, 100vw"
+                  src="/images/peiman-jp-casual.jpg"
+                />
+              </div>
             </figure>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">About</p>

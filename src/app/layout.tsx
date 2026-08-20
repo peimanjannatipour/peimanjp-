@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { JsonLd } from "@/components/JsonLd";
@@ -12,17 +12,13 @@ import "./theme-overrides.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Peiman Jannatipour | Computational Neuroscience & Neurotechnology",
+  title: "Peiman Jannatipour | Computational Neuroscience Research",
   description:
-    "Research portfolio of Peiman Jannatipour across computational neuroscience, EEG, temporal cognition, developmental neuroimaging, research software, and neurotechnology.",
+    "Research by Peiman Jannatipour in computational neuroscience, EEG, human timing, Bayesian modelling, neuroimaging, scientific software and neurotechnology.",
   path: "/",
 });
 
@@ -47,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} h-full antialiased`}
       lang="en"
       suppressHydrationWarning
     >

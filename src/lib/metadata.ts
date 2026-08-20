@@ -13,7 +13,7 @@ export function createPageMetadata({
   path = "/",
 }: PageMetadataInput): Metadata {
   const url = new URL(path, siteConfig.baseUrl);
-  const imageUrl = new URL("/assets/stock/stock1.jpg", siteConfig.baseUrl);
+  const imageUrl = new URL("/opengraph-image", siteConfig.baseUrl);
 
   return {
     title,
@@ -32,10 +32,15 @@ export function createPageMetadata({
       "temporal cognition",
       "human time reproduction",
       "Bayesian modelling",
+      "developmental neuroimaging",
+      "fMRI",
       "neural time-series",
+      "reproducible neuroscience",
+      "research software",
       "NeuroLab OS",
       "NDMS",
       "neurotechnology",
+      "privacy-aware multimodal AI",
       "scientific software",
       "ORCID 0009-0009-3205-2423",
       "ResearchGate",
@@ -65,8 +70,8 @@ export function createPageMetadata({
         {
           url: imageUrl,
           width: 1200,
-          height: 800,
-          alt: "Computational neuroscience workstation",
+          height: 630,
+          alt: "Peiman Jannatipour — computational neuroscience research",
         },
       ],
       siteName: siteConfig.name,
