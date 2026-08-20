@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+<title id="title">Traceable scientific workflow</title>
+<desc id="desc">Eight explicit stages connect data ingestion, preprocessing, quality control, scientist review, fitting, simulation, perturbation and reporting.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1d4f91"/></marker>
+<style>.b{fill:#fff;stroke:#b8c5d6;stroke-width:2}.n{font:700 15px Arial,sans-serif;fill:#1d4f91}.h{font:700 18px Arial,sans-serif;fill:#172033}.s{font:13px Arial,sans-serif;fill:#536174}.e{stroke:#1d4f91;stroke-width:3;fill:none;marker-end:url(#arrow)}</style></defs>
+<rect width="1600" height="720" fill="#fff"/><rect x="70" y="55" width="1460" height="610" rx="28" fill="#f8fafc"/>
+<text x="120" y="115" style="font:700 28px Arial,sans-serif;fill:#111827">Traceable scientific workflow</text>
+<text x="120" y="148" style="font:15px Arial,sans-serif;fill:#64748b">Eight explicit stages connect the data decision path to the final provenance bundle.</text>
+<g transform="translate(120 230)"><rect class="b" width="290" height="145" rx="16"/><text class="n" x="24" y="32">1</text><text class="h" x="24" y="66">Ingest</text><text class="s" x="24" y="102">EEG / ROI-BOLD / time series</text></g>
+<g transform="translate(455 230)"><rect class="b" width="290" height="145" rx="16"/><text class="n" x="24" y="32">2</text><text class="h" x="24" y="66">Preprocess</text><text class="s" x="24" y="102">Filter • rereference • resample</text></g>
+<g transform="translate(790 230)"><rect class="b" width="290" height="145" rx="16"/><text class="n" x="24" y="32">3</text><text class="h" x="24" y="66">QC</text><text class="s" x="24" y="102">Pass • review • fail</text></g>
+<g transform="translate(1125 230)"><rect class="b" width="290" height="145" rx="16"/><text class="n" x="24" y="32" style="fill:#14845d">4</text><text class="h" x="24" y="66">Scientist review</text><text class="s" x="24" y="102">Equation • parameters • limits</text></g>
+<path class="e" d="M410 302H455"/><path class="e" d="M745 302H790"/><path class="e" d="M1080 302H1125"/>
+<g transform="translate(120 445)"><rect class="b" width="290" height="145" rx="16"/><text class="n" x="24" y="32">5</text><text class="h" x="24" y="66">Fit</text><text class="s" x="24" y="102">Seeded feature matching</text></g>
+<g transform="translate(455 445)"><rect class="b" width="290" height="145" rx="16"/><text class="n" x="24" y="32">6</text><text class="h" x="24" y="66">Simulate</text><text class="s" x="24" y="102">11 registered model families</text></g>
+<g transform="translate(790 445)"><rect class="b" width="290" height="145" rx="16"/><text class="n" x="24" y="32">7</text><text class="h" x="24" y="66">Perturb</text><text class="s" x="24" y="102">8 model-space operations</text></g>
+<g transform="translate(1125 445)"><rect class="b" width="290" height="145" rx="16"/><text class="n" x="24" y="32">8</text><text class="h" x="24" y="66">Report</text><text class="s" x="24" y="102">Hashes • seeds • lineage</text></g>
+<path class="e" d="M410 517H455"/><path class="e" d="M745 517H790"/><path class="e" d="M1080 517H1125"/>
+<path class="e" d="M1270 375 C1270 410 265 390 265 445"/>
+<rect x="375" y="610" width="850" height="40" rx="10" fill="#fff7ed" stroke="#fdba74"/><text x="800" y="635" text-anchor="middle" style="font:700 13px Arial,sans-serif;fill:#b45309">Boundary: in silico perturbations support computational hypothesis generation only.</text>
+</svg>
