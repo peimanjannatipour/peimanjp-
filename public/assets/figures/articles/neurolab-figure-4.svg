@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 720" role="img" aria-labelledby="title desc">
+  <title id="title">Model registry by scientific claim boundary</title>
+  <desc id="desc">NeuroLab OS model taxonomy separating literature-anchored dynamics, statistical baselines, and explicit proxies or surrogates.</desc>
+  <rect width="1500" height="720" fill="#f8fafc"/>
+  <text x="70" y="82" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#0f172a">Model registry by scientific claim boundary</text>
+  <text x="70" y="118" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#64748b">Eleven registered families are grouped by modelling role, not treated as equal biological mechanisms.</text>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="70" y="175" width="410" height="410" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="70" y="175" width="410" height="8" rx="4" fill="#059669"/>
+    <text x="105" y="225" font-size="22" font-weight="700" fill="#0f172a">Literature-anchored dynamics</text>
+    <text x="105" y="278" font-size="18" fill="#0f172a">• Wilson–Cowan</text>
+    <text x="105" y="320" font-size="18" fill="#0f172a">• Kuramoto</text>
+    <text x="105" y="362" font-size="18" fill="#0f172a">• Ornstein–Uhlenbeck</text>
+    <text x="105" y="404" font-size="18" fill="#0f172a">• Jansen–Rit</text>
+    <text x="105" y="446" font-size="18" fill="#0f172a">• Hopf / Stuart–Landau</text>
+    <text x="105" y="520" font-size="14" font-weight="700" fill="#047857">Recognisable mathematical ancestry</text>
+    <text x="105" y="548" font-size="14" font-weight="700" fill="#047857">Implementation safeguards are documented</text>
+
+    <rect x="545" y="175" width="410" height="410" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="545" y="175" width="410" height="8" rx="4" fill="#2563eb"/>
+    <text x="580" y="225" font-size="22" font-weight="700" fill="#0f172a">Statistical baselines</text>
+    <text x="580" y="278" font-size="18" fill="#0f172a">• Linear state-space</text>
+    <text x="580" y="320" font-size="18" fill="#0f172a">• Stable VAR connectivity</text>
+    <text x="580" y="520" font-size="14" font-weight="700" fill="#2563eb">Useful comparators</text>
+    <text x="580" y="548" font-size="14" font-weight="700" fill="#2563eb">Not physiological mechanisms by default</text>
+
+    <rect x="1020" y="175" width="410" height="410" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="1020" y="175" width="410" height="8" rx="4" fill="#d97706"/>
+    <text x="1055" y="225" font-size="22" font-weight="700" fill="#0f172a">Explicit proxies / surrogates</text>
+    <text x="1055" y="278" font-size="18" fill="#0f172a">• fMRI latent-state proxy</text>
+    <text x="1055" y="320" font-size="18" fill="#0f172a">• Switching LSS proxy</text>
+    <text x="1055" y="362" font-size="18" fill="#0f172a">• Reduced Wong–Wang Lite</text>
+    <text x="1055" y="520" font-size="14" font-weight="700" fill="#d97706">Reduced scope is stated explicitly</text>
+    <text x="1055" y="548" font-size="14" font-weight="700" fill="#d97706">No full HMM/hemodynamic claim</text>
+  </g>
+</svg>

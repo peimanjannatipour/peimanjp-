@@ -1,0 +1,95 @@
+[
+  {
+    "id": "methods-fitting",
+    "number": "2.6",
+    "title": "Feature extraction, model fitting and recommendation",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The fitting layer compares empirical and simulated summary features rather than performing Bayesian posterior inference. Implemented summaries include Welch power spectral density (PSD), autocorrelation, a mean absolute functional-connectivity summary, frequency-band power and synchrony. For empirical feature vector E and simulated feature vector S(θ), the fitted parameter vector is obtained by minimizing a weighted composite distance,"
+      },
+      {
+        "type": "equation",
+        "label": "1",
+        "text": "θ̂ = arg min_θ [w_P D_PSD + w_A D_ACF + w_F D_FC + w_B D_BP + w_S D_sync]"
+      },
+      {
+        "type": "paragraph",
+        "text": "where the individual terms are mean-squared, absolute or normalized band-power discrepancies as appropriate to the feature type. The implementation uses seeded Optuna/TPE optimization [29]. Repeated-seed intervals, when generated, are empirical robustness summaries and are not Bayesian credible intervals."
+      },
+      {
+        "type": "table",
+        "id": "table1"
+      },
+      {
+        "type": "paragraph",
+        "text": "A model-recommendation module ranks candidate models from dataset-derived features. Its numerical output is a deterministic heuristic ranking score, not a calibrated probability that a model is biologically correct. The current beta still exposes the word “confidence” in part of the researcher-facing interface; this terminology should be interpreted as a ranking heuristic and is a known presentation limitation rather than a probabilistic model-selection claim."
+      },
+      {
+        "type": "paragraph",
+        "text": "The EEG feature/QC code in v0.1.1 also contains a known definition mismatch: one subsystem uses alpha/beta boundaries of 8–12/12–30 Hz, whereas another uses 8–13/13–30 Hz. The manuscript therefore does not treat band-power values from those two subsystems as definition-identical. A single versioned band registry is recommended for the archival publication release."
+      }
+    ]
+  },
+  {
+    "id": "methods-perturbation",
+    "number": "2.7",
+    "title": "In silico perturbation layer",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Eight perturbation operations are represented in the scientific engine: node lesion, connectivity weakening, connectivity strengthening, increased inhibition, decreased inhibition, periodic stimulation, noise injection and gain modulation. These operations are model-dependent transformations rather than a single universal biological intervention model. For a model with parameter/state representation θ, an intervention is best described abstractly as"
+      },
+      {
+        "type": "equation",
+        "label": "2",
+        "text": "θ′ = I_m(θ; ϕ)"
+      },
+      {
+        "type": "paragraph",
+        "text": "where m identifies the model and ϕ the intervention settings. A periodic drive, for example, is implemented in the familiar form si (t) = A sin(2πf t). Other operations map to native parameters where available or to explicitly labelled proxies where no direct mechanism exists. Gain modulation remains heuristic in models lacking a native gain parameter. The resulting changes in PSD/band power, synchrony, connectivity summaries or signal-level differences are computational effects only; no therapeutic, causal or clinical inference follows from them."
+      }
+    ]
+  },
+  {
+    "id": "methods-provenance",
+    "number": "2.8",
+    "title": "Provenance and reporting",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "NeuroLab OS links data identity, preprocessing configuration, model/run metadata, seeds and generated artifacts through its local workflow. Reports can include machine-readable manifests, figure recipes, hashes and lineage metadata. The release is accompanied by a ZIP manifest and SHA-256 checksum, and a scientific sidecar manifest records release/test metadata. For a publication-grade archival release, the provenance layer should be strengthened further by embedding per-model immutable source, equation and parameter-schema hashes together with a clean Git commit/tag."
+      }
+    ]
+  },
+  {
+    "id": "methods-verification-framework",
+    "number": "2.9",
+    "title": "Verification and validation framework",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "We use the terms verification and validation conservatively. Verification asks whether the software implementation and packaged runtime satisfy their stated computational contracts; validation asks whether model or analysis outputs agree with an independent reference, empirical system or intended scientific use within a defined tolerance or domain [3, 1]. This distinction is important because a simulator can be internally consistent while still being an inadequate representation of a biological system, and a biologically motivated model can be implemented incorrectly."
+      },
+      {
+        "type": "paragraph",
+        "text": "For NeuroLab OS we therefore organize evidence into four levels (Fig. 3): (1) artifact identity and build integrity; (2) software-contract verification; (3) numerical sanity and synthetic recovery checks; and (4) external scientific validation. The present release contains evidence for the first three levels, although publication-scale distributions for the numerical benchmarks are not included in the release report. Level 4—for example concordance with an independent MNE/EEGLAB pipeline on a public EEG dataset, or reference-model trajectory agreement—is not claimed in this manuscript. This evidence hierarchy is consistent with prior calls for quantitative model-validation workflows and reproducible computational-neuroscience practice [3, 2]."
+      }
+    ]
+  },
+  {
+    "id": "methods-release-verification",
+    "number": "2.10",
+    "title": "Release verification",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Verification was performed against the canonical v0.1.1 source build before packaging. The backend test command python -m pytest backend/tests -q returned 82 passed, 0 failed and one warning. The focused workflow suite returned 38 passed, 0 failed. Desktop type checking, desktop production build, local engine build and unsigned-beta packaging passed. The final ZIP was expanded to verify the presence of resources/app.asar and the bundled neurolab-engine.exe. The packaged application was launched, and the engine health endpoint returned HTTP 200 with a local-runtime status. The canonical model registry contained all 11 expected model keys."
+      },
+      {
+        "type": "figure",
+        "id": "figure3"
+      }
+    ]
+  }
+]

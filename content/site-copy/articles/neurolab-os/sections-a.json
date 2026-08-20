@@ -1,0 +1,116 @@
+[
+  {
+    "id": "introduction",
+    "number": "1",
+    "title": "Introduction",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Computational neuroscience increasingly depends on multi-stage analysis chains in which the reported result is determined not only by the recorded signal, but also by data organization, preprocessing, quality-control (QC) decisions, model specification, numerical settings, random seeds and reporting choices. Reproducibility therefore depends on preserving both computational assets and the semantic information required to understand how a model or analysis was instantiated [1, 2]. In practice, discrepancies between a written method and its executable implementation can materially change a computational result, making explicit model and workflow specifications a scientific requirement rather than merely a software-engineering preference [3]."
+      },
+      {
+        "type": "paragraph",
+        "text": "Mature neuroscience ecosystems solve important parts of this problem. BIDS and EEG-BIDS standardize data organization [4, 5]; MNE-Python, EEGLAB and FieldTrip provide broad electrophysiology analysis environments [6, 7, 8]; Nipype and BIDS Apps support workflow execution [9, 10]; DataLad manages versioned relationships between data and code [11]; and The Virtual Brain (TVB) provides specialized large-scale brain-network simulation [12, 13]. More recent research-software frameworks illustrate complementary design strategies: Pynapple emphasizes stable abstractions for diverse time-resolved neuroscience data [14]; BrainPy focuses on flexible, performant brain-dynamics programming [15]; and NeuroWRAP integrates configurable neurodata workflows with sensitivity and robustness analysis [16]. Reproducible EEG workflow demonstrations further show the value of making a complete analysis path executable and inspectable rather than documenting only isolated steps [17]."
+      },
+      {
+        "type": "paragraph",
+        "text": "These advances do not eliminate a practical integration gap in model-based neural time-series work. A preprocessing decision may be recorded in one environment, a model equation in another, a parameter fit in a job log, a simulated perturbation in an ad hoc script and the final figure in a manually assembled report. This fragmentation matters because analytical variability can substantially affect neuroimaging results [18, 19, 20], while operating-environment differences can affect computational reproducibility [21]. For dynamical models, an additional semantic risk arises: a reviewer or researcher needs to know whether the equation displayed or described is the equation actually executed, what parameters and units were used, whether an optimization result is identifiable, and whether a manipulation is a native model mechanism or a software proxy."
+      },
+      {
+        "type": "paragraph",
+        "text": "NeuroLab OS was developed around this continuity problem. It is a local-first desktop research environment that connects neural time-series ingestion, preprocessing, explicit QC, scientist-visible computational-model specifications, seeded model fitting, simulation, explicitly in silico perturbation and provenance-aware reporting. The scientific contribution is therefore a research-software architecture, not a claim to have introduced established models such as Wilson–Cowan, Kuramoto, Jansen–Rit, Ornstein–Uhlenbeck (OU) or Hopf dynamics [22, 23, 24, 25, 26]. Reduced and surrogate implementations are labelled as such rather than being presented as canonical biological models."
+      },
+      {
+        "type": "paragraph",
+        "text": "This paper describes and verifies the scientific runtime of NeuroLab OS v0.1.1. We address four questions: (i) which scientific modules and model families are implemented; (ii) how model semantics and intervention boundaries are exposed to prevent unsupported interpretation; (iii) whether the frozen release satisfies its software and runtime contracts; and (iv) which evidence still separates the current technical beta from an externally validated reference platform. This final distinction follows the computational-neuroscience literature in treating verification of an implementation and validation against an external reference or intended biological domain as related but different evidential tasks [3, 1]."
+      },
+      {
+        "type": "paragraph",
+        "text": "The specific contributions evaluated here are fourfold. First, NeuroLab connects QC, model review, fitting, simulation, model-space perturbation and reporting in one local execution path. Second, the model registry exposes an explicit fidelity taxonomy so that literature-recognizable dynamical systems, statistical baselines and reduced proxies are not presented as equivalent scientific claims. Third, a scientist-visible model specification contract places equations, parameter semantics and limitations at the execution boundary rather than only in documentation. Fourth, release evidence is organized as a hierarchy that separates artifact/build integrity, software-contract verification, numerical sanity checks and external scientific validation. The contribution is consequently a traceability-oriented biomedical software design rather than a new neural model family."
+      }
+    ]
+  },
+  {
+    "id": "methods-scope",
+    "number": "2.1",
+    "title": "Evaluated release and scope",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The evaluated artifact was NeuroLab-OS-UNSIGNED_BETA-0.1.1-win-x64.zip, generated on 16 August 2026. The release manifest identifies the package as an unsigned Windows x64 beta; it is not a signed production installer. The scientific engine reports an internal service version of neurolab-os-0.4.0; this is treated as an engine/API version distinct from the desktop release version 0.1.1."
+      },
+      {
+        "type": "paragraph",
+        "text": "The software analysis in this paper is restricted to the scientific runtime: desktop interface, local engine, data workflows, preprocessing/QC, model registry, fitting, recommendation logic, in silico interventions, and reporting/provenance. Licensing and commercial control-plane functionality are outside scope. No human or animal data were used to generate the release-verification results reported here; therefore the software verification itself did not constitute human-subjects or animal research."
+      }
+    ]
+  },
+  {
+    "id": "methods-architecture",
+    "number": "2.2",
+    "title": "Local-first software architecture",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "NeuroLab OS packages an Electron/React desktop interface with a local Python/FastAPI engine. The desktop communicates with the scientific engine over loopback, while datasets, database state, logs and generated reports remain local to the workstation in the evaluated configuration (Fig. 1). The packaged engine includes numerical and scientific dependencies used by the application, including NumPy, SciPy, pandas, SQLAlchemy and MNE-related functionality. This architecture is intended to make model execution and report generation available through a researcher-facing application without requiring a remote scientific-compute service."
+      },
+      {
+        "type": "figure",
+        "id": "figure1"
+      }
+    ]
+  },
+  {
+    "id": "methods-workflow",
+    "number": "2.3",
+    "title": "Scientific workflow and data handling",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The implemented workflow is organized as a sequence from data ingestion to reporting (Fig. 2). The present release supports three practical data contexts: EEG-oriented time-series ingestion using BIDS-lite conventions and EDF-first handling; ROI/BOLD time-series matrices for fMRI-derived regional signals; and generic multichannel time series. The fMRI path does not perform raw DICOM or NIfTI preprocessing and should not be described as a replacement for dedicated fMRI preprocessing systems."
+      },
+      {
+        "type": "paragraph",
+        "text": "EEG/time-series preprocessing includes configurable detrending, notch and Butterworth filtering, average or median rereferencing, resampling, variance-based channel screening, standardization, spectral summaries and event-related epoch handling. Where a flagged channel is replaced by the mean of retained channels, the operation is described as mean-channel replacement rather than spherical or anatomical electrode interpolation. The release should likewise not be interpreted as providing a complete independently validated automatic ICA/SSP artifact-correction pipeline."
+      },
+      {
+        "type": "paragraph",
+        "text": "QC is represented as an explicit research decision rather than a hidden preprocessing side effect. Dataset/run states can be routed to pass, review or fail outcomes, allowing downstream modelling to remain associated with the decision path that permitted it. A model-review layer exposes specification metadata before execution, including the model identity, equations/description, parameter schema and limitations. The formal objective is that the scientist reviews the same model contract that drives the run; the v0.1.1 release includes regression coverage for the model-detail contract and corrected a previously stale Stuart–Landau desktop equation."
+      },
+      {
+        "type": "figure",
+        "id": "figure2"
+      }
+    ]
+  },
+  {
+    "id": "methods-model-contract",
+    "number": "2.4",
+    "title": "Scientist-visible model specification contract",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "A central design requirement is that the model presented to the researcher immediately before execution is scientifically identifiable. For each registered family, the model-detail surface is designed to expose model identity, a human-readable mathematical description or equation, parameter names and bounds, available unit semantics, implementation fidelity, and explicit limitations. Solver, sampling, seed and fitting configuration are retained as run metadata where applicable. The objective is not to turn a graphical review step into proof of model validity; it is to reduce a narrower but consequential failure mode in which the scientist approves one mathematical description while the runtime executes another."
+      },
+      {
+        "type": "paragraph",
+        "text": "The importance of this contract was illustrated during verification of v0.1.1: a stale desktop Stuart–Landau equation was detected against the backend canonical specification and corrected before the release was packaged. A regression test now checks the model-detail endpoint against the canonical backend equation and source metadata. This establishes consistency for the reviewed specification in the evaluated release, but the current sidecar manifest does not yet provide a complete immutable per-model tuple of source hash, equation hash, equation version and parameter-schema hash. We therefore treat cryptographic binding of every reviewed specification to every executable model as an archival-release requirement rather than a capability fully demonstrated here."
+      }
+    ]
+  },
+  {
+    "id": "methods-model-registry",
+    "number": "2.5",
+    "title": "Computational model registry",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The v0.1.1 runtime registry contains 11 model families (Table 1; full equations and interpretation boundaries are provided in Supplementary Table S1). To avoid implying equal biological status, we use three categories. Literature-anchored dynamical models implement recognizable structures derived from established mathematical models. Statistical/engineering baselines provide useful time-series comparators without being neural-mass models. Proxy/surrogate implementations intentionally simplify a broader modelling family and are labelled accordingly."
+      },
+      {
+        "type": "paragraph",
+        "text": "This classification is important for software validity. A correct numerical implementation of a surrogate does not make the surrogate biologically equivalent to the canonical model on which it is inspired. Conversely, statistical baselines can be numerically well-defined without having a neural-population interpretation."
+      }
+    ]
+  }
+]

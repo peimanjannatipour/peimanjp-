@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 650" role="img" aria-labelledby="title desc">
+<title id="title">Local-first scientific runtime</title>
+<desc id="desc">Researcher-facing NeuroLab OS desktop, local scientific engine, and local state remain connected on the workstation with loopback execution.</desc>
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1d4f91"/></marker>
+  <style>.box{fill:#fff;stroke:#b8c5d6;stroke-width:2}.head{font:700 28px Arial,sans-serif;fill:#111827}.sub{font:15px Arial,sans-serif;fill:#64748b}.label{font:700 19px Arial,sans-serif;fill:#172033}.body{font:14px Arial,sans-serif;fill:#536174}.line{stroke:#1d4f91;stroke-width:4;marker-end:url(#arrow)}.green{stroke:#14845d;stroke-width:8}.blue{stroke:#1d4f91;stroke-width:8}</style>
+</defs>
+<rect width="1500" height="650" fill="#fff"/>
+<rect x="95" y="65" width="1310" height="520" rx="28" fill="#f8fafc"/>
+<text class="head" x="145" y="125">Local-first scientific runtime</text>
+<text class="sub" x="145" y="158">Researcher-facing control, computation and scientific state remain connected on the workstation.</text>
+<g transform="translate(150 230)">
+  <rect class="box" width="310" height="215" rx="18"/><line class="blue" x1="3" y1="0" x2="3" y2="215"/>
+  <text class="label" x="28" y="48">Desktop</text>
+  <text class="body" x="28" y="88">Electron / React</text><text class="body" x="28" y="120">QC + model review</text><text class="body" x="28" y="152">Run + report controls</text>
+</g>
+<line class="line" x1="470" y1="338" x2="545" y2="338"/>
+<g transform="translate(555 230)">
+  <rect class="box" width="390" height="215" rx="18"/><line class="green" x1="3" y1="0" x2="3" y2="215"/>
+  <text class="label" x="28" y="48">Local scientific engine</text>
+  <text class="body" x="28" y="88">Python / FastAPI</text><text class="body" x="28" y="120">Preprocessing + features</text><text class="body" x="28" y="152">Model fit + simulation</text><text class="body" x="28" y="184">In silico perturbation</text>
+</g>
+<line class="line" x1="955" y1="338" x2="1030" y2="338"/>
+<g transform="translate(1040 230)">
+  <rect class="box" width="310" height="215" rx="18"/><line class="blue" x1="3" y1="0" x2="3" y2="215"/>
+  <text class="label" x="28" y="48">Local state</text>
+  <text class="body" x="28" y="88">SQLite + project files</text><text class="body" x="28" y="120">Logs + report artifacts</text><text class="body" x="28" y="152">NumPy / SciPy / MNE / Optuna</text>
+</g>
+<rect x="420" y="500" width="660" height="50" rx="12" fill="#eef5ff"/>
+<text x="750" y="531" text-anchor="middle" style="font:700 13px Arial,sans-serif;fill:#1d4f91">Loopback execution • no remote scientific-compute service required</text>
+</svg>
