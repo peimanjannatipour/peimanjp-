@@ -1,14 +1,14 @@
 {
   "eyebrow": "Computational neuroscience · research systems · neurotechnology",
-  "h1": "Peiman Jannatipour",
-  "subtitle": "Computational Neuroscience Researcher · EEG, Human Timing, Developmental Neuroimaging, Research Software, and Neurotechnology",
+  "h1": "Peiman Jannatipour — Computational Neuroscience Research",
+  "subtitle": "EEG · Human Timing · Bayesian Modelling · Developmental Neuroimaging · Scientific Software · Neurotechnology",
   "heroParagraph": "I work across computational neuroscience, EEG, temporal cognition, Bayesian modelling, developmental neuroimaging, scientific software, and privacy-aware neurotechnology. My research asks how behavioural context, recent experience, and neural state shape human cognition, while my systems work focuses on making complex scientific workflows more reproducible, interpretable, and usable.",
   "heroSecondary": "The portfolio brings together empirical neuroscience, computational modelling, ongoing ABCD developmental-neuroimaging work, NeuroLab OS, the NDMS invention programme, and evidence-review systems such as SMIS-ODS. Public pages distinguish preprints, manuscripts, research lines, prototypes, and patent-pending work so that status and evidence remain clear.",
   "primaryButtons": [
-    { "label": "Explore Research", "href": "/research" },
-    { "label": "Publications & Manuscripts", "href": "/publications" },
-    { "label": "Current Projects", "href": "/projects" },
-    { "label": "Contact", "href": "/contact" }
+    { "label": "Research programme", "href": "/research" },
+    { "label": "Publication record", "href": "/publications" },
+    { "label": "Project portfolio", "href": "/projects" },
+    { "label": "Research inquiry", "href": "/contact" }
   ],
   "highlights": [
     {

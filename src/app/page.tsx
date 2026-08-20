@@ -15,31 +15,38 @@ const currentWorkTitles = [
   "SMIS-ODS",
 ];
 
+const projectLinkLabels: Record<string, string> = {
+  "ABCD Autism-ADHD Developmental Neuroimaging Research Line": "ABCD project overview",
+  "NeuroLab OS": "NeuroLab OS overview",
+  "Masking Index Prototype": "Masking prototype overview",
+  "SMIS-ODS": "SMIS-ODS overview",
+};
+
 const verificationLinks = [
   {
-    label: "ORCID",
+    label: "ORCID identity",
     href: externalLinks.orcid.href,
-    detail: "Persistent scholarly identity",
+    detail: "Persistent scholarly identity record",
   },
   {
-    label: "ResearchGate",
+    label: "ResearchGate profile",
     href: externalLinks.researchGate.href,
-    detail: "Public scholarly profile",
+    detail: "Public scholarly profile and research presence",
   },
   {
-    label: "GitHub",
+    label: "GitHub projects",
     href: externalLinks.github.href,
     detail: "Public code and project identity",
   },
   {
-    label: "DOI-linked outputs",
+    label: "DOI-linked research",
     href: "/publications",
     detail: "Preprints and manuscripts with source links",
   },
   {
-    label: "Patent Center",
+    label: "PCT status context",
     href: "/patent",
-    detail: "Public PCT and invention-status context",
+    detail: "Public invention and patent-status explanation",
   },
 ];
 
@@ -77,7 +84,7 @@ export default function Home() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">
                 {homepageData.eyebrow}
               </p>
-              <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
                 {homepageData.h1}
               </h1>
               <p className="mt-4 max-w-4xl text-lg font-semibold leading-8 text-sky-200 sm:text-xl">
@@ -103,11 +110,11 @@ export default function Home() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs text-slate-400">
-                <a className="underline decoration-slate-600 underline-offset-4 hover:text-white" href={externalLinks.orcid.href} rel="noreferrer" target="_blank">ORCID</a>
-                <a className="underline decoration-slate-600 underline-offset-4 hover:text-white" href={externalLinks.researchGate.href} rel="noreferrer" target="_blank">ResearchGate</a>
-                <a className="underline decoration-slate-600 underline-offset-4 hover:text-white" href={externalLinks.github.href} rel="noreferrer" target="_blank">GitHub</a>
-                <Link className="underline decoration-slate-600 underline-offset-4 hover:text-white" href="/cv">CV</Link>
-                <Link className="underline decoration-slate-600 underline-offset-4 hover:text-white" href="/verification">Verification</Link>
+                <a className="underline decoration-slate-600 underline-offset-4 hover:text-white" href={externalLinks.orcid.href} rel="noreferrer" target="_blank">ORCID identity</a>
+                <a className="underline decoration-slate-600 underline-offset-4 hover:text-white" href={externalLinks.researchGate.href} rel="noreferrer" target="_blank">ResearchGate profile</a>
+                <a className="underline decoration-slate-600 underline-offset-4 hover:text-white" href={externalLinks.github.href} rel="noreferrer" target="_blank">GitHub code</a>
+                <Link className="underline decoration-slate-600 underline-offset-4 hover:text-white" href="/cv">Public CV</Link>
+                <Link className="underline decoration-slate-600 underline-offset-4 hover:text-white" href="/verification">Source verification</Link>
               </div>
             </div>
 
@@ -142,7 +149,7 @@ export default function Home() {
             {homepageData.highlights.map((highlight, index) => (
               <article className="rounded-xl border border-slate-800 bg-slate-900 p-6" key={highlight.title}>
                 <span className="text-xs font-bold text-sky-300">0{index + 1}</span>
-                <h3 className="mt-3 text-lg font-semibold text-white">{highlight.title}</h3>
+                <p className="mt-3 text-lg font-semibold text-white">{highlight.title}</p>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{highlight.text}</p>
               </article>
             ))}
@@ -182,16 +189,18 @@ export default function Home() {
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="areas-title">{researchData.title}</h2>
               <p className="mt-4 text-sm leading-7 text-slate-300">{researchData.intro}</p>
             </div>
-            <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/research">Full research overview</Link>
+            <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/research">Research overview</Link>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {researchData.cards.map((card) => (
-              <Link className="group rounded-xl border border-slate-800 bg-slate-900 p-6 transition hover:border-sky-500/60" href={card.href} key={card.id}>
-                <h3 className="text-lg font-semibold text-white group-hover:text-sky-200">{card.title}</h3>
+              <article className="rounded-xl border border-slate-800 bg-slate-900 p-6" key={card.id}>
+                <h3 className="text-lg font-semibold text-white">{card.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{card.text}</p>
                 <p className="mt-4 border-l-2 border-sky-500/50 pl-4 text-xs leading-6 text-slate-400">{card.plainLanguage}</p>
-                <span className="mt-5 inline-block text-sm font-semibold text-sky-300">Explore this research line →</span>
-              </Link>
+                <Link className="mt-5 inline-block text-sm font-semibold text-sky-300 underline underline-offset-4" href={card.href}>
+                  {card.linkLabel} →
+                </Link>
+              </article>
             ))}
           </div>
         </div>
@@ -208,18 +217,22 @@ export default function Home() {
             {currentWork.map((project) => (
               <article className="rounded-xl border border-slate-800 bg-slate-900 p-6" key={project.title}>
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+                  <p className="text-xl font-semibold text-white">{project.title}</p>
                   <span className="rounded-full border border-sky-500/30 bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-300">{project.status}</span>
                 </div>
                 <p className="mt-4 text-sm leading-7 text-slate-300">{project.summary}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {project.tags.map((tag) => <span className="rounded-full border border-slate-700 px-2.5 py-1 text-xs text-slate-400" key={tag}>{tag}</span>)}
                 </div>
-                {project.href ? <Link className="mt-5 inline-block text-sm font-semibold text-sky-300 underline underline-offset-4" href={project.href}>Open project page →</Link> : null}
+                {project.href ? (
+                  <Link className="mt-5 inline-block text-sm font-semibold text-sky-300 underline underline-offset-4" href={project.href}>
+                    {projectLinkLabels[project.title] ?? "Project overview"} →
+                  </Link>
+                ) : null}
               </article>
             ))}
           </div>
-          <div className="mt-6"><Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/projects">View the complete project portfolio →</Link></div>
+          <div className="mt-6"><Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/projects">All projects →</Link></div>
         </div>
       </section>
 
@@ -230,7 +243,7 @@ export default function Home() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Research outputs</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="publications-title">Publications, preprints, and manuscripts</h2>
             </div>
-            <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/publications">View all outputs</Link>
+            <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/publications">All publications</Link>
           </div>
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {publicationsData.entries.slice(0, 4).map((entry) => (
@@ -247,35 +260,37 @@ export default function Home() {
 
       <section className="border-b border-slate-800 py-16 lg:py-20" aria-labelledby="verification-title">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="max-w-4xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Evidence and status</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="verification-title">External sources and clear research-status definitions</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-300">
+              Public claims are linked to scholarly identities, DOI records, project sources, or explicit status pages when an appropriate public source exists. Research and technology labels are kept distinct so that a preprint, manuscript, technical beta, or patent-pending invention is not silently upgraded into a stronger claim.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-10 lg:grid-cols-2">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">External verification</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="verification-title">Source trails for research identity, outputs, and invention status</h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300">
-                Public claims on this portfolio are linked to external scholarly identities, DOI records, public project sources, or explicit status pages wherever a suitable source is available.
-              </p>
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-slate-300">External verification</p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {verificationLinks.map((item) => {
                   const external = item.href.startsWith("http");
-                  return external ? (
-                    <a className="rounded-xl border border-slate-800 bg-slate-900 p-4 transition hover:border-sky-500/60" href={item.href} key={item.label} rel="noreferrer" target="_blank">
-                      <span className="block text-sm font-semibold text-sky-200">{item.label} ↗</span>
-                      <span className="mt-1 block text-xs leading-5 text-slate-400">{item.detail}</span>
-                    </a>
-                  ) : (
-                    <Link className="rounded-xl border border-slate-800 bg-slate-900 p-4 transition hover:border-sky-500/60" href={item.href} key={item.label}>
-                      <span className="block text-sm font-semibold text-sky-200">{item.label} →</span>
-                      <span className="mt-1 block text-xs leading-5 text-slate-400">{item.detail}</span>
-                    </Link>
+                  return (
+                    <div className="rounded-xl border border-slate-800 bg-slate-900 p-4" key={item.label}>
+                      {external ? (
+                        <a className="text-sm font-semibold text-sky-200 underline underline-offset-4" href={item.href} rel="noreferrer" target="_blank">{item.label} ↗</a>
+                      ) : (
+                        <Link className="text-sm font-semibold text-sky-200 underline underline-offset-4" href={item.href}>{item.label} →</Link>
+                      )}
+                      <p className="mt-2 text-xs leading-5 text-slate-400">{item.detail}</p>
+                    </div>
                   );
                 })}
               </div>
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">How to read this portfolio</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white">Research and technology status labels are intentionally distinct</h2>
-              <dl className="mt-7 grid gap-4 sm:grid-cols-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-slate-300">Status guide</p>
+              <dl className="mt-5 grid gap-4 sm:grid-cols-2">
                 {statusGuide.map((item) => (
                   <div className="rounded-xl border border-slate-800 bg-slate-900 p-5" key={item.label}>
                     <dt className="text-sm font-semibold text-white">{item.label}</dt>
@@ -284,8 +299,8 @@ export default function Home() {
                 ))}
               </dl>
               <div className="mt-6 flex flex-wrap gap-4 text-sm">
-                <Link className="font-semibold text-sky-300 underline underline-offset-4" href="/verification">Verification policy</Link>
-                <Link className="font-semibold text-sky-300 underline underline-offset-4" href="/contact">Contact for clarification</Link>
+                <Link className="font-semibold text-sky-300 underline underline-offset-4" href="/verification">Verification guide</Link>
+                <Link className="font-semibold text-sky-300 underline underline-offset-4" href="/contact">Ask about research status</Link>
               </div>
             </div>
           </div>
@@ -311,8 +326,8 @@ export default function Home() {
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white" id="about-title">{homepageData.about.title}</h2>
               <p className="mt-5 text-base leading-8 text-slate-300">{homepageData.about.body}</p>
               <div className="mt-6 flex flex-wrap gap-4">
-                <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/about">Read the full profile</Link>
-                <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/contact">Contact</Link>
+                <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/about">About Peiman</Link>
+                <Link className="text-sm font-semibold text-sky-300 underline underline-offset-4" href="/contact">Collaboration contact</Link>
               </div>
             </div>
           </div>

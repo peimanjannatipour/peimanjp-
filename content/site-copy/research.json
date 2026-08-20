@@ -7,6 +7,7 @@
       "title": "EEG and neural time-series",
       "text": "Analysis of sensor-level neural signals, residual prediction, and brain-behaviour relationships in human timing and cognitive variability.",
       "plainLanguage": "Why it matters: tests whether neural signals add useful information beyond what behaviour already explains.",
+      "linkLabel": "EEG research details",
       "href": "/research/eeg-temporal-reproduction-bias"
     },
     {
@@ -14,6 +15,7 @@
       "title": "Temporal cognition and human time reproduction",
       "text": "Research on systematic bias in time reproduction, contextual effects, recent-trial influences, and computational accounts of temporal estimation.",
       "plainLanguage": "Why it matters: explains why reproduced durations systematically drift with context and recent experience.",
+      "linkLabel": "Human timing research",
       "href": "/research/bayesian-log-time-state-space-clock"
     },
     {
@@ -21,6 +23,7 @@
       "title": "Bayesian and state-space modelling",
       "text": "Interpretable behavioural models emphasizing central tendency, multiplicative variability, predictive diagnostics, and explicit model misspecification.",
       "plainLanguage": "Why it matters: makes model successes and failure modes visible instead of relying on fit alone.",
+      "linkLabel": "Bayesian model details",
       "href": "/research/bayesian-log-time-state-space-clock"
     },
     {
@@ -28,6 +31,7 @@
       "title": "ABCD developmental neuroimaging",
       "text": "An ongoing research line using ABCD data to study adolescent brain maturation, resting-state connectivity, and dimensional autism/ADHD trait co-occurrence without disclosing unpublished analyses.",
       "plainLanguage": "Why it matters: studies developmental variation at a scale that can connect brain maturation with dimensional traits.",
+      "linkLabel": "ABCD research scope",
       "href": "/research/abcd-developmental-neuroimaging"
     },
     {
@@ -35,6 +39,7 @@
       "title": "Neurotechnology and scientific systems",
       "text": "Design of privacy-aware and reproducible systems for neural analysis, modelling, simulation, multimodal inference, and research translation.",
       "plainLanguage": "Why it matters: turns complex scientific workflows into systems that are easier to inspect, reproduce, and audit.",
+      "linkLabel": "Scientific software systems",
       "href": "/neurolab-os"
     },
     {
@@ -42,6 +47,7 @@
       "title": "Evidence systems and scientific decision support",
       "text": "Structured evidence-review work focused on separating claims, sources, study design, outcome relevance, risk of bias, and support direction.",
       "plainLanguage": "Why it matters: separates evidence quality from the claim being made before a conclusion is presented.",
+      "linkLabel": "Evidence-system details",
       "href": "/projects/smis-ods"
     }
   ]
