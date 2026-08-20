@@ -1,0 +1,125 @@
+{
+  "figures": {
+    "figure1": {
+      "number": "1",
+      "src": "/assets/figures/articles/neurolab-figure-1.svg",
+      "alt": "Local-first NeuroLab OS scientific runtime showing the Electron React desktop, local Python FastAPI scientific engine, and local state.",
+      "caption": "Scientific runtime evaluated in NeuroLab OS v0.1.1. The commercial/licensing control plane is not part of the scientific contribution described here."
+    },
+    "figure2": {
+      "number": "2",
+      "src": "/assets/figures/articles/neurolab-figure-2.svg",
+      "alt": "Eight-stage NeuroLab OS research workflow from ingest through preprocess, quality control, scientist review, fitting, simulation, perturbation, and reporting.",
+      "caption": "NeuroLab OS research workflow. Perturbations are computational operations on model parameters or states and are not biological or clinical interventions."
+    },
+    "figure3": {
+      "number": "3",
+      "src": "/assets/figures/articles/neurolab-figure-3.svg",
+      "alt": "Evidence hierarchy distinguishing artifact integrity, software-contract verification, numerical sanity, and outstanding external scientific validation.",
+      "caption": "Evidence hierarchy used in this manuscript. NeuroLab OS v0.1.1 provides artifact/build verification, software-contract verification and internal numerical-sanity coverage. Independent reference-data or reference-implementation concordance remains a separate validation layer and is not inferred from passing tests."
+    },
+    "figure4": {
+      "number": "4",
+      "src": "/assets/figures/articles/neurolab-figure-4.svg",
+      "alt": "NeuroLab OS model taxonomy separating literature-anchored dynamics, statistical baselines, and explicit proxies or surrogates.",
+      "caption": "Model taxonomy used in this manuscript. Categories refer to modelling role and claim boundary, not an ordinal quality ranking."
+    }
+  },
+  "tables": {
+    "table1": {
+      "title": "Table 1 | Scientific model inventory in the v0.1.1 runtime",
+      "note": "“Anchored” denotes a literature-recognizable model family, not independent biological validation of the NeuroLab implementation.",
+      "columns": ["Model", "Category", "Intended computational role / interpretation boundary"],
+      "rows": [
+        ["Wilson–Cowan", "Anchored dynamical", "Coupled excitatory/inhibitory population dynamics; time-constant units are not interpreted physiologically unless explicitly specified."],
+        ["Kuramoto", "Anchored dynamical", "Coupled phase oscillators; ω is an angular-frequency variable and should not be conflated with frequency in Hz."],
+        ["OU baseline", "Anchored stochastic", "Mean-reverting stochastic baseline with optional coupling."],
+        ["Jansen–Rit", "Anchored structural form", "Six-state cortical-column structure with NeuroLab numerical scaling/safeguards; not claimed as a canonical parameter set."],
+        ["Hopf/Stuart–Landau", "Anchored dynamical", "Diffusively coupled normal-form oscillator network used as a whole-brain-style dynamical model [26, 27]."],
+        ["Linear state-space", "Statistical baseline", "Discrete linear stochastic dynamics; engineering/statistical comparator rather than physiological model."],
+        ["Stable VAR connectivity", "Statistical baseline", "Stable vector autoregressive dynamics; coefficients are model-derived and not anatomical connectivity by default."],
+        ["fMRI latent-state", "Proxy/surrogate", "Markov-switching ROI/BOLD time-series proxy; not a complete HMM inference pipeline."],
+        ["Stuart–Landau", "Extended dynamical form", "Complex-amplitude oscillator with phase-lagged network coupling and deterministic/stochastic drive."],
+        ["Switching linear state-space", "Proxy/surrogate", "Regime-switching linear dynamics; not an exact reproduction of a specific HMM inference framework."],
+        ["Reduced Wong–Wang Lite", "Proxy/surrogate", "Wong–Wang-inspired recurrent ROI model with a compact BOLD-like smoothing transform; not a full hemodynamic forward model [28]."]
+      ]
+    },
+    "table2": {
+      "title": "Table 2 | Release verification for NeuroLab OS v0.1.1",
+      "columns": ["Check", "Result", "Interpretation"],
+      "rows": [
+        ["Backend regression suite", "82/82 passed", "Implemented backend contracts covered by the suite were satisfied."],
+        ["Workflow suite", "38/38 passed", "Core scientific workflow routes/services passed focused regression tests."],
+        ["Desktop type check / build", "Passed / passed", "Renderer and desktop code compiled in the release environment."],
+        ["Scientific engine build", "Passed", "Local Python engine was successfully frozen for Windows."],
+        ["Unsigned beta packaging", "Passed", "A complete Windows x64 ZIP was generated from the build."],
+        ["Packaged desktop launch", "Passed", "The packaged application remained running during smoke verification."],
+        ["Engine health check", "HTTP 200", "Bundled local service started and responded as expected."],
+        ["Model registry", "11/11 present", "All documented model specifications were available."],
+        ["ZIP integrity", "SHA-256 matched", "Release checksum matched the supplied manifest."]
+      ]
+    },
+    "table3": {
+      "title": "Table 3 | Evidence hierarchy and current status for NeuroLab OS v0.1.1",
+      "columns": ["Evidence layer", "Evidence in v0.1.1", "What it supports", "What remains for stronger claims"],
+      "rows": [
+        ["Artifact identity", "ZIP SHA-256 and manifest match", "Exact identity of the evaluated binary artifact", "Archival source DOI and clean signed/tagged release"],
+        ["Software contracts", "82 backend and 38 workflow tests; build and runtime smoke checks", "Implemented routes, registry and packaged-runtime behaviour covered by tests", "Independent replication of build and test process"],
+        ["Numerical sanity", "Model-regression, oscillator-frequency, OU sanity, recovery and intervention-consistency tests are reported in the test inventory", "Internal numerical guardrails and regression detection", "Publication-scale distributions, tolerances and independent reference implementations"],
+        ["Scientific validation", "Not provided as an external benchmark in this release", "No external-validity claim is made", "Public EEG/ROI-BOLD benchmark; cross-tool numerical concordance; cross-machine reproduction"],
+        ["Biological/clinical validity", "Not evaluated", "No causal, therapeutic or clinical claim", "Separate empirical/clinical study designed for the intended use"]
+      ]
+    },
+    "table4": {
+      "title": "Table 4 | Positioning of NeuroLab OS relative to complementary research-software ecosystems",
+      "note": "The comparison describes primary design emphasis and does not imply feature exclusivity or superiority.",
+      "columns": ["System / ecosystem", "Primary established role", "Evidence/semantic emphasis", "Relationship to NeuroLab OS"],
+      "rows": [
+        ["MNE-Python / EEGLAB / FieldTrip", "Mature EEG/MEG preprocessing, analysis and visualization", "Modality-specific analytical breadth", "NeuroLab uses a narrower signal workflow and connects it to model review, fitting and provenance."],
+        ["BIDS / EEG-BIDS / BIDS Apps", "Standardized data organization and executable app conventions", "Interoperability and workflow specification", "NeuroLab is BIDS-lite-oriented for EEG but does not claim full BIDS/NWB conformance."],
+        ["DataLad", "Distributed versioning of data, code and their relationships", "Dataset/code provenance", "NeuroLab focuses on run-level preprocessing/model/report lineage inside the application."],
+        ["The Virtual Brain", "Whole-brain network simulation and personalized modelling", "Biophysically motivated large-scale simulation", "NeuroLab exposes a smaller heterogeneous model registry integrated with QC/fitting/reporting."],
+        ["BrainPy", "General-purpose brain dynamics programming", "Flexible model definition, performance and analysis", "NeuroLab is not a simulator programming framework; it emphasizes researcher-facing model contracts and workflow continuity."],
+        ["Pynapple", "Common objects and operations for time-resolved neuroscience data", "Stable, reusable data-analysis abstractions", "NeuroLab is less general as a data-analysis library and instead couples data handling to reviewed modelling and report lineage."],
+        ["NeuroWRAP", "Configurable neurodata analysis workflows", "Workflow sharing plus sensitivity/robustness analysis", "NeuroLab targets neural time-series modelling and provenance rather than calcium-imaging workflow consensus."]
+      ]
+    }
+  },
+  "references": [
+    {"n": 1, "text": "R. A. McDougal, A. S. Bulanova, W. W. Lytton, Reproducibility in computational neuroscience models and simulations, IEEE Transactions on Biomedical Engineering 63 (10) (2016) 2021–2035.", "doi": "10.1109/TBME.2016.2539602"},
+    {"n": 2, "text": "T. Manninen, J. Açimović, R. Havela, H. Teppola, M.-L. Linne, Challenges in reproducibility, replicability, and comparability of computational models and tools for neuronal and glial networks, cells, and subcellular structures, Frontiers in Neuroinformatics 12 (2018) 20.", "doi": "10.3389/fninf.2018.00020"},
+    {"n": 3, "text": "R. Gutzen, M. von Papen, G. Trensch, P. Quaglio, S. Grün, M. Denker, Reproducible neural network simulations: Statistical methods for model validation on the level of network activity data, Frontiers in Neuroinformatics 12 (2018) 90.", "doi": "10.3389/fninf.2018.00090"},
+    {"n": 4, "text": "K. J. Gorgolewski, T. Auer, V. D. Calhoun, et al., The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments, Scientific Data 3 (2016) 160044.", "doi": "10.1038/sdata.2016.44"},
+    {"n": 5, "text": "C. R. Pernet, S. Appelhoff, K. J. Gorgolewski, et al., EEG-BIDS, an extension to the brain imaging data structure for electroencephalography, Scientific Data 6 (2019) 103.", "doi": "10.1038/s41597-019-0104-8"},
+    {"n": 6, "text": "A. Gramfort, M. Luessi, E. Larson, et al., MEG and EEG data analysis with MNE-Python, Frontiers in Neuroscience 7 (2013) 267.", "doi": "10.3389/fnins.2013.00267"},
+    {"n": 7, "text": "A. Delorme, S. Makeig, EEGLAB: an open source toolbox for analysis of single-trial EEG dynamics including independent component analysis, Journal of Neuroscience Methods 134 (1) (2004) 9–21.", "doi": "10.1016/j.jneumeth.2003.10.009"},
+    {"n": 8, "text": "R. Oostenveld, P. Fries, E. Maris, J.-M. Schoffelen, Fieldtrip: Open source software for advanced analysis of MEG, EEG, and invasive electrophysiological data, Computational Intelligence and Neuroscience 2011 (2011) 156869.", "doi": "10.1155/2011/156869"},
+    {"n": 9, "text": "K. Gorgolewski, C. D. Burns, C. Madison, et al., Nipype: a flexible, lightweight and extensible neuroimaging data processing framework in python, Frontiers in Neuroinformatics 5 (2011) 13.", "doi": "10.3389/fninf.2011.00013"},
+    {"n": 10, "text": "K. J. Gorgolewski, F. Alfaro-Almagro, T. Auer, et al., BIDS apps: Improving ease of use, accessibility, and reproducibility of neuroimaging data analysis methods, PLOS Computational Biology 13 (3) (2017) e1005209.", "doi": "10.1371/journal.pcbi.1005209"},
+    {"n": 11, "text": "Y. O. Halchenko, K. Meyer, B. Poldrack, et al., Datalad: distributed system for joint management of code, data, and their relationship, Journal of Open Source Software 6 (63) (2021) 3262.", "doi": "10.21105/joss.03262"},
+    {"n": 12, "text": "P. Sanz Leon, S. A. Knock, M. M. Woodman, et al., The virtual brain: a simulator of primate brain network dynamics, Frontiers in Neuroinformatics 7 (2013) 10.", "doi": "10.3389/fninf.2013.00010"},
+    {"n": 13, "text": "P. Ritter, M. Schirner, A. R. McIntosh, V. K. Jirsa, The virtual brain integrates computational modeling and multimodal neuroimaging, Brain Connectivity 3 (2) (2013) 121–145.", "doi": "10.1089/brain.2012.0120"},
+    {"n": 14, "text": "G. Viejo, D. Levenstein, S. Skromne Carrasco, D. Mehrotra, S. Mahallati, G. R. Vite, H. Denny, L. Sjulson, F. P. Battaglia, A. Peyrache, Pynapple, a toolbox for data analysis in neuroscience, eLife 12 (2023) RP85786.", "doi": "10.7554/eLife.85786.3"},
+    {"n": 15, "text": "C. Wang, T. Zhang, X. Chen, S. He, S. Li, S. Wu, Brainpy, a flexible, integrative, efficient, and extensible framework for general-purpose brain dynamics programming, eLife 12 (2023) e86365.", "doi": "10.7554/eLife.86365"},
+    {"n": 16, "text": "Z. Bowen, G. Magnusson, M. Diep, U. Ayyangar, A. Smirnov, P. O. Kanold, W. Losert, Neurowrap: integrating, validating, and sharing neurodata analysis workflows, Frontiers in Neuroinformatics 17 (2023) 1082111.", "doi": "10.3389/fninf.2023.1082111"},
+    {"n": 17, "text": "C. R. Pernet, R. Martinez-Cancino, D. Truong, S. Makeig, A. Delorme, From bids-formatted eeg data to sensor-space group results: A fully reproducible workflow with eeglab and limo eeg, Frontiers in Neuroscience 14 (2021) 610388.", "doi": "10.3389/fnins.2020.610388"},
+    {"n": 18, "text": "J. Carp, The secret lives of experiments: methods reporting in the fmri literature, NeuroImage 63 (1) (2012) 289–300.", "doi": "10.1016/j.neuroimage.2012.07.004"},
+    {"n": 19, "text": "R. A. Poldrack, C. I. Baker, J. Durnez, et al., Scanning the horizon: towards transparent and reproducible neuroimaging research, Nature Reviews Neuroscience 18 (2017) 115–126.", "doi": "10.1038/nrn.2016.167"},
+    {"n": 20, "text": "R. Botvinik-Nezer, F. Holzmeister, C. F. Camerer, et al., Variability in the analysis of a single neuroimaging dataset by many teams, Nature 582 (2020) 84–88.", "doi": "10.1038/s41586-020-2314-9"},
+    {"n": 21, "text": "T. Glatard, L. B. Lewis, R. Ferreira da Silva, et al., Reproducibility of neuroimaging analyses across operating systems, Frontiers in Neuroinformatics 9 (2015) 12.", "doi": "10.3389/fninf.2015.00012"},
+    {"n": 22, "text": "H. R. Wilson, J. D. Cowan, Excitatory and inhibitory interactions in localized populations of model neurons, Biophysical Journal 12 (1) (1972) 1–24.", "doi": "10.1016/S0006-3495(72)86068-5"},
+    {"n": 23, "text": "Y. Kuramoto, Chemical Oscillations, Waves, and Turbulence, Springer, Berlin, 1984.", "doi": "10.1007/978-3-642-69689-3"},
+    {"n": 24, "text": "B. H. Jansen, V. G. Rit, Electroencephalogram and visual evoked potential generation in a mathematical model of coupled cortical columns, Biological Cybernetics 73 (1995) 357–366.", "doi": "10.1007/BF00199471"},
+    {"n": 25, "text": "G. E. Uhlenbeck, L. S. Ornstein, On the theory of the brownian motion, Physical Review 36 (1930) 823–841.", "doi": "10.1103/PhysRev.36.823"},
+    {"n": 26, "text": "G. Deco, M. L. Kringelbach, V. K. Jirsa, P. Ritter, The dynamics of resting fluctuations in the brain: metastability and its dynamical cortical core, Scientific Reports 7 (2017) 3095.", "doi": "10.1038/s41598-017-03073-5"},
+    {"n": 27, "text": "A. Ponce-Alvarez, G. Deco, The hopf whole-brain model and its linear approximation, Scientific Reports 14 (2024) 2615.", "doi": "10.1038/s41598-024-53105-0"},
+    {"n": 28, "text": "K.-F. Wong, X.-J. Wang, A recurrent network mechanism of time integration in perceptual decisions, Journal of Neuroscience 26 (4) (2006) 1314–1328.", "doi": "10.1523/JNEUROSCI.3733-05.2006"},
+    {"n": 29, "text": "T. Akiba, S. Sano, T. Yanase, T. Ohta, M. Koyama, Optuna: A next-generation hyperparameter optimization framework, in: Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 2019, pp. 2623–2631.", "doi": "10.1145/3292500.3330701"},
+    {"n": 30, "text": "M. Mohácsi, M. P. Török, S. Sáray, L. Tar, G. Farkas, S. Káli, Evaluation and comparison of methods for neuronal parameter optimization using the neuroptimus software framework, PLOS Computational Biology 20 (12) (2024) e1012039.", "doi": "10.1371/journal.pcbi.1012039"},
+    {"n": 31, "text": "P. Jannatipour, Sensor-Level EEG Residual Prediction of Temporal Reproduction Bias, Research Square preprint (2026).", "doi": "10.21203/rs.3.rs-9852649/v1"},
+    {"n": 32, "text": "P. Jannatipour, A Bayesian Log-Time State-Space Clock for Human Time Reproduction, SSRN preprint (2026).", "doi": "10.2139/ssrn.6383218"},
+    {"n": 33, "text": "P. Jannatipour, A Graph-Theoretic Framework for Representing Space-time as Temporal Layers of Spatial Graphs, SSRN preprint (2025).", "doi": "10.2139/ssrn.5891994"}
+  ],
+  "citation": "Jannatipour P. NeuroLab OS: A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation. Technical manuscript. 2026.",
+  "bibtex": "@misc{jannatipour2026neurolabos,\n  author = {Jannatipour, Peiman},\n  title = {NeuroLab OS: A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation},\n  year = {2026},\n  note = {Technical manuscript; NeuroLab OS v0.1.1}\n}"
+}
