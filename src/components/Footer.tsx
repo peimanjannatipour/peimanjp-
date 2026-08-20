@@ -26,12 +26,12 @@ export function Footer() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-slate-300">Key routes</p>
             <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/research">Research programme</Link></li>
-              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/publications">Publication record</Link></li>
-              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/projects">Project index</Link></li>
-              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/about">About Peiman</Link></li>
-              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/contact">Research contact</Link></li>
-              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/verification">Status verification</Link></li>
+              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/research">Research hub</Link></li>
+              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/publications">Outputs index</Link></li>
+              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/projects">Projects index</Link></li>
+              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/about">Profile page</Link></li>
+              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/contact">Contact route</Link></li>
+              <li><Link className="underline-offset-4 transition hover:text-white hover:underline" href="/verification">Evidence policy</Link></li>
             </ul>
           </div>
 
@@ -65,7 +65,7 @@ export function Footer() {
                 rel="noreferrer"
                 target="_blank"
               >
-                LinkedIn
+                LinkedIn share
               </a>
               <a
                 className="underline-offset-4 hover:text-white hover:underline"
@@ -73,7 +73,7 @@ export function Footer() {
                 rel="noreferrer"
                 target="_blank"
               >
-                X / Twitter
+                X share
               </a>
               <a
                 className="underline-offset-4 hover:text-white hover:underline"
