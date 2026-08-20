@@ -1,0 +1,112 @@
+[
+  {
+    "id": "results-verification",
+    "number": "3.1",
+    "title": "Release-level software verification",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The release verification establishes an executable scientific surface spanning data handling, preprocessing/QC, model specification, simulation, fitting, model recommendation, perturbation analysis and report generation. Table 2 summarizes the observed release checks. Importantly, these results answer the software-engineering question “does the implemented workflow execute as specified by its tests and packaging checks?” They do not answer the biological question “is every parameterization an empirically valid representation of a neural system?”"
+      },
+      {
+        "type": "paragraph",
+        "text": "The test inventory reported for the release includes numerical regression coverage for the complete model registry, oscillator-frequency sanity checks, OU analytic sanity checks, parameter-recovery benchmark hardening and intervention-consistency tests. The distributed release evidence reports their inclusion within the passing backend suite but does not provide publication-scale benchmark distributions or external reference-dataset concordance. Accordingly, we treat these as implementation-verification evidence rather than as a substitute for external validation."
+      },
+      {
+        "type": "table",
+        "id": "table2"
+      }
+    ]
+  },
+  {
+    "id": "results-boundary",
+    "number": "3.2",
+    "title": "Evidence boundary and validation readiness",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Table 3 separates the evidence currently available from evidence that would be required for stronger scientific claims. This prevents a common error in research-software reporting: treating successful execution or unit tests as evidence that a model is biologically correct. Quantitative benchmark studies in computational neuroscience typically report distributions of accuracy, convergence, sensitivity or reference agreement rather than only the existence of a test harness [3, 30, 15]. NeuroLab’s current benchmark infrastructure is therefore best interpreted as a reproducibility and regression foundation on which publication-scale validation experiments can be run."
+      },
+      {
+        "type": "table",
+        "id": "table3"
+      }
+    ]
+  },
+  {
+    "id": "results-semantics",
+    "number": "3.3",
+    "title": "Model-semantic boundaries",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The model registry is heterogeneous by design (Fig. 4). The strongest scientific safeguard is therefore not a claim that all models have equal fidelity, but the explicit separation of model roles. Wilson–Cowan, Kuramoto, OU, Jansen–Rit and Hopf/Stuart–Landau have recognizable mathematical ancestry [22, 23, 25, 24, 26]; linear state-space and VAR are statistical baselines; the fMRI latent-state and switching-state models are proxies/surrogates; and Reduced Wong–Wang Lite intentionally uses a reduced recurrent-population and BOLD-like proxy rather than a full hemodynamic forward model. This classification prevents software availability from being mistaken for physiological validation."
+      },
+      {
+        "type": "figure",
+        "id": "figure4"
+      }
+    ]
+  },
+  {
+    "id": "results-reproducibility",
+    "number": "3.4",
+    "title": "Reproducibility properties of the release",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The final beta artifact was independently checksum-verifiable: the release manifest and recomputed SHA-256 both identified 6bd8dcd9c4372cf6edd8506bcfe7a18a6f7edffb2748ccdb4d5c3047c780e2da. The release package contained both the Electron application archive and the frozen scientific engine. These properties establish artifact identity. Reproducibility at the scientific-result level additionally requires stable input data, model/configuration records and environment information; NeuroLab’s report/provenance layer is designed to retain these items, but cross-machine numerical equivalence has not yet been demonstrated as a publication-scale experiment."
+      }
+    ]
+  },
+  {
+    "id": "discussion",
+    "number": "4",
+    "title": "Discussion",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "NeuroLab OS is best positioned as an integration layer for traceable model-based neural time-series work rather than as a replacement for established neuroscience ecosystems. MNE-Python, EEGLAB and FieldTrip remain substantially broader and more mature for electrophysiological signal processing [6, 7, 8]; BIDS, BIDS Apps and DataLad address standardization, workflow execution and versioned computational assets [4, 10, 11]; TVB provides specialized large-scale brain-network simulation [12, 13]; BrainPy provides a general-purpose programming framework for efficient brain dynamics modelling [15]; Pynapple provides stable abstractions for time-resolved neuroscience data [14]; and NeuroWRAP demonstrates how integrated workflows can support sensitivity and robustness analysis [16]. NeuroLab’s distinguishing design objective is narrower: keep QC decisions, researcher-visible model semantics, fit configuration, model-space perturbations and report lineage connected in one local application. The intended advantage is therefore not maximal preprocessing breadth, the number of available equations, or simulator speed; it is cross-stage semantic continuity between what the researcher reviews, what the runtime executes and what the report records."
+      },
+      {
+        "type": "paragraph",
+        "text": "Three aspects of the design are potentially useful to research practice. First, the model-review step makes model selection and model semantics visible events rather than hidden function calls. This matters in a heterogeneous registry where a statistical baseline, a literature-recognizable dynamical form and a purpose-built surrogate may all produce plausible time-series output while supporting very different interpretations. Second, the local architecture reduces dependence on a remote scientific-compute service for data that laboratories may prefer to retain on workstation or institutional storage. Third, provenance is designed as an output of the workflow: dataset identity, processing configuration, model/run metadata, seeds, figure recipes and generated artifacts can be associated with the report rather than reconstructed after analysis."
+      },
+      {
+        "type": "paragraph",
+        "text": "The software literature also clarifies where the present paper remains weaker than mature research-software publications. Pynapple demonstrates a toolbox across multiple openly available neuroscience datasets [14]; BrainPy reports comparative accuracy and performance evidence against existing solutions [15]; NeuroWRAP supplements workflow integration with sensitivity/robustness analyses [16]; and Neuroptimus evaluates a software framework through six benchmark optimization problems and systematic algorithm comparison [30]. These precedents support a clear interpretation of the current NeuroLab evidence: the software architecture and frozen release are verifiable, but a stronger methods claim requires quantitative external benchmarks. Passing regression tests is necessary engineering evidence, not a substitute for empirical or reference-implementation concordance."
+      },
+      {
+        "type": "table",
+        "id": "table4"
+      },
+      {
+        "type": "paragraph",
+        "text": "The 11-model inventory should likewise not be interpreted as evidence of scientific superiority or model novelty. Wilson–Cowan, Kuramoto, OU, Jansen–Rit and Hopf/Stuart–Landau have established mathematical ancestry; linear state-space and VAR serve as statistical comparators; and several registry entries are intentionally reduced proxies. For example, the fMRI latent-state implementation is a Markov-switching time-series proxy rather than full HMM inference, while Reduced Wong–Wang Lite uses a compact recurrent-population and BOLD-like transform rather than a validated hemodynamic forward model. In-silico lesions, coupling changes, inhibition changes, stimulation and gain manipulations are model-space operations. They are useful for computational hypothesis generation and regression testing but do not by themselves support claims about biological causality, therapy or clinical decision-making."
+      },
+      {
+        "type": "paragraph",
+        "text": "Several limitations should be resolved before NeuroLab OS is treated as a publication-grade reference platform. The evaluated release is an unsigned Windows-only technical beta built from a worktree with pre-existing modifications rather than a clean archival Git tag. Physical-unit semantics are not exposed uniformly for every model parameter, the EEG frequency-band definitions are not yet fully centralized, and the researcher-facing interface retains a “confidence” label for a heuristic recommendation score. The sidecar scientific manifest records release/test metadata but does not yet contain an immutable per-model mapping of source hash, equation hash, equation version and parameter-schema hash. Most importantly, the present evaluation lacks an external public EEG or ROI/BOLD benchmark, independent cross-tool numerical concordance, blinded usability evaluation and cross-machine/cross-platform numerical reproduction."
+      },
+      {
+        "type": "paragraph",
+        "text": "Related methodological work by the author includes an EEG residual-prediction preprint, a Bayesian log-time state-space model of human time reproduction, and an exploratory graph-theoretic temporal-layer model [31, 32, 33]. These studies are distinct from the present software contribution and are cited here only as adjacent methodological context; they do not constitute validation of NeuroLab OS."
+      },
+      {
+        "type": "paragraph",
+        "text": "The highest-value next experiment is therefore not to add more model families, but to deepen validation. A public EEG dataset can be processed in NeuroLab and a mature reference environment using matched filter, resampling, PSD and event-related-analysis definitions, with numerical differences reported under prespecified tolerances [17]. Independent implementations can be used for deterministic trajectory or statistical-moment checks; synthetic parameter-recovery experiments can quantify bias and identifiability across seeds and signal lengths; and generating-model experiments can characterize the model-ranking heuristic using top-1/top-k performance rather than treating its score as probability. Such experiments would move the evidence from internal verification toward the quantitative validation standards advocated for computational neuroscience models [3, 1]."
+      }
+    ]
+  },
+  {
+    "id": "conclusions",
+    "number": "5",
+    "title": "Conclusions",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "NeuroLab OS v0.1.1 implements a local research workflow that links neural time-series handling, explicit QC, scientist-visible model specifications, seeded summary-feature fitting, computational simulation, in silico perturbation and provenance-aware reporting. Its principal contribution is not a new neural equation or a claim of superior preprocessing; it is the attempt to maintain continuity between what the researcher is shown, what the runtime executes and what the report records. The evaluated release provides substantial software-verification evidence, including 82 passing backend tests, 38 passing workflow tests, successful desktop and engine builds, packaged-runtime startup, registry checks and checksum-verified artifact identity. The same evidence does not establish external scientific, biological or clinical validity. A clean archival release plus quantitative reference-dataset, parameter-recovery and cross-machine studies are the next requirements for elevating NeuroLab from a verified technical beta to a validated research platform."
+      }
+    ]
+  }
+]
