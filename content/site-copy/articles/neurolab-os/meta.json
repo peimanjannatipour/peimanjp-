@@ -1,0 +1,27 @@
+{
+  "title": "NeuroLab OS: A local-first software environment for scientist-reviewed neural time-series modelling and provenance-aware simulation",
+  "articleType": "Technical manuscript",
+  "author": "Peiman Jannatipour",
+  "affiliation": "Università Campus Bio-Medico di Roma (UCBM), Rome, Italy",
+  "year": "2026",
+  "release": "NeuroLab OS v0.1.1 · Windows x64 technical beta",
+  "engineVersion": "neurolab-os-0.4.0",
+  "status": "Full manuscript · software verification, not external biological or clinical validation",
+  "pdfUrl": null,
+  "projectUrl": "https://neurolabos.peimanjp.com/",
+  "abstract": {
+    "Background and Objective": "Reproducible neural time-series analysis requires more than preserving code: the scientific interpretation also depends on the exact preprocessing choices, model equations, parameter semantics, numerical settings, random seeds and transformations that produced a result. Existing neuroscience ecosystems provide mature capabilities for signal analysis, workflow execution, model simulation and data/code provenance, but these activities are often distributed across separate tools. NeuroLab OS was developed to maintain continuity between researcher-visible model semantics and executable analysis provenance within one local workflow.",
+    "Methods": "We describe NeuroLab OS version 0.1.1, a Windows x64 technical beta comprising an Electron/React desktop interface and a bundled local Python/FastAPI scientific engine. The evaluated runtime supports EEG-oriented and generic time-series ingestion, ROI/BOLD matrix workflows, preprocessing and explicit quality-control review, a registry of 11 computational model families, seeded summary-feature fitting, eight explicitly in silico perturbation operations, and provenance-aware reporting. Model families are classified as literature-anchored dynamical models, statistical/engineering baselines, or NeuroLab proxy/surrogate implementations. We distinguish software verification from external scientific validation and evaluate the frozen release using regression, workflow, packaging, runtime and artifact-integrity evidence.",
+    "Results": "The release passed 82 backend tests and 38 focused workflow tests; desktop type checking, production build, local engine build and Windows packaging also passed. The packaged application launched successfully, the bundled engine returned HTTP 200 on its health endpoint, all 11 model specifications were present, and the final ZIP checksum matched its manifest (SHA-256 6bd8dcd9c4372cf6edd8506bcfe7a18a6f7edffb2748ccdb4d5c3047c780e2da). The test inventory includes model-regression, oscillator-frequency, Ornstein–Uhlenbeck sanity, parameter-recovery and intervention-consistency checks. These findings establish implementation and release-level verification, not biological or clinical validity; publication-scale external reference-dataset concordance remains outstanding.",
+    "Conclusions": "NeuroLab OS contributes an integrated research-software architecture in which QC decisions, model definitions, fitting, simulation, model-space perturbations and reporting are connected within a traceable local execution path. Its primary novelty is the continuity of model semantics and computational lineage rather than a new neural equation. The present release is suitable as a verified technical beta; an archival clean-source release, external EEG/ROI-BOLD benchmarks and cross-machine numerical reproduction are required to strengthen the evidence from software verification toward scientific validation.",
+    "Keywords": "neuroinformatics, neuroscience software, EEG, computational modelling, reproducibility, provenance"
+  },
+  "keywords": [
+    "neuroinformatics",
+    "neuroscience software",
+    "EEG",
+    "computational modelling",
+    "reproducibility",
+    "provenance"
+  ]
+}
