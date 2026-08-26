@@ -9,9 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/research/bayesian-log-time-state-space-clock",
     "/research/abcd-developmental-neuroimaging",
     "/research/cortical-state-temporal-inference",
-    "/llms.txt",
-    "/llms-full.txt",
-    "/humans.txt",
     "/privacy",
   ];
 
