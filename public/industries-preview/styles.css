@@ -279,3 +279,248 @@ body.reduced-motion .cinematic-media>img{transform:scale(1.04)!important}
   border-color:color-mix(in srgb,var(--accent) 58%,var(--line));
   box-shadow:0 26px 66px rgba(0,0,0,.34),inset 0 0 58px color-mix(in srgb,var(--accent) 10%,transparent)
 }
+
+
+/* =========================
+   SYSTEM ARCHITECTURE — readability rebuild
+   ========================= */
+.architecture-section{
+  padding-top:clamp(88px,9vw,150px);
+  padding-bottom:clamp(100px,10vw,170px);
+}
+.architecture-head{
+  max-width:1280px;
+  margin:0 auto clamp(48px,6vw,88px);
+  position:relative;
+}
+.architecture-head h2{
+  margin:14px 0 22px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.12em .18em;
+  font-size:clamp(46px,6.2vw,106px);
+  line-height:.92;
+  letter-spacing:-.065em;
+  font-weight:590;
+  text-wrap:balance;
+}
+.architecture-head h2 i{
+  font-style:normal;
+  font-weight:350;
+  color:color-mix(in srgb,var(--accent) 60%,var(--muted));
+  transform:translateY(-.04em);
+}
+.architecture-head h2 .accent-word{color:var(--accent)}
+.architecture-head>p:last-child{
+  margin:0;
+  max-width:860px;
+  color:var(--muted);
+  line-height:1.72;
+  font-size:clamp(15px,1.2vw,19px);
+}
+
+.architecture-wrap{
+  grid-template-columns:minmax(300px,.72fr) minmax(560px,1.28fr);
+  gap:clamp(44px,6vw,92px);
+  align-items:start;
+}
+.architecture-copy{
+  top:108px;
+  padding:22px 0 34px;
+}
+.architecture-kicker{
+  display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)
+}
+.architecture-kicker span{
+  color:var(--accent2);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:7px 9px;
+  background:color-mix(in srgb,var(--panel) 76%,transparent)
+}
+.architecture-kicker b{font-weight:650;color:var(--text)}
+.architecture-list{
+  gap:0;
+  margin-top:28px;
+  border-top:1px solid var(--line);
+}
+.architecture-list>div{
+  grid-template-columns:48px 1fr;
+  gap:14px;
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
+  opacity:.5;
+  transition:opacity .28s ease,transform .36s cubic-bezier(.2,.8,.2,1),border-color .3s;
+}
+.architecture-list>div.arch-active{
+  opacity:1;
+  transform:translateX(7px);
+  border-bottom-color:color-mix(in srgb,var(--accent) 38%,var(--line));
+}
+.architecture-list i{
+  width:34px;height:34px;
+  font-size:10px;
+  border-radius:11px;
+  background:color-mix(in srgb,var(--panel) 72%,transparent);
+}
+.architecture-list>div.arch-active i{
+  color:#fff;
+  border-color:color-mix(in srgb,var(--accent) 70%,var(--line));
+  box-shadow:0 0 22px color-mix(in srgb,var(--accent) 18%,transparent)
+}
+.architecture-list p{margin:0}
+.architecture-list b{font-size:15px;letter-spacing:-.015em}
+.architecture-list .copy{font-size:12px;line-height:1.5}
+
+.architecture-explode{
+  min-height:1500px;
+  display:block;
+  position:relative;
+  border-radius:34px;
+}
+.architecture-stage{
+  position:sticky;
+  top:94px;
+  width:100%;
+  height:min(79vh,820px);
+  min-height:610px;
+  border:1px solid rgba(180,222,246,.13);
+  border-radius:32px;
+  overflow:hidden;
+  background:
+    radial-gradient(620px 420px at 52% 45%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 62%),
+    linear-gradient(180deg,rgba(9,24,34,.92),rgba(5,15,23,.96));
+  box-shadow:0 42px 110px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.045);
+  perspective:1500px;
+  isolation:isolate;
+}
+.architecture-stage-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(180,220,240,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(180,220,240,.055) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(180deg,transparent,#000 10%,#000 90%,transparent);
+}
+.architecture-stage>.three-explode{
+  z-index:2;
+  inset:4% 3% 4%;
+  pointer-events:auto;
+}
+.architecture-stage .connector{
+  z-index:1;
+  top:13%;
+  bottom:13%;
+  opacity:.24;
+}
+.architecture-axis{
+  position:absolute;z-index:5;
+  left:18px;top:20px;bottom:20px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  font-size:8px;letter-spacing:.18em;color:var(--muted);
+  pointer-events:none;
+}
+.architecture-axis:after{
+  content:"";position:absolute;left:5px;top:24px;bottom:24px;width:1px;
+  background:linear-gradient(var(--accent),color-mix(in srgb,var(--accent) 20%,transparent));
+  opacity:.45
+}
+.architecture-axis span{writing-mode:vertical-rl;background:rgba(5,15,23,.72);padding:5px 0;z-index:2}
+
+.architecture-stage .stack-layer{
+  left:auto;
+  right:20px;
+  width:min(42%,330px);
+  height:68px;
+  padding:0 14px;
+  border-radius:16px;
+  z-index:6 !important;
+  opacity:.62 !important;
+  filter:none !important;
+  backdrop-filter:blur(16px);
+  background:linear-gradient(135deg,rgba(13,30,42,.86),rgba(7,19,28,.72));
+  border:1px solid rgba(180,224,246,.15);
+  box-shadow:0 14px 34px rgba(0,0,0,.2) !important;
+  transform-origin:right center;
+}
+.architecture-stage .stack-layer:nth-of-type(1){top:13%}
+.architecture-stage .stack-layer:nth-of-type(2){top:29%}
+.architecture-stage .stack-layer:nth-of-type(3){top:45%}
+.architecture-stage .stack-layer:nth-of-type(4){top:61%}
+.architecture-stage .stack-layer:nth-of-type(5){top:77%}
+.architecture-stage .stack-layer .layer-mark{
+  width:38px;height:38px;border-radius:11px;
+  font-size:10px;
+  flex:0 0 auto;
+}
+.architecture-stage .stack-layer strong{
+  margin-left:10px;
+  font-size:14px;
+  flex:0 0 auto;
+  opacity:1;
+}
+.architecture-stage .stack-layer span{
+  margin-left:auto;
+  max-width:145px;
+  font-size:9px;
+  line-height:1.3;
+  text-align:right;
+  opacity:.78;
+}
+.architecture-stage .stack-layer.layer-active{
+  opacity:1 !important;
+  border-color:color-mix(in srgb,var(--accent) 58%,rgba(180,224,246,.15));
+  background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,rgba(13,30,42,.92)),rgba(7,19,28,.82));
+  box-shadow:0 16px 46px rgba(0,0,0,.28),0 0 28px color-mix(in srgb,var(--accent) 9%,transparent) !important;
+}
+.architecture-explode:before{
+  display:none;
+}
+.architecture-explode:after{
+  content:"SCROLL / DISASSEMBLE";
+  position:absolute;
+  top:18px;right:18px;
+  writing-mode:horizontal-tb;
+  font-size:8px;letter-spacing:.18em;color:var(--muted);
+  z-index:8;
+  opacity:.68;
+}
+
+@media(max-width:1180px){
+  .architecture-head h2{font-size:clamp(44px,7.3vw,82px)}
+  .architecture-wrap{grid-template-columns:minmax(280px,.8fr) minmax(470px,1.2fr);gap:38px}
+  .architecture-stage .stack-layer{width:min(45%,300px)}
+}
+@media(max-width:980px){
+  .architecture-head{margin-bottom:46px}
+  .architecture-wrap{display:block}
+  .architecture-copy{position:relative;top:auto;padding-top:0;margin-bottom:34px}
+  .architecture-list{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .architecture-list>div{display:block;padding:14px;border:0;border-right:1px solid var(--line);min-height:122px}
+  .architecture-list>div:last-child{border-right:0}
+  .architecture-list .copy{display:none}
+  .architecture-list i{margin-bottom:10px}
+  .architecture-explode{min-height:1050px}
+  .architecture-stage{top:82px;height:min(72vh,700px);min-height:560px}
+}
+@media(max-width:700px){
+  .architecture-section{padding-left:18px;padding-right:18px}
+  .architecture-head h2{display:block;font-size:clamp(44px,14vw,72px);line-height:.94}
+  .architecture-head h2 span,.architecture-head h2 i{display:inline}
+  .architecture-head h2 i{font-size:.62em;margin:0 .08em}
+  .architecture-list{grid-template-columns:1fr 1fr}
+  .architecture-list>div{min-height:92px;border-bottom:1px solid var(--line)}
+  .architecture-list>div:nth-child(even){border-right:0}
+  .architecture-stage{min-height:500px;height:68vh;border-radius:24px}
+  .architecture-stage>.three-explode{inset:1%}
+  .architecture-stage .stack-layer{
+    display:flex !important;
+    right:10px;width:52%;height:54px;padding:0 9px;border-radius:12px
+  }
+  .architecture-stage .stack-layer .layer-mark{width:30px;height:30px;border-radius:9px}
+  .architecture-stage .stack-layer strong{font-size:11px;margin-left:7px}
+  .architecture-stage .stack-layer span{display:none}
+  .architecture-axis{left:10px;top:14px;bottom:14px}
+}
