@@ -1,0 +1,111 @@
+<!doctype html><html lang="en" data-theme="dark" data-accent="cyan"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071018">
+<meta name="description" content="NDMS — privacy-first multimodal intelligence for human-state research and applications.">
+<title>NDMS — PJP Industries</title><link rel="preconnect" href="https://images.unsplash.com"><link rel="stylesheet" href="styles.css"></head><body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">PJP <span>Industries</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a  href="index.html">Home</a>
+    <a href="index.html#systems">Systems</a>
+    <a class="active" href="ndms.html">NDMS</a>
+    <a  href="neurolab-os.html">NeuroLab OS</a>
+    <a  href="loopproof.html">LoopProof</a>
+    <a href="index.html#research">Research</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+  <div class="controls">
+    <div class="accent-set" aria-label="Accent color">
+      <button class="accent-btn" data-accent="cyan" aria-label="Cyan accent"></button>
+      <button class="accent-btn" data-accent="violet" aria-label="Violet accent"></button>
+      <button class="accent-btn" data-accent="green" aria-label="Green accent"></button>
+    </div>
+    <button class="chip-btn" data-theme-toggle aria-label="Toggle theme">Theme</button>
+    <button class="chip-btn" data-motion-toggle>Motion: full</button>
+    <button class="menu-btn" aria-label="Open menu">Menu</button>
+  </div>
+</header><main class="page">
+<section class="section hero shell">
+  <div class="reveal">
+    <p class="eyebrow">Human intelligence systems</p>
+    <h1>NDMS</h1>
+    <p class="lead">Privacy-first multimodal intelligence for understanding human state.</p>
+    <p class="copy">NDMS combines synchronized video and audio with optional research signals, quality-aware fusion, temporal modeling and uncertainty-aware outputs. The public site focuses on what the system does—not unpublished implementation detail.</p>
+    <div class="actions"><a class="btn primary" href="#pipeline">Explore the pipeline →</a><a class="btn" href="https://ndms.peimanjp.com" target="_blank" rel="noreferrer">Open current NDMS site ↗</a></div>
+    <div class="stat-row"><div class="stat"><b>Multimodal</b><span>Video + audio + optional research signals</span></div><div class="stat"><b>Privacy-first</b><span>Local/on-device pathways where appropriate</span></div><div class="stat"><b>Human-centered</b><span>Uncertainty and explanation over black-box scoring</span></div></div>
+  </div>
+  <div class="hero-visual reveal">
+    <img class="photo" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=84" alt="Modern research and technology workspace">
+    <div class="hero-device">
+      <div class="glass-ui">
+        <h4>NDMS · Live multimodal view</h4>
+        <div class="row"><span>Video quality</span><b>0.91</b></div><div class="row"><span>Audio quality</span><b>0.86</b></div><div class="row"><span>Fusion confidence</span><b>±0.08</b></div>
+        <div class="mini-chart"></div>
+        <div class="row"><span>Personal baseline</span><b style="color:var(--good)">Within expected range</b></div>
+      </div>
+      <div class="glass-ui"><h4>Inputs</h4><div class="row"><span>Camera</span><b>Live</b></div><div class="row"><span>Microphone</span><b>Live</b></div><div class="row"><span>Self-report</span><b>Optional</b></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section shell" id="pipeline">
+  <div class="section-head reveal"><div><p class="eyebrow">From signals to insight</p><h2>How NDMS works</h2></div><p>The flow is intentionally legible: every stage has a clear job, and quality information travels with the signal.</p></div>
+  <div class="workflow">
+    <div class="workflow-card reveal"><div class="n">01 / VIDEO</div><h3>Visual dynamics</h3><div class="mini-chart"></div><p>Face tracking, landmarks, movement and other visual features derived from the video stream.</p></div>
+    <div class="workflow-card reveal"><div class="n">02 / AUDIO</div><h3>Acoustic features</h3><div class="mini-chart"></div><p>Speech activity, prosody, cadence and related acoustic descriptors from synchronized audio.</p></div>
+    <div class="workflow-card reveal"><div class="n">03 / QUALITY</div><h3>Signal quality</h3><div class="mini-chart"></div><p>Video and audio quality are estimated so weak channels do not silently dominate the result.</p></div>
+    <div class="workflow-card reveal"><div class="n">04 / FUSION</div><h3>Quality-aware fusion</h3><div class="mini-chart"></div><p>Modalities are combined using context and estimated reliability rather than fixed weighting alone.</p></div>
+    <div class="workflow-card reveal"><div class="n">05 / TEMPORAL</div><h3>State over time</h3><div class="mini-chart"></div><p>Temporal dynamics matter: the system looks at trajectories, transitions and change—not only snapshots.</p></div>
+    <div class="workflow-card reveal"><div class="n">06 / OUTPUT</div><h3>Interpretable result</h3><div class="mini-chart"></div><p>Outputs include an estimate, uncertainty and comparison against a personalized baseline where available.</p></div>
+  </div>
+</section>
+
+<section class="section shell">
+  <div class="stack-wrap">
+    <div class="stack-copy reveal"><p class="eyebrow">Exploded architecture</p><h2>A multimodal stack that opens as you scroll.</h2><p class="copy">This is the signature interaction for NDMS: the software pipeline behaves like a product teardown. Scroll separates the layers so the system remains understandable.</p>
+      <div class="stack-list"><div><i>1</i><p><b>Capture</b><br><span class="copy">Synchronized video and audio.</span></p></div><div><i>2</i><p><b>Quality</b><br><span class="copy">Per-stream reliability and context.</span></p></div><div><i>3</i><p><b>Fusion</b><br><span class="copy">Dynamic multimodal integration.</span></p></div><div><i>4</i><p><b>Temporal model</b><br><span class="copy">State trajectories through time.</span></p></div><div><i>5</i><p><b>Feedback</b><br><span class="copy">Estimate, uncertainty and baseline.</span></p></div></div>
+    </div>
+    <div class="explode reveal"><div class="explode-core"><div class="connector"></div>
+      <div class="stack-layer"><div class="layer-mark">V</div><strong>Video stream</strong><span>Face · landmarks · motion</span></div>
+      <div class="stack-layer"><div class="layer-mark">A</div><strong>Audio stream</strong><span>Prosody · cadence · events</span></div>
+      <div class="stack-layer"><div class="layer-mark">Q</div><strong>Quality layer</strong><span>Lighting · noise · reliability</span></div>
+      <div class="stack-layer"><div class="layer-mark">F</div><strong>Fusion + temporal model</strong><span>Context-aware multimodal state</span></div>
+      <div class="stack-layer"><div class="layer-mark">O</div><strong>Output</strong><span>Estimate · uncertainty · baseline</span></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="section shell">
+  <div class="section-head reveal"><div><p class="eyebrow">Why it matters</p><h2>Designed around ambiguity, not certainty theater.</h2></div><p>Human state is noisy and context dependent. The interface should surface quality, disagreement and uncertainty rather than hiding them.</p></div>
+  <div class="grid-4">
+    <div class="feature-card reveal"><div class="icon">↔</div><h3>Cross-modal mismatch</h3><p>Surfaces disagreement between channels instead of collapsing everything into one opaque score.</p></div>
+    <div class="feature-card reveal"><div class="icon">Q</div><h3>Quality-aware inference</h3><p>Weights evidence based on the quality of the underlying observation.</p></div>
+    <div class="feature-card reveal"><div class="icon">Δ</div><h3>Change over time</h3><p>Tracks trajectories and change points rather than only current-state snapshots.</p></div>
+    <div class="feature-card reveal"><div class="icon">H</div><h3>Human-centered feedback</h3><p>Outputs are meant to inform a user or researcher, not silently judge or automate consequential decisions.</p></div>
+  </div>
+</section>
+
+<section class="section shell">
+  <div class="section-head reveal"><div><p class="eyebrow">Privacy-first by design</p><h2>Control stays visible.</h2></div><p>Privacy and transparency are part of the product architecture, not a footnote.</p></div>
+  <div class="grid-4">
+    <div class="privacy-card reveal"><div class="icon">⌂</div><h3>Local-first pathways</h3><p>Core inference can run close to the user so raw media does not need to become the product.</p></div>
+    <div class="privacy-card reveal"><div class="icon">✓</div><h3>Consent</h3><p>Data use should be explicit, granular and revocable.</p></div>
+    <div class="privacy-card reveal"><div class="icon">+</div><h3>Optional self-report</h3><p>Self-report can improve research context without becoming mandatory for every use.</p></div>
+    <div class="privacy-card reveal"><div class="icon">?</div><h3>Uncertainty shown</h3><p>The interface should display limits and confidence instead of presenting estimates as ground truth.</p></div>
+  </div>
+</section>
+
+<section class="section shell">
+  <div class="research-field reveal"><canvas class="field-canvas" data-field data-labels="Multimodal Learning|Affective Computing|EEG Validation|Human Timing|Human-AI Interaction|Neuroscience|Signal Quality|Temporal Modeling"></canvas>
+    <div class="field-copy"><p class="eyebrow">Research foundation</p><h3>Multiple disciplines, one system.</h3><p class="copy">The public narrative connects multimodal learning, behavioral neuroscience, timing, signal quality and human–AI interaction without turning unpublished IP into marketing copy.</p></div>
+  </div>
+</section>
+
+<section class="section shell"><div class="cta reveal"><div class="cta-copy"><p class="eyebrow">NDMS</p><h2>Human intelligence, with uncertainty intact.</h2><p class="copy">Explore the dedicated project site or return to the Industries system map.</p><div class="actions"><a class="btn primary" href="https://ndms.peimanjp.com" target="_blank" rel="noreferrer">Open NDMS ↗</a><a class="btn" href="index.html#systems">All systems</a></div></div><div class="cta-photo"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=84" alt="Research office"></div></div></section>
+</main>
+<footer class="footer">
+  <b>PJP Industries</b>
+  <nav><a href="index.html">Home</a><a href="ndms.html">NDMS</a><a href="neurolab-os.html">NeuroLab OS</a><a href="loopproof.html">LoopProof</a></nav>
+  <span>Research → systems → real-world impact</span>
+</footer>
+<script src="app.js" defer></script></body></html>
