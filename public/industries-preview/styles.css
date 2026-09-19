@@ -260,3 +260,22 @@ body.reduced-motion .domain-card:after{display:none}
 }
 body.reduced-motion .scene-status:before{animation:none}
 body.reduced-motion .cinematic-media>img{transform:scale(1.04)!important}
+
+
+/* Motion compatibility overrides */
+.cinematic-chapter:before{
+  background:radial-gradient(700px 500px at var(--chapter-x,50%) 50%,
+    color-mix(in srgb,var(--chapter-accent,var(--accent)) 8%,transparent),transparent 68%)
+}
+.cinematic-media>img{
+  transform:translate3d(0,var(--velocity-y,0px),0) scale(var(--chapter-scale,1.055)) rotateX(var(--velocity-skew,0deg))
+}
+.scene-grid{background-position:0 var(--grid-y,0px),var(--grid-x,0px) 0}
+.explode-core .stack-layer{
+  border-color:color-mix(in srgb,var(--accent) 20%,var(--line));
+  box-shadow:0 20px 48px rgba(0,0,0,.28),inset 0 0 44px color-mix(in srgb,var(--accent) 5%,transparent)
+}
+.explode-core .stack-layer.layer-active{
+  border-color:color-mix(in srgb,var(--accent) 58%,var(--line));
+  box-shadow:0 26px 66px rgba(0,0,0,.34),inset 0 0 58px color-mix(in srgb,var(--accent) 10%,transparent)
+}
