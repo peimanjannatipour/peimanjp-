@@ -50,27 +50,74 @@ addEventListener('scroll',updateExplodes,{passive:true});addEventListener('resiz
 
 class Field{
   constructor(canvas){
-    this.c=canvas;this.ctx=canvas.getContext('2d');this.nodes=[];this.pointer={x:-9999,y:-9999};this.labels=(canvas.dataset.labels||'Multimodal AI|Human Timing|EEG|Scientific Reproducibility|Digital Twins|Evidence Systems|Physical AI|Edge Sensing').split('|');
-    this.resize();this.seed();
-    canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();this.pointer.x=(e.clientX-r.left)*devicePixelRatio;this.pointer.y=(e.clientY-r.top)*devicePixelRatio});
+    this.c=canvas;this.ctx=canvas.getContext('2d');this.nodes=[];this.pointer={x:-9999,y:-9999};this.hoverCluster=null;
+    this.labels=(canvas.dataset.labels||'Multimodal AI|Human Timing|EEG|Scientific Reproducibility|Digital Twins|Evidence Systems|Physical AI|Edge Sensing').split('|');
+    this.groups=['human','scientific','physical'];this.resize();this.seed();
+    canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();this.pointer.x=(e.clientX-r.left)*this.d;this.pointer.y=(e.clientY-r.top)*this.d},{passive:true});
     canvas.addEventListener('pointerleave',()=>{this.pointer.x=-9999;this.pointer.y=-9999});
+    const field=canvas.closest('.research-field');
+    field?.querySelectorAll('.field-legend .tag').forEach((tag,i)=>{
+      tag.style.cursor='pointer';
+      tag.addEventListener('mouseenter',()=>this.hoverCluster=this.groups[i%3]);
+      tag.addEventListener('mouseleave',()=>this.hoverCluster=null);
+    });
     addEventListener('resize',()=>{this.resize();this.seed()});
     this.frame=this.frame.bind(this);requestAnimationFrame(this.frame);
   }
-  resize(){const r=this.c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);this.d=d;this.c.width=r.width*d;this.c.height=r.height*d}
-  seed(){const w=this.c.width,h=this.c.height;this.nodes=[];const count=Math.max(18,Math.min(34,Math.round(w/38)));for(let i=0;i<count;i++){this.nodes.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.16,vy:(Math.random()-.5)*.16,r:i<8?4.2:2.1,label:i<8?this.labels[i%this.labels.length]:''})}}
+  resize(){const r=this.c.getBoundingClientRect();this.d=Math.min(devicePixelRatio||1,2);this.c.width=r.width*this.d;this.c.height=r.height*this.d}
+  seed(){
+    const w=this.c.width,h=this.c.height;this.nodes=[];
+    const count=Math.max(24,Math.min(42,Math.round(w/32)));
+    const centers={human:[w*.27,h*.58],scientific:[w*.55,h*.36],physical:[w*.78,h*.64]};
+    for(let i=0;i<count;i++){
+      const group=this.groups[i%3],center=centers[group],label=i<this.labels.length?this.labels[i]:'';
+      this.nodes.push({
+        x:center[0]+(Math.random()-.5)*w*.22,y:center[1]+(Math.random()-.5)*h*.28,
+        tx:center[0],ty:center[1],vx:0,vy:0,r:label?4.4:1.9,label,group,phase:Math.random()*Math.PI*2
+      });
+    }
+  }
+  rgba(group,a){
+    if(group==='human')return 'rgba(141,124,255,'+a+')';
+    if(group==='physical')return 'rgba(68,217,142,'+a+')';
+    return 'rgba(40,183,255,'+a+')';
+  }
   frame(){
-    const ctx=this.ctx,w=this.c.width,h=this.c.height;
-    ctx.clearRect(0,0,w,h);
-    const reduced=body.classList.contains('reduced-motion')||matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const accent=getComputedStyle(root).getPropertyValue('--accent').trim()||'#28b7ff';
-    this.nodes.forEach(n=>{
-      if(!reduced){n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>w)n.vx*=-1;if(n.y<0||n.y>h)n.vy*=-1;const dx=n.x-this.pointer.x,dy=n.y-this.pointer.y,dist=Math.hypot(dx,dy);if(dist<150*this.d){const f=(150*this.d-dist)/(150*this.d);n.x+=dx/(dist||1)*f*2.2;n.y+=dy/(dist||1)*f*2.2}}
-    });
-    for(let i=0;i<this.nodes.length;i++)for(let j=i+1;j<this.nodes.length;j++){const a=this.nodes[i],b=this.nodes[j],dist=Math.hypot(a.x-b.x,a.y-b.y);if(dist<145*this.d){ctx.globalAlpha=(1-dist/(145*this.d))*.33;ctx.strokeStyle=accent;ctx.lineWidth=.7*this.d;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}
-    ctx.globalAlpha=1;
-    this.nodes.forEach(n=>{ctx.fillStyle=n.label?accent:'rgba(190,225,244,.7)';ctx.beginPath();ctx.arc(n.x,n.y,n.r*this.d,0,Math.PI*2);ctx.fill();if(n.label){ctx.font=(11*this.d)+'px Inter, system-ui';ctx.fillStyle='rgba(231,244,250,.9)';ctx.fillText(n.label,n.x+10*this.d,n.y-8*this.d)}});
     requestAnimationFrame(this.frame);
+    const ctx=this.ctx,w=this.c.width,h=this.c.height,reduced=body.classList.contains('reduced-motion')||matchMedia('(prefers-reduced-motion: reduce)').matches;
+    ctx.clearRect(0,0,w,h);
+    const now=performance.now()*.001;
+    this.nodes.forEach(n=>{
+      const focus=this.hoverCluster?this.hoverCluster===n.group:true;
+      if(!reduced){
+        const spring=.00075,dx=n.tx-n.x,dy=n.ty-n.y;
+        n.vx+=dx*spring;n.vy+=dy*spring;
+        n.vx+=Math.cos(now*.7+n.phase)*.002;n.vy+=Math.sin(now*.6+n.phase)*.002;
+        const px=n.x-this.pointer.x,py=n.y-this.pointer.y,dist=Math.hypot(px,py);
+        if(dist<165*this.d){const f=(165*this.d-dist)/(165*this.d);n.vx+=px/(dist||1)*f*.12;n.vy+=py/(dist||1)*f*.12}
+        n.vx*=.965;n.vy*=.965;n.x+=n.vx;n.y+=n.vy;
+      }
+      n.alpha=focus?1:.16;
+    });
+    for(let i=0;i<this.nodes.length;i++)for(let j=i+1;j<this.nodes.length;j++){
+      const a=this.nodes[i],b=this.nodes[j],same=a.group===b.group,dist=Math.hypot(a.x-b.x,a.y-b.y);
+      if((same&&dist<210*this.d)||(!same&&dist<120*this.d)){
+        const alpha=(1-dist/((same?210:120)*this.d))*(same?.26:.06)*Math.min(a.alpha,b.alpha);
+        if(alpha>0){ctx.strokeStyle=this.rgba(same?a.group:'scientific',alpha);ctx.lineWidth=(same?1:.55)*this.d;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+      }
+    }
+    this.nodes.forEach(n=>{
+      const pulse=1+(reduced?0:Math.sin(now*1.4+n.phase)*.08);
+      ctx.globalAlpha=n.alpha;
+      ctx.shadowBlur=n.label?14*this.d:5*this.d;ctx.shadowColor=this.rgba(n.group,.9);ctx.fillStyle=this.rgba(n.group,n.label?.95:.58);
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r*this.d*pulse,0,Math.PI*2);ctx.fill();
+      ctx.shadowBlur=0;
+      if(n.label){
+        ctx.font=(10.5*this.d)+'px Inter, system-ui';ctx.fillStyle='rgba(230,243,250,'+(.88*n.alpha)+')';
+        ctx.fillText(n.label,n.x+10*this.d,n.y-9*this.d);
+      }
+    });
+    ctx.globalAlpha=1;
   }
 }
 document.querySelectorAll('[data-field]').forEach(c=>new Field(c));
