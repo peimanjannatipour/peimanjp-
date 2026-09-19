@@ -726,3 +726,215 @@ body.reduced-motion .cinematic-media>img{transform:scale(1.04)!important}
 }
 body.reduced-motion .arch-v3-explode{min-height:620px !important}
 body.reduced-motion .arch-v3-stage{position:relative;top:auto}
+
+
+/* =========================
+   SYSTEM ARCHITECTURE V4 — stable two-column layout
+   ========================= */
+.architecture-v4{
+  padding-top:clamp(82px,7vw,118px);
+  padding-bottom:clamp(90px,8vw,128px);
+}
+.arch-v4-head{
+  max-width:1180px;
+  margin:0 0 38px;
+}
+.arch-v4-head h2{
+  margin:10px 0 18px;
+  font-size:clamp(42px,5vw,76px);
+  line-height:.98;
+  letter-spacing:-.055em;
+  font-weight:590;
+  text-wrap:balance;
+}
+.arch-v4-head h2 span{
+  color:color-mix(in srgb,var(--accent) 58%,var(--muted));
+  font-weight:360;
+}
+.arch-v4-head h2 b{color:var(--accent);font-weight:620}
+.arch-v4-head>p:last-child{
+  margin:0;
+  max-width:860px;
+  color:var(--muted);
+  line-height:1.68;
+  font-size:clamp(14px,1.1vw,18px);
+}
+.arch-v4-layout{
+  display:grid;
+  grid-template-columns:minmax(300px,.68fr) minmax(0,1.32fr);
+  gap:clamp(28px,4vw,58px);
+  align-items:start;
+}
+.arch-v4-steps{
+  display:grid;
+  gap:10px;
+  align-self:start;
+}
+.arch-v4-steps article{
+  min-height:86px;
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  gap:13px;
+  align-items:center;
+  padding:14px 15px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 92%,transparent),color-mix(in srgb,var(--bg2) 88%,transparent));
+  opacity:.56;
+  transition:opacity .28s,transform .28s,border-color .28s,box-shadow .28s,background .28s;
+}
+.arch-v4-steps article.arch-active{
+  opacity:1;
+  transform:translateX(5px);
+  border-color:color-mix(in srgb,var(--accent) 58%,var(--line));
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 6%,var(--panel)),color-mix(in srgb,var(--bg2) 92%,transparent));
+  box-shadow:0 12px 34px rgba(0,0,0,.2),inset 0 0 28px color-mix(in srgb,var(--accent) 5%,transparent);
+}
+.arch-v4-steps i{
+  width:36px;height:36px;
+  display:grid;place-items:center;
+  border-radius:11px;
+  border:1px solid var(--line);
+  color:var(--accent2);
+  font-style:normal;
+  font-size:9px;
+  letter-spacing:.08em;
+}
+.arch-v4-steps article.arch-active i{
+  color:#fff;
+  border-color:color-mix(in srgb,var(--accent) 68%,var(--line));
+  box-shadow:0 0 20px color-mix(in srgb,var(--accent) 18%,transparent);
+}
+.arch-v4-steps strong{
+  display:block;
+  font-size:15px;
+  margin-bottom:4px;
+  letter-spacing:-.018em;
+}
+.arch-v4-steps p{
+  margin:0;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+}
+
+.arch-v4-explode{
+  min-height:610px !important;
+  height:610px !important;
+  display:block !important;
+  position:relative !important;
+  perspective:none !important;
+  margin:0 !important;
+}
+.arch-v4-explode:before,
+.arch-v4-explode:after{display:none !important}
+.arch-v4-stage{
+  position:relative !important;
+  top:auto !important;
+  width:100%;
+  height:610px;
+  min-height:610px;
+  overflow:hidden;
+  border-radius:28px;
+  border:1px solid rgba(180,224,246,.14);
+  background:
+    radial-gradient(680px 430px at 50% 48%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 64%),
+    linear-gradient(180deg,rgba(10,25,35,.96),rgba(5,15,23,.985));
+  box-shadow:0 32px 88px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.045);
+  isolation:isolate;
+}
+.arch-v4-stage>.three-explode{
+  position:absolute !important;
+  inset:0 !important;
+  z-index:2 !important;
+  overflow:hidden;
+  pointer-events:auto;
+}
+.arch-v4-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(185,224,244,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(185,224,244,.045) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(180deg,transparent 2%,#000 14%,#000 86%,transparent 98%);
+}
+.arch-v4-stage:after{
+  content:"";
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(circle at 50% 48%,transparent 42%,rgba(3,10,16,.12) 74%,rgba(3,10,16,.36) 100%);
+}
+.arch-v4-meta{
+  position:absolute;
+  inset:15px;
+  z-index:5;
+  pointer-events:none;
+  font-size:8px;
+  letter-spacing:.16em;
+  color:var(--muted);
+}
+.arch-v4-meta span{position:absolute}
+.arch-v4-meta span:nth-child(1){left:0;top:0}
+.arch-v4-meta span:nth-child(2){right:0;top:0}
+.arch-v4-meta span:nth-child(3){left:0;bottom:0}
+.arch-v4-meta span:nth-child(4){right:0;bottom:0}
+.arch-v4-footer{
+  position:absolute;
+  left:16px;right:16px;bottom:15px;
+  z-index:6;
+  min-height:42px;
+  display:grid;
+  grid-template-columns:auto auto 1fr;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border:1px solid rgba(188,226,246,.14);
+  border-radius:14px;
+  background:rgba(4,14,21,.68);
+  backdrop-filter:blur(14px);
+  pointer-events:none;
+}
+.arch-v4-footer strong{
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-weight:650;
+}
+.arch-v4-footer em{
+  justify-self:end;
+  font-style:normal;
+  font-size:9px;
+  color:var(--muted);
+  letter-spacing:.04em;
+}
+
+@media(max-width:1050px){
+  .arch-v4-layout{grid-template-columns:1fr}
+  .arch-v4-steps{
+    grid-template-columns:repeat(5,minmax(180px,1fr));
+    overflow-x:auto;
+    padding-bottom:6px;
+    scrollbar-width:none;
+  }
+  .arch-v4-steps::-webkit-scrollbar{display:none}
+  .arch-v4-steps article{min-height:98px}
+  .arch-v4-explode,.arch-v4-stage{height:560px !important;min-height:560px !important}
+}
+@media(max-width:700px){
+  .architecture-v4{padding-left:18px;padding-right:18px}
+  .arch-v4-head{margin-bottom:28px}
+  .arch-v4-head h2{
+    font-size:clamp(40px,12vw,58px);
+    line-height:1.02;
+  }
+  .arch-v4-steps{grid-template-columns:repeat(5,220px)}
+  .arch-v4-steps article{min-height:88px}
+  .arch-v4-explode,.arch-v4-stage{height:440px !important;min-height:440px !important}
+  .arch-v4-stage{border-radius:22px}
+  .arch-v4-footer{left:10px;right:10px;bottom:10px;grid-template-columns:auto 1fr}
+  .arch-v4-footer em{display:none}
+}
+body.reduced-motion .arch-v4-explode,
+body.reduced-motion .arch-v4-stage{
+  height:520px !important;
+  min-height:520px !important;
+}
