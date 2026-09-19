@@ -445,11 +445,11 @@ body.reduced-motion .cinematic-media>img{transform:scale(1.04)!important}
   box-shadow:0 14px 34px rgba(0,0,0,.2) !important;
   transform-origin:right center;
 }
-.architecture-stage .stack-layer:nth-of-type(1){top:13%}
-.architecture-stage .stack-layer:nth-of-type(2){top:29%}
-.architecture-stage .stack-layer:nth-of-type(3){top:45%}
-.architecture-stage .stack-layer:nth-of-type(4){top:61%}
-.architecture-stage .stack-layer:nth-of-type(5){top:77%}
+.architecture-stage>.stack-layer:nth-child(5){top:13%}
+.architecture-stage>.stack-layer:nth-child(6){top:29%}
+.architecture-stage>.stack-layer:nth-child(7){top:45%}
+.architecture-stage>.stack-layer:nth-child(8){top:61%}
+.architecture-stage>.stack-layer:nth-child(9){top:77%}
 .architecture-stage .stack-layer .layer-mark{
   width:38px;height:38px;border-radius:11px;
   font-size:10px;
