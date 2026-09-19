@@ -193,7 +193,7 @@ class Stage{
           const active=Math.floor(chapterP*6);
           const k=i===Math.min(5,active)?1.18:1;
           n.scale.lerp(new THREE.Vector3(k,k,k),.08);
-          n.material.emissiveIntensity+=( (i<=active?.22:.06)-n.material.emissiveIntensity)*.08;
+          n.material.emissiveIntensity+=( (i<=active ? .22 : .06)-n.material.emissiveIntensity)*.08;
         });
         if(this.mode==='loopproof'&&this.primary)this.primary.rotation.z+=.0015+.004*chapterP;
         if(this.shells)this.shells.forEach((s,i)=>{const spread=scrollP*.15*i;s.position.set((i-1)*spread,Math.sin(t*.5+i)*.02,spread*.3);s.rotation.x+=.001*(i+1)});
