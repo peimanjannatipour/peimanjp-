@@ -38,6 +38,9 @@ function updateExplodes(){
     const p=clamp((innerHeight*.76-r.top)/Math.max(1,r.height-innerHeight*.32),0,1);
     el.style.setProperty('--explode-progress',p.toFixed(4));
     const layers=[...el.querySelectorAll('.stack-layer')];
+    const archSteps=[...el.closest('.architecture-wrap')?.querySelectorAll('[data-arch-step]')||[]];
+    const activeStep=Math.min(archSteps.length-1,Math.max(0,Math.floor(p*Math.max(1,archSteps.length))));
+    archSteps.forEach((step,i)=>step.classList.toggle('arch-active',i===activeStep));
     layers.forEach((layer,i)=>{
       const mid=(layers.length-1)/2;
       const start=i*.065,end=.62+i*.055;
