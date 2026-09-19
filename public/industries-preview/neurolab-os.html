@@ -1,0 +1,94 @@
+<!doctype html><html lang="en" data-theme="dark" data-accent="cyan"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071018">
+<meta name="description" content="NeuroLab OS — local-first scientific infrastructure for reproducible neural and biomedical research.">
+<title>NeuroLab OS — PJP Industries</title><link rel="preconnect" href="https://images.unsplash.com"><link rel="stylesheet" href="styles.css"></head><body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">PJP <span>Industries</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a  href="index.html">Home</a>
+    <a href="index.html#systems">Systems</a>
+    <a  href="ndms.html">NDMS</a>
+    <a class="active" href="neurolab-os.html">NeuroLab OS</a>
+    <a  href="loopproof.html">LoopProof</a>
+    <a href="index.html#research">Research</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+  <div class="controls">
+    <div class="accent-set" aria-label="Accent color">
+      <button class="accent-btn" data-accent="cyan" aria-label="Cyan accent"></button>
+      <button class="accent-btn" data-accent="violet" aria-label="Violet accent"></button>
+      <button class="accent-btn" data-accent="green" aria-label="Green accent"></button>
+    </div>
+    <button class="chip-btn" data-theme-toggle aria-label="Toggle theme">Theme</button>
+    <button class="chip-btn" data-motion-toggle>Motion: full</button>
+    <button class="menu-btn" aria-label="Open menu">Menu</button>
+  </div>
+</header><main class="page">
+<section class="section hero shell">
+  <div class="reveal"><p class="eyebrow">Scientific infrastructure</p><h1>NeuroLab <span class="accent">OS</span></h1><p class="lead">A scientific workspace for reproducible neural data and model-based discovery.</p><p class="copy">NeuroLab OS brings data review, QC, computational models, simulation, comparison, provenance and reporting into one local-first environment.</p>
+    <div class="actions"><a class="btn primary" href="#workflow">Explore workflow →</a><a class="btn" href="https://neurolabos.peimanjp.com" target="_blank" rel="noreferrer">Open public beta ↗</a></div>
+    <div class="stat-row"><div class="stat"><b>Local-first</b><span>Runs on the researcher's hardware</span></div><div class="stat"><b>Model-based</b><span>From neural data to computational models</span></div><div class="stat"><b>Reproducible</b><span>Provenance, comparison and reports</span></div></div>
+  </div>
+  <div class="hero-visual reveal">
+    <img class="photo" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1800&q=84" alt="Modern laboratory">
+    <div class="hero-device"><div class="ui-shot">
+      <div class="ui-top"><span class="ui-dot"></span><span class="ui-dot"></span><span class="ui-dot"></span><b style="margin-left:8px">NeuroLab OS · Project workspace</b></div>
+      <div class="ui-body"><div class="ui-side"><span class="on">Projects</span><span>Data</span><span>QC</span><span>Models</span><span>Simulation</span><span>Compare</span><span>Reports</span></div>
+      <div class="ui-main"><div class="ui-panel"><small>EEG / time-series viewer</small><div class="wave"></div><div class="mini-chart"></div></div><div class="ui-panel"><small>ROI / model context</small><div class="brain-orb"></div><div class="row"><span>Model fit</span><b style="color:var(--good)">Ready</b></div></div></div></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="section shell" id="workflow"><div class="section-head reveal"><div><p class="eyebrow">From data to discovery</p><h2>One workflow, end to end.</h2></div><p>Each stage leaves a trace that can be inspected, rerun and compared.</p></div>
+  <div class="workflow">
+    <div class="workflow-card reveal"><div class="n">01 / IMPORT</div><h3>Bring data in</h3><div class="mini-chart"></div><p>EEG, ROI/BOLD and generic neural time-series enter a consistent project structure.</p></div>
+    <div class="workflow-card reveal"><div class="n">02 / QC</div><h3>Find issues early</h3><div class="mini-chart"></div><p>Signal quality and preprocessing decisions are visible before downstream modeling.</p></div>
+    <div class="workflow-card reveal"><div class="n">03 / REVIEW</div><h3>Explore features</h3><div class="mini-chart"></div><p>Inspect traces, spectra and derived features before fitting a model.</p></div>
+    <div class="workflow-card reveal"><div class="n">04 / MODEL</div><h3>Fit computational models</h3><div class="mini-chart"></div><p>Run supported model classes or research-specific extensions in a controlled environment.</p></div>
+    <div class="workflow-card reveal"><div class="n">05 / COMPARE</div><h3>Compare runs</h3><div class="mini-chart"></div><p>Keep subjects, variants, parameters and outputs side-by-side instead of scattered across folders.</p></div>
+    <div class="workflow-card reveal"><div class="n">06 / REPORT</div><h3>Export evidence</h3><div class="mini-chart"></div><p>Generate reports and provenance bundles that preserve the path from input to result.</p></div>
+  </div>
+</section>
+
+<section class="section shell"><div class="stack-wrap">
+  <div class="stack-copy reveal"><p class="eyebrow">Inside NeuroLab OS</p><h2>Software architecture as an exploded product.</h2><p class="copy">The scroll interaction turns the software stack into a physical-feeling teardown without pretending the system is hardware.</p>
+    <div class="stack-list"><div><i>1</i><p><b>Connectors</b><br><span class="copy">Files, datasets and acquisition inputs.</span></p></div><div><i>2</i><p><b>Data layer</b><br><span class="copy">Unified project structure and metadata.</span></p></div><div><i>3</i><p><b>Workflow engine</b><br><span class="copy">Local execution, batching and orchestration.</span></p></div><div><i>4</i><p><b>Model + simulation</b><br><span class="copy">Computational models and virtual perturbations.</span></p></div><div><i>5</i><p><b>Applications</b><br><span class="copy">Review, compare, report and collaborate.</span></p></div></div>
+  </div>
+  <div class="explode reveal"><div class="explode-core"><div class="connector"></div>
+    <div class="stack-layer"><div class="layer-mark">UI</div><strong>Applications</strong><span>Projects · viewers · reports</span></div>
+    <div class="stack-layer"><div class="layer-mark">P</div><strong>Provenance + reports</strong><span>Comparison · exports · traceability</span></div>
+    <div class="stack-layer"><div class="layer-mark">M</div><strong>Models + simulation</strong><span>Fit · perturb · compare</span></div>
+    <div class="stack-layer"><div class="layer-mark">W</div><strong>Workflow engine</strong><span>Local orchestration · tasks</span></div>
+    <div class="stack-layer"><div class="layer-mark">D</div><strong>Data + connectors</strong><span>EEG · ROI/BOLD · time-series</span></div>
+  </div></div>
+</div></section>
+
+<section class="section shell"><div class="section-head reveal"><div><p class="eyebrow">Reproducibility</p><h2>Built so a result can be retraced.</h2></div><p>Research software earns trust by preserving context, not by hiding complexity behind a glossy dashboard.</p></div>
+  <div class="grid-4">
+    <div class="feature-card reveal"><div class="icon">↺</div><h3>Provenance</h3><p>Track inputs, parameters, code context and outputs across runs.</p></div>
+    <div class="feature-card reveal"><div class="icon">≡</div><h3>Parameter versioning</h3><p>Keep model and workflow changes visible rather than overwritten.</p></div>
+    <div class="feature-card reveal"><div class="icon">⇩</div><h3>Exportable reports</h3><p>Package figures, methods and structured results for downstream use.</p></div>
+    <div class="feature-card reveal"><div class="icon">✓</div><h3>Workflow validation</h3><p>Re-run complete paths and compare outputs, not just screenshots.</p></div>
+  </div>
+</section>
+
+<section class="section shell"><div class="section-head reveal"><div><p class="eyebrow">Accessible by design</p><h2>Powerful for experts. Navigable for everyone.</h2></div><p>The same preferences used across PJP Industries carry into the product story: theme, accent and reduced motion are first-class controls.</p></div>
+  <div class="grid-4">
+    <div class="privacy-card reveal"><div class="icon">◐</div><h3>Appearance</h3><p>Dark/light modes and user-selected accents.</p></div>
+    <div class="privacy-card reveal"><div class="icon">Aa</div><h3>Readable typography</h3><p>High contrast and a clear information hierarchy for long sessions.</p></div>
+    <div class="privacy-card reveal"><div class="icon">≈</div><h3>Reduced motion</h3><p>The animated field and exploded stack can be minimized.</p></div>
+    <div class="privacy-card reveal"><div class="icon">⌨</div><h3>Keyboard-friendly</h3><p>Navigation and product flows should not require precise pointer control.</p></div>
+  </div>
+</section>
+
+<section class="section shell"><div class="research-field reveal"><canvas class="field-canvas" data-field data-labels="Neuroscience Methods|Open Standards|Data Quality|Computational Modeling|Scientific Reproducibility|Open Science|Simulation|Provenance"></canvas><div class="field-copy"><p class="eyebrow">Research foundation</p><h3>Open methods become infrastructure.</h3><p class="copy">NeuroLab OS turns repeated research pain points—data organization, model comparison, provenance and reporting—into a coherent product surface.</p></div></div></section>
+
+<section class="section shell"><div class="cta reveal"><div class="cta-copy"><p class="eyebrow">NeuroLab OS</p><h2>Build what’s next in scientific computing.</h2><p class="copy">Open the public beta site or return to the Industries system map.</p><div class="actions"><a class="btn primary" href="https://neurolabos.peimanjp.com" target="_blank" rel="noreferrer">Open NeuroLab OS ↗</a><a class="btn" href="index.html#systems">All systems</a></div></div><div class="cta-photo"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1400&q=84" alt="Scientific laboratory"></div></div></section>
+</main>
+<footer class="footer">
+  <b>PJP Industries</b>
+  <nav><a href="index.html">Home</a><a href="ndms.html">NDMS</a><a href="neurolab-os.html">NeuroLab OS</a><a href="loopproof.html">LoopProof</a></nav>
+  <span>Research → systems → real-world impact</span>
+</footer>
+<script src="app.js" defer></script></body></html>
