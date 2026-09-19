@@ -1,0 +1,98 @@
+<!doctype html><html lang="en" data-theme="dark" data-accent="green"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071018">
+<meta name="description" content="LoopProof — a self-testing digital twin concept for closed-loop physical systems.">
+<title>LoopProof — PJP Industries</title><link rel="preconnect" href="https://images.unsplash.com"><link rel="stylesheet" href="styles.css"></head><body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">PJP <span>Industries</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a  href="index.html">Home</a>
+    <a href="index.html#systems">Systems</a>
+    <a  href="ndms.html">NDMS</a>
+    <a  href="neurolab-os.html">NeuroLab OS</a>
+    <a class="active" href="loopproof.html">LoopProof</a>
+    <a href="index.html#research">Research</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+  <div class="controls">
+    <div class="accent-set" aria-label="Accent color">
+      <button class="accent-btn" data-accent="cyan" aria-label="Cyan accent"></button>
+      <button class="accent-btn" data-accent="violet" aria-label="Violet accent"></button>
+      <button class="accent-btn" data-accent="green" aria-label="Green accent"></button>
+    </div>
+    <button class="chip-btn" data-theme-toggle aria-label="Toggle theme">Theme</button>
+    <button class="chip-btn" data-motion-toggle>Motion: full</button>
+    <button class="menu-btn" aria-label="Open menu">Menu</button>
+  </div>
+</header><main class="page">
+<section class="section hero shell">
+  <div class="reveal"><p class="eyebrow">Physical systems</p><h1>Loop<span class="accent">Proof</span></h1><p class="lead">A self-testing digital twin for closed-loop physical systems.</p><p class="copy">LoopProof observes an existing loop, models expected behavior, runs bounded diagnostic tests and returns evidence-linked explanations—while the existing control layer remains authoritative.</p>
+    <div class="actions"><a class="btn primary" href="#observe">See how it works →</a><a class="btn" href="https://loopproof.peimanjp.com" target="_blank" rel="noreferrer">Open current microsite ↗</a></div>
+    <div class="stat-row"><div class="stat"><b>Observe</b><span>Map real topology and selected signals</span></div><div class="stat"><b>Test</b><span>Bounded diagnostics, not open-ended autonomy</span></div><div class="stat"><b>Explain</b><span>Evidence, confidence and operator next step</span></div></div>
+  </div>
+  <div class="hero-visual reveal"><img class="photo" src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1800&q=84" alt="Greenhouse interior">
+    <div class="hero-device"><div class="glass-ui"><h4>System health</h4><div class="row"><span>Status</span><b style="color:var(--good)">Healthy</b></div><div class="row"><span>Flow</span><b>42.6 L/min</b></div><div class="row"><span>pH</span><b>5.9</b></div><div class="row"><span>EC</span><b>1.6 mS/cm</b></div><div class="row"><span>Temperature</span><b>21.4 °C</b></div><div class="mini-chart"></div></div>
+    <div class="glass-ui"><h4>Control boundary</h4><div class="row"><span>PLC</span><b>Authoritative</b></div><div class="row"><span>LoopProof</span><b>Advisory</b></div></div></div>
+  </div>
+</section>
+
+<section class="section shell" id="observe"><div class="section-head reveal"><div><p class="eyebrow">Observe → Model → Test → Explain</p><h2>From physical reality to trusted insight.</h2></div><p>The page follows the same diagnostic loop as the concept itself.</p></div>
+  <div class="workflow">
+    <div class="workflow-card reveal"><div class="n">01 / OBSERVE</div><h3>Map the physical loop</h3><div class="mini-chart"></div><p>Reservoirs, pumps, valves, branches, sensors and grow zones remain visible as a system topology.</p></div>
+    <div class="workflow-card reveal"><div class="n">02 / STREAMS</div><h3>Read selected signals</h3><div class="mini-chart"></div><p>Flow, pressure, pH, EC, temperature and state variables provide the observation layer.</p></div>
+    <div class="workflow-card reveal"><div class="n">03 / MODEL</div><h3>Estimate expected behavior</h3><div class="mini-chart"></div><p>A compact digital twin represents how the loop should respond under known conditions.</p></div>
+    <div class="workflow-card reveal"><div class="n">04 / TEST</div><h3>Run a bounded check</h3><div class="mini-chart"></div><p>Predefined diagnostic sequences narrow the plausible cause without replacing the PLC.</p></div>
+    <div class="workflow-card reveal"><div class="n">05 / COMPARE</div><h3>Expected vs observed</h3><div class="mini-chart"></div><p>The system compares the measured response with the model under the same bounded condition.</p></div>
+    <div class="workflow-card reveal"><div class="n">06 / EXPLAIN</div><h3>Return evidence</h3><div class="mini-chart"></div><p>The operator gets a plausible cause, supporting evidence, confidence and a recommended inspection step.</p></div>
+  </div>
+</section>
+
+<section class="section shell"><div class="stack-wrap">
+  <div class="stack-copy reveal"><p class="eyebrow">Exploded physical + model view</p><h2>One loop. Five views.</h2><p class="copy">As you scroll, the physical system separates into topology, sensing, state model, diagnostic logic and explanation—so the reasoning path never disappears behind an abstract AI label.</p>
+    <div class="stack-list"><div><i>1</i><p><b>Physical loop</b><br><span class="copy">Real assets and topology.</span></p></div><div><i>2</i><p><b>Sensor streams</b><br><span class="copy">Observed process variables.</span></p></div><div><i>3</i><p><b>Digital twin</b><br><span class="copy">Expected behavior and uncertainty.</span></p></div><div><i>4</i><p><b>Test library</b><br><span class="copy">Bounded checks under pilot constraints.</span></p></div><div><i>5</i><p><b>Explanation</b><br><span class="copy">Evidence + operator recommendation.</span></p></div></div>
+  </div>
+  <div class="explode reveal"><div class="explode-core"><div class="connector"></div>
+    <div class="stack-layer"><div class="layer-mark">P</div><strong>Physical topology</strong><span>Reservoir · pump · valves · zones</span></div>
+    <div class="stack-layer"><div class="layer-mark">S</div><strong>Sensor streams</strong><span>Flow · pressure · pH · EC · temperature</span></div>
+    <div class="stack-layer"><div class="layer-mark">D</div><strong>Digital twin</strong><span>Expected state · constraints · uncertainty</span></div>
+    <div class="stack-layer"><div class="layer-mark">T</div><strong>Diagnostic tests</strong><span>Predefined · bounded · recoverable</span></div>
+    <div class="stack-layer"><div class="layer-mark">E</div><strong>Explanation</strong><span>Cause · evidence · confidence · next step</span></div>
+  </div></div>
+</div></section>
+
+<section class="section shell"><div class="section-head reveal"><div><p class="eyebrow">Human in the loop</p><h2>The model narrows. The operator decides.</h2></div><p>LoopProof is positioned as diagnostic intelligence, not autonomous control.</p></div>
+  <div class="grid-4">
+    <div class="feature-card reveal"><div class="icon">!</div><h3>Anomaly detected</h3><p>Observed behavior departs from the learned operating envelope.</p></div>
+    <div class="feature-card reveal"><div class="icon">Y</div><h3>Isolate a branch</h3><p>A bounded test narrows where the mismatch is likely to be occurring.</p></div>
+    <div class="feature-card reveal"><div class="icon">≠</div><h3>Test a hypothesis</h3><p>Expected and observed responses are compared under a controlled diagnostic sequence.</p></div>
+    <div class="feature-card reveal"><div class="icon">✓</div><h3>Act safely</h3><p>The operator reviews the evidence. Existing PLC and safety interlocks remain in control.</p></div>
+  </div>
+</section>
+
+<section class="section shell"><div class="section-head reveal"><div><p class="eyebrow">Pilot-ready concept</p><h2>Evidence before autonomy.</h2></div><p>The first deployment story stays narrow: instrument, model, test in shadow/advisory mode, validate and document limits.</p></div>
+  <div class="grid-4">
+    <div class="privacy-card reveal"><div class="icon">8</div><h3>8-week concept pilot</h3><p>Map the loop, build the compact twin, define tests, run shadow mode and review evidence.</p></div>
+    <div class="privacy-card reveal"><div class="icon">PLC</div><h3>PLC remains authoritative</h3><p>No autonomous actuation is required for the initial pilot concept.</p></div>
+    <div class="privacy-card reveal"><div class="icon">E</div><h3>Evidence-focused</h3><p>Success is measured in detected issues, narrowed causes, operator clarity and documented limitations.</p></div>
+    <div class="privacy-card reveal"><div class="icon">↗</div><h3>Scale only after validation</h3><p>Additional zones, tests and integrations come after the diagnostic concept earns evidence.</p></div>
+  </div>
+</section>
+
+<section class="section shell"><div class="section-head reveal"><div><p class="eyebrow">Applications</p><h2>Closed-loop systems, grounded in real environments.</h2></div><p>Stock photography is used for real-world context; diagrams and UI communicate the concept itself.</p></div>
+  <div class="grid-3">
+    <div class="photo-card reveal"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=84" alt="Greenhouse"><div class="caption"><h3>Hydroponic systems</h3><p>Recirculating nutrient loops and controlled grow environments.</p></div></div>
+    <div class="photo-card reveal"><img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=1200&q=84" alt="Controlled agriculture"><div class="caption"><h3>Greenhouse systems</h3><p>Climate, irrigation and controlled-environment loops.</p></div></div>
+    <div class="photo-card reveal"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=84" alt="Research facility"><div class="caption"><h3>Research facilities</h3><p>Instrumented experimental loops where model assumptions can be tested explicitly.</p></div></div>
+  </div>
+</section>
+
+<section class="section shell"><div class="research-field reveal"><canvas class="field-canvas" data-field data-labels="Environmental Sensing|Control Systems|Edge AI|Digital Twins|Physics-aware Models|Sustainable Systems|Diagnostics|Human Review"></canvas><div class="field-copy"><p class="eyebrow">Research & systems context</p><h3>Physical intelligence without losing the physics.</h3><p class="copy">LoopProof sits between environmental sensing, control-system knowledge, compact models and human review.</p></div></div></section>
+
+<section class="section shell"><div class="cta reveal"><div class="cta-copy"><p class="eyebrow">LoopProof</p><h2>See the loop before it breaks.</h2><p class="copy">Open the current V.I.T.A. concept microsite or return to the Industries system map.</p><div class="actions"><a class="btn primary" href="https://loopproof.peimanjp.com" target="_blank" rel="noreferrer">Open LoopProof ↗</a><a class="btn" href="index.html#systems">All systems</a></div></div><div class="cta-photo"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1400&q=84" alt="Greenhouse systems"></div></div></section>
+</main>
+<footer class="footer">
+  <b>PJP Industries</b>
+  <nav><a href="index.html">Home</a><a href="ndms.html">NDMS</a><a href="neurolab-os.html">NeuroLab OS</a><a href="loopproof.html">LoopProof</a></nav>
+  <span>Research → systems → real-world impact</span>
+</footer>
+<script src="app.js" defer></script></body></html>
