@@ -70,37 +70,32 @@
   </div>
 </section>
 
-<section class="section shell architecture-section">
-  <div class="architecture-head reveal">
+<section class="section shell architecture-v3" id="architecture">
+  <div class="arch-v3-head reveal">
     <p class="eyebrow">System architecture</p>
-    <h2><span>Sense</span><i>→</i><span>Model</span><i>→</i><span>Understand</span><i>→</i><span class="accent-word">Act</span></h2>
-    <p>Every PJP system follows the same evidence path: capture the real world, structure the signal, build a model, surface an interpretation, then support a bounded action.</p>
+    <h2>Sense <span>→</span> Model <span>→</span> Understand <span>→</span> <b>Act</b></h2>
+    <p>One evidence path connects every PJP system: capture reality, structure the signal, model what is happening, make the evidence understandable, then support a bounded action.</p>
   </div>
 
-  <div class="stack-wrap architecture-wrap">
-    <div class="stack-copy architecture-copy reveal">
-      <div class="architecture-kicker"><span>01—05</span><b>Evidence path</b></div>
-      <p class="copy">Scroll through the assembly. Each layer separates in depth while the readable architecture stays fixed beside it.</p>
-      <div class="stack-list architecture-list">
-        <div data-arch-step="0"><i>01</i><p><b>Sense</b><br><span class="copy">Video, audio, neural time-series and physical sensors.</span></p></div>
-        <div data-arch-step="1"><i>02</i><p><b>Structure</b><br><span class="copy">Quality checks, provenance and standardized data streams.</span></p></div>
-        <div data-arch-step="2"><i>03</i><p><b>Model</b><br><span class="copy">Fusion, computational models, simulation and digital twins.</span></p></div>
-        <div data-arch-step="3"><i>04</i><p><b>Understand</b><br><span class="copy">Human-readable states, comparisons, evidence and uncertainty.</span></p></div>
-        <div data-arch-step="4"><i>05</i><p><b>Act</b><br><span class="copy">Research workflows, decision support and bounded real-world pilots.</span></p></div>
-      </div>
-    </div>
+  <div class="arch-v3-steps reveal" aria-label="System architecture stages">
+    <article data-arch-step="0"><i>01</i><strong>Sense</strong><p>Video, audio, EEG and physical sensors.</p></article>
+    <article data-arch-step="1"><i>02</i><strong>Structure</strong><p>Quality checks, provenance and standardized streams.</p></article>
+    <article data-arch-step="2"><i>03</i><strong>Model</strong><p>Fusion, simulation, computational models and digital twins.</p></article>
+    <article data-arch-step="3"><i>04</i><strong>Understand</strong><p>Evidence, comparison, uncertainty and explanation.</p></article>
+    <article data-arch-step="4"><i>05</i><strong>Act</strong><p>Decision support, research workflows and bounded pilots.</p></article>
+  </div>
 
-    <div class="explode architecture-explode reveal" aria-label="Scroll-driven exploded system architecture">
-      <div class="explode-core architecture-stage">
-        <div class="architecture-stage-grid" aria-hidden="true"></div>
-        <div class="three-explode" data-three-explode data-mode="home" aria-hidden="true"></div>
-        <div class="architecture-axis" aria-hidden="true"><span>INPUT</span><span>EVIDENCE</span><span>OUTPUT</span></div>
-        <div class="connector"></div>
-        <div class="stack-layer"><div class="layer-mark">01</div><strong>Sense</strong><span>Camera · Audio · EEG · Sensors</span></div>
-        <div class="stack-layer"><div class="layer-mark">02</div><strong>Structure</strong><span>Quality · Provenance · Streams</span></div>
-        <div class="stack-layer"><div class="layer-mark">03</div><strong>Model</strong><span>Fusion · Simulation · Digital twins</span></div>
-        <div class="stack-layer"><div class="layer-mark">04</div><strong>Understand</strong><span>Compare · Explain · Uncertainty</span></div>
-        <div class="stack-layer"><div class="layer-mark">05</div><strong>Act</strong><span>Research · Decision support · Pilot</span></div>
+  <div class="explode arch-v3-explode reveal" aria-label="Interactive exploded system model">
+    <div class="arch-v3-stage">
+      <div class="arch-v3-grid" aria-hidden="true"></div>
+      <div class="three-explode" data-three-explode data-mode="home" aria-hidden="true"></div>
+      <div class="arch-v3-corners" aria-hidden="true">
+        <span>INPUT</span><span>MODEL</span><span>EVIDENCE</span><span>OUTPUT</span>
+      </div>
+      <div class="arch-v3-status">
+        <span class="arch-dot"></span>
+        <strong>Scroll to disassemble the system</strong>
+        <em>3D evidence stack</em>
       </div>
     </div>
   </div>
