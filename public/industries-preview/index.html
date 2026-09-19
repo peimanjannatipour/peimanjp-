@@ -70,26 +70,37 @@
   </div>
 </section>
 
-<section class="section shell">
-  <div class="stack-wrap">
-    <div class="stack-copy reveal">
-      <p class="eyebrow">System architecture</p><h2>Sense → Model → Understand → <span style="color:var(--accent)">Act</span></h2>
-      <p class="copy">The website itself mirrors the architecture behind the projects. Scroll through the stack to separate each layer and see how data becomes a usable system.</p>
-      <div class="stack-list">
-        <div><i>1</i><p><b>Sense</b><br><span class="copy">Video, audio, neural time-series, sensors and environmental signals.</span></p></div>
-        <div><i>2</i><p><b>Data</b><br><span class="copy">Structured, quality-checked and traceable inputs.</span></p></div>
-        <div><i>3</i><p><b>Models</b><br><span class="copy">Multimodal inference, computational neuroscience and digital twins.</span></p></div>
-        <div><i>4</i><p><b>Interface</b><br><span class="copy">Human-readable states, comparisons, evidence and next steps.</span></p></div>
-        <div><i>5</i><p><b>Deployment</b><br><span class="copy">Research workflows, software environments and bounded real-world pilots.</span></p></div>
+<section class="section shell architecture-section">
+  <div class="architecture-head reveal">
+    <p class="eyebrow">System architecture</p>
+    <h2><span>Sense</span><i>→</i><span>Model</span><i>→</i><span>Understand</span><i>→</i><span class="accent-word">Act</span></h2>
+    <p>Every PJP system follows the same evidence path: capture the real world, structure the signal, build a model, surface an interpretation, then support a bounded action.</p>
+  </div>
+
+  <div class="stack-wrap architecture-wrap">
+    <div class="stack-copy architecture-copy reveal">
+      <div class="architecture-kicker"><span>01—05</span><b>Evidence path</b></div>
+      <p class="copy">Scroll through the assembly. Each layer separates in depth while the readable architecture stays fixed beside it.</p>
+      <div class="stack-list architecture-list">
+        <div data-arch-step="0"><i>01</i><p><b>Sense</b><br><span class="copy">Video, audio, neural time-series and physical sensors.</span></p></div>
+        <div data-arch-step="1"><i>02</i><p><b>Structure</b><br><span class="copy">Quality checks, provenance and standardized data streams.</span></p></div>
+        <div data-arch-step="2"><i>03</i><p><b>Model</b><br><span class="copy">Fusion, computational models, simulation and digital twins.</span></p></div>
+        <div data-arch-step="3"><i>04</i><p><b>Understand</b><br><span class="copy">Human-readable states, comparisons, evidence and uncertainty.</span></p></div>
+        <div data-arch-step="4"><i>05</i><p><b>Act</b><br><span class="copy">Research workflows, decision support and bounded real-world pilots.</span></p></div>
       </div>
     </div>
-    <div class="explode reveal" aria-label="Scroll-driven exploded system stack">
-      <div class="explode-core"><div class="three-explode" data-three-explode data-mode="home" aria-hidden="true"></div><div class="connector"></div>
-        <div class="stack-layer"><div class="layer-mark">01</div><strong>Sensing</strong><span>Camera · Audio · EEG · Sensors</span></div>
-        <div class="stack-layer"><div class="layer-mark">02</div><strong>Data</strong><span>Quality · Provenance · Standardized streams</span></div>
-        <div class="stack-layer"><div class="layer-mark">03</div><strong>Models</strong><span>Fusion · Simulation · Digital twins</span></div>
-        <div class="stack-layer"><div class="layer-mark">04</div><strong>Interface</strong><span>Visualize · Compare · Explain</span></div>
-        <div class="stack-layer"><div class="layer-mark">05</div><strong>Deployment</strong><span>Research · Product · Pilot</span></div>
+
+    <div class="explode architecture-explode reveal" aria-label="Scroll-driven exploded system architecture">
+      <div class="explode-core architecture-stage">
+        <div class="architecture-stage-grid" aria-hidden="true"></div>
+        <div class="three-explode" data-three-explode data-mode="home" aria-hidden="true"></div>
+        <div class="architecture-axis" aria-hidden="true"><span>INPUT</span><span>EVIDENCE</span><span>OUTPUT</span></div>
+        <div class="connector"></div>
+        <div class="stack-layer"><div class="layer-mark">01</div><strong>Sense</strong><span>Camera · Audio · EEG · Sensors</span></div>
+        <div class="stack-layer"><div class="layer-mark">02</div><strong>Structure</strong><span>Quality · Provenance · Streams</span></div>
+        <div class="stack-layer"><div class="layer-mark">03</div><strong>Model</strong><span>Fusion · Simulation · Digital twins</span></div>
+        <div class="stack-layer"><div class="layer-mark">04</div><strong>Understand</strong><span>Compare · Explain · Uncertainty</span></div>
+        <div class="stack-layer"><div class="layer-mark">05</div><strong>Act</strong><span>Research · Decision support · Pilot</span></div>
       </div>
     </div>
   </div>
