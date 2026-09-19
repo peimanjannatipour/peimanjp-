@@ -24,7 +24,7 @@ class ThreeStage {
     this.pointer={x:0,y:0}; this.targetPointer={x:0,y:0}; this.progress=0;
     this.scene=new THREE.Scene();
     this.camera=new THREE.PerspectiveCamera(type==='hero'?38:34,1,.1,100);
-    this.camera.position.set(0, type==='hero'?.2:1.0, type==='hero'?8.4:9.7);
+    this.camera.position.set(0, type==='hero' ? 0.2 : 1.0, type==='hero' ? 8.4 : 9.7);
     this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
     this.renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.75));
     this.renderer.setClearColor(0x000000,0);
@@ -183,7 +183,7 @@ class ThreeStage {
         this.rootGroup.rotation.x += (this.pointer.y*.14-this.rootGroup.rotation.x)*.045;
         this.rootGroup.rotation.z += (-this.pointer.x*.06-this.rootGroup.rotation.z)*.035;
         this.camera.position.x += (this.pointer.x*.45-this.camera.position.x)*.04;
-        this.camera.position.y += ((this.mode==='home'?.2:.15)+this.pointer.y*.22-this.camera.position.y)*.04;
+        this.camera.position.y += ((this.mode==='home' ? 0.2 : 0.15)+this.pointer.y*.22-this.camera.position.y)*.04;
         if(this.primary) this.primary.rotation.y+=.004;
         if(this.wire) this.wire.rotation.x-=.002;
       }
