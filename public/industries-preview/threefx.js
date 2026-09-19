@@ -86,7 +86,7 @@ class Stage{
     const core=new THREE.Mesh(new THREE.SphereGeometry(.92,64,64),this.mat({color:0x0a3046,metalness:.16,roughness:.04,opacity:.7,transmission:.3,emissiveIntensity:.18}));this.group.add(core);this.primary=core;
     [1.35,1.62,1.89].forEach((r,i)=>{const t=new THREE.Mesh(new THREE.TorusGeometry(r,.022,12,170),new THREE.MeshBasicMaterial({color:i===1?0x8d7cff:this.accent,transparent:true,opacity:.42-i*.07,blending:THREE.AdditiveBlending}));t.rotation.set(i*.75,.35+i*.45,Math.PI/2*i);this.group.add(t);this.orbits.push(t)});
     const inputs=[new THREE.Vector3(-3,1.05,0),new THREE.Vector3(-3,-1.05,.2),new THREE.Vector3(3,.72,-.25),new THREE.Vector3(3,-.72,.1)];
-    inputs.forEach((p,i)=>{const n=new THREE.Mesh(new THREE.OctahedronGeometry(.31,2),this.mat({color:i<2?0x153d52:0x292d5d,metalness:.25,opacity:.9,emissiveIntensity:.22}));n.position.copy(p);this.group.add(n);const col=i<2?this.accent:new THREE.Color(0x8d7cff);this.line(p,new THREE.Vector3(),col,.35);this.addFlow(p,new THREE.Vector3(),5,col,.11+i*.012)});
+    this.ndmsInputs=[];inputs.forEach((p,i)=>{const n=new THREE.Mesh(new THREE.OctahedronGeometry(.31,2),this.mat({color:i<2?0x153d52:0x292d5d,metalness:.25,opacity:.9,emissiveIntensity:.22}));n.position.copy(p);n.userData.base=p.clone();this.group.add(n);this.ndmsInputs.push(n);const col=i<2?this.accent:new THREE.Color(0x8d7cff);this.line(p,new THREE.Vector3(),col,.35);this.addFlow(p,new THREE.Vector3(),5,col,.11+i*.012)});
     const halo=this.sprite(0xffffff,.7,.8);this.group.add(halo);this.halo=halo;
   }
   neurolab(){
@@ -104,7 +104,7 @@ class Stage{
     const pipe=this.mat({color:0x163b32,metalness:.72,roughness:.16,opacity:.96,emissive:new THREE.Color(0x44d98e),emissiveIntensity:.08});
     const ring=new THREE.Mesh(new THREE.TorusGeometry(2.35,.17,18,190),pipe);ring.rotation.x=Math.PI/2.45;this.group.add(ring);this.primary=ring;
     this.loopAngle=ring.rotation.x;
-    for(let i=0;i<6;i++){const a=i/6*Math.PI*2;const n=new THREE.Mesh(new THREE.CylinderGeometry(.25,.25,.62,24),this.mat({color:i%2?0x1c4740:0x293b40,metalness:.72,roughness:.13,opacity:.95,emissiveIntensity:.08}));n.position.set(Math.cos(a)*2.35,Math.sin(a)*1.96,Math.sin(a*.7)*.38);n.rotation.z=a;this.group.add(n)}
+    this.loopNodes=[];for(let i=0;i<6;i++){const a=i/6*Math.PI*2;const n=new THREE.Mesh(new THREE.CylinderGeometry(.25,.25,.62,24),this.mat({color:i%2?0x1c4740:0x293b40,metalness:.72,roughness:.13,opacity:.95,emissiveIntensity:.08}));n.position.set(Math.cos(a)*2.35,Math.sin(a)*1.96,Math.sin(a*.7)*.38);n.rotation.z=a;n.userData.baseScale=1;this.group.add(n);this.loopNodes.push(n)}
     const tank=new THREE.Mesh(new THREE.CylinderGeometry(.72,.72,1.55,48),this.mat({color:0x35454b,metalness:.84,roughness:.15,opacity:.96,emissiveIntensity:.03}));tank.position.set(0,0,-.45);this.group.add(tank);
     for(let i=0;i<14;i++){const s=this.sprite(i%4===0?0xffffff:new THREE.Color(0x44d98e),.15,.8);s.userData={phase:i/14,speed:.07+(i%4)*.006};this.group.add(s);this.flowDots.push(s)}
   }
@@ -135,24 +135,30 @@ class Stage{
     const host=this.el.closest('.explode')||this.el,r=host.getBoundingClientRect();
     this.progress=clamp((innerHeight*.72-r.top)/Math.max(1,r.height-innerHeight*.32),0,1);
   }
-  updateFlow(t){
+  chapterProgress(){
+    const ch=this.el.closest('[data-cinematic]');
+    if(!ch)return 0;
+    const r=ch.getBoundingClientRect(),total=Math.max(1,r.height-innerHeight);
+    return smooth(clamp((-r.top)/total,0,1));
+  }
+  updateFlow(t,chapterP=0){
     if(this.mode==='ndms'){
-      this.flowDots.forEach(s=>{const u=(t*s.userData.speed+s.userData.phase)%1;const e=smooth(u);s.position.lerpVectors(s.userData.a,s.userData.b,e);s.material.opacity=.25+.72*Math.sin(Math.PI*u)});
+      this.flowDots.forEach(s=>{const u=(t*s.userData.speed*(1+chapterP*1.6)+s.userData.phase)%1;const e=smooth(u);s.position.lerpVectors(s.userData.a,s.userData.b,e);s.material.opacity=.18+(.58+.22*chapterP)*Math.sin(Math.PI*u)});
       if(this.halo)this.halo.scale.setScalar(1+.12*Math.sin(t*2.1));
     }else if(this.mode==='loopproof'&&this.type==='hero'){
-      this.flowDots.forEach(s=>{const a=((t*s.userData.speed+s.userData.phase)%1)*Math.PI*2;const y=Math.sin(a)*1.95,z=Math.sin(a*.7)*.38,x=Math.cos(a)*2.35;s.position.set(x,y,z);s.material.opacity=.4+.55*(.5+.5*Math.sin(a*3))});
+      this.flowDots.forEach(s=>{const a=((t*s.userData.speed*(1+chapterP*1.8)+s.userData.phase)%1)*Math.PI*2;const y=Math.sin(a)*1.95,z=Math.sin(a*.7)*.38,x=Math.cos(a)*2.35;s.position.set(x,y,z);s.material.opacity=.4+.55*(.5+.5*Math.sin(a*3))});
     }
     if(this.mode==='neurolab'){
-      this.dataPackets.forEach(s=>{const u=(t*s.userData.speed+s.userData.phase)%1;s.position.set(-2.0+4*u,-1.55+3.1*((u*1.8)%1),-.85+1.7*((u*2.3)%1));s.material.opacity=.35+.6*Math.sin(Math.PI*u)});
+      this.dataPackets.forEach(s=>{const u=(t*s.userData.speed*(1+chapterP*1.25)+s.userData.phase)%1;s.position.set(-2.0+4*u,-1.55+3.1*((u*1.8)%1),-.85+1.7*((u*2.3)%1));s.material.opacity=.35+.6*Math.sin(Math.PI*u)});
     }
   }
   frame(){
     requestAnimationFrame(this.frame);if(!this.visible)return;
     const t=this.clock.getElapsedTime();this.progressFromScroll();
     this.pointer.x+=(this.target.x-this.pointer.x)*.055;this.pointer.y+=(this.target.y-this.pointer.y)*.055;
-    const reduced=motionReduced(),accentNow=new THREE.Color(cssAccent());this.accent.lerp(accentNow,.07);this.rim.color.copy(this.accent);
+    const reduced=motionReduced(),chapterP=this.chapterProgress(),accentNow=new THREE.Color(cssAccent());this.accent.lerp(accentNow,.07);this.rim.color.copy(this.accent);
     if(this.particles)this.particles.material.color.copy(this.accent);
-    this.updateFlow(t);
+    this.updateFlow(t,chapterP);
 
     if(this.type==='hero'){
       const host=this.el.getBoundingClientRect(),scrollP=clamp(-host.top/Math.max(1,host.height),0,1);
@@ -162,13 +168,36 @@ class Stage{
         this.group.rotation.z+=(-this.pointer.x*.045-this.group.rotation.z)*.04;
         this.camera.position.x+=(this.pointer.x*.5-this.camera.position.x)*.035;
         this.camera.position.y+=((.16+this.pointer.y*.22)-this.camera.position.y)*.035;
-        this.camera.position.z+=(8.6-scrollP*.28-this.camera.position.z)*.03;
+        this.camera.position.z+=(8.6-scrollP*.28-chapterP*.38-this.camera.position.z)*.03;
         if(this.primary)this.primary.rotation.y+=.004;
         this.orbits.forEach((o,i)=>{o.rotation.z+=(i%2?-.0014:.0018);o.rotation.y+=.0008*(i+1)});
         if(this.wire){this.wire.rotation.x-=.0015;this.wire.rotation.y+=.002}
-        if(this.layers)this.layers.forEach((l,i)=>{l.position.y=(i-2.5)*.5+Math.sin(t*.7+i*.72)*.035});
+        if(this.layers)this.layers.forEach((l,i)=>{
+          const mid=(this.layers.length-1)/2;
+          const spread=(i-mid)*.42*chapterP;
+          l.position.y=(i-2.5)*.5+spread+Math.sin(t*.7+i*.72)*.035;
+          l.position.z=Math.abs(i-mid)*.16*chapterP;
+          l.rotation.y=.11+(i-mid)*.018*chapterP;
+        });
+        if(this.ndmsInputs)this.ndmsInputs.forEach((n,i)=>{
+          const b=n.userData.base,phase=clamp((chapterP-i*.08)/.68,0,1);
+          const pull=.08+.16*phase;
+          n.position.set(b.x*(1-pull),b.y*(1-pull),b.z+Math.sin(t*1.2+i)*.05);
+          n.scale.setScalar(.9+.16*phase);
+        });
+        if(this.mode==='ndms'&&this.primary){
+          const pulse=1+chapterP*.12+Math.sin(t*2.2)*(.018+.02*chapterP);
+          this.primary.scale.setScalar(pulse);
+        }
+        if(this.loopNodes)this.loopNodes.forEach((n,i)=>{
+          const active=Math.floor(chapterP*6);
+          const k=i===Math.min(5,active)?1.18:1;
+          n.scale.lerp(new THREE.Vector3(k,k,k),.08);
+          n.material.emissiveIntensity+=( (i<=active?.22:.06)-n.material.emissiveIntensity)*.08;
+        });
+        if(this.mode==='loopproof'&&this.primary)this.primary.rotation.z+=.0015+.004*chapterP;
         if(this.shells)this.shells.forEach((s,i)=>{const spread=scrollP*.15*i;s.position.set((i-1)*spread,Math.sin(t*.5+i)*.02,spread*.3);s.rotation.x+=.001*(i+1)});
-        if(this.particles)this.particles.rotation.y=t*.014;
+        if(this.particles){this.particles.rotation.y=t*.014+chapterP*.12;this.particles.material.opacity=.38+.18*chapterP;}
       }
     }else{
       const p=reduced?1:this.progress;
