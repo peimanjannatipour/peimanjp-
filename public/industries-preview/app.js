@@ -166,7 +166,13 @@ function updateCinematic(){
     const p=clamp((-r.top)/total,0,1);
     ch.style.setProperty('--chapter-progress',p.toFixed(4));
     const media=ch.querySelector('.cinematic-media');
-    if(media) media.style.setProperty('--chapter-progress',p.toFixed(4));
+    if(media){
+      media.style.setProperty('--chapter-progress',p.toFixed(4));
+      media.style.setProperty('--chapter-scale',(1.055+p*.035).toFixed(4));
+      media.style.setProperty('--grid-y',(p*72).toFixed(1)+'px');
+      media.style.setProperty('--grid-x',(-p*54).toFixed(1)+'px');
+    }
+    ch.style.setProperty('--chapter-x',(18+p*64).toFixed(1)+'%');
     const rail=[...ch.querySelectorAll('.chapter-rail span')];
     const active=Math.min(rail.length-1,Math.floor(p*rail.length));
     rail.forEach((el,i)=>el.classList.toggle('active',i===active));
