@@ -177,3 +177,86 @@ body:before{
 }
 body.reduced-motion .cinematic-media>img{transform:scale(1.035)!important}
 body.reduced-motion .domain-card:after{display:none}
+
+
+/* V2.2 — motion choreography */
+.cinematic-chapter:before{
+  content:"";position:absolute;inset:5% 0;pointer-events:none;z-index:-1;opacity:.7;
+  background:radial-gradient(700px 500px at calc(18% + var(--chapter-progress,0)*64%) 50%,
+    color-mix(in srgb,var(--chapter-accent,var(--accent)) 8%,transparent),transparent 68%);
+  filter:blur(30px)
+}
+.cinematic-media{transform:translateZ(0);will-change:transform}
+.cinematic-media>img{
+  transform:translate3d(0,var(--velocity-y,0px),0) scale(calc(1.055 + var(--chapter-progress,0)*.035)) rotateX(var(--velocity-skew,0deg));
+  will-change:transform;transition:filter .35s
+}
+.scene-grid{
+  background-position:
+    0 calc(var(--chapter-progress,0)*72px),
+    calc(var(--chapter-progress,0)*-54px) 0;
+  transition:opacity .25s
+}
+.cinematic-chapter .three-canvas{filter:saturate(calc(.88 + var(--chapter-progress,0)*.24)) contrast(calc(1 + var(--chapter-progress,0)*.06))}
+.chapter-rail span{position:relative;overflow:visible}
+.chapter-rail span:before{
+  content:"";position:absolute;top:-2px;left:0;width:0;height:3px;border-radius:3px;
+  background:var(--accent);box-shadow:0 0 16px color-mix(in srgb,var(--accent) 50%,transparent);
+  transition:width .38s cubic-bezier(.2,.8,.2,1)
+}
+.chapter-rail span.active:before{width:100%}
+.scene-status:before{
+  content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:0 0 auto;
+  box-shadow:0 0 16px var(--accent);animation:statusPulse 2.1s ease-in-out infinite
+}
+@keyframes statusPulse{0%,100%{opacity:.45;transform:scale(.82)}50%{opacity:1;transform:scale(1.2)}}
+
+.explode-core .stack-layer{
+  transform-style:preserve-3d;
+  border-color:color-mix(in srgb,var(--accent) calc(14% + var(--layer-energy,0)*26%),var(--line));
+  box-shadow:
+    0 calc(12px + var(--layer-energy,0)*18px) calc(34px + var(--layer-energy,0)*28px) rgba(0,0,0,.28),
+    inset 0 0 calc(28px + var(--layer-energy,0)*35px) color-mix(in srgb,var(--accent) calc(var(--layer-energy,0)*8%),transparent);
+}
+.explode-core .stack-layer.layer-active{
+  border-color:color-mix(in srgb,var(--accent) 58%,var(--line));
+}
+.explode-core .stack-layer.layer-active .layer-mark{
+  color:#fff;border-color:color-mix(in srgb,var(--accent) 65%,var(--line));
+  box-shadow:0 0 24px color-mix(in srgb,var(--accent) 20%,transparent)
+}
+.explode:after{
+  content:"SCROLL TO DISASSEMBLE";position:absolute;right:0;top:8%;font-size:9px;letter-spacing:.2em;
+  color:var(--muted);writing-mode:vertical-rl;opacity:calc(.35 + var(--explode-progress,0)*.4)
+}
+
+.motion-progress{
+  --p:0;position:fixed;z-index:55;right:18px;top:50%;transform:translateY(-50%);
+  width:18px;height:150px;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:.72
+}
+.motion-progress:before{
+  content:"";position:absolute;top:0;bottom:27px;left:8px;width:1px;background:var(--line)
+}
+.motion-progress i{
+  position:absolute;top:0;left:7px;width:3px;height:calc((100% - 27px)*var(--p));border-radius:4px;
+  background:linear-gradient(180deg,var(--accent2),var(--accent));box-shadow:0 0 14px color-mix(in srgb,var(--accent) 35%,transparent)
+}
+.motion-progress span{
+  margin-top:auto;font-size:8px;letter-spacing:.08em;color:var(--muted);font-variant-numeric:tabular-nums
+}
+.reveal.in h2,.reveal.in h3{animation:titleSettle .75s cubic-bezier(.16,.84,.24,1) both}
+@keyframes titleSettle{from{letter-spacing:-.02em;filter:blur(3px);opacity:.25;transform:translateY(14px)}to{filter:blur(0);opacity:1;transform:none}}
+
+@media(max-width:900px){
+  .motion-progress{display:none}
+  .cinematic-media>img{transform:scale(calc(1.045 + var(--chapter-progress,0)*.025))}
+  .explode:after{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .scene-status:before{animation:none}
+  .reveal.in h2,.reveal.in h3{animation:none}
+  .cinematic-media>img{transform:scale(1.04)!important}
+}
+body.reduced-motion .scene-status:before{animation:none}
+body.reduced-motion .cinematic-media>img{transform:scale(1.04)!important}
