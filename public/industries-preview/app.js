@@ -35,14 +35,21 @@ function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
 function updateExplodes(){
   document.querySelectorAll('.explode').forEach(el=>{
     const r=el.getBoundingClientRect();
-    const p=clamp((innerHeight-r.top)/(innerHeight+r.height*.45),0,1);
+    const p=clamp((innerHeight*.76-r.top)/Math.max(1,r.height-innerHeight*.32),0,1);
+    el.style.setProperty('--explode-progress',p.toFixed(4));
     const layers=[...el.querySelectorAll('.stack-layer')];
     layers.forEach((layer,i)=>{
       const mid=(layers.length-1)/2;
-      const offset=(i-mid)*82*p;
-      const rotate=(i-mid)*.7*p;
-      layer.style.transform='translate3d(0,'+offset+'px,'+(Math.abs(i-mid)*18*p)+'px) rotateX('+rotate+'deg)';
-      layer.style.opacity=String(.72+.28*p);
+      const start=i*.065,end=.62+i*.055;
+      const local=clamp((p-start)/(end-start),0,1);
+      const eased=local*local*(3-2*local);
+      const offset=(i-mid)*112*eased;
+      const depth=Math.abs(i-mid)*30*eased;
+      const rotate=(i-mid)*1.35*eased;
+      layer.style.transform='translate3d('+(i-mid)*5*eased+'px,'+offset+'px,'+depth+'px) rotateX('+rotate+'deg)';
+      layer.style.opacity=String(.42+.58*eased);
+      layer.style.setProperty('--layer-energy',eased.toFixed(3));
+      layer.classList.toggle('layer-active',p>=start&&p<end);
     });
   });
 }
@@ -196,3 +203,36 @@ document.querySelectorAll('.btn').forEach(btn=>{
   },{passive:true});
   btn.addEventListener('pointerleave',()=>btn.style.transform='');
 });
+
+
+// Scroll velocity becomes a restrained motion input rather than decorative noise.
+const motionProgress=document.createElement('div');
+motionProgress.className='motion-progress';
+motionProgress.innerHTML='<i></i><span>00</span>';
+motionProgress.setAttribute('aria-hidden','true');
+document.body.appendChild(motionProgress);
+
+let lastScrollY=scrollY,lastScrollT=performance.now(),scrollVelocity=0,scrollRAF=0;
+function motionFrame(now){
+  scrollRAF=0;
+  const dt=Math.max(16,now-lastScrollT),dy=scrollY-lastScrollY;
+  const raw=clamp(dy/dt,-2.2,2.2);
+  scrollVelocity+= (raw-scrollVelocity)*.18;
+  lastScrollY=scrollY;lastScrollT=now;
+  const max=Math.max(1,document.documentElement.scrollHeight-innerHeight),gp=clamp(scrollY/max,0,1);
+  root.style.setProperty('--scroll-v',scrollVelocity.toFixed(4));
+  root.style.setProperty('--page-progress',gp.toFixed(4));
+  motionProgress.style.setProperty('--p',gp.toFixed(4));
+  const n=motionProgress.querySelector('span');if(n)n.textContent=String(Math.round(gp*100)).padStart(2,'0');
+  if(!body.classList.contains('reduced-motion')){
+    document.querySelectorAll('.cinematic-media').forEach(media=>{
+      const r=media.getBoundingClientRect();
+      if(r.bottom>0&&r.top<innerHeight){
+        media.style.setProperty('--velocity-y',(scrollVelocity*8).toFixed(2)+'px');
+        media.style.setProperty('--velocity-skew',(scrollVelocity*.16).toFixed(3)+'deg');
+      }
+    });
+  }
+}
+function requestMotionFrame(){if(!scrollRAF)scrollRAF=requestAnimationFrame(motionFrame)}
+addEventListener('scroll',requestMotionFrame,{passive:true});requestMotionFrame();
