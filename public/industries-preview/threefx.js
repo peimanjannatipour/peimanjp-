@@ -62,7 +62,20 @@ class Stage{
     this.particles=new THREE.Points(g,m);this.group.add(this.particles);
   }
   addFlow(a,b,count,color=this.accent,speed=.15){
-    for(let i=0;i<count;i++){const s=this.sprite(color,.16,i%3===0?.95:.65);s.userData={a:a.clone(),b:b.clone(),phase:i/count,speed};this.group.add(s);this.flowDots.push(s)}
+    const mid=a.clone().lerp(b,.5);
+    const bend=new THREE.Vector3(-(b.y-a.y)*.18,(b.x-a.x)*.08,.38*Math.sign(a.x||1));
+    mid.add(bend);
+    const curve=new THREE.QuadraticBezierCurve3(a.clone(),mid,b.clone());
+    const trace=new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(curve.getPoints(42)),
+      new THREE.LineBasicMaterial({color,transparent:true,opacity:.2,blending:THREE.AdditiveBlending})
+    );
+    this.group.add(trace);
+    for(let i=0;i<count;i++){
+      const s=this.sprite(color,.16,i%3===0 ? .95 : .65);
+      s.userData={a:a.clone(),b:b.clone(),curve,phase:i/count,speed};
+      this.group.add(s);this.flowDots.push(s);
+    }
   }
   buildHero(){
     this.particleCloud(this.mode==='home'?240:160,5.2);
@@ -143,7 +156,7 @@ class Stage{
   }
   updateFlow(t,chapterP=0){
     if(this.mode==='ndms'){
-      this.flowDots.forEach(s=>{const u=(t*s.userData.speed*(1+chapterP*1.6)+s.userData.phase)%1;const e=smooth(u);s.position.lerpVectors(s.userData.a,s.userData.b,e);s.material.opacity=.18+(.58+.22*chapterP)*Math.sin(Math.PI*u)});
+      this.flowDots.forEach(s=>{const u=(t*s.userData.speed*(1+chapterP*1.6)+s.userData.phase)%1;const e=smooth(u);s.position.copy(s.userData.curve ? s.userData.curve.getPoint(e) : s.userData.a.clone().lerp(s.userData.b,e));s.material.opacity=.18+(.58+.22*chapterP)*Math.sin(Math.PI*u);const k=.75+.5*Math.sin(Math.PI*u);s.scale.setScalar(.16*k)});
       if(this.halo)this.halo.scale.setScalar(1+.12*Math.sin(t*2.1));
     }else if(this.mode==='loopproof'&&this.type==='hero'){
       this.flowDots.forEach(s=>{const a=((t*s.userData.speed*(1+chapterP*1.8)+s.userData.phase)%1)*Math.PI*2;const y=Math.sin(a)*1.95,z=Math.sin(a*.7)*.38,x=Math.cos(a)*2.35;s.position.set(x,y,z);s.material.opacity=.4+.55*(.5+.5*Math.sin(a*3))});
