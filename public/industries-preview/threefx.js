@@ -23,7 +23,7 @@ class Stage{
     this.camera=new THREE.PerspectiveCamera(type==='hero'?36:32,1,.1,80);
     this.camera.position.set(0,type==='hero' ? 0.18 : 0.65,type==='hero' ? 8.6 : 10.2);
     this.renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'});
-    this.renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.65));
+    this.renderer.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<760?1.2:1.65));
     this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.18;
     this.renderer.setClearColor(0x000000,0);this.renderer.domElement.className='three-canvas';el.appendChild(this.renderer.domElement);
     this.group=new THREE.Group();this.scene.add(this.group);this.accent=new THREE.Color(cssAccent());this.clock=new THREE.Clock();
@@ -78,7 +78,7 @@ class Stage{
     }
   }
   buildHero(){
-    this.particleCloud(this.mode==='home'?240:160,5.2);
+    this.particleCloud(this.mode==='home'?(innerWidth<760?120:240):(innerWidth<760?84:160),5.2);
     if(this.mode==='home')this.home();
     if(this.mode==='ndms')this.ndms();
     if(this.mode==='neurolab')this.neurolab();
@@ -122,7 +122,7 @@ class Stage{
     for(let i=0;i<14;i++){const s=this.sprite(i%4===0?0xffffff:new THREE.Color(0x44d98e),.15,.8);s.userData={phase:i/14,speed:.07+(i%4)*.006};this.group.add(s);this.flowDots.push(s)}
   }
   buildExplode(){
-    this.explodeObjects=[];this.particleCloud(110,4.7);
+    this.explodeObjects=[];this.particleCloud(innerWidth<760?64:110,4.7);
     this.mode==='loopproof'?this.loopExplode():this.layerExplode();
   }
   layerExplode(){
