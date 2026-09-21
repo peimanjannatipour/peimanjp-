@@ -37,9 +37,14 @@
     </div>
   </div>
   <div class="hero-visual reveal">
-    <img class="photo" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=84" alt="Modern technology workspace"><div class="three-stage" data-three-hero data-mode="home" aria-hidden="true"></div><div class="three-badge">Move pointer · live 3D</div>
+    <img class="photo" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=84" alt="Modern technology workspace" fetchpriority="high" decoding="async"><div class="three-stage" data-three-hero data-mode="home" aria-hidden="true"></div><div class="three-badge">Move pointer · live 3D</div>
     <canvas class="field-canvas" data-field data-labels="Multimodal AI|Human Timing|EEG|Scientific Reproducibility|Digital Twins|Evidence Systems|Physical AI|Edge Sensing"></canvas>
     <div class="hero-labels"><span class="tag">Human intelligence</span><span class="tag">Scientific infrastructure</span><span class="tag">Physical systems</span></div>
+    <div class="hero-hud" aria-hidden="true">
+      <span><b>01</b>SIGNAL</span><i></i><span><b>02</b>MODEL</span><i></i><span><b>03</b>SYSTEM</span>
+    </div>
+    <div class="hero-corner hero-corner-a" aria-hidden="true">RESEARCH / ENGINEERING</div>
+    <div class="hero-corner hero-corner-b" aria-hidden="true">PJP / 2026</div>
   </div>
 </section>
 
@@ -64,9 +69,9 @@
 <section class="section shell" id="systems">
   <div class="section-head reveal"><div><p class="eyebrow">Flagship systems</p><h2>Three systems. One research engine.</h2></div><p>Each flagship solves a different problem, but all follow the same operating principle: sense carefully, model transparently, and surface evidence a human can inspect.</p></div>
   <div class="grid-3">
-    <a class="project-card reveal" href="ndms.html"><div class="media"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=84" alt="Modern computer workstation"></div><div class="body"><div class="type">Human intelligence</div><h3>NDMS</h3><p>Privacy-first multimodal neurotechnology for video, audio and optional validation signals, with quality-aware fusion and uncertainty-aware outputs.</p><div class="tags"><span>Video</span><span>Audio</span><span>Human state</span><span>Privacy</span></div></div></a>
-    <a class="project-card reveal" href="neurolab-os.html"><div class="media"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1400&q=82" alt="Research laboratory"></div><div class="body"><div class="type">Scientific infrastructure</div><h3>NeuroLab OS</h3><p>A local-first environment for data QC, computational modeling, simulation, comparison, provenance and reproducible reporting.</p><div class="tags"><span>EEG</span><span>ROI/BOLD</span><span>Models</span><span>Reports</span></div></div></a>
-    <a class="project-card reveal" href="loopproof.html"><div class="media"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1400&q=84" alt="Greenhouse and controlled-environment plants"></div><div class="body"><div class="type">Physical systems</div><h3>LoopProof</h3><p>A self-testing digital twin concept for closed-loop systems: observe operation, model expected behavior, run bounded tests and explain plausible faults.</p><div class="tags"><span>Digital twin</span><span>Diagnostics</span><span>Hydroponics</span><span>Human in loop</span></div></div></a>
+    <a class="project-card reveal" data-project="01" href="ndms.html"><div class="media"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=84" alt="Modern computer workstation"></div><div class="body"><div class="project-topline"><div class="type">Human intelligence</div><span>01 ↗</span></div><h3>NDMS</h3><p>Privacy-first multimodal neurotechnology for video, audio and optional validation signals, with quality-aware fusion and uncertainty-aware outputs.</p><div class="tags"><span>Video</span><span>Audio</span><span>Human state</span><span>Privacy</span></div></div></a>
+    <a class="project-card reveal" data-project="02" href="neurolab-os.html"><div class="media"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1400&q=82" alt="Research laboratory"></div><div class="body"><div class="project-topline"><div class="type">Scientific infrastructure</div><span>02 ↗</span></div><h3>NeuroLab OS</h3><p>A local-first environment for data QC, computational modeling, simulation, comparison, provenance and reproducible reporting.</p><div class="tags"><span>EEG</span><span>ROI/BOLD</span><span>Models</span><span>Reports</span></div></div></a>
+    <a class="project-card reveal" data-project="03" href="loopproof.html"><div class="media"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1400&q=84" alt="Greenhouse and controlled-environment plants"></div><div class="body"><div class="project-topline"><div class="type">Physical systems</div><span>03 ↗</span></div><h3>LoopProof</h3><p>A self-testing digital twin concept for closed-loop systems: observe operation, model expected behavior, run bounded tests and explain plausible faults.</p><div class="tags"><span>Digital twin</span><span>Diagnostics</span><span>Hydroponics</span><span>Human in loop</span></div></div></a>
   </div>
 </section>
 
@@ -108,10 +113,10 @@
   <div class="section-head reveal"><div><p class="eyebrow">Flagship deep dive</p><h2>Three systems. Three motion languages.</h2></div><p>Each flagship has its own interaction grammar: fluid multimodal fusion, modular scientific compute, and physical closed-loop diagnostics.</p></div>
 </section>
 
-<section class="cinematic-chapter chapter-ndms" data-cinematic="ndms">
+<section class="cinematic-chapter chapter-ndms" id="ndms-story" data-cinematic="ndms">
   <div class="cinematic-sticky shell">
     <div class="cinematic-media">
-      <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=86" alt="Modern technology workspace">
+      <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=86" alt="Modern technology workspace">
       <div class="three-stage cinematic-three" data-three-hero data-mode="ndms" aria-hidden="true"></div>
       <div class="scene-grid"></div>
       <div class="scene-status"><span>NDMS / HUMAN INTELLIGENCE</span><b>VIDEO + AUDIO → QUALITY → FUSION → STATE</b></div>
@@ -129,10 +134,10 @@
   </div>
 </section>
 
-<section class="cinematic-chapter chapter-neurolab" data-cinematic="neurolab">
+<section class="cinematic-chapter chapter-neurolab" id="neurolab-story" data-cinematic="neurolab">
   <div class="cinematic-sticky shell reverse">
     <div class="cinematic-media">
-      <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1800&q=86" alt="Scientific research laboratory">
+      <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1800&q=86" alt="Scientific research laboratory">
       <div class="three-stage cinematic-three" data-three-hero data-mode="neurolab" aria-hidden="true"></div>
       <div class="scene-grid"></div>
       <div class="scene-status"><span>NEUROLAB OS / SCIENTIFIC INFRASTRUCTURE</span><b>DATA → QC → MODELS → COMPARE → REPORT</b></div>
@@ -150,10 +155,10 @@
   </div>
 </section>
 
-<section class="cinematic-chapter chapter-loopproof" data-cinematic="loopproof">
+<section class="cinematic-chapter chapter-loopproof" id="loopproof-story" data-cinematic="loopproof">
   <div class="cinematic-sticky shell">
     <div class="cinematic-media">
-      <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1800&q=86" alt="Controlled environment greenhouse">
+      <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1800&q=86" alt="Controlled environment greenhouse">
       <div class="three-stage cinematic-three" data-three-hero data-mode="loopproof" aria-hidden="true"></div>
       <div class="scene-grid"></div>
       <div class="scene-status"><span>LOOPPROOF / PHYSICAL SYSTEMS</span><b>OBSERVE → MODEL → TEST → EXPLAIN</b></div>
@@ -183,9 +188,9 @@
 <section class="section shell">
   <div class="section-head reveal"><div><p class="eyebrow">Experimental systems</p><h2>Focused prototypes and evidence tools.</h2></div><p>Smaller projects stay visible without competing with the three flagship systems.</p></div>
   <div class="grid-3">
-    <div class="photo-card reveal"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=82" alt="Laboratory equipment"><div class="caption"><p class="eyebrow">Evidence intelligence</p><h3>SMIS-ODS</h3><p>Structured evidence mapping, source reliability and outcome-aware synthesis.</p></div></div>
-    <div class="photo-card reveal"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=82" alt="Robotics prototype"><div class="caption"><p class="eyebrow">Robotics</p><h3>Prototype workbench</h3><p>Embedded sensing, control and physical prototyping.</p></div></div>
-    <div class="photo-card reveal"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=84" alt="Technology workspace"><div class="caption"><p class="eyebrow">Exploration</p><h3>Future systems</h3><p>Early concepts stay experimental until evidence catches up.</p></div></div>
+    <div class="photo-card reveal"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=82" alt="Laboratory equipment"><div class="caption"><p class="eyebrow">Evidence intelligence</p><h3>SMIS-ODS</h3><p>Structured evidence mapping, source reliability and outcome-aware synthesis.</p></div></div>
+    <div class="photo-card reveal"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=82" alt="Robotics prototype"><div class="caption"><p class="eyebrow">Robotics</p><h3>Prototype workbench</h3><p>Embedded sensing, control and physical prototyping.</p></div></div>
+    <div class="photo-card reveal"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=84" alt="Technology workspace"><div class="caption"><p class="eyebrow">Exploration</p><h3>Future systems</h3><p>Early concepts stay experimental until evidence catches up.</p></div></div>
   </div>
 </section>
 
@@ -201,7 +206,7 @@
 <section class="section shell" id="contact">
   <div class="cta reveal">
     <div class="cta-copy"><p class="eyebrow">PJP Industries</p><h2>Build what doesn’t exist yet.</h2><p class="copy">Research, systems and real-world impact—connected by a single engineering language.</p><div class="actions"><a class="btn primary" href="https://peimanjp.com" target="_blank" rel="noreferrer">Get in touch →</a><a class="btn" href="#systems">Explore systems</a></div></div>
-    <div class="cta-photo"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=84" alt="Modern technology workspace"></div>
+    <div class="cta-photo"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=84" alt="Modern technology workspace"></div>
   </div>
 </section>
 </main>
