@@ -8,9 +8,22 @@ const storedMotion=localStorage.getItem('pjp-motion');
 if(storedTheme) root.dataset.theme=storedTheme;
 if(storedAccent) root.dataset.accent=storedAccent;
 if(storedMotion==='reduced') body.classList.add('reduced-motion');
+document.querySelectorAll('[data-motion-toggle]').forEach(btn=>{
+  btn.textContent=body.classList.contains('reduced-motion')?'Motion: reduced':'Motion: full';
+});
 
 addEventListener('scroll',()=>header&&header.classList.toggle('scrolled',scrollY>18),{passive:true});
-if(menu) menu.addEventListener('click',()=>header.classList.toggle('open'));
+if(menu) menu.addEventListener('click',()=>{
+  const open=header.classList.toggle('open');
+  menu.setAttribute('aria-expanded',String(open));
+  menu.setAttribute('aria-label',open?'Close menu':'Open menu');
+  body.classList.toggle('menu-open',open);
+});
+header?.querySelectorAll('.nav a').forEach(link=>link.addEventListener('click',()=>{
+  header.classList.remove('open');
+  body.classList.remove('menu-open');
+  if(menu){menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open menu')}
+}));
 
 document.querySelectorAll('[data-theme-toggle]').forEach(btn=>btn.addEventListener('click',()=>{
   const next=root.dataset.theme==='light'?'dark':'light';
@@ -198,9 +211,11 @@ document.querySelectorAll('.project-card').forEach(card=>{
   card.addEventListener('pointermove',e=>{
     if(body.classList.contains('reduced-motion')) return;
     const r=card.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    card.style.transform='perspective(900px) rotateX('+(-y*2.2)+'deg) rotateY('+(x*2.8)+'deg) translateY(-8px)';
+    const nx=(e.clientX-r.left)/r.width,ny=(e.clientY-r.top)/r.height;
+    const x=nx-.5,y=ny-.5;
+    card.style.setProperty('--px',(nx*100).toFixed(1)+'%');
+    card.style.setProperty('--py',(ny*100).toFixed(1)+'%');
+    card.style.transform='perspective(900px) rotateX('+(-y*2.0)+'deg) rotateY('+(x*2.5)+'deg) translateY(-8px)';
   },{passive:true});
   card.addEventListener('pointerleave',()=>card.style.transform='');
 });
@@ -246,3 +261,54 @@ function motionFrame(now){
 }
 function requestMotionFrame(){if(!scrollRAF)scrollRAF=requestAnimationFrame(motionFrame)}
 addEventListener('scroll',requestMotionFrame,{passive:true});requestMotionFrame();
+
+
+// V5 navigation state and page-level interaction polish
+const sectionMap=[
+  {id:'systems',href:'#systems'},
+  {id:'architecture',href:'#architecture'},
+  {id:'research',href:'#research'},
+  {id:'contact',href:'#contact'}
+];
+const navLinks=[...document.querySelectorAll('.nav a')];
+const homeLink=navLinks.find(x=>x.getAttribute('href')==='index.html');
+
+function updateNavState(){
+  let current=null;
+  const marker=innerHeight*.32;
+  for(const item of sectionMap){
+    const el=document.getElementById(item.id);
+    if(!el)continue;
+    const r=el.getBoundingClientRect();
+    if(r.top<=marker&&r.bottom>marker)current=item.href;
+  }
+  navLinks.forEach(link=>{
+    link.classList.remove('is-current');
+    if(link===homeLink)link.classList.remove('active');
+    link.removeAttribute('aria-current');
+  });
+  const target=current?navLinks.find(x=>x.getAttribute('href')===current):homeLink;
+  if(target){
+    target.classList.add('is-current');
+    target.setAttribute('aria-current','page');
+  }
+}
+addEventListener('scroll',()=>requestAnimationFrame(updateNavState),{passive:true});
+addEventListener('resize',updateNavState);
+updateNavState();
+
+const heroVisual=document.querySelector('.hero-visual');
+if(heroVisual){
+  heroVisual.addEventListener('pointermove',e=>{
+    if(body.classList.contains('reduced-motion'))return;
+    const r=heroVisual.getBoundingClientRect();
+    heroVisual.style.setProperty('--hero-x',(((e.clientX-r.left)/r.width)*100).toFixed(1)+'%');
+    heroVisual.style.setProperty('--hero-y',(((e.clientY-r.top)/r.height)*100).toFixed(1)+'%');
+  },{passive:true});
+}
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&header?.classList.contains('open')){
+    header.classList.remove('open');body.classList.remove('menu-open');
+    if(menu){menu.setAttribute('aria-expanded','false');menu.focus()}
+  }
+});
