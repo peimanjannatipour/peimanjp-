@@ -1328,3 +1328,20 @@ body{
   .project-card:after{display:none}
 }
 body.reduced-motion .project-card:after{display:none}
+
+
+/* V5 interaction finishing */
+.hero-visual:before{
+  background:
+    radial-gradient(460px 360px at var(--hero-x,58%) var(--hero-y,45%),color-mix(in srgb,var(--accent) 16%,transparent),transparent 64%),
+    linear-gradient(180deg,rgba(2,10,16,.02),rgba(2,10,16,.42));
+  transition:background-position .18s ease-out;
+}
+body.menu-open{overflow:hidden}
+.menu-btn[aria-expanded="true"]{
+  border-color:color-mix(in srgb,var(--accent) 45%,var(--line));
+  background:color-mix(in srgb,var(--accent) 9%,var(--panel));
+}
+@media(max-width:1180px){
+  .site-header.open .nav{max-height:calc(100svh - var(--header-h) - 30px);overflow:auto}
+}
