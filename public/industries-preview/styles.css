@@ -1345,3 +1345,168 @@ body.menu-open{overflow:hidden}
 @media(max-width:1180px){
   .site-header.open .nav{max-height:calc(100svh - var(--header-h) - 30px);overflow:auto}
 }
+
+
+/* =========================
+   PJP INDUSTRIES V6 — CLEAN FINAL PASS
+   ========================= */
+:root{--muted:#a7b7c1}
+
+/* Brand + navigation: reduce control-panel feel */
+.brand:before{display:none!important}
+.brand-mark{
+  width:24px;height:24px;display:inline-grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  align-items:end;margin-right:3px;transform:skewX(-8deg)
+}
+.brand-mark i{
+  display:block;width:100%;border-radius:2px 2px 1px 1px;
+  background:linear-gradient(180deg,var(--accent2),var(--accent));
+  box-shadow:0 0 12px color-mix(in srgb,var(--accent) 18%,transparent)
+}
+.brand-mark i:nth-child(1){height:46%}
+.brand-mark i:nth-child(2){height:82%}
+.brand-mark i:nth-child(3){height:62%}
+.nav{gap:4px}
+.nav a{padding:8px 13px;font-size:12px}
+.controls{margin-left:4px}
+.display-menu{position:relative}
+.display-menu summary{
+  list-style:none;cursor:pointer;
+  border:1px solid var(--line);
+  background:rgba(9,22,31,.46);
+  color:var(--text);
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  user-select:none;
+}
+.display-menu summary::-webkit-details-marker{display:none}
+.display-menu[open] summary{
+  border-color:color-mix(in srgb,var(--accent) 38%,var(--line));
+  background:color-mix(in srgb,var(--accent) 7%,var(--panel))
+}
+.display-panel{
+  position:absolute;right:0;top:calc(100% + 10px);z-index:80;
+  min-width:196px;padding:12px;
+  display:grid;grid-template-columns:1fr;gap:9px;
+  border:1px solid var(--line);border-radius:16px;
+  background:color-mix(in srgb,var(--bg) 97%,transparent);
+  box-shadow:0 24px 70px rgba(0,0,0,.38);
+  backdrop-filter:blur(22px)
+}
+.display-panel .display-label{
+  font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)
+}
+.display-panel .accent-set{display:flex!important;width:max-content}
+.display-panel .chip-btn{display:flex!important;width:100%;justify-content:flex-start;border-radius:11px;padding:9px 10px}
+.menu-btn{font-size:12px}
+
+/* Keep the page progress useful but nearly invisible. */
+.motion-progress{
+  position:fixed!important;
+  z-index:61!important;
+  left:0!important;right:0!important;top:var(--header-h)!important;
+  width:100%!important;height:2px!important;
+  transform:none!important;
+  opacity:.72!important;
+  display:block!important;
+  pointer-events:none!important
+}
+.motion-progress:before{display:none!important}
+.motion-progress i{
+  position:absolute!important;left:0!important;top:0!important;
+  height:2px!important;width:calc(100% * var(--p))!important;
+  background:linear-gradient(90deg,var(--accent2),var(--accent))!important;
+  box-shadow:0 0 10px color-mix(in srgb,var(--accent) 28%,transparent)!important
+}
+.motion-progress span{display:none!important}
+
+/* More editorial, less HUD-heavy */
+.hero-corner-b{display:none}
+.hero-corner-a{opacity:.7}
+.hero-hud{opacity:.86}
+.three-badge{
+  font-size:8px!important;
+  letter-spacing:.1em!important;
+  color:rgba(224,240,248,.72)!important;
+  background:rgba(3,13,20,.48)!important
+}
+.copy,.section-head>p,.arch-v4-head>p:last-child{color:var(--muted)}
+.tag,.metric{color:#e4f0f6}
+
+/* Architecture: make the system itself the visual hero. */
+.arch-v4-layout{
+  grid-template-columns:minmax(300px,.56fr) minmax(0,1.44fr);
+  gap:clamp(34px,4vw,64px)
+}
+.arch-v4-steps{gap:8px}
+.arch-v4-steps article{
+  min-height:78px;
+  padding:12px 14px;
+  opacity:.68;
+  background:linear-gradient(180deg,rgba(13,29,41,.78),rgba(7,18,27,.74))
+}
+.arch-v4-steps article.arch-active{transform:translateX(3px)}
+.arch-v4-steps p{font-size:11px;color:#9fb1bd}
+.arch-v4-stage{
+  height:640px!important;
+  min-height:640px!important;
+  background:
+    radial-gradient(600px 430px at 50% 49%,color-mix(in srgb,var(--accent) 11%,transparent),transparent 69%),
+    linear-gradient(180deg,rgba(8,23,33,.98),rgba(4,14,21,.99))
+}
+.arch-v4-explode{height:640px!important;min-height:640px!important}
+.arch-v4-grid{opacity:.68;background-size:56px 56px}
+.arch-v4-meta{opacity:.7}
+.arch-v4-footer{
+  left:18px;right:18px;bottom:16px;
+  background:rgba(3,12,18,.58);
+  border-color:rgba(188,226,246,.1)
+}
+.arch-v4-footer strong{font-size:9px;color:#dcebf2}
+.arch-v4-footer em{color:#8fa3af}
+.arch-dot{width:5px;height:5px}
+
+/* Reduce generic card chrome. */
+.project-card{
+  box-shadow:0 18px 50px rgba(0,0,0,.16);
+  transition:transform .38s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s
+}
+.project-card:hover{
+  transform:translateY(-6px)!important;
+  box-shadow:0 28px 70px rgba(0,0,0,.24)
+}
+.project-card:after{opacity:0!important}
+.project-card:hover:after{opacity:.65!important}
+.btn{transition:transform .2s ease,border-color .2s,background .2s}
+.btn:hover{transform:translateY(-2px)!important}
+
+/* Calm sections should stay calm. */
+.feature-card:hover,.privacy-card:hover{transform:translateY(-3px)}
+.photo-card:hover img{transform:scale(1.025)}
+.cinematic-media>img{
+  transform:translate3d(0,var(--velocity-y,0px),0) scale(var(--chapter-scale,1.045))!important
+}
+.cinematic-copy{border-color:rgba(180,220,242,.07)}
+.scene-grid{opacity:.08}
+.research-field:after{opacity:.55}
+
+/* Improve focus visibility. */
+a:focus-visible,button:focus-visible,summary:focus-visible{
+  outline:2px solid var(--accent);outline-offset:3px
+}
+
+@media(max-width:1180px){
+  .arch-v4-layout{grid-template-columns:1fr}
+  .arch-v4-stage,.arch-v4-explode{height:570px!important;min-height:570px!important}
+}
+@media(max-width:760px){
+  :root{--muted:#aebbc4}
+  .display-menu summary{padding:8px 10px}
+  .display-panel{right:-42px;min-width:184px}
+  .motion-progress{display:block!important}
+  .hero-hud{display:none}
+  .hero-corner{display:none}
+  .arch-v4-stage,.arch-v4-explode{height:450px!important;min-height:450px!important}
+  .arch-v4-steps article{opacity:.8}
+}
