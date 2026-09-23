@@ -9,16 +9,27 @@
 </head>
 <body>
 <header class="site-header">
-  <a class="brand" href="index.html">PJP <span>Industries</span></a>
+  <a class="brand" href="index.html" aria-label="PJP Industries home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>PJP <span>Industries</span></a>
   <nav class="nav" id="primary-nav" aria-label="Primary">
-    <a class="active" href="index.html">Home</a><a href="#systems">Systems</a><a href="ndms.html">NDMS</a><a href="neurolab-os.html">NeuroLab OS</a><a href="loopproof.html">LoopProof</a><a href="#research">Research</a><a href="#contact">Contact</a>
+    <a href="#systems">Systems</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#research">Research</a>
+    <a href="#contact">Contact</a>
   </nav>
   <div class="controls">
-    <div class="accent-set" aria-label="Accent color">
-      <button class="accent-btn" data-accent="cyan" aria-label="Cyan accent"></button><button class="accent-btn" data-accent="violet" aria-label="Violet accent"></button><button class="accent-btn" data-accent="green" aria-label="Green accent"></button>
-    </div>
-    <button class="chip-btn" data-theme-toggle aria-label="Toggle theme">Theme</button>
-    <button class="chip-btn" data-motion-toggle>Motion: full</button>
+    <details class="display-menu">
+      <summary>Display</summary>
+      <div class="display-panel">
+        <span class="display-label">Accent</span>
+        <div class="accent-set" aria-label="Accent color">
+          <button class="accent-btn" data-accent="cyan" aria-label="Cyan accent"></button>
+          <button class="accent-btn" data-accent="violet" aria-label="Violet accent"></button>
+          <button class="accent-btn" data-accent="green" aria-label="Green accent"></button>
+        </div>
+        <button class="chip-btn" data-theme-toggle aria-label="Toggle theme">Theme</button>
+        <button class="chip-btn" data-motion-toggle>Motion: full</button>
+      </div>
+    </details>
     <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">Menu</button>
   </div>
 </header>
@@ -37,7 +48,7 @@
     </div>
   </div>
   <div class="hero-visual reveal">
-    <img class="photo" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=84" alt="Modern technology workspace" fetchpriority="high" decoding="async"><div class="three-stage" data-three-hero data-mode="home" aria-hidden="true"></div><div class="three-badge">Move pointer · live 3D</div>
+    <img class="photo" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=84" alt="Modern technology workspace" fetchpriority="high" decoding="async"><div class="three-stage" data-three-hero data-mode="home" aria-hidden="true"></div><div class="three-badge">Interactive system model</div>
     <canvas class="field-canvas" data-field data-labels="Multimodal AI|Human Timing|EEG|Scientific Reproducibility|Digital Twins|Evidence Systems|Physical AI|Edge Sensing"></canvas>
     <div class="hero-labels"><span class="tag">Human intelligence</span><span class="tag">Scientific infrastructure</span><span class="tag">Physical systems</span></div>
     <div class="hero-hud" aria-hidden="true">
