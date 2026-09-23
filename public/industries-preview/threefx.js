@@ -126,6 +126,104 @@ class Stage{
     this.mode==='loopproof'?this.loopExplode():this.layerExplode();
   }
   layerExplode(){
+    if(this.mode==='home'){
+      const addEdges=(mesh,color=this.accent,opacity=.28)=>{
+        const edge=new THREE.LineSegments(
+          new THREE.EdgesGeometry(mesh.geometry),
+          new THREE.LineBasicMaterial({color,transparent:true,opacity})
+        );
+        edge.position.copy(mesh.position);edge.rotation.copy(mesh.rotation);return edge;
+      };
+      const finish=(g,i)=>{
+        g.userData.baseY=(i-2)*.12;g.userData.index=i;
+        g.position.y=g.userData.baseY;g.rotation.set(-.055,.13,0);
+        this.group.add(g);this.explodeObjects.push(g);
+      };
+
+      // 01 / SENSE — physical input plane with distinct sensor nodes.
+      {
+        const g=new THREE.Group();
+        const plate=new THREE.Mesh(new THREE.BoxGeometry(5.35,.13,2.9),this.mat({color:0x0d3042,metalness:.55,roughness:.13,opacity:.76,emissiveIntensity:.055}));
+        g.add(plate);g.add(addEdges(plate));
+        [[-1.85,-.8],[-.62,.82],[.7,-.72],[1.82,.72]].forEach(([x,z],j)=>{
+          const stem=new THREE.Mesh(new THREE.CylinderGeometry(.095,.095,.34,18),this.mat({color:0x1b465a,metalness:.56,roughness:.12,opacity:.96,emissiveIntensity:.12}));
+          stem.position.set(x,.2,z);g.add(stem);
+          const ring=new THREE.Mesh(new THREE.TorusGeometry(.17,.025,10,40),new THREE.MeshBasicMaterial({color:j%2?0xffffff:this.accent,transparent:true,opacity:.55}));
+          ring.position.set(x,.39,z);ring.rotation.x=Math.PI/2;g.add(ring);
+          const dot=this.sprite(j%2?0xffffff:this.accent,.13,.78);dot.position.set(x,.39,z);g.add(dot);
+        });
+        finish(g,0);
+      }
+
+      // 02 / STRUCTURE — traceable data rails and provenance nodes.
+      {
+        const g=new THREE.Group();
+        const frame=new THREE.Mesh(new THREE.BoxGeometry(5.05,.12,2.72),this.mat({color:0x112b3d,metalness:.42,roughness:.14,opacity:.48,transmission:.12,emissiveIntensity:.045}));
+        g.add(frame);g.add(addEdges(frame,0x7bd7ff,.2));
+        for(let r=0;r<3;r++){
+          const rail=new THREE.Mesh(new THREE.BoxGeometry(4.2,.045,.055),new THREE.MeshBasicMaterial({color:r===1?0xffffff:this.accent,transparent:true,opacity:r===1?.3:.24}));
+          rail.position.set(0,.14,-.72+r*.72);g.add(rail);
+          for(let j=0;j<5;j++){
+            const n=this.sprite(j===2?0xffffff:this.accent,.085,j===2?.86:.56);
+            n.position.set(-1.7+j*.85,.17,-.72+r*.72);g.add(n);
+          }
+        }
+        finish(g,1);
+      }
+
+      // 03 / MODEL — smaller compute plane with an explicit model core.
+      {
+        const g=new THREE.Group();
+        const base=new THREE.Mesh(new THREE.BoxGeometry(4.35,.16,2.35),this.mat({color:0x172f4c,metalness:.6,roughness:.1,opacity:.7,transmission:.08,emissiveIntensity:.08}));
+        g.add(base);g.add(addEdges(base,0xffffff,.24));
+        const core=new THREE.Mesh(new THREE.IcosahedronGeometry(.58,2),this.mat({color:0x184b66,metalness:.34,roughness:.06,opacity:.88,transmission:.12,emissiveIntensity:.2}));
+        core.position.y=.55;g.add(core);
+        const ring=new THREE.Mesh(new THREE.TorusGeometry(.92,.025,12,90),new THREE.MeshBasicMaterial({color:this.accent,transparent:true,opacity:.5,blending:THREE.AdditiveBlending}));
+        ring.position.y=.55;ring.rotation.x=Math.PI/2.35;g.add(ring);
+        for(let i=0;i<6;i++){
+          const a=i/6*Math.PI*2,n=this.sprite(i%3===0?0xffffff:this.accent,.095,.72);
+          n.position.set(Math.cos(a)*1.55,.22,Math.sin(a)*.72);g.add(n);
+        }
+        finish(g,2);
+      }
+
+      // 04 / UNDERSTAND — glass evidence plane with visible comparison bars.
+      {
+        const g=new THREE.Group();
+        const glass=new THREE.Mesh(new THREE.BoxGeometry(4.75,.11,2.55),this.mat({color:0x173344,metalness:.18,roughness:.08,opacity:.42,transmission:.25,emissiveIntensity:.04}));
+        g.add(glass);g.add(addEdges(glass,0x8ddfff,.28));
+        const widths=[2.6,1.95,3.2];
+        widths.forEach((w,i)=>{
+          const bar=new THREE.Mesh(new THREE.BoxGeometry(w,.055,.14),new THREE.MeshBasicMaterial({color:i===1?0xffffff:this.accent,transparent:true,opacity:.45}));
+          bar.position.set(-1.55+w/2,.2,-.62+i*.62);g.add(bar);
+          const dot=this.sprite(i===1?0xffffff:this.accent,.1,.75);dot.position.set(-1.68,.22,-.62+i*.62);g.add(dot);
+        });
+        finish(g,3);
+      }
+
+      // 05 / ACT — bounded output ring with directional endpoints.
+      {
+        const g=new THREE.Group();
+        const base=new THREE.Mesh(new THREE.BoxGeometry(4.4,.13,2.3),this.mat({color:0x103a3a,metalness:.58,roughness:.13,opacity:.72,emissiveIntensity:.07}));
+        g.add(base);g.add(addEdges(base,0x44d98e,.28));
+        const ring=new THREE.Mesh(new THREE.TorusGeometry(.76,.055,14,70),new THREE.MeshBasicMaterial({color:0x44d98e,transparent:true,opacity:.52,blending:THREE.AdditiveBlending}));
+        ring.position.y=.28;ring.rotation.x=Math.PI/2;g.add(ring);
+        const dirs=[
+          [1.5,.2,0,0,0,-Math.PI/2],[-1.5,.2,0,0,0,Math.PI/2],
+          [0,.2,.86,Math.PI/2,0,0],[0,.2,-.86,-Math.PI/2,0,0]
+        ];
+        dirs.forEach((d,i)=>{
+          const cone=new THREE.Mesh(new THREE.ConeGeometry(.15,.46,18),this.mat({color:0x245947,metalness:.5,roughness:.12,opacity:.95,emissive:new THREE.Color(0x44d98e),emissiveIntensity:.12}));
+          cone.position.set(d[0],d[1],d[2]);cone.rotation.set(d[3],d[4],d[5]);g.add(cone);
+          const dot=this.sprite(i%2?0xffffff:new THREE.Color(0x44d98e),.11,.72);dot.position.set(d[0]*1.16,.22,d[2]*1.16);g.add(dot);
+        });
+        finish(g,4);
+      }
+
+      this.group.scale.setScalar(innerWidth<760?.96:1.12);
+      return;
+    }
+
     const pal=this.mode==='ndms'?[0x12384d,0x172d43,0x28305a,0x15384d,0x0d2f43]:this.mode==='neurolab'?[0x10293a,0x123247,0x162d40,0x1b3550,0x10293a]:[0x10293a,0x123247,0x162d40,0x1b3550,0x10293a];
     for(let i=0;i<5;i++){
       const g=new THREE.Group(),slab=new THREE.Mesh(new THREE.BoxGeometry(5.4,.32,3.25),this.mat({color:pal[i],metalness:.44,roughness:.11,opacity:.7,transmission:.12,emissiveIntensity:.06}));
@@ -224,7 +322,7 @@ class Stage{
         g.rotation.x+=(-.12+this.pointer.y*.06+(i-mid)*.022*local-g.rotation.x)*.055;
         g.scale.setScalar(.96+.04*local);
       });
-      this.camera.position.z+=(10.2-p*.72-this.camera.position.z)*.04;
+      const targetZ=this.mode==='home'?(8.9-p*.38):(10.2-p*.72);this.camera.position.z+=(targetZ-this.camera.position.z)*.04;
       this.group.rotation.y+=(this.pointer.x*.12-this.group.rotation.y)*.04;
       if(this.particles){this.particles.rotation.z=t*.01;this.particles.material.opacity=.26+.24*p}
     }
