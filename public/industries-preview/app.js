@@ -253,8 +253,8 @@ function motionFrame(now){
     document.querySelectorAll('.cinematic-media').forEach(media=>{
       const r=media.getBoundingClientRect();
       if(r.bottom>0&&r.top<innerHeight){
-        media.style.setProperty('--velocity-y',(scrollVelocity*8).toFixed(2)+'px');
-        media.style.setProperty('--velocity-skew',(scrollVelocity*.16).toFixed(3)+'deg');
+        media.style.setProperty('--velocity-y',(scrollVelocity*3.5).toFixed(2)+'px');
+        media.style.setProperty('--velocity-skew','0deg');
       }
     });
   }
@@ -311,4 +311,20 @@ addEventListener('keydown',e=>{
     header.classList.remove('open');body.classList.remove('menu-open');
     if(menu){menu.setAttribute('aria-expanded','false');menu.focus()}
   }
+});
+
+
+// Keep the compact Display popover out of the way after a choice or outside click.
+const displayMenus=[...document.querySelectorAll('.display-menu')];
+document.addEventListener('click',e=>{
+  displayMenus.forEach(details=>{
+    if(details.open&&!details.contains(e.target))details.removeAttribute('open');
+  });
+});
+document.querySelectorAll('.display-panel button').forEach(btn=>btn.addEventListener('click',()=>{
+  const details=btn.closest('.display-menu');
+  if(details) setTimeout(()=>details.removeAttribute('open'),80);
+}));
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')displayMenus.forEach(details=>details.removeAttribute('open'));
 });
