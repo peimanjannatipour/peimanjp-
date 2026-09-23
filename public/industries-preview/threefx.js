@@ -21,7 +21,7 @@ class Stage{
     this.pointer={x:0,y:0};this.target={x:0,y:0};this.progress=0;this.flowDots=[];this.dataPackets=[];this.orbits=[];
     this.scene=new THREE.Scene();
     this.camera=new THREE.PerspectiveCamera(type==='hero'?36:32,1,.1,80);
-    this.camera.position.set(0,type==='hero' ? 0.18 : 0.65,type==='hero' ? 8.6 : 10.2);
+    this.camera.position.set(0,type==='hero' ? 0.18 : 0.06,type==='hero' ? 8.6 : 10.2);
     this.renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'});
     this.renderer.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<760?1.2:1.65));
     this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.18;
