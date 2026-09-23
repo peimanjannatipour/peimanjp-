@@ -220,7 +220,7 @@ class Stage{
         finish(g,4);
       }
 
-      this.group.scale.setScalar(innerWidth<760?.96:1.12);
+      this.group.scale.setScalar(innerWidth<760 ? .96 : 1.12);
       return;
     }
 
