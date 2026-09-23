@@ -4,25 +4,28 @@
 <title>NDMS — PJP Industries</title><link rel="preconnect" href="https://images.unsplash.com"><link rel="stylesheet" href="styles.css"></head><body>
 
 <header class="site-header">
-  <a class="brand" href="index.html">PJP <span>Industries</span></a>
-  <nav class="nav" aria-label="Primary">
-    <a  href="index.html">Home</a>
+  <a class="brand" href="index.html" aria-label="PJP Industries home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>PJP <span>Industries</span></a>
+  <nav class="nav" id="primary-nav" aria-label="Primary">
     <a href="index.html#systems">Systems</a>
-    <a class="active" href="ndms.html">NDMS</a>
-    <a  href="neurolab-os.html">NeuroLab OS</a>
-    <a  href="loopproof.html">LoopProof</a>
+    <a href="index.html#architecture">Architecture</a>
     <a href="index.html#research">Research</a>
     <a href="index.html#contact">Contact</a>
   </nav>
   <div class="controls">
-    <div class="accent-set" aria-label="Accent color">
-      <button class="accent-btn" data-accent="cyan" aria-label="Cyan accent"></button>
-      <button class="accent-btn" data-accent="violet" aria-label="Violet accent"></button>
-      <button class="accent-btn" data-accent="green" aria-label="Green accent"></button>
-    </div>
-    <button class="chip-btn" data-theme-toggle aria-label="Toggle theme">Theme</button>
-    <button class="chip-btn" data-motion-toggle>Motion: full</button>
-    <button class="menu-btn" aria-label="Open menu">Menu</button>
+    <details class="display-menu">
+      <summary>Display</summary>
+      <div class="display-panel">
+        <span class="display-label">Accent</span>
+        <div class="accent-set" aria-label="Accent color">
+          <button class="accent-btn" data-accent="cyan" aria-label="Cyan accent"></button>
+          <button class="accent-btn" data-accent="violet" aria-label="Violet accent"></button>
+          <button class="accent-btn" data-accent="green" aria-label="Green accent"></button>
+        </div>
+        <button class="chip-btn" data-theme-toggle aria-label="Toggle theme">Theme</button>
+        <button class="chip-btn" data-motion-toggle>Motion: full</button>
+      </div>
+    </details>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">Menu</button>
   </div>
 </header><main class="page">
 <section class="section hero shell">
@@ -35,7 +38,7 @@
     <div class="stat-row"><div class="stat"><b>Multimodal</b><span>Video + audio + optional research signals</span></div><div class="stat"><b>Privacy-first</b><span>Local/on-device pathways where appropriate</span></div><div class="stat"><b>Human-centered</b><span>Uncertainty and explanation over black-box scoring</span></div></div>
   </div>
   <div class="hero-visual reveal">
-    <img class="photo" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=84" alt="Modern research and technology workspace"><div class="three-stage" data-three-hero data-mode="ndms" aria-hidden="true"></div><div class="three-badge">Move pointer · live 3D</div>
+    <img class="photo" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=84" alt="Modern research and technology workspace"><div class="three-stage" data-three-hero data-mode="ndms" aria-hidden="true"></div><div class="three-badge">Interactive system model</div>
     <div class="hero-device">
       <div class="glass-ui">
         <h4>NDMS · Live multimodal view</h4>
